@@ -3,29 +3,50 @@
 defined('v1Secureraisix') or header('Location: /');
 
 function Header_HTML($Title="", $IncludeHeader="") {
-  $ret='<!doctype html>
-  <html lang="fr" ng-app="appRoot">
-    <head>
+   $git = getGitVersion();
+
+   $ret='<!doctype html>
+<html lang="fr" ng-app="appRoot">
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
       <title>Raisix - '.$Title.'</title>
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      RaisiX   -  Responsive Bootstrap 4
+                                             Updated: '.$git[1].'
+
+      Author                  : LeGrizzly#0341 - StarBeard#1310 - Ma4yGaHiH#1268
+      Design and Developed by : LeGrizzly#0341 - StarBeard#1310 - Ma4yGaHiH#1268
+
+      Support: https://discord.gg/YTxEJN3jxk
+       _                _____          _               _         
+      | |              / ____|        (_)             | |        
+      | |        ___  | |  __   _ __   _   ____  ____ | |  _   _ 
+      | |       / _ \ | | |_ | | \'__| | | |_  / |_  / | | | | | |
+      | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
+      |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
+                                                            __/ |
+                                                            |___/
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
       <!-- Favicon -->
-      <link rel="shortcut icon" href="/frontend/assets/images/favicon.ico" />
+      <link rel="shortcut icon" href="assets/images/favicon.ico" />
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="/frontend/assets/css/typography.css">
+      <link rel="stylesheet" href="assets/css/typography.css">
       <!-- Style -->
-      <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+      <link rel="stylesheet" href="assets/css/style.css" />
       <!-- Responsive -->
-      <link rel="stylesheet" href="/frontend/assets/css/responsive.css" />
+      <link rel="stylesheet" href="assets/css/responsive.css" />
 
       <!-- Import CSS -->
       '.$IncludeHeader.'
-
-  </head>
+   </head>
 <body>';
   return $ret;
 }
@@ -366,34 +387,43 @@ function Footer_HTML($IncludeFooter="") {
       <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
   </div>
   <!-- back-to-top End -->
+
+  <!-- Import JS -->
+  '.$IncludeFooter.'
+
   <!-- jQuery, Popper JS -->
-  <script src="/frontend/assets/js/jquery-3.4.1.min.js"></script>
-  <script src="/frontend/assets/js/popper.min.js"></script>
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
   <!-- Bootstrap JS -->
-  <script src="/frontend/assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
   <!-- Slick JS -->
-  <script src="/frontend/assets/js/slick.min.js"></script>
+  <script src="assets/js/slick.min.js"></script>
   <!-- owl carousel Js -->
-  <script src="/frontend/assets/js/owl.carousel.min.js"></script>
+  <script src="assets/js/owl.carousel.min.js"></script>
   <!-- select2 Js -->
-  <script src="/frontend/assets/js/select2.min.js"></script>
+  <script src="assets/js/select2.min.js"></script>
   <!-- Magnific Popup-->
-  <script src="/frontend/assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js"></script>
   <!-- Slick Animation-->
-  <script src="/frontend/assets/js/slick-animation.min.js"></script>
+  <script src="assets/js/slick-animation.min.js"></script>
   <!-- Flatpickr JavaScript -->
-  <script src="/frontend/assets/js/flatpickr.min.js"></script>
+  <script src="assets/js/flatpickr.min.js"></script>
   <!-- Custom JS-->
-  <script src="/frontend/assets/js/custom.js"></script>
+  <script src="assets/js/custom.js"></script>
 
   <!-- AngularJS Core -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <!-- AngularJS Script-->
   <script src="/frontend/assets/js/app-angular.js"></script>
-
-  <!-- Import JS -->
-  '.$IncludeFooter.'
   </body>
 </html>';
   return $ret;
 }
+
+function getGitVersion() {
+   $version = trim(exec('git log --pretty="%h" -n1 HEAD'));
+   $commitDate = new \DateTime(trim(exec('git log -n1 --pretty=%ci HEAD')));
+     $date = $commitDate->setTimezone(new \DateTimeZone('UTC'))->add(new DateInterval("PT2H"))->format('d-m H:i');
+   
+   return array($version, $date);
+ }

@@ -6,12 +6,18 @@ Site web de Streaming films et séries gratuit.
 ## **Pre-requis**
 > - [wamp](http://www.wampserver.com/) (ou équivalement)
 
+### **Version V0.1.2**
+> -「✔」Remember me login\
+> -「✔」Simplify template Dashboard\
+> -「✔」Page Confirm mail\
+> -「✔」Page access dashboard
+
 ### **Version V0.1.1**
 > -「✔」Création du module de connexion\
 > -「✔」Gestion du compte user
 
 ### **Version V0.1.0**
-> -「✔」template front simplifié
+> -「✔」simplify template Front
 
 ### **Version 0.0.2**
 > -「✔」Name\
@@ -22,9 +28,8 @@ Site web de Streaming films et séries gratuit.
 
 ### *A venir*
 ```
--「❌」Optimisation du backOffice
+-「-」Optimisation du backOffice
 -「❌」Gestion Films
--「❌」Gestion Users
 -「❌」Gestion Commentaire
 -「❌」Gestion Catégorie
 -「❌」Affichage des Films en Front

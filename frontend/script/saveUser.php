@@ -63,9 +63,14 @@ include_once("../../includes/inc.php");
 			$_SESSION["postForm"] = $_POST;
 			header("Location: ../sign-up.php");
 		} else {
+
+			$token_email = uniqid('', true);
+
+			// send mail to verif
+			// raisix:83/verif_mail?uuid=$token_email&email=$_POST["email"]
 			
-			$sql = "INSERT INTO `users` (`date_create`, `date_modification`, `firstname`, `lastname`, `email`, `password`, `date_modification_pw`, `tac`)
-				VALUES (now(), now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now(), '1');";
+			$sql = "INSERT INTO `users` (`date_create`, `date_modification`, `firstname`, `lastname`, `email`, `token_check_email`, `password`, `date_modification_pw`, `tac`)
+				VALUES (now(), now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".$token_email."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now(), '1');";
 			$result = db_execute($sql);
 
 			header("Location: ../login.php");
