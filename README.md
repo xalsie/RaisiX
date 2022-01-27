@@ -14,7 +14,7 @@ Site web de Streaming films et séries gratuit.
 > -「✔」template front simplifié
 
 ### **Version 0.0.2**
-> -「✔」Name
+> -「✔」Name\
 > -「✔」Logo V1
 
 ### **Version 0.0.1**
@@ -22,11 +22,11 @@ Site web de Streaming films et séries gratuit.
 
 ### *A venir*
 ```
--「❌」Optimisation du backOffice\
--「❌」Gestion Films\
--「❌」Gestion Users\
--「❌」Gestion Commentaire\
--「❌」Gestion Catégorie\
--「❌」Affichage des Films en Front\
+-「❌」Optimisation du backOffice
+-「❌」Gestion Films
+-「❌」Gestion Users
+-「❌」Gestion Commentaire
+-「❌」Gestion Catégorie
+-「❌」Affichage des Films en Front
 -「❌」Affichage page du détail Film
 ```
