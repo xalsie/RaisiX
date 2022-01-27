@@ -1,7 +1,7 @@
 <?php
 include_once("../../includes/inc.php");
 
-if (count($_POST) == 2 && !empty($_POST["email"]) && !empty($_POST["pwd"])) {
+if ((count($_POST) == 2 || count($_POST) == 3) && !empty($_POST["email"]) && !empty($_POST["pwd"])) {
 	$error = FALSE;
 	$listOfErrors = [];
 	$_POST["email"] = strtolower( trim($_POST["email"]) );
@@ -20,10 +20,19 @@ if (count($_POST) == 2 && !empty($_POST["email"]) && !empty($_POST["pwd"])) {
 			$_SESSION["token"] = createToken($result[0]['id'], $_POST['email']);
 			$_SESSION["role"] = $result[0]["role"];
 
+			if (isset($_POST["customCheck"]) && $_POST["customCheck"] == "on") {
+				$cookieOptions = array (
+					'expires' => 'Session',
+					'path' => '/',
+					'domain' => 'raisix'
+				);
+				setcookie("remember", $_SESSION["token"], $cookieOptions);
+			}
+
 			$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"], "role"=>$_SESSION["role"],];
 			login($user);
 
-			header("Location: ../index.php");
+			header("Location: /frontend/index.php");
 			// echo "Location: ../index.php";
 		} else {
 			$error = TRUE;

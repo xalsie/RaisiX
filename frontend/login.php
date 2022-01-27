@@ -4,7 +4,16 @@ include_once("../includes/inc.php");
 if(isset($_GET['logout'])) {
    // destroy session
    session_destroy();
+   $cookieOptions = array (
+      'expires' => 'Session',
+      'path' => '/',
+      'domain' => 'raisix'
+   );
+   setcookie("remember", "", $cookieOptions);
 }
+
+if (isset($_COOKIE["remember"]) && !empty($_COOKIE["remember"]))
+   header("Location: index.php");
 
 echo Header_HTML("S'identifier", "");
 ?>
@@ -42,7 +51,7 @@ echo Header_HTML("S'identifier", "");
                                  <div class="sign-info">
                                     <button type="submit" class="btn btn-hover">S'identifier</button>
                                     <div class="custom-control custom-checkbox d-inline-block">
-                                       <input type="checkbox" class="custom-control-input" id="customCheck">
+                                       <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
                                        <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
                                     </div>
                                  </div>
