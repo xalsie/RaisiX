@@ -1,0 +1,12 @@
+# Logs
+logs
+*.log
+
+# Config file
+config.json
+includes/config.inc.php
+
+# Dev folder
+Dev/*
+_outils/*
+*.dev
