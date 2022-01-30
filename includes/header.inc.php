@@ -2,7 +2,7 @@
 //àéè
 defined('v1Secureraisix') or header('Location: /');
 
-function Header_HTML($Title="", $IncludeHeader="") {
+function Header_HTML($Title="", $panel=false, $IncludeHeader="") {
    $git = getGitVersion();
 
    $ret='<!doctype html>
@@ -33,22 +33,43 @@ function Header_HTML($Title="", $IncludeHeader="") {
                                                             |___/
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="assets/images/favicon.ico" />
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="assets/css/typography.css">
-      <!-- Style -->
-      <link rel="stylesheet" href="assets/css/style.css" />
-      <!-- Responsive -->
-      <link rel="stylesheet" href="assets/css/responsive.css" />
+      '.Header_css($panel).'
 
       <!-- Import CSS -->
       '.$IncludeHeader.'
    </head>
 <body>';
   return $ret;
+}
+
+function Header_css($panel) {
+   $frontend = '<!-- Favicon -->
+   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+   <!-- Typography CSS -->
+   <link rel="stylesheet" href="/assets/css/typography_frontend.css">
+   <!-- Style -->
+   <link rel="stylesheet" href="/assets/css/style_frontend.css" />
+   <!-- Responsive -->
+   <link rel="stylesheet" href="/assets/css/responsive_frontend.css" />';
+ 
+   $dashboard = '<!-- Favicon -->
+   <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+   <!-- Typography CSS -->
+   <link rel="stylesheet" href="/assets/css/typography_dashboard.css">
+   <!-- Style -->
+   <link rel="stylesheet" href="/assets/css/style_dashboard.css" />
+   <!-- Responsive -->
+   <link rel="stylesheet" href="/assets/css/responsive_dashboard.css" />';
+ 
+   if ($panel == "frontend") {
+     return $frontend;
+   } else if ($panel == "dashboard") {
+     return $dashboard;
+   }
 }
 
 function nav_bar_user() {
@@ -72,7 +93,7 @@ function Header_header() {
                      <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                   </div>
                </a>
-               <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/frontend/assets/images/logo.png"
+               <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
                   alt="raisix logo" /> </a>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <div class="menu-main-menu-container">
@@ -126,7 +147,7 @@ function Header_header() {
                                     <div class="iq-card-body">
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
-                                             <img src="/frontend/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
+                                             <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
                                                 alt="raisix" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">Boop Bitty</h6>
@@ -136,7 +157,7 @@ function Header_header() {
                                        </a>
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
-                                             <img src="/frontend/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
+                                             <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
                                                 alt="raisix" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">The Last Breath</h6>
@@ -146,7 +167,7 @@ function Header_header() {
                                        </a>
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
-                                             <img src="/frontend/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
+                                             <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
                                                 alt="raisix" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">The Hero Camp</h6>
@@ -160,7 +181,7 @@ function Header_header() {
                            </li>
                            <li>
                               <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                              <img src="/frontend/assets/images/user/{{avatar}}" class="img-fluid avatar-40 rounded-circle"
+                              <img src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
                                  alt="user">
                               </a>
                               <div class="iq-sub-dropdown iq-user-dropdown">
@@ -235,7 +256,7 @@ function Header_header() {
                               <div class="iq-card-body">
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
-                                       <img src="/frontend/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
+                                       <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
                                           alt="raisix" />
                                        <div class="media-body">
                                           <h6 class="mb-0 ">Boot Bitty</h6>
@@ -245,7 +266,7 @@ function Header_header() {
                                  </a>
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
-                                       <img src="/frontend/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
+                                       <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
                                           alt="raisix" />
                                        <div class="media-body">
                                           <h6 class="mb-0 ">The Last Breath</h6>
@@ -255,7 +276,7 @@ function Header_header() {
                                  </a>
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
-                                       <img src="/frontend/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
+                                       <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
                                           alt="raisix" />
                                        <div class="media-body">
                                           <h6 class="mb-0 ">The Hero Camp</h6>
@@ -270,7 +291,7 @@ function Header_header() {
                      <li class="nav-item nav-icon">
                         <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
                            data-toggle="search-toggle">
-                        <img src="/frontend/assets/images/user/{{avatar}}" class="img-fluid avatar-40 rounded-circle" alt="user">
+                        <img src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
@@ -329,7 +350,7 @@ function Header_loader() {
   return $rtn;
 }
 
-function Footer_HTML($IncludeFooter="") {
+function Footer_HTML($panel=false, $IncludeFooter="") {
   $ret = '<footer class="mb-0">
       <div class="container-fluid">
         <div class="block-space">
@@ -391,33 +412,71 @@ function Footer_HTML($IncludeFooter="") {
   <!-- Import JS -->
   '.$IncludeFooter.'
 
-  <!-- jQuery, Popper JS -->
-  <script src="assets/js/jquery-3.4.1.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="assets/js/bootstrap.min.js"></script>
-  <!-- Slick JS -->
-  <script src="assets/js/slick.min.js"></script>
-  <!-- owl carousel Js -->
-  <script src="assets/js/owl.carousel.min.js"></script>
-  <!-- select2 Js -->
-  <script src="assets/js/select2.min.js"></script>
-  <!-- Magnific Popup-->
-  <script src="assets/js/jquery.magnific-popup.min.js"></script>
-  <!-- Slick Animation-->
-  <script src="assets/js/slick-animation.min.js"></script>
-  <!-- Flatpickr JavaScript -->
-  <script src="assets/js/flatpickr.min.js"></script>
-  <!-- Custom JS-->
-  <script src="assets/js/custom.js"></script>
+  '.footer_css($panel).'
 
-  <!-- AngularJS Core -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-  <!-- AngularJS Script-->
-  <script src="/frontend/assets/js/app-angular.js"></script>
   </body>
 </html>';
   return $ret;
+}
+
+function footer_css($panel) {
+   $frontend = '<!-- jQuery, Popper JS -->
+      <script src="/assets/js/jquery-3.4.1.min.js"></script>
+      <script src="/assets/js/popper.min.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="/assets/js/bootstrap.min.js"></script>
+      <!-- Slick JS -->
+      <script src="/assets/js/slick.min.js"></script>
+      <!-- owl carousel Js -->
+      <script src="/assets/js/owl.carousel.min.js"></script>
+      <!-- select2 Js -->
+      <script src="/assets/js/select2.min.js"></script>
+      <!-- Magnific Popup-->
+      <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+      <!-- Slick Animation-->
+      <script src="/assets/js/slick-animation.min.js"></script>
+      <!-- Flatpickr JavaScript -->
+      <script src="/assets/js/flatpickr.min.js"></script>
+      <!-- Custom JS-->
+      <script src="/assets/js/custom_frontend.js"></script>
+   
+      <!-- AngularJS Core -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+      <!-- AngularJS Script-->
+      <script src="/assets/js/app-angular.js"></script>
+';
+ 
+   $dashboard = '<!-- jQuery, Popper JS -->
+      <script src="/assets/js/jquery-3.4.1.min.js"></script>
+      <script src="/assets/js/popper.min.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="/assets/js/bootstrap.min.js"></script>
+      <!-- Slick JS -->
+      <script src="/assets/js/slick.min.js"></script>
+      <!-- owl carousel Js -->
+      <script src="/assets/js/owl.carousel.min.js"></script>
+      <!-- select2 Js -->
+      <script src="/assets/js/select2.min.js"></script>
+      <!-- Magnific Popup-->
+      <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+      <!-- Slick Animation-->
+      <script src="/assets/js/slick-animation.min.js"></script>
+      <!-- Flatpickr JavaScript -->
+      <script src="/assets/js/flatpickr.min.js"></script>
+      <!-- Custom JS-->
+      <script src="/assets/js/custom_dashboard.js"></script>
+   
+      <!-- AngularJS Core -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+      <!-- AngularJS Script-->
+      <script src="/assets/js/app-angular.js"></script>
+';
+ 
+   if ($panel == "frontend") {
+     return $frontend;
+   } else if ($panel == "dashboard") {
+     return $dashboard;
+   }
 }
 
 function getGitVersion() {

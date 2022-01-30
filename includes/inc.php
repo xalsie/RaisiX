@@ -6,13 +6,13 @@
 	define('v1Secureraisix',"WEB");
 	
 	if (empty(@$_SERVER["DOCUMENT_ROOT"]) || @$_SERVER["DOCUMENT_ROOT"] == "C:/wamp64/www") {
-		$path = "C:/wamp64/www/raisix/frontend/";
+		$path = "C:/wamp64/www/raisix/";
 	} else {
 		$path = $_SERVER["DOCUMENT_ROOT"];
 	}
 
 	// include_once($path."/db_connect/Connect.php");
-	include_once($_SERVER["DOCUMENT_ROOT"]."/includes/config.inc.php");
+	include_once($path."/includes/config.inc.php");
 	$aConfig['db_host']=$dbhost;
 	$aConfig['db_user']=$dbuser;
 	$aConfig['db_password']=$dbpassword;
@@ -20,10 +20,10 @@
 
 	session_start();
 	
-	include_once($_SERVER["DOCUMENT_ROOT"]."/includes/db.inc.php");
-	include_once($_SERVER["DOCUMENT_ROOT"]."/includes/functions.inc.php");
+	include_once($path."/includes/db.inc.php");
+	include_once($path."/includes/functions.inc.php");
 	
-	include_once($_SERVER["DOCUMENT_ROOT"]."/includes/header.inc.php");
+	include_once($path."/includes/header.inc.php");
 
 	$listOfErrors=[
 		1=>"Le prénom doit faire plus de 2 caractères",

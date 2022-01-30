@@ -6,6 +6,9 @@ Site web de Streaming films et séries gratuit.
 ## **Pre-requis**
 > - [wamp](http://www.wampserver.com/) (ou équivalement)
 
+### **Version V0.1.2.3**
+> -「✔」Simplify template Global
+
 ### **Version V0.1.2**
 > -「✔」Remember me login\
 > -「✔」Simplify template Dashboard\

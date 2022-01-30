@@ -10,3 +10,4 @@ includes/config.inc.php
 Dev/*
 _outils/*
 *.dev
+pages/*
