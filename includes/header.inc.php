@@ -181,7 +181,7 @@ function Header_header() {
                            </li>
                            <li>
                               <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                              <img src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
+                              <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
                                  alt="user">
                               </a>
                               <div class="iq-sub-dropdown iq-user-dropdown">
@@ -244,43 +244,25 @@ function Header_header() {
                      <li class="nav-item nav-icon">
                         <a href="#" class="search-toggle" data-toggle="search-toggle">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
-                              class="noti-svg">
+                           class="color-svg"
+                           ng-class="{\'noti-svg\': notifMap._count}">
                               <path fill="none" d="M0 0h24v24H0z" />
                               <path
                                  d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
                            </svg>
-                           <span class="bg-danger dots"></span>
+                           <span class="bg-danger" ng-class="{\'dots\': notifMap._count}"></span>
                         </a>
                         <div class="iq-sub-dropdown">
                            <div class="iq-card shadow-none m-0">
                               <div class="iq-card-body">
-                                 <a href="#" class="iq-sub-card">
+                                 <a href="/detail/movie/{{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
                                     <div class="media align-items-center">
-                                       <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
-                                          alt="raisix" />
-                                       <div class="media-body">
-                                          <h6 class="mb-0 ">Boot Bitty</h6>
-                                          <small class="font-size-12"> just now</small>
+                                       <div class="noti-img">
+                                          <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="raisix" />
                                        </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
-                                          alt="raisix" />
-                                       <div class="media-body">
-                                          <h6 class="mb-0 ">The Last Breath</h6>
-                                          <small class="font-size-12">15 minutes ago</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
-                                          alt="raisix" />
-                                       <div class="media-body">
-                                          <h6 class="mb-0 ">The Hero Camp</h6>
-                                          <small class="font-size-12">1 hour ago</small>
+                                       <div class="media-body ml-2">
+                                          <h6 class="mb-0 ">{{row.title}}</h6>
+                                          <small class="font-size-12">{{fromNow(row.date_create)}}</small>
                                        </div>
                                     </div>
                                  </a>
@@ -291,7 +273,7 @@ function Header_header() {
                      <li class="nav-item nav-icon">
                         <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
                            data-toggle="search-toggle">
-                        <img src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
+                        <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
@@ -441,9 +423,12 @@ function footer_css($panel) {
       <script src="/assets/js/custom_frontend.js"></script>
    
       <!-- AngularJS Core -->
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+      <script src="/assets/js/angular.min.js"></script>
       <!-- AngularJS Script-->
       <script src="/assets/js/app-angular.js"></script>
+      <!-- Moment With Locales JavaScript -->
+      <script src="/assets/js/moment-with-locales.min.js"></script>
+      <script type="text/javascript">moment.locale("fr");</script>
 ';
  
    $dashboard = '<!-- jQuery, Popper JS -->
@@ -467,9 +452,30 @@ function footer_css($panel) {
       <script src="/assets/js/custom_dashboard.js"></script>
    
       <!-- AngularJS Core -->
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+      <script src="/assets/js/angular.min.js"></script>
       <!-- AngularJS Script-->
       <script src="/assets/js/app-angular.js"></script>
+      <!-- Moment With Locales JavaScript -->
+      <script src="/assets/js/moment-with-locales.min.js"></script>
+      <script type="text/javascript">moment.locale("fr");</script>
+
+      <script src="/assets/js/jquery.dataTables.min.js"></script>
+      <script src="/assets/js/dataTables.bootstrap4.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="/assets/js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="/assets/js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="/assets/js/waypoints.min.js"></script>
+      <script src="/assets/js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="/assets/js/wow.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="/assets/js/smooth-scrollbar.js"></script>
+      <!-- apex Custom JavaScript -->
+      <script src="/assets/js/apexcharts.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="/assets/js/chart-custom.js"></script>
 ';
  
    if ($panel == "frontend") {

@@ -4,6 +4,12 @@ include_once("../../includes/inc.php");
 if (!isConnected())
    die("Vous etes deconnecté.");
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    http_response_code(401);
+    echo "Not unauthorized for GET request.";
+    return;
+}
+
 // Getting posted data and decodeing json
 $_POST = json_decode(file_get_contents('php://input'), true);
 
@@ -32,13 +38,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             $SQL = "INSERT INTO `users` (`date_modification`, `firstname`, `lastname`, `email`, `password`, `date_modification_pw`)
 				VALUES (now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now());";
 			$result = db_execute($SQL);
-            
+
             break;
         case "getAvatar":
             $SQL = "SELECT ud.avatar FROM users_detail AS ud WHERE ud.id_users = ".$_SESSION["id"].";";
             $result = db_query($SQL);
 
 			echo json_encode($result);
+            break;
+        case "saveMovie":
+            $data = $_POST["data"];
+            $result = [];
+
+            $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`)
+                    VALUES (now(), now(), '".$data['adult']."', '".$data['backdrop_path']."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$data['poster_path']."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', NULL, '".$data['status']."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$data['video']."', '".$data['vote_average']."', '".$data['vote_count']."');";
+			$result = db_execute($SQL);
+
+            print_r($result);
+            break;
+        case "getNotification":
+            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path  FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 15;";
+            $result["datas"] = db_query($SQL);
+
+			if (!$result["datas"]) {
+                echo "[]";
+                return;
+            }
+        
+            $result["_count"] = count($result["datas"]);
+        
+            echo json_encode($result);
+            break;
+        case "getPathMovie":
+            $result = array();
+            $dir = 'C:/wamp64/www/raisix/assets/video/';
+            $files = scandir($dir);
+
+            foreach ($files as $key => $value) {
+                $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+                if (is_dir($path) && $value != "." && $value != "..") {
+                    $result[] = $path;
+                }
+            }
+
+            echo json_encode($result);
             break;
 	}
 	exit;

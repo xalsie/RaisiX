@@ -20,7 +20,7 @@ echo Header_HTML("Réglage du compte", "frontend");
                     <div class="sign-user_card text-center">
                         <label class="edit-icon text-primary slick-arrow" for="customFile">Modifier</label>
                             <input type="file" class="custom-file-input" accept="image/*" onchange="angular.element(this).scope().SelectFile(event)" style="display:none;" id="customFile">
-                        <img ng-src="{{PreviewImage}}" src="/assets/images/user/{{settingMap.avatar}}" class="rounded-circle img-fluid d-block avatar-150 cover mx-auto mb-3" alt="Avatar user">
+                        <img ng-src="{{PreviewImage}}" class="rounded-circle img-fluid d-block avatar-150 cover mx-auto mb-3" alt="Avatar user">
                         <a ng-show="PreviewImageSave" class="save-icon text-success slick-arrow" ng-click="sendPicture();">Enregistrer</a>
                         <h4 class="mt-4 mb-3">{{settingMap.firstname}} {{settingMap.lastname}}</h4>
                         <p>{{settingMap.description}}</p>

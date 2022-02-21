@@ -1,10 +1,9 @@
 <?php
-include_once("/includes/inc.php");
+include_once("includes/inc.php");
 
-if (!isConnected())
-   header("Location: /?url_redirect=".$_SERVER["HTTP_ORIGIN"] . "/dashboard.php");
+isConnected(true);
 
-echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">');
 ?>
    <!-- loader Start -->
@@ -19,7 +18,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
             <a href="index-2.html" class="header-logo">
-               <img src="assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+               <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                <div class="logo-title">
                   <span class="text-primary text-uppercase">raisix</span>
                </div>
@@ -174,7 +173,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                   </div>
                   <div class="iq-navbar-logo d-flex justify-content-between">
                      <a href="index-2.html" class="header-logo">
-                        <img src="assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                        <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                         <div class="logo-title">
                            <span class="text-primary text-uppercase">raisix</span>
                         </div>
@@ -215,7 +214,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card" >
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/01.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/01.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Emma Watson Barry</h6>
@@ -227,7 +226,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card" >
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/02.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/02.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">New customer is join</h6>
@@ -239,7 +238,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card" >
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/03.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/03.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Two customer is left</h6>
@@ -251,7 +250,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card" >
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/04.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/04.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">New Mail from Fenny</h6>
@@ -278,7 +277,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/01.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/01.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Barry Emma Watson</h6>
@@ -289,7 +288,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/02.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/02.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
@@ -300,7 +299,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/03.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/03.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Why do we use it?</h6>
@@ -311,7 +310,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/04.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/04.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Variations Passages</h6>
@@ -322,7 +321,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <a href="#" class="iq-sub-card">
                                     <div class="media align-items-center">
                                        <div class="">
-                                          <img class="avatar-40 rounded" src="assets/images/user/05.jpg" alt="">
+                                          <img class="avatar-40 rounded" src="/assets/images/user/05.jpg" alt="">
                                        </div>
                                        <div class="media-body ml-3">
                                           <h6 class="mb-0 ">Lorem Ipsum generators</h6>
@@ -336,7 +335,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                      </li>
                      <li class="line-height pt-3">
                         <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                           <img src="assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
+                           <img src="/assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
@@ -503,7 +502,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/01.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/01.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -522,7 +521,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/02.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/02.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -541,7 +540,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/03.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/03.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -560,7 +559,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/04.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/04.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -579,7 +578,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/05.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/05.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -598,7 +597,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                  <div class="iq-card-body p-0">
                                     <div class="iq-thumb">
                                        <a href="javascript:void(0)">
-                                          <img src="assets/images/dashboard/06.jpg" class="img-fluid w-100 img-border-radius" alt="">
+                                          <img src="/assets/images/dashboard/06.jpg" class="img-fluid w-100 img-border-radius" alt="">
                                        </a>
                                     </div>
                                     <div class="iq-feature-list">
@@ -834,7 +833,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                     <td>
                                        <div class="media align-items-center">
                                           <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img src="assets/images/movie-thumb/01.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                             <a href="javascript:void(0);"><img src="/assets/images/movie-thumb/01.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                           </div>
                                           <div class="media-body text-white text-left ml-3">
                                              <p class="mb-0">Champions</p>
@@ -855,7 +854,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                     <td >
                                        <div class="media align-items-center">
                                           <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img src="assets/images/show-thumb/05.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                             <a href="javascript:void(0);"><img src="/assets/images/show-thumb/05.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                           </div>
                                           <div class="media-body text-white text-left ml-3">
                                              <p class="mb-0">Last Race</p>
@@ -875,7 +874,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                     <td>
                                        <div class="media align-items-center">
                                           <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img src="assets/images/show-thumb/07.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                             <a href="javascript:void(0);"><img src="/assets/images/show-thumb/07.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                           </div>
                                           <div class="media-body text-white text-left ml-3">
                                              <p class="mb-0">Boop Bitty</p>
@@ -895,7 +894,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                     <td>
                                        <div class="media align-items-center">
                                           <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img src="assets/images/show-thumb/10.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                             <a href="javascript:void(0);"><img src="/assets/images/show-thumb/10.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                           </div>
                                           <div class="media-body text-white text-left ml-3">
                                              <p class="mb-0">Dino Land</p>
@@ -915,7 +914,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
                                     <td>
                                        <div class="media align-items-center">
                                           <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img src="assets/images/show-thumb/04.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                             <a href="javascript:void(0);"><img src="/assets/images/show-thumb/04.jpg" class="img-border-radius avatar-40 img-fluid" alt=""></a>
                                           </div>
                                           <div class="media-body text-white text-left ml-3">
                                              <p class="mb-0">The Last Breath</p>
@@ -961,22 +960,5 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="a
    <!-- Footer END -->
 
 <?php
-   echo Footer_html('<script src="assets/js/jquery.min.js"></script>
-   <script src="assets/js/jquery.dataTables.min.js"></script>
-   <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-   <!-- Appear JavaScript -->
-   <script src="assets/js/jquery.appear.js"></script>
-   <!-- Countdown JavaScript -->
-   <script src="assets/js/countdown.min.js"></script>
-   <!-- Counterup JavaScript -->
-   <script src="assets/js/waypoints.min.js"></script>
-   <script src="assets/js/jquery.counterup.min.js"></script>
-   <!-- Wow JavaScript -->
-   <script src="assets/js/wow.min.js"></script>
-   <!-- Smooth Scrollbar JavaScript -->
-   <script src="assets/js/smooth-scrollbar.js"></script>
-   <!-- apex Custom JavaScript -->
-   <script src="assets/js/apexcharts.js"></script>
-   <!-- Chart Custom JavaScript -->
-   <script src="assets/js/chart-custom.js"></script>');
+   echo Footer_css("dashboard");
 ?>

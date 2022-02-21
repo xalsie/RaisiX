@@ -11,3 +11,6 @@ Dev/*
 _outils/*
 *.dev
 pages/*
+
+# Apache WEB cache
+apache/*

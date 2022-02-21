@@ -22,11 +22,11 @@
 			
 			if (isset($_COOKIE["remember"]) && !empty($_COOKIE["remember"])) {
 				$cookieOptions = array (
-					'expires' => 'Session',
+					'expires' => strtotime('+10 days'),
 					'path' => '/',
 					'domain' => 'raisix'
 				);
-				setcookie("remember", $token, $cookieOptions);	
+				setcookie("remember", $token, $cookieOptions);
 			}
 		}
 	}
@@ -38,7 +38,7 @@
 		return $token;
 	}
 	
-	function isConnected() {
+	function isConnected($redirect = false) {
 		if(!empty($_SESSION["token"])
 			&& !empty($_SESSION["email"])
 			&& !empty($_SESSION["id"])) {
@@ -55,10 +55,15 @@
 				$result = db_query($SQL);
 	
 			if(!empty($result[0])) {
-				$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "role"=>$_SESSION["role"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"]];
+				$user = ["id"=>$result[0]["id"], "email"=>$result[0]["email"], "role"=>$result[0]["role"], "firstname"=>$result[0]["firstname"], "lastname"=>$result[0]["lastname"]];
 				login($user);
 				return true;
 			}
 		}
-		return false;
+
+		if ($redirect) {
+			session_destroy();
+			header("Location: /?url_redirect=".$_SERVER["REQUEST_URI"]);
+		} else
+			return $redirect;
 	}

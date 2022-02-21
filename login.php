@@ -10,9 +10,7 @@ if(isset($_GET['logout'])) {
       'domain' => 'raisix'
    );
    setcookie("remember", "", $cookieOptions);
-}
-
-if (isset($_COOKIE["remember"]) && !empty($_COOKIE["remember"]))
+} else if (isConnected())
    header("Location: /index.php");
 
 echo Header_HTML("S'identifier", "frontend");
@@ -28,7 +26,7 @@ echo Header_HTML("S'identifier", "frontend");
                            <h3 class="mb-3 text-center">S'identifier</h3>
 
                            <?php 
-                              if(isset($_SESSION["errorsForm"])){
+                              if(isset($_SESSION["errorsForm"])) {
                                  foreach ($_SESSION["errorsForm"] as $keyError) {
                                     echo "<li style='color:red'>".$listOfErrors[$keyError]."</li>";
                                  }

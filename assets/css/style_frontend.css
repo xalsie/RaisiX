@@ -47,8 +47,10 @@ header .navbar-light .navbar-brand img.logo { width: 160px; }
 .search:focus, .search:hover { width: 350px; padding: 0 0 0 0; border-color: var(--iq-body-text) }
 .expandright { left: auto; right: -6px; bottom: -2px; }
 .search::placehoder { color: var(--iq-white) !important; }
-.noti-svg { -webkit-animation: notify 1.5s ease infinite; animation: notify 1.5s ease infinite; fill: var(--iq-body-text); }
-.noti-svg:hover { fill: var(--iq-primary); }
+.color-svg { fill: var(--iq-body-text); }
+.color-svg:hover { fill: var(--iq-primary); }
+.noti-svg { -webkit-animation: notify 1.5s ease infinite; animation: notify 1.5s ease infinite; }
+.noti-img { width: 75px; height: 75px; float: right; justify-content: center; align-items: center; overflow: hidden; }
 .search-box { position: absolute; left: 0; right: 0; top: 46px; min-width: 25rem; width: 100%; z-index: -1; opacity: 0; transform: translate(0, 70px); -webkit-transform: translate(0, 70px); -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15); }
 .search-toggle { padding: 0 !important; }
 
@@ -371,7 +373,7 @@ video { display: block; width: 100%; height: 100%; }
 -----------------------------------------------------------------------*/
 #sign-in-page-box { background: #fff; border-radius: 10px; position: relative; width: 100%; min-height: 480px; height: 93vh; margin: 15px auto; box-shadow: 0px 4px 20px 0px rgba(44, 101, 144, 0.1); -webkit-box-shadow: 0px 4px 20px 0px rgba(44, 101, 144, 0.1); }
 .sign-in-detail { color: var(--iq-white); }
-.sign-in-page { height: 100vh; position: relative; background: url(/assets/images/login/login_wp.jpg)  no-repeat scroll 0 0; background-size: cover; }
+.sign-in-page { height: 100vh; position: relative; background: url(/assets/images/login/login_wp.jpg) no-repeat scroll 0 0; background-size: cover; }
 .sign-in-page .height-self-center { height: 100vh; border-radius: 15px; }
 .sign-in-page-data { border-radius: 15px; }
 .sign-in-detail { padding: 50px 80px; }
