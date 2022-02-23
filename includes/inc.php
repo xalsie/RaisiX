@@ -6,7 +6,7 @@
 	define('v1Secureraisix',"WEB");
 	
 	if (empty(@$_SERVER["DOCUMENT_ROOT"]) || @$_SERVER["DOCUMENT_ROOT"] == "C:/wamp64/www") {
-		$path = "C:/wamp64/www/raisix/";
+		$path = "H:/wamp64/www/raisix/";
 	} else {
 		$path = $_SERVER["DOCUMENT_ROOT"];
 	}
