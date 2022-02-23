@@ -20,7 +20,7 @@ echo Header_HTML("Ajouter film", "dashboard", '<link rel="stylesheet" href="/ass
             <a href="index-2.html" class="header-logo">
                <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                <div class="logo-title">
-                  <span class="text-primary text-uppercase">raisix</span>
+                  <span class="text-primary text-uppercase">RaisiX</span>
                </div>
             </a>
             <div class="iq-menu-bt-sidebar">
@@ -210,7 +210,7 @@ echo Header_HTML("Ajouter film", "dashboard", '<link rel="stylesheet" href="/ass
                      <a href="index-2.html" class="header-logo">
                         <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                         <div class="logo-title">
-                           <span class="text-primary text-uppercase">raisix</span>
+                           <span class="text-primary text-uppercase">RaisiX</span>
                         </div>
                      </a>
                   </div>
@@ -452,131 +452,127 @@ echo Header_HTML("Ajouter film", "dashboard", '<link rel="stylesheet" href="/ass
                         </div>
                      </div>
                      <div class="iq-card-body">
-                        <!-- <form action=""> -->
-                           <div class="row mb-4">
-                              <div class="col-lg-7">
-                                 <div class="row">
-                                    <div class="col-12 form-group input-group mb-3">
-                                       <input type="text" class="form-control" placeholder="Saisir le titre du film" ng-model="tmdbData" aria-label="Saisir le titre du film" aria-describedby="title-movie">
+                        <div class="row mb-4">
+                           <div class="col-lg-7">
+                              <div class="row">
+                                 <div class="col-12 form-group input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Saisir le titre du film" ng-model="tmdbData" aria-label="Saisir le titre du film" aria-describedby="title-movie">
 
-                                       <div class="input-group-append">
-                                          <button class="btn btn-outline-secondary" ng-click="tmdb_search()" type="button">Recherche</button>
-                                       </div>
+                                    <div class="input-group-append">
+                                       <button class="btn btn-outline-secondary" ng-click="tmdb_search()" type="button">Recherche</button>
                                     </div>
+                                 </div>
 
-                                    <div class="col-12 form-group input-group mb-3" ng-show="tmdbDetailsResult">
-                                       <select class="form-control" id="exampleFormControlSelect1" ng-model="tmdbDataSelect">
-                                          <option ng-cloak ng-repeat="details in tmdbDetailsResult" value="{{details.id}}">{{details.original_title}}</option>
+                                 <div class="col-12 form-group input-group mb-3" ng-show="tmdbDetailsResult">
+                                    <select class="form-control" id="exampleFormControlSelect1" ng-model="tmdbDataSelect">
+                                       <option ng-cloak ng-repeat="details in tmdbDetailsResult" value="{{details.id}}">{{details.original_title}}</option>
+                                    </select>
+                                 </div>
+
+                                 <div class="col-12 form-group" ng-show="tmdbDetailsResult">
+                                    <button type="button" class="btn btn-info btn-block" ng-click="getInfoMovie()">Valide</button>
+                                 </div>
+
+                              </div>
+                              <div class="row" ng-show="tmdbDetailsShow">
+                                 <div class="col-md-6 form-group">
+                                    <select class="form-control" id="formSelectGenres" multiple>
+                                       <option disabled>Genres</option>
+                                       <option ng-repeat="genres in tmdbDetails.info.genres" value="{{genres.id}}" disabled selected>{{genres.name}}</option>
+                                    </select>
+                                 </div>
+                                 
+                                 <div class="col-sm-6 form-group">
+                                    <input type="text" class="form-control" placeholder="Année de sortie" value="{{todatefr(tmdbDetails.info.release_date)}}">
+                                 </div>
+
+                                 <div class="col-12 form-group">
+                                    <textarea id="text" name="text" rows="5" class="form-control"
+                                       placeholder="Description">{{tmdbDetails.info.overview}}</textarea>
+                                 </div>
+
+                                 <div class="col-12 form-group">
+                                    <div class="col-sm form-group">
+                                       <select class="form-control" id="formSelectVideo" ng-model="videoSelect">
+                                          <option disabled selected>Bande-annonce</option>
+                                          <option ng-repeat="video in tmdbDetails.videos.results" value="{{video.key}}">{{video.name}} - {{video.site}}</option>
                                        </select>
                                     </div>
 
-                                    <div class="col-12 form-group" ng-show="tmdbDetailsResult">
-                                       <button type="button" class="btn btn-info btn-block" ng-click="getInfoMovie()">Valide</button>
+                                    <div class="col-12">
+                                       <iframe width="560" height="315" ng-src="{{videoSelect | iframeVideoYtb}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
 
-                                 </div>
-                                 <div class="row" ng-show="tmdbDetailsShow">
-                                    <div class="col-md-6 form-group">
-                                       <select class="form-control" id="exampleFormControlSelect1" multiple>
-                                          <option disabled>Genres</option>
-                                          <option ng-repeat="genres in tmdbDetails.info.genres" value="{{genres.id}}" disabled selected>{{genres.name}}</option>
-                                       </select>
-                                    </div>
-                                    
-                                    <div class="col-sm-6 form-group">
-                                       <input type="text" class="form-control" placeholder="Année de sortie" value="{{todatefr(tmdbDetails.info.release_date)}}">
-                                    </div>
-
-                                    <div class="col-12 form-group">
-                                       <textarea id="text" name="text" rows="5" class="form-control"
-                                          placeholder="Description">{{tmdbDetails.info.overview}}</textarea>
-                                    </div>
-
-                                    <div class="col-12 form-group">
-                                       <div class="col-sm form-group">
-                                          <select class="form-control" id="exampleFormControlSelect3" ng-model="videoSelect">
-                                             <option disabled selected>Bande-annonce</option>
-                                             <option ng-repeat="video in tmdbDetails.videos.results" value="{{video.key}}">{{video.name}} - {{video.site}}</option>
-                                          </select>
-                                       </div>
-
-                                       <div class="col-12">
-                                          <iframe width="560" height="315" ng-src="{{videoSelect | iframeVideoYtb}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                       </div>
-
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-lg-5" ng-show="tmdbDetailsShow">
-                                 <div class="col-sm form-group">
-                                    <select class="form-control" id="exampleFormControlSelect3" ng-model="posterSelected">
-                                       <option disabled selected>Affiches</option>
-                                       <option ng-repeat="poster in tmdbDetails.images.posters" value="{{poster.file_path}}">[{{poster.iso_639_1}}] - {{poster.file_path}}</option>
-                                    </select>
-                                 </div>
-                                 <div class="d-block position-relative mb-3">
-                                    <div class="form_video-upload" style="position: relative; text-align: center;">
-                                       <img ng-src="{{tmdbConf.images_uri}}{{posterSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
-                                    </div>
-                                 </div>
-
-                                 <div class="col-sm form-group">
-                                    <select class="form-control" id="exampleFormControlSelect3" ng-model="backdropSelected">
-                                       <option disabled selected>Toiles de fond</option>
-
-                                       <option ng-repeat="backdrop in tmdbDetails.images.backdrops" value="{{backdrop.file_path}}">[{{backdrop.iso_639_1}}] - {{backdrop.file_path}}</option>
-                                    </select>
-                                 </div>
-                                 <div class="d-block position-relative">
-                                    <div class="form_video-upload" style="position: relative; text-align: center;">
-                                       <img ng-src="{{tmdbConf.images_uri}}{{backdropSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
-                                    </div>
                                  </div>
                               </div>
                            </div>
-                           <div class="row" ng-show="tmdbDetailsShow">
+                           <div class="col-lg-5" ng-show="tmdbDetailsShow">
                               <div class="col-sm form-group">
-                                 <select class="form-control" id="exampleFormControlSelect2" multiple>
-                                    <option disabled>Qualités</option>
-                                    <option value="1">SD - 480p</option>
-                                    <option value="2">HD - 720p</option>
-                                    <option value="3">BluRay - 1080p</option>
-                                    <option value="4">2K - 1440p</option>
-                                    <option value="4">4K - 2160p</option>
+                                 <select class="form-control" id="formSelectPoster" ng-model="posterSelected">
+                                    <option disabled selected>Affiches</option>
+                                    <option ng-repeat="poster in tmdbDetails.images.posters" value="{{poster.file_path}}">[{{poster.iso_639_1}}] - {{poster.file_path}}</option>
                                  </select>
                               </div>
+                              <div class="d-block position-relative mb-3">
+                                 <div class="form_video-upload" style="position: relative; text-align: center;">
+                                    <img ng-src="{{tmdbConf.images_uri}}{{posterSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
+                                 </div>
+                              </div>
+
                               <div class="col-sm form-group">
-                                 <select class="form-control" id="exampleFormControlSelect3">
-                                    <option disabled selected>Statut</option>
-                                    <option value="1">A venir</option>
-                                    <option value="2">Publié</option>
+                                 <select class="form-control" id="formSelectBackdrop" ng-model="backdropSelected">
+                                    <option disabled selected>Toiles de fond</option>
+                                    <option ng-repeat="backdrop in tmdbDetails.images.backdrops" value="{{backdrop.file_path}}">[{{backdrop.iso_639_1}}] - {{backdrop.file_path}}</option>
                                  </select>
                               </div>
-                              <div class="col-sm form-group">
-                                 <select class="form-control" id="exampleFormControlSelect5" multiple>
-                                    <option disabled>Language</option>
-                                    <option value="1">English</option>
-                                    <option value="2">Francais</option>
-                                 </select>
-                              </div>
-
-
-                              <div class="col-sm-12 form-group">
-                                 <select class="form-control" id="exampleFormControlSelect6" multiple>
-                                    <option disabled selected>Dossier du film</option>
-
-                                    <option ng-repeat="pathmovie in tmdbDetails.path" value="{{pathmovie}}">{{pathmovie}}</option>
-                                 </select>
-                              </div>
-
-                           </div>
-                           <div class="row">
-                              <div class="col-12 form-group ">
-                                 <button type="button" ng-show="tmdbDetailsShow" ng-click="submitMovie()" class="btn btn-primary">Submit</button>
-                                 <button type="reset" ng-click="resetMovie()" class="btn btn-danger">cancel</button>
+                              <div class="d-block position-relative">
+                                 <div class="form_video-upload" style="position: relative; text-align: center;">
+                                    <img ng-src="{{tmdbConf.images_uri}}{{backdropSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
+                                 </div>
                               </div>
                            </div>
-                        <!-- </form> -->
+                        </div>
+                        <div class="row" ng-show="tmdbDetailsShow">
+                           <div class="col-sm form-group">
+                              <select class="form-control" id="formSelectQualite" multiple ng-model="qualiteSelected">
+                                 <option disabled>Qualités</option>
+                                 <option value="1">SD - 480p</option>
+                                 <option value="2">HD - 720p</option>
+                                 <option value="3">BluRay - 1080p</option>
+                                 <option value="4">2K - 1440p</option>
+                                 <option value="4">4K - 2160p</option>
+                              </select>
+                           </div>
+                           <div class="col-sm form-group">
+                              <select class="form-control" id="formSelectStatus" ng-model="statusSelected">
+                                 <option disabled selected>Statut</option>
+                                 <option value="1">A venir</option>
+                                 <option value="2">Publié</option>
+                              </select>
+                           </div>
+                           <div class="col-sm form-group">
+                              <select class="form-control" id="formSelectLanguage" multiple ng-model="languageSelected">
+                                 <option disabled>Langue</option>
+                                 <option value="1">English</option>
+                                 <option value="2">Francais</option>
+                              </select>
+                           </div>
+
+
+                           <div class="col-sm-12 form-group">
+                              <select class="form-control" id="formSelectPathFile" multiple ng-model="pathFileSelected">
+                                 <option disabled selected>Dossier du film</option>
+                                 <option ng-repeat="pathmovie in tmdbDetails.path" value="{{pathmovie}}">{{pathmovie}}</option>
+                              </select>
+                           </div>
+
+                        </div>
+                        <div class="row">
+                           <div class="col-12 form-group ">
+                              <button type="button" ng-click="submitMovie()" class="btn btn-primary" ng-show="tmdbDetailsShow">Submit</button>
+                              <button type="reset" ng-click="resetMovie()" class="btn btn-danger">cancel</button>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -596,8 +592,7 @@ echo Header_HTML("Ajouter film", "dashboard", '<link rel="stylesheet" href="/ass
                   <li class="list-inline-item"><a href="terms-of-service.html" target="blank">Terms of Use</a></li>
                </ul>
             </div>
-            <div class="col-lg-6 text-right">
-               Copyright 2020 <a href="/" target="blank">RaisiX</a> All Rights Reserved.
+            <div class="col-lg-6 text-right">Copyright 2022 <a href="/" target="blank">RaisiX</a> All Rights Reserved.
             </div>
          </div>
       </div>

@@ -83,6 +83,7 @@ h6, .h6 { font-size: 1.0em; }
 .big-title { font-family: 'Helvetica Neue Regular'; }
 .badge { border-radius: 0 !important; }
 .iq-mb-30 { margin-bottom: 30px; }
+.comma::after { content:', '; }
 
 /*----------------------------------------------
 Input

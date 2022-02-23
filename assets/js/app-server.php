@@ -46,28 +46,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
 			echo json_encode($result);
             break;
+        case "getDatas":
+            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path  FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 15;";
+                $result["notification"] = [];
+                $result["notification"]["datas"] = db_query($SQL);
+
+            if (!$result["notification"]["datas"]) {
+                $result["notification"]["datas"] = [];
+                $result["notification"]["_count"] = 0;
+            } else
+                $result["notification"]["_count"] = count($result["notification"]["datas"]);
+
+
+            $SQL = "SELECT * FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 6;";
+                $result["slider"] = [];
+                $result["slider"]["datas"] = db_query($SQL);
+
+			if (!$result["slider"]["datas"]) {
+                $result["slider"]["datas"] = [];
+                $result["slider"]["_count"] = 0;
+            } else
+                $result["slider"]["_count"] = count($result["slider"]["datas"]);
+        
+            echo json_encode($result);
+            break;
         case "saveMovie":
-            $data = $_POST["data"];
+            $data       = $_POST["data"];
+            $backdrop   = $_POST["backdrop"];
+            $language   = $_POST["language"];
+            $pathfile   = $_POST["pathfile"];
+            $poster     = $_POST["poster"];
+            $qualite    = $_POST["qualite"];
+            $status     = $_POST["status"];
+            $video      = $_POST["video"];
+
+
             $result = [];
 
-            $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`)
-                    VALUES (now(), now(), '".$data['adult']."', '".$data['backdrop_path']."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$data['poster_path']."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', NULL, '".$data['status']."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$data['video']."', '".$data['vote_average']."', '".$data['vote_count']."');";
+            $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`, `qualite`, `pathfile`)
+                    VALUES (now(), now(), '".$data['adult']."', '".$backdrop."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$poster."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', '".json_encode($language)."', '".$status."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$video."', '".$data['vote_average']."', '".$data['vote_count']."', '".json_encode($qualite)."', '".db_escape(json_encode($pathfile, JSON_FORCE_OBJECT))."');";
 			$result = db_execute($SQL);
 
             print_r($result);
-            break;
-        case "getNotification":
-            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path  FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 15;";
-            $result["datas"] = db_query($SQL);
-
-			if (!$result["datas"]) {
-                echo "[]";
-                return;
-            }
-        
-            $result["_count"] = count($result["datas"]);
-        
-            echo json_encode($result);
             break;
         case "getPathMovie":
             $result = array();

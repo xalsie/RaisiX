@@ -6,7 +6,7 @@
   var tmdbConf = {
     api_key: "9a669d07e76293279b1bfa0e023610ed",
     base_uri: "https://api.themoviedb.org/3/",
-    images_uri: "http://image.tmdb.org/t/p/w500/",
+    images_uri: "https://image.tmdb.org/t/p/original",
     language: "fr-FR",
     timeout: 5000
   };
@@ -17,7 +17,7 @@
     };
   }]);
 
-  app.controller('appHeader', ['$scope', '$http', function($scope, $http) {
+  app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
     $scope.getAvatar = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
@@ -35,7 +35,7 @@
       });
     }
 
-    $scope.getNotification = () => {
+    $scope.getDatas = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
         method: "POST",
@@ -43,23 +43,97 @@
         dataType: 'json',
         data: {
           autofunc: true,
-          action: "getNotification",
+          action: "getDatas",
         },
         async: true
       }).then(function (response) {
-        $scope.notifMap = response.data;
-        console.log($scope.notifMap);
-        console.log($scope.notifMap._count);
+        $scope.responseMap = response.data;
+
+        $scope.toNotification();
+        $scope.toMovieSlider();
       });
+    }
+
+    $scope.toNotification = () => {
+      $scope.notifMap = $scope.responseMap.notification;
+    }
+
+    $scope.toMovieSlider = () => {
+      $scope.sliderMap = $scope.responseMap.slider;
+
+      $timeout(function(){
+        $scope.initSlider();
+      }, 500);
+    }
+
+    $scope.responseMap  = false;
+    $scope.notifMap     = false;
+    $scope.sliderMap    = false;
+    $scope.slideLoaded  = false;
+    $scope.getAvatar();
+    $scope.getDatas();
+
+    // $scope.toNotification();
+    // $scope.toMovieSlider();
+
+    $scope.initSlider = () => {
+      $('#home-slider').slick({
+        autoplay: false,
+        speed: 800,
+        lazyLoad: 'progressive',
+        dots: false,
+        arrows: true,
+        prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        responsive: [
+          {
+            breakpoint: 992,
+            settings: {
+              dots: true,
+              arrows: false,
+            }
+          }
+        ]
+      }).slickAnimation();
+
+      $('.slick-nav').on('click touch', function (e) {
+        e.preventDefault();
+        var arrow = $(this);
+        if (!arrow.hasClass('animate')) {
+          arrow.addClass('animate');
+          setTimeout(() => {
+            arrow.removeClass('animate');
+          }, 1600);
+        }
+      });
+
+      $scope.slideLoaded = true;
     }
 
     $scope.fromNow = (x) => {
       return moment(x, "YYYY-MM-DD hh:mm:ss").fromNow();
     }
-
-    $scope.notifMap = false;
-    $scope.getAvatar();
-    $scope.getNotification();
+    $scope.formatTime = (x) => {
+      if (x == undefined) return "";
+      const h = Math.floor(x / 60);
+      const m = Math.round(x % 60)
+      return [
+        h, "h ",
+        m > 9 ? m : (h ? '0' + m : m || '0'), "m"
+      ].filter(Boolean).join("");
+    }
+    $scope.displayGenres = (genres) => {
+      const obj = JSON.parse(genres);
+      const count = Object.keys(obj).length;
+      var _rtn = "";
+      for (var key in obj) {
+        if (key != count-1)
+          _rtn += obj[key].name+', ';
+        else
+          _rtn += obj[key].name;
+      }
+      return _rtn;
+    }
 
     // scope tmdb
     $scope.tmdbConf = tmdbConf;
@@ -233,14 +307,23 @@
         data: {
           autofunc: false,
           action: "saveMovie",
-          data: $scope.tmdbDetails,
+          data: $scope.tmdbDetails["info"],
+          poster: $scope.posterSelected,
+          backdrop: $scope.backdropSelected,
+          video: $scope.videoSelect,
+          qualite: $scope.qualiteSelected,
+          status: $scope.statusSelected,
+          language: $scope.languageSelected,
+          pathfile: $scope.pathFileSelected,
         },
         async: true
       }).then(function (response) {
         console.log(response);
+        
+        $scope.resetMovie();
       });
 
-      $scope.tmdbDetails        = [];
+      
     }
 
     $scope.resetMovie = () => {
@@ -251,11 +334,7 @@
       $scope.tmdbDetailsShow    = false;
     }
 
-    $scope.tmdbData           = "";
-    $scope.tmdbDetailsResult  = false;
-    $scope.tmdbDataSelect     = false;
-    $scope.tmdbDetails        = [];
-    $scope.tmdbDetailsShow    = false;
+    $scope.resetMovie();
 
     // scope tmdb
     $scope.tmdbConf = tmdbConf;

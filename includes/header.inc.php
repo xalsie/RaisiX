@@ -38,7 +38,7 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="") {
       <!-- Import CSS -->
       '.$IncludeHeader.'
    </head>
-<body>';
+<body ng-controller="appHeader">';
   return $ret;
 }
 
@@ -79,7 +79,7 @@ return $rtn;
 
 function Header_header() {
   $rtn = '<header id="main-header">
-<div class="main-header" ng-controller="appHeader">
+<div class="main-header">
    <div class="container-fluid">
       <div class="row">
          <div class="col-sm-12">
@@ -94,7 +94,7 @@ function Header_header() {
                   </div>
                </a>
                <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
-                  alt="raisix logo" /> </a>
+                  alt="RaisiX logo" /> </a>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <div class="menu-main-menu-container">
                      <ul id="top-menu" class="navbar-nav ms-auto">
@@ -148,7 +148,7 @@ function Header_header() {
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
                                              <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
-                                                alt="raisix" />
+                                                alt="RaisiX" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">Boop Bitty</h6>
                                                 <small class="font-size-12"> just now</small>
@@ -158,7 +158,7 @@ function Header_header() {
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
                                              <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
-                                                alt="raisix" />
+                                                alt="RaisiX" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">The Last Breath</h6>
                                                 <small class="font-size-12">15 minutes ago</small>
@@ -168,7 +168,7 @@ function Header_header() {
                                        <a href="#" class="iq-sub-card">
                                           <div class="media align-items-center">
                                              <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
-                                                alt="raisix" />
+                                                alt="RaisiX" />
                                              <div class="media-body">
                                                 <h6 class="mb-0 ">The Hero Camp</h6>
                                                 <small class="font-size-12">1 hour ago</small>
@@ -258,7 +258,7 @@ function Header_header() {
                                  <a href="/detail/movie/{{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
                                     <div class="media align-items-center">
                                        <div class="noti-img">
-                                          <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="raisix" />
+                                          <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
                                        </div>
                                        <div class="media-body ml-2">
                                           <h6 class="mb-0 ">{{row.title}}</h6>
@@ -380,7 +380,7 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
       </div>
       <div class="copyright py-2">
         <div class="container-fluid">
-            <p class="mb-0 text-center font-size-14 text-body">raisix - 2020 All Rights Reserved</p>
+            <p class="mb-0 text-center font-size-14 text-body">RaisiX - 2020 All Rights Reserved</p>
         </div>
       </div>
   </footer>
@@ -419,16 +419,16 @@ function footer_css($panel) {
       <script src="/assets/js/slick-animation.min.js"></script>
       <!-- Flatpickr JavaScript -->
       <script src="/assets/js/flatpickr.min.js"></script>
-      <!-- Custom JS-->
-      <script src="/assets/js/custom_frontend.js"></script>
-   
+      <!-- Moment With Locales JavaScript -->
+      <script src="/assets/js/moment-with-locales.min.js"></script>
+      <script type="text/javascript">moment.locale("fr");</script>
+
       <!-- AngularJS Core -->
       <script src="/assets/js/angular.min.js"></script>
       <!-- AngularJS Script-->
       <script src="/assets/js/app-angular.js"></script>
-      <!-- Moment With Locales JavaScript -->
-      <script src="/assets/js/moment-with-locales.min.js"></script>
-      <script type="text/javascript">moment.locale("fr");</script>
+      <!-- Custom JS-->
+      <script src="/assets/js/custom_frontend.js"></script>
 ';
  
    $dashboard = '<!-- jQuery, Popper JS -->
