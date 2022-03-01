@@ -38,23 +38,19 @@ Index Of Script
 ----------------------------------------------*/
 
 (function(jQuery) {
-
-
-
     "use strict";
-
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
 
         /*---------------------------------------------------------------------
         Tooltip
         -----------------------------------------------------------------------*/
-        jQuery('[data-toggle="popover"]').popover();
-        jQuery('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
 
         /*---------------------------------------------------------------------
         Magnific Popup
         -----------------------------------------------------------------------*/
-        jQuery('.popup-gallery').magnificPopup({
+        $('.popup-gallery').magnificPopup({
             delegate: 'a.popup-img',
             type: 'image',
             tLoading: 'Loading image #%curr%...',
@@ -71,7 +67,7 @@ Index Of Script
                 }
             }
         });
-        jQuery('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+        $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
             disableOn: 700,
             type: 'iframe',
             mainClass: 'mfp-fade',
@@ -84,17 +80,17 @@ Index Of Script
         /*---------------------------------------------------------------------
         Ripple Effect
         -----------------------------------------------------------------------*/
-        jQuery(document).on('click', ".iq-waves-effect", function(e) {
+        $(document).on('click', ".iq-waves-effect", function(e) {
             // Remove any old one
-            jQuery('.ripple').remove();
+            $('.ripple').remove();
             // Setup
-            let posX = jQuery(this).offset().left,
-                posY = jQuery(this).offset().top,
-                buttonWidth = jQuery(this).width(),
-                buttonHeight = jQuery(this).height();
+            let posX = $(this).offset().left,
+                posY = $(this).offset().top,
+                buttonWidth = $(this).width(),
+                buttonHeight = $(this).height();
 
             // Add the element
-            jQuery(this).prepend("<span class='ripple'></span>");
+            $(this).prepend("<span class='ripple'></span>");
 
 
             // Make it round!
@@ -110,7 +106,7 @@ Index Of Script
 
 
             // Add the ripples CSS and start the animation
-            jQuery(".ripple").css({
+            $(".ripple").css({
                 width: buttonWidth,
                 height: buttonHeight,
                 top: y + 'px',
@@ -122,36 +118,36 @@ Index Of Script
         Sidebar Widget
         -----------------------------------------------------------------------*/
        
-        jQuery(document).on("click", '.iq-menu > li > a', function() {
-            jQuery('.iq-menu > li > a').parent().removeClass('active');
-            jQuery(this).parent().addClass('active');
+        $(document).on("click", '.iq-menu > li > a', function() {
+            $('.iq-menu > li > a').parent().removeClass('active');
+            $(this).parent().addClass('active');
         });
        
         /*---------------------------------------------------------------------
         Page FAQ
         -----------------------------------------------------------------------*/
-        jQuery('.iq-accordion .iq-accordion-block .accordion-details').hide();
-        jQuery('.iq-accordion .iq-accordion-block:first').addClass('accordion-active').children().slideDown('slow');
-        jQuery(document).on("click", '.iq-accordion .iq-accordion-block', function() {
-            if (jQuery(this).children('div.accordion-details ').is(':hidden')) {
-                jQuery('.iq-accordion .iq-accordion-block').removeClass('accordion-active').children('div.accordion-details ').slideUp('slow');
-                jQuery(this).toggleClass('accordion-active').children('div.accordion-details ').slideDown('slow');
+        $('.iq-accordion .iq-accordion-block .accordion-details').hide();
+        $('.iq-accordion .iq-accordion-block:first').addClass('accordion-active').children().slideDown('slow');
+        $(document).on("click", '.iq-accordion .iq-accordion-block', function() {
+            if ($(this).children('div.accordion-details ').is(':hidden')) {
+                $('.iq-accordion .iq-accordion-block').removeClass('accordion-active').children('div.accordion-details ').slideUp('slow');
+                $(this).toggleClass('accordion-active').children('div.accordion-details ').slideDown('slow');
             }
         });
         
         /*---------------------------------------------------------------------
         Page Loader
         -----------------------------------------------------------------------*/
-        jQuery("#load").fadeOut();
-        jQuery("#loading").delay().fadeOut("");
+        $("#load").fadeOut();
+        $("#loading").delay().fadeOut("");
 
         
 
        /*---------------------------------------------------------------------
        Owl Carousel
        -----------------------------------------------------------------------*/
-        jQuery('.owl-carousel').each(function() {
-            let jQuerycarousel = jQuery(this);
+        $('.owl-carousel').each(function() {
+            let jQuerycarousel = $(this);
             jQuerycarousel.owlCarousel({
                 items: jQuerycarousel.data("items"),
                 loop: jQuerycarousel.data("loop"),
@@ -193,32 +189,32 @@ Index Of Script
         /*---------------------------------------------------------------------
         Search input
         -----------------------------------------------------------------------*/
-        jQuery(document).on('click', function(e) {
+        $(document).on('click', function(e) {
             let myTargetElement = e.target;
             let selector, mainElement;
-            if (jQuery(myTargetElement).hasClass('search-toggle') || jQuery(myTargetElement).parent().hasClass('search-toggle') || jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
-                if (jQuery(myTargetElement).hasClass('search-toggle')) {
-                    selector = jQuery(myTargetElement).parent();
-                    mainElement = jQuery(myTargetElement);
-                } else if (jQuery(myTargetElement).parent().hasClass('search-toggle')) {
-                    selector = jQuery(myTargetElement).parent().parent();
-                    mainElement = jQuery(myTargetElement).parent();
-                } else if (jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
-                    selector = jQuery(myTargetElement).parent().parent().parent();
-                    mainElement = jQuery(myTargetElement).parent().parent();
+            if ($(myTargetElement).hasClass('search-toggle') || $(myTargetElement).parent().hasClass('search-toggle') || $(myTargetElement).parent().parent().hasClass('search-toggle')) {
+                if ($(myTargetElement).hasClass('search-toggle')) {
+                    selector = $(myTargetElement).parent();
+                    mainElement = $(myTargetElement);
+                } else if ($(myTargetElement).parent().hasClass('search-toggle')) {
+                    selector = $(myTargetElement).parent().parent();
+                    mainElement = $(myTargetElement).parent();
+                } else if ($(myTargetElement).parent().parent().hasClass('search-toggle')) {
+                    selector = $(myTargetElement).parent().parent().parent();
+                    mainElement = $(myTargetElement).parent().parent();
                 }
-                if (!mainElement.hasClass('active') && jQuery(".navbar-list li").find('.active')) {
-                    jQuery('.navbar-list li').removeClass('iq-show');
-                    jQuery('.navbar-list li .search-toggle').removeClass('active');
+                if (!mainElement.hasClass('active') && $(".navbar-list li").find('.active')) {
+                    $('.navbar-list li').removeClass('iq-show');
+                    $('.navbar-list li .search-toggle').removeClass('active');
                 }
 
                 selector.toggleClass('iq-show');
                 mainElement.toggleClass('active');
 
                 e.preventDefault();
-            } else if (jQuery(myTargetElement).is('.search-input')) {} else {
-                jQuery('.navbar-list li').removeClass('iq-show');
-                jQuery('.navbar-list li .search-toggle').removeClass('active');
+            } else if ($(myTargetElement).is('.search-input')) {} else {
+                $('.navbar-list li').removeClass('iq-show');
+                $('.navbar-list li .search-toggle').removeClass('active');
             }
         });
 
@@ -226,11 +222,11 @@ Index Of Script
         Scrollbar
         -----------------------------------------------------------------------*/
         let Scrollbar = window.Scrollbar;
-        if (jQuery('#sidebar-scrollbar').length) {
+        if ($('#sidebar-scrollbar').length) {
             Scrollbar.init(document.querySelector('#sidebar-scrollbar'), options);
         }
         let Scrollbar1 = window.Scrollbar;
-        if (jQuery('#right-sidebar-scrollbar').length) {
+        if ($('#right-sidebar-scrollbar').length) {
             Scrollbar1.init(document.querySelector('#right-sidebar-scrollbar'), options);
         }
 
@@ -239,7 +235,7 @@ Index Of Script
         /*---------------------------------------------------------------------
         Counter
         -----------------------------------------------------------------------*/
-        jQuery('.counter').counterUp({
+        $('.counter').counterUp({
             delay: 10,
             time: 1000
         });
@@ -247,7 +243,7 @@ Index Of Script
         /*---------------------------------------------------------------------
         slick
         -----------------------------------------------------------------------*/
-        jQuery('.slick-slider').slick({
+        $('.slick-slider').slick({
             centerMode: true,
             centerPadding: '60px',
             slidesToShow: 9,
@@ -274,7 +270,7 @@ Index Of Script
             prevArrow: '<a href="#" class="ri-arrow-right-s-line right"></a>',
         });
       
-        jQuery('.top-rated-item').slick({
+        $('.top-rated-item').slick({
             slidesToShow: 4,
             speed: 300,
             slidesToScroll: 1,
@@ -517,9 +513,9 @@ Index Of Script
     -----------------------------------------------------------------------*/
 
 
-   if (jQuery('select').hasClass('season-select')) {
+   if ($('select').hasClass('season-select')) {
 
-        jQuery('select').select2({
+        $('select').select2({
           theme: 'bootstrap4',
           allowClear: false 
         });
@@ -530,9 +526,9 @@ Index Of Script
         /*---------------------------------------------------------------------
         Progress Bar
         -----------------------------------------------------------------------*/
-        jQuery('.iq-progress-bar > span').each(function() {
-            let progressBar = jQuery(this);
-            let width = jQuery(this).data('percent');
+        $('.iq-progress-bar > span').each(function() {
+            let progressBar = $(this);
+            let width = $(this).data('percent');
             progressBar.css({
                 'transition': 'width 2s'
             });
@@ -548,12 +544,12 @@ Index Of Script
         /*---------------------------------------------------------------------
         Page Menu
         -----------------------------------------------------------------------*/
-        jQuery(document).on('click', '.wrapper-menu', function() {
-            jQuery(this).toggleClass('open');
+        $(document).on('click', '.wrapper-menu', function() {
+            $(this).toggleClass('open');
         });
 
-        jQuery(document).on('click', ".wrapper-menu", function() {
-            jQuery("body").toggleClass("sidebar-main");
+        $(document).on('click', ".wrapper-menu", function() {
+            $("body").toggleClass("sidebar-main");
         });
         
 
@@ -595,32 +591,32 @@ Index Of Script
       /*---------------------------------------------------------------------
        Active Class for Pricing Table
        -----------------------------------------------------------------------*/
-      jQuery("#my-table tr th").click(function () {
-        jQuery('#my-table tr th').children().removeClass('active');
-        jQuery(this).children().addClass('active');
-        jQuery("#my-table td").each(function () {
-          if (jQuery(this).hasClass('active')) {
-            jQuery(this).removeClass('active')
+      $("#my-table tr th").click(function () {
+        $('#my-table tr th').children().removeClass('active');
+        $(this).children().addClass('active');
+        $("#my-table td").each(function () {
+          if ($(this).hasClass('active')) {
+            $(this).removeClass('active')
           }
         });
-        var col = jQuery(this).index();
-        jQuery("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
+        var col = $(this).index();
+        $("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
       });
 
         /*------------------------------------------------------------------
         Flatpicker
         * -----------------------------------------------------------------*/
-      if (jQuery('.date-input').hasClass('basicFlatpickr')) {
-          jQuery('.basicFlatpickr').flatpickr();
-          jQuery('#inputTime').flatpickr({
+      if ($('.date-input').hasClass('basicFlatpickr')) {
+          $('.basicFlatpickr').flatpickr();
+          $('#inputTime').flatpickr({
             enableTime: true,
             noCalendar: true,
             dateFormat: "H:i",
           });
-          jQuery('#inputDatetime').flatpickr({
+          $('#inputDatetime').flatpickr({
             enableTime: true
           });
-          jQuery('#inputWeek').flatpickr({            
+          $('#inputWeek').flatpickr({            
             weekNumbers: true
           });          
       }
@@ -653,26 +649,16 @@ Index Of Script
         /*---------------------------------------------------------------------
            checkout
         -----------------------------------------------------------------------*/
-
-        jQuery(document).ready(function(){
-            jQuery('#place-order').click(function(){
-                jQuery('#cart').removeClass('show');
-                jQuery('#address').addClass('show');
+        $(document).ready(function(){
+            $('#place-order').click(function(){
+                $('#cart').removeClass('show');
+                $('#address').addClass('show');
             });
-            jQuery('#deliver-address').click(function(){
-                jQuery('#address').removeClass('show');
-                jQuery('#payment').addClass('show');
+            $('#deliver-address').click(function(){
+                $('#address').removeClass('show');
+                $('#payment').addClass('show');
             });
         });
-
-         /*---------------------------------------------------------------------
-           Datatables
-        -----------------------------------------------------------------------*/
-        if(jQuery('.data-tables').length)
-        {
-          $('.data-tables').DataTable();
-        }
- 
 
       /*---------------------------------------------------------------------
       image-upload
@@ -701,26 +687,26 @@ Index Of Script
         Button 
         -----------------------------------------------------------------------*/
 
-        jQuery('.qty-btn').on('click',function(){
-          var id = jQuery(this).attr('id');
+        $('.qty-btn').on('click',function(){
+          var id = $(this).attr('id');
 
-          var val = parseInt(jQuery('#quantity').val());
+          var val = parseInt($('#quantity').val());
 
           if(id == 'btn-minus')
           {
             if(val != 0)
             {
-              jQuery('#quantity').val(val-1);
+              $('#quantity').val(val-1);
             }
             else
             {
-              jQuery('#quantity').val(0);
+              $('#quantity').val(0);
             }
 
           }
           else
           {
-            jQuery('#quantity').val(val+1);
+            $('#quantity').val(val+1);
           }
         });
 

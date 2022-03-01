@@ -1,10 +1,10 @@
 (function(jQuery) {
 
     "use strict";
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         var rightSideBarMini = false;
         checkRightSideBar(rightSideBarMini);
-        jQuery(document).on('click', '.right-sidebar-toggle', function() {
+        $(document).on('click', '.right-sidebar-toggle', function() {
             if (rightSideBarMini) {
                 rightSideBarMini = false;
             } else {
@@ -23,11 +23,11 @@
     }
 
     function rightSideBarShow() {
-        jQuery('.right-sidebar-mini').addClass('right-sidebar')
+        $('.right-sidebar-mini').addClass('right-sidebar')
     }
 
     function rightSideBarHide() {
-        jQuery('.right-sidebar-mini').removeClass('right-sidebar')
+        $('.right-sidebar-mini').removeClass('right-sidebar')
     }
 
 })(jQuery);
@@ -78,7 +78,7 @@ var options = {
     }
 };
 
-if(jQuery('#chart-1').length){
+if($('#chart-1').length){
     var chart = new ApexCharts(
         document.querySelector("#chart-1"),
         options
@@ -130,7 +130,7 @@ var options = {
     }
 };
 
-if(jQuery('#chart-2').length){
+if($('#chart-2').length){
     var chart = new ApexCharts(
         document.querySelector("#chart-2"),
         options
@@ -181,7 +181,7 @@ var options = {
         },
     }
 };
-if(jQuery('#chart-3').length){
+if($('#chart-3').length){
     var chart = new ApexCharts(
         document.querySelector("#chart-3"),
         options
@@ -232,7 +232,7 @@ var options = {
     }
 };
 
-if(jQuery('#chart-4').length){
+if($('#chart-4').length){
     var chart = new ApexCharts(
         document.querySelector("#chart-4"),
         options
@@ -325,7 +325,7 @@ var options = {
     }
 };
 
-if(jQuery('#chart-5').length) {
+if($('#chart-5').length) {
     var chart = new ApexCharts(
         document.querySelector("#chart-5"),
         options
@@ -387,7 +387,7 @@ var options = {
     }
 };
 
-if(jQuery('#bar-chart-6').length){
+if($('#bar-chart-6').length){
     var chart = new ApexCharts(
         document.querySelector("#bar-chart-6"),
         options
@@ -395,7 +395,7 @@ if(jQuery('#bar-chart-6').length){
 
     chart.render();
 }
-if(jQuery('#chart-6').length){
+if($('#chart-6').length){
     var chart = new ApexCharts(
         document.querySelector("#chart-6"),
         options
@@ -507,7 +507,7 @@ var options = {
 };
 options.colors = ['#ff4545'];
 
-if(jQuery('#wave-chart-7').length){
+if($('#wave-chart-7').length){
     options.markers.size=0;
     options.chart.type='area';
     options.stroke.curve="smooth";
@@ -518,7 +518,7 @@ if(jQuery('#wave-chart-7').length){
     );
     wave_chart_7.render();
 }
-if(jQuery('#chart-7').length){
+if($('#chart-7').length){
     var chart_7 = new ApexCharts(
         document.querySelector("#chart-7"),
         options
@@ -528,7 +528,7 @@ if(jQuery('#chart-7').length){
 
 
 options.colors = ['#1ee2ac'];
-if(jQuery('#wave-chart-8').length){
+if($('#wave-chart-8').length){
     options.markers.size=0;
     options.chart.height=70;
     options.stroke.curve="smooth";
@@ -539,43 +539,43 @@ if(jQuery('#wave-chart-8').length){
     );
     wave_chart_8.render();
 }
-if(jQuery('#chart-8').length){
+if($('#chart-8').length){
     var chart_8 = new ApexCharts(
         document.querySelector("#chart-8"),
         options
     );
     chart_8.render();
 }
-if(jQuery('#wave-chart-7').length || jQuery('#wave-chart-8').length) {
+if($('#wave-chart-7').length || $('#wave-chart-8').length) {
     window.setInterval(function () {
         getNewSeries(lastDate, {
             min: 10,
             max: 90
         });
-        if(jQuery('#wave-chart-7').length){
+        if($('#wave-chart-7').length){
             wave_chart_7.updateSeries([{
                 data: data
             }]);
         }
-        if(jQuery('#wave-chart-8').length) {
+        if($('#wave-chart-8').length) {
             wave_chart_8.updateSeries([{
                 data: data
             }])
         }
     }, 1000);
 }
-// if(jQuery('#chart-7').length || jQuery('#chart-8').length) {
+// if($('#chart-7').length || $('#chart-8').length) {
 //     window.setInterval(function () {
 //         getNewSeries(lastDate, {
 //             min: 10,
 //             max: 90
 //         });
-//         if(jQuery('#chart-7').length){
+//         if($('#chart-7').length){
 //             chart_7.updateSeries([{
 //                 data: data
 //             }]);
 //         }
-//         if(jQuery('#chart-8').length) {
+//         if($('#chart-8').length) {
 //             chart_8.updateSeries([{
 //                 data: data
 //             }])
@@ -636,7 +636,7 @@ var options = {
 };
 options.colors = ['#ff4545'];
 
-if(jQuery('#chart-9').length){
+if($('#chart-9').length){
     var chart9 = new ApexCharts(
         document.querySelector("#chart-9"),
         options
@@ -647,7 +647,7 @@ if(jQuery('#chart-9').length){
             min: 10,
             max: 90
         });
-        if (jQuery('#chart-9').length) {
+        if ($('#chart-9').length) {
             chart9.updateSeries([{
                 data: data
             }]);
@@ -749,7 +749,7 @@ var options = {
     }
 };
 
-if(jQuery('#chart-10').length) {
+if($('#chart-10').length) {
     var chart_2 = new ApexCharts(
         document.querySelector("#chart-10"),
         options
@@ -837,7 +837,7 @@ var chart11 = {
         borderColor: '#f1f1f1',
     }
 }
-if(jQuery('#chart-11').length) {
+if($('#chart-11').length) {
     var chart_3 = new ApexCharts(
         document.querySelector("#chart-11"),
         chart11
@@ -888,7 +888,7 @@ var options12 = {
         },
     }
 };
-if(jQuery('#chart-12').length) {
+if($('#chart-12').length) {
     var chart12 = new ApexCharts(
         document.querySelector("#chart-12"),
         options12
@@ -928,7 +928,7 @@ var barOptions12 = {
         },
     }
 };
-if(jQuery('#bar-chart-12').length) {
+if($('#bar-chart-12').length) {
     var chart12 = new ApexCharts(
         document.querySelector("#bar-chart-12"),
         barOptions12
@@ -940,7 +940,7 @@ if(jQuery('#bar-chart-12').length) {
             min: 10,
             max: 90
         });
-        if (jQuery('#bar-chart-12').length) {
+        if ($('#bar-chart-12').length) {
             chart12.updateSeries([{
                 data: data
             }]);
@@ -1003,7 +1003,7 @@ var option13 = {
     labels: [' Mobile', 'Desktop', 'Tablet', 'Watch'],
 };
 
-if(jQuery('#chart-13').length) {
+if($('#chart-13').length) {
     var chart13 = new ApexCharts(
         document.querySelector("#chart-13"),
         option13
@@ -1059,7 +1059,7 @@ var option14 = {
 
 };
 
-if(jQuery('#chart-14').length) {
+if($('#chart-14').length) {
     var chart14 = new ApexCharts(
         document.querySelector("#chart-14"),
         option14
@@ -1123,7 +1123,7 @@ var option15 = {
     }
 };
 
-if(jQuery('#chart-15').length) {
+if($('#chart-15').length) {
     var chart15 = new ApexCharts(
         document.querySelector("#chart-15"),
         option15
@@ -1167,7 +1167,7 @@ var option16 = {
     }
 };
 
-if(jQuery('#chart-16').length) {
+if($('#chart-16').length) {
     var chart16 = new ApexCharts(
         document.querySelector("#chart-16"),
         option16
@@ -1263,7 +1263,7 @@ var option17 = {
     }
 }
 
-if(jQuery('#Dash1MultiBarChart').length) {
+if($('#Dash1MultiBarChart').length) {
     var chart17 = new ApexCharts(
         document.querySelector("#Dash1MultiBarChart"),
         option17
@@ -1295,7 +1295,7 @@ var option18 = {
     }
 };
 
-if(jQuery('#Dash1DonetChart').length) {
+if($('#Dash1DonetChart').length) {
     var chart18 = new ApexCharts(
         document.querySelector("#Dash1DonetChart"),
         option18
@@ -1351,7 +1351,7 @@ var option19 =  {
     }],
 };
 
-if(jQuery('#chart-19').length) {
+if($('#chart-19').length) {
 
     var chart19 = new ApexCharts(
         document.querySelector("#chart-19"),
@@ -1437,7 +1437,7 @@ var option20 = {
 };
 
 
-if(jQuery('#chart-20').length) {
+if($('#chart-20').length) {
 
     var chart20 = new ApexCharts(
         document.querySelector("#chart-20"),
@@ -1783,7 +1783,7 @@ $(document).ready(function() {
 
 
 // top chart 1
- if(jQuery('#view-chart-01').length){
+ if($('#view-chart-01').length){
        var options = {
           series: [44, 55, 30, 30],
           chart: {
@@ -1821,7 +1821,7 @@ $(document).ready(function() {
       }
 
     // top chart 2
- if(jQuery('#view-chart-02').length){
+ if($('#view-chart-02').length){
         var options = {
           series: [44, 30, 20, 43, 22,20],
           chart: {
@@ -1861,7 +1861,7 @@ $(document).ready(function() {
     }
       
 // top chart 2
- if(jQuery('#view-chart-03').length){
+ if($('#view-chart-03').length){
         var options = {
           series: [{
           name: 'This Month',

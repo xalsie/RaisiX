@@ -586,7 +586,7 @@ img.summary-image-top { width: 35px; }
 .table.table-borderless thead th { color: var(--iq-body-text); font-weight: 600; }
 .table.table-test thead { border: 0px; }
 .table.table-test tr td { font-weight: 400; color: var(--iq-body-text); }
-.data-tables td p { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.data-tables td p { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 div.dataTables_wrapper div.dataTables_paginate ul.pagination { margin: 15px 0 0; }
 div.dataTables_wrapper div.dataTables_info { padding-top: 20px; }
 .movie_table tbody tr { border-bottom: 10px solid var(--iq-light-card); background-color: var(--iq-body-bg); }

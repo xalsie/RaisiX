@@ -2,7 +2,7 @@
 //àéè
 defined('v1Secureraisix') or header('Location: /');
 
-function Header_HTML($Title="", $panel=false, $IncludeHeader="") {
+function Header_HTML($Title="", $panel=false, $IncludeHeader="", $controller = "appHeader") {
    $git = getGitVersion();
 
    $ret='<!doctype html>
@@ -33,12 +33,22 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="") {
                                                             |___/
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K01N3EFBW2"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag("js", new Date());
+
+         gtag("config", "G-K01N3EFBW2");
+      </script>
+
       '.Header_css($panel).'
 
       <!-- Import CSS -->
       '.$IncludeHeader.'
    </head>
-<body ng-controller="appHeader">';
+<body ng-controller="'.$controller.'">';
   return $ret;
 }
 
@@ -78,7 +88,7 @@ return $rtn;
 }
 
 function Header_header() {
-  $rtn = '<header id="main-header">
+  $rtn = '<header id="main-header" ng-controller="getAvatar">
 <div class="main-header">
    <div class="container-fluid">
       <div class="row">
@@ -187,7 +197,17 @@ function Header_header() {
                               <div class="iq-sub-dropdown iq-user-dropdown">
                                  <div class="iq-card shadow-none m-0">
                                     <div class="iq-card-body p-0 pl-3 pr-3">
-                                       <a href="setting.php" class="iq-sub-card setting-dropdown">
+                                       <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
+                                          <div class="media align-items-center">
+                                             <div class="right-icon">
+                                                <i class="ri-settings-4-line text-primary"></i>
+                                             </div>
+                                             <div class="media-body ml-3">
+                                                <h6 class="mb-0 ">Tableau de bord</h6>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a href="/setting.php" class="iq-sub-card setting-dropdown">
                                           <div class="media align-items-center">
                                              <div class="right-icon">
                                                 <i class="ri-settings-4-line text-primary"></i>
@@ -197,7 +217,7 @@ function Header_header() {
                                              </div>
                                           </div>
                                        </a>
-                                       <a href="pricing-plan.php" class="iq-sub-card setting-dropdown">
+                                       <a href="/pricing-plan.php" class="iq-sub-card setting-dropdown">
                                           <div class="media align-items-center">
                                              <div class="right-icon">
                                                 <i class="ri-settings-4-line text-primary"></i>
@@ -207,7 +227,7 @@ function Header_header() {
                                              </div>
                                           </div>
                                        </a>
-                                       <a href="login.php?logout" class="iq-sub-card setting-dropdown">
+                                       <a href="/login.php?logout" class="iq-sub-card setting-dropdown">
                                           <div class="media align-items-center">
                                              <div class="right-icon">
                                                 <i class="ri-logout-circle-line text-primary"></i>
@@ -255,14 +275,14 @@ function Header_header() {
                         <div class="iq-sub-dropdown">
                            <div class="iq-card shadow-none m-0">
                               <div class="iq-card-body">
-                                 <a href="/detail/movie/{{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
+                                 <a href="/movie-details.php?id={{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
                                     <div class="media align-items-center">
                                        <div class="noti-img">
                                           <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
                                        </div>
                                        <div class="media-body ml-2">
                                           <h6 class="mb-0 ">{{row.title}}</h6>
-                                          <small class="font-size-12">{{fromNow(row.date_create)}}</small>
+                                          <small class="font-size-12">{{row.date_create | fromNow}}</small>
                                        </div>
                                     </div>
                                  </a>
@@ -278,6 +298,16 @@ function Header_header() {
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
                               <div class="iq-card-body p-0 pl-3 pr-3">
+                                 <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
+                                    <div class="media align-items-center">
+                                       <div class="right-icon">
+                                          <i class="ri-settings-4-line text-primary"></i>
+                                       </div>
+                                       <div class="media-body ml-3">
+                                          <h6 class="mb-0 ">Tableau de bord</h6>
+                                       </div>
+                                    </div>
+                                 </a>
                                  <a href="setting.php" class="iq-sub-card setting-dropdown">
                                     <div class="media align-items-center">
                                        <div class="right-icon">
@@ -391,42 +421,28 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
   </div>
   <!-- back-to-top End -->
 
-  <!-- Import JS -->
-  '.$IncludeFooter.'
-
-  '.footer_css($panel).'
+  '.footer_css($panel, $IncludeFooter).'
 
   </body>
 </html>';
   return $ret;
 }
 
-function footer_css($panel) {
+function footer_css($panel, $IncludeFooter = "") {
    $frontend = '<!-- jQuery, Popper JS -->
-      <script src="/assets/js/jquery-3.4.1.min.js"></script>
+      <script src="/assets/js/jquery.min.js"></script>
       <script src="/assets/js/popper.min.js"></script>
       <!-- Bootstrap JS -->
       <script src="/assets/js/bootstrap.min.js"></script>
-      <!-- Slick JS -->
-      <script src="/assets/js/slick.min.js"></script>
-      <!-- owl carousel Js -->
-      <script src="/assets/js/owl.carousel.min.js"></script>
-      <!-- select2 Js -->
-      <script src="/assets/js/select2.min.js"></script>
-      <!-- Magnific Popup-->
-      <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-      <!-- Slick Animation-->
-      <script src="/assets/js/slick-animation.min.js"></script>
-      <!-- Flatpickr JavaScript -->
-      <script src="/assets/js/flatpickr.min.js"></script>
-      <!-- Moment With Locales JavaScript -->
-      <script src="/assets/js/moment-with-locales.min.js"></script>
-      <script type="text/javascript">moment.locale("fr");</script>
+      
+      <!-- Import JS -->
+      '.$IncludeFooter.'
 
       <!-- AngularJS Core -->
       <script src="/assets/js/angular.min.js"></script>
       <!-- AngularJS Script-->
       <script src="/assets/js/app-angular.js"></script>
+
       <!-- Custom JS-->
       <script src="/assets/js/custom_frontend.js"></script>
 ';
@@ -477,7 +493,7 @@ function footer_css($panel) {
       <!-- Chart Custom JavaScript -->
       <script src="/assets/js/chart-custom.js"></script>
 ';
- 
+
    if ($panel == "frontend") {
      return $frontend;
    } else if ($panel == "dashboard") {

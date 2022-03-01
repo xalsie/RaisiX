@@ -1,6 +1,14 @@
 @charset 'UTF-8';
 /* Slider */
+.slick-track {
+    display: flex !important;
+}
 
+.slick-slide {
+    height: inherit !important;
+    display: flex !important;
+    justify-content: center;
+}
 
 /* Arrows */
 .slick-prev,

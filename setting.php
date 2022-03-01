@@ -4,7 +4,7 @@ include_once("includes/inc.php");
 if (!isConnected())
    header("Location: login.php");
 
-echo Header_HTML("Réglage du compte", "frontend");
+echo Header_HTML("Réglage du compte", "frontend", );
 ?>
 
 <?php echo Header_loader(); ?>
@@ -150,5 +150,27 @@ echo Header_HTML("Réglage du compte", "frontend");
     </section>
 
 <?php
-   echo Footer_html("frontend");
+   echo Footer_html("frontend", '<!-- Slick JS -->
+   <script src="/assets/js/slick.min.js"></script>
+   <!-- owl carousel Js -->
+   <script src="/assets/js/owl.carousel.min.js"></script>
+   <!-- select2 Js -->
+   <script src="/assets/js/select2.min.js"></script>
+   <!-- Magnific Popup-->
+   <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+   <!-- Slick Animation-->
+   <script src="/assets/js/slick-animation.min.js"></script>
+   <!-- Flatpickr JavaScript -->
+   <script src="/assets/js/flatpickr.min.js"></script>
+   <!-- Moment With Locales JavaScript -->
+   <script src="/assets/js/moment-with-locales.min.js"></script>
+   <script type="text/javascript">moment.locale("fr");</script>
+
+   <!-- Videojs -->
+   <link href="/assets/css/video-js.css" rel="stylesheet" />
+   <link href="https://vod.dev/dist/videojs-http-source-selector.css" rel="stylesheet" />
+
+   <script src="https://vjs.zencdn.net/7.4.1/video.js"></script>
+   <script src="https://vod.dev/dist/videojs-http-source-selector.js"></script>
+   <script src="https://vod.dev/dist/videojs-contrib-quality-levels.js"></script>');
 ?>

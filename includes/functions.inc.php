@@ -63,7 +63,7 @@
 
 		if ($redirect) {
 			session_destroy();
-			header("Location: /?url_redirect=".$_SERVER["REQUEST_URI"]);
+			header("Location: /login.php?url_redirect=".$_SERVER["REQUEST_URI"]);
 		} else
-			return $redirect;
+			return;
 	}

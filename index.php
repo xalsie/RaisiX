@@ -1,8 +1,7 @@
 <?php
 include_once("includes/inc.php");
 
-if (!isConnected())
-   header("Location: login.php");
+isConnected(true);
 
 echo Header_HTML("Home", "frontend");
 ?>
@@ -16,9 +15,9 @@ echo Header_HTML("Home", "frontend");
          <!-- Slider Start -->
       <section id="home" class="iq-main-slider p-0">
          <div id="home-slider" class="slider m-0 p-0" ng-show="slideLoaded">
-               
+
          <!-- slider section repeat -->
-            <div class="slide slick-bg" style="background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path}});" ng-repeat="movie in sliderMap.datas">
+            <div class="slide slick-bg" style="background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path? movie.backdrop_path:movie.poster_path}});" ng-repeat="movie in sliderMap.datas">
                <div class="container-fluid position-relative h-100">
                   <div class="slider-inner h-100">
                      <div class="row align-items-center h-100">
@@ -30,21 +29,22 @@ echo Header_HTML("Home", "frontend");
                            </a>
                            <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft" data-delay-in="0.6">{{movie.original_title}}</h1>
                            <div class="d-flex align-items-center" data-animation-in="fadeInUp" data-delay-in="1">
-                              <span class="badge badge-secondary p-2">18+</span>
+                              <!-- <span class="badge badge-secondary p-2">18+</span> -->
+                              <span class="badge badge-secondary p-2">{{movie.vote_average}}</span>
                               <!-- <span class="ml-3">2 Seasons</span> -->
-                              <span class="ml-3">{{formatTime(movie.runtime)}}</span>
-                              <span class="ml-3">{{displayGenres(movie.genres)}}</span>
+                              <span class="ml-3">{{movie.runtime | formatTime}}</span>
+                              <span class="ml-3">{{displayGenres(movie.genres, ', ')}}</span>
                            </div>
-                           <p data-animation-in="fadeInUp" data-delay-in="1.2">{{movie.overview}}</p>
-                           <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.2">
-                              <a href="show-details.php" class="btn btn-hover"><i class="fa fa-play mr-2"
+                           <p class="slider-overview" data-animation-in="fadeInUp" data-delay-in="1.2">{{movie.overview}}</p>
+                           <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.5">
+                              <a href="/movie-details.php?id={{movie.id}}" class="btn btn-hover"><i class="fa fa-play mr-2"
                                  aria-hidden="true"></i>Voir maintenant</a>
-                              <a href="show-details.php" class="btn btn-link">Plus de détails</a>
+                              <a href="/movie-details.php?id={{movie.id}}" class="btn btn-link">Plus de détails</a>
                            </div>
                         </div>
                      </div>
-                     <div class="trailor-video">
-                        <a href="/assets/video/trailer.mp4" class="video-open playbtn">
+                     <div class="trailor-video" ng-if="movie.video">
+                        <a ng-href="{{movie.video | iframeVideoYtb}}" class="video-open playbtn">
                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                               x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7"
                               enable-background="new 0 0 213.7 213.7" xml:space="preserve">
@@ -54,7 +54,7 @@ echo Header_HTML("Home", "frontend");
                               <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round"
                                  stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
                            </svg>
-                           <span class="w-trailor">Watch Trailer</span>
+                           <span class="w-trailor">Voir la bande-annonce</span>
                         </a>
                      </div>
                   </div>
@@ -3710,5 +3710,19 @@ echo Header_HTML("Home", "frontend");
       </div>
 
 <?php
-   echo Footer_html("frontend");
+   echo Footer_html("frontend", '<!-- Slick JS -->
+   <script src="/assets/js/slick.min.js"></script>
+   <!-- owl carousel Js -->
+   <script src="/assets/js/owl.carousel.min.js"></script>
+   <!-- select2 Js -->
+   <script src="/assets/js/select2.min.js"></script>
+   <!-- Magnific Popup-->
+   <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+   <!-- Slick Animation-->
+   <script src="/assets/js/slick-animation.min.js"></script>
+   <!-- Flatpickr JavaScript -->
+   <script src="/assets/js/flatpickr.min.js"></script>
+   <!-- Moment With Locales JavaScript -->
+   <script src="/assets/js/moment-with-locales.min.js"></script>
+   <script type="text/javascript">moment.locale("fr");</script>');
 ?>

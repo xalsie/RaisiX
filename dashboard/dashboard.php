@@ -3,7 +3,7 @@ include_once("../includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
+echo Header_HTML("Tableau de bord - Accueil", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">');
 ?>
    <!-- loader Start -->
@@ -48,7 +48,7 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="/
                   <li>
                      <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="movie" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a href="add-movie.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
+                        <li><a href="movie-add.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
                         <li><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
                      </ul>
                   </li>
@@ -861,5 +861,5 @@ echo Header_HTML("Tableau de bord", "dashboard", '<link rel="stylesheet" href="/
    <!-- Footer END -->
 
 <?php
-   echo Footer_css("dashboard");
+   echo footer_css("dashboard", "");
 ?>

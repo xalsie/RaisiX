@@ -24,7 +24,7 @@ echo Header_HTML("Home", "frontend");
                                 </div>
                             </a>
                             <a class="navbar-brand" href="index-2.html"> <img class="img-fluid logo" src="images/logo.png"
-                                    alt="raisix" /> </a>
+                                    alt="RaisiX" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
                                     <ul id="top-menu" class="navbar-nav ml-auto">
@@ -78,7 +78,7 @@ echo Header_HTML("Home", "frontend");
                                                             <a href="#" class="iq-sub-card">
                                                                 <div class="media align-items-center">
                                                                     <img src="images/notify/thumb-1.jpg"
-                                                                        class="img-fluid mr-3" alt="raisix" />
+                                                                        class="img-fluid mr-3" alt="RaisiX" />
                                                                     <div class="media-body">
                                                                         <h6 class="mb-0 ">Boop Bitty</h6>
                                                                         <small class="font-size-12"> just now</small>
@@ -88,7 +88,7 @@ echo Header_HTML("Home", "frontend");
                                                             <a href="#" class="iq-sub-card">
                                                                 <div class="media align-items-center">
                                                                     <img src="images/notify/thumb-2.jpg"
-                                                                        class="img-fluid mr-3" alt="raisix" />
+                                                                        class="img-fluid mr-3" alt="RaisiX" />
                                                                     <div class="media-body">
                                                                         <h6 class="mb-0 ">The Last Breath</h6>
                                                                         <small class="font-size-12">15 minutes ago</small>
@@ -98,7 +98,7 @@ echo Header_HTML("Home", "frontend");
                                                             <a href="#" class="iq-sub-card">
                                                                 <div class="media align-items-center">
                                                                     <img src="images/notify/thumb-3.jpg"
-                                                                        class="img-fluid mr-3" alt="raisix" />
+                                                                        class="img-fluid mr-3" alt="RaisiX" />
                                                                     <div class="media-body">
                                                                         <h6 class="mb-0 ">The Hero Camp</h6>
                                                                         <small class="font-size-12">1 hour ago</small>
@@ -200,7 +200,7 @@ echo Header_HTML("Home", "frontend");
                                                     <a href="#" class="iq-sub-card">
                                                         <div class="media align-items-center">
                                                             <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
-                                                                alt="raisix" />
+                                                                alt="RaisiX" />
                                                             <div class="media-body">
                                                                 <h6 class="mb-0 ">Boot Bitty</h6>
                                                                 <small class="font-size-12"> just now</small>
@@ -210,7 +210,7 @@ echo Header_HTML("Home", "frontend");
                                                     <a href="#" class="iq-sub-card">
                                                         <div class="media align-items-center">
                                                             <img src="images/notify/thumb-2.jpg" class="img-fluid mr-3"
-                                                                alt="raisix" />
+                                                                alt="RaisiX" />
                                                             <div class="media-body">
                                                                 <h6 class="mb-0 ">The Last Breath</h6>
                                                                 <small class="font-size-12">15 minutes ago</small>
@@ -220,7 +220,7 @@ echo Header_HTML("Home", "frontend");
                                                     <a href="#" class="iq-sub-card">
                                                         <div class="media align-items-center">
                                                             <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
-                                                                alt="raisix" />
+                                                                alt="RaisiX" />
                                                             <div class="media-body">
                                                                 <h6 class="mb-0 ">The Hero Camp</h6>
                                                                 <small class="font-size-12">1 hour ago</small>
@@ -342,7 +342,7 @@ echo Header_HTML("Home", "frontend");
                                         <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" scope="row">raisix Special</th>
+                                        <th class="text-center" scope="row">RaisiX Special</th>
                                         <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
                                         <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
                                         </td>

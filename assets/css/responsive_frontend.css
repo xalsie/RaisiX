@@ -59,7 +59,6 @@
   .device-margin { margin-top: 15px; }
   #home-slider h1.slider-text { font-size: 35px;}
   header .navbar ul li{display:block;}
-  .iq-main-slider{padding-top:60px!important;}
   .m-profile {padding-top: 100px;padding-bottom: 60px;}
   .trending-info .trending-dec{width: 52%;}
 }
@@ -104,6 +103,7 @@
   .shows-content { bottom: 14px; }
   .main-content { padding-top: 25px; }
   #home-slider p { width: 100%; }
+  #home-slider p.slider-overview { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
   .slick-bg:before { background: linear-gradient(-360deg, rgba(0, 0, 0, 1) 0%, rgba(20, 20, 20, 1) 40%, rgba(83, 100, 141, 0) 100%); }
   .m-profile { padding-top: 40px; padding-bottom: 50px; }
   .m-profile .sign-user_card { padding: 15px; }

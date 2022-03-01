@@ -29,30 +29,30 @@ Index Of Script
 
 (function (jQuery) {
 	"use strict";
-	jQuery(document).ready(function() {
+	$(document).ready(function() {
 
 		function activaTab(pill) {
-			jQuery(pill).addClass('active show');
+			$(pill).addClass('active show');
 		}
 
 		/*---------------------------------------------------------------------
 			Sticky Header Animation & Height
 		----------------------------------------------------------------------- */
 		function headerHeight() {
-			var height = jQuery("#main-header").height();
-			jQuery('.iq-height').css('height', height + 'px');
+			var height = $("#main-header").height();
+			$('.iq-height').css('height', height + 'px');
 		}
-		jQuery(function() {
-			var header = jQuery("#main-header"),
+		$(function() {
+			var header = $("#main-header"),
 				yOffset = 0,
 				triggerPoint = 80;
 
 			headerHeight();
 
-			jQuery(window).resize(headerHeight);
-			jQuery(window).on('scroll', function() {
+			$(window).resize(headerHeight);
+			$(window).on('scroll', function() {
 
-				yOffset = jQuery(window).scrollTop();
+				yOffset = $(window).scrollTop();
 
 				if (yOffset >= triggerPoint) {
 					header.addClass("menu-sticky animated slideInDown");
@@ -82,36 +82,36 @@ Index Of Script
 		/*---------------------------------------------------------------------
 			Header Menu Dropdown
 		---------------------------------------------------------------------*/
-		jQuery('[data-toggle=more-toggle]').on('click', function() {
-			jQuery(this).next().toggleClass('show');
+		$('[data-toggle=more-toggle]').on('click', function() {
+			$(this).next().toggleClass('show');
 		});
 
-		jQuery(document).on('click', function(e) {
+		$(document).on('click', function(e) {
 			let myTargetElement = e.target;
 			let selector, mainElement;
-			if (jQuery(myTargetElement).hasClass('search-toggle') || jQuery(myTargetElement).parent().hasClass('search-toggle') || jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
-				if (jQuery(myTargetElement).hasClass('search-toggle')) {
-					selector = jQuery(myTargetElement).parent();
-					mainElement = jQuery(myTargetElement);
-				} else if (jQuery(myTargetElement).parent().hasClass('search-toggle')) {
-					selector = jQuery(myTargetElement).parent().parent();
-					mainElement = jQuery(myTargetElement).parent();
-				} else if (jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
-					selector = jQuery(myTargetElement).parent().parent().parent();
-					mainElement = jQuery(myTargetElement).parent().parent();
+			if ($(myTargetElement).hasClass('search-toggle') || $(myTargetElement).parent().hasClass('search-toggle') || $(myTargetElement).parent().parent().hasClass('search-toggle')) {
+				if ($(myTargetElement).hasClass('search-toggle')) {
+					selector = $(myTargetElement).parent();
+					mainElement = $(myTargetElement);
+				} else if ($(myTargetElement).parent().hasClass('search-toggle')) {
+					selector = $(myTargetElement).parent().parent();
+					mainElement = $(myTargetElement).parent();
+				} else if ($(myTargetElement).parent().parent().hasClass('search-toggle')) {
+					selector = $(myTargetElement).parent().parent().parent();
+					mainElement = $(myTargetElement).parent().parent();
 				}
-				if (!mainElement.hasClass('active') && jQuery(".navbar-list li").find('.active')) {
-					jQuery('.navbar-right li').removeClass('iq-show');
-					jQuery('.navbar-right li .search-toggle').removeClass('active');
+				if (!mainElement.hasClass('active') && $(".navbar-list li").find('.active')) {
+					$('.navbar-right li').removeClass('iq-show');
+					$('.navbar-right li .search-toggle').removeClass('active');
 				}
 
 				selector.toggleClass('iq-show');
 				mainElement.toggleClass('active');
 
 				e.preventDefault();
-			} else if (jQuery(myTargetElement).is('.search-input')) {} else {
-				jQuery('.navbar-right li').removeClass('iq-show');
-				jQuery('.navbar-right li .search-toggle').removeClass('active');
+			} else if ($(myTargetElement).is('.search-input')) {} else {
+				$('.navbar-right li').removeClass('iq-show');
+				$('.navbar-right li .search-toggle').removeClass('active');
 			}
 		});
 
@@ -148,7 +148,7 @@ Index Of Script
 		// 	}
 		// });
 
-		jQuery('.favorites-slider').slick({
+		$('.favorites-slider').slick({
 			dots: false,
 			arrows: false,
 			infinite: true,
@@ -183,7 +183,7 @@ Index Of Script
 			]
 		});
 
-		jQuery('#top-ten-slider').slick({
+		$('#top-ten-slider').slick({
 			slidesToShow: 1,
 			slidesToScroll: 1,
 			arrows: false,
@@ -201,7 +201,7 @@ Index Of Script
 			}
 			]
 		});
-		jQuery('#top-ten-slider-nav').slick({
+		$('#top-ten-slider-nav').slick({
 			slidesToShow: 3,
 			slidesToScroll: 1,
 			asNavFor: '#top-ten-slider',
@@ -230,7 +230,7 @@ Index Of Script
 			]
 		});
 
-		jQuery('#episodes-slider2').slick({
+		$('#episodes-slider2').slick({
 			dots: false,
 			arrows: true,
 			infinite: true,
@@ -265,7 +265,7 @@ Index Of Script
 			]
 		});
 
-		jQuery('#episodes-slider3').slick({
+		$('#episodes-slider3').slick({
 			dots: false,
 			arrows: true,
 			infinite: true,
@@ -300,14 +300,14 @@ Index Of Script
 			]
 		});
 
-		jQuery('#trending-slider').slick({
+		$('#trending-slider').slick({
 			slidesToShow: 1,
 			slidesToScroll: 1,		 
 			arrows: false,
 			fade: true,
 			asNavFor: '#trending-slider-nav',	
 		});
-		jQuery('#trending-slider-nav').slick({
+		$('#trending-slider-nav').slick({
 			slidesToShow: 5,
 			slidesToScroll: 1,
 			asNavFor: '#trending-slider',
@@ -335,7 +335,7 @@ Index Of Script
 			]
 		});
 		
-		jQuery('#tvshows-slider').slick({
+		$('#tvshows-slider').slick({
 			centerMode: true,
 			centerPadding: '200px',
 			slidesToShow: 1,
@@ -368,7 +368,7 @@ Index Of Script
 		/*---------------------------------------------------------------------
 			Owl Carousel
 		----------------------------------------------------------------------- */
-		jQuery('.episodes-slider1').owlCarousel({
+		$('.episodes-slider1').owlCarousel({
 			loop:true,
 			margin:20,
 			nav:true,
@@ -390,72 +390,72 @@ Index Of Script
 		/*---------------------------------------------------------------------
 			Page Loader
 		----------------------------------------------------------------------- */
-		jQuery("#load").fadeOut();
-		jQuery("#loading").delay(0).fadeOut("slow");
+		$("#load").fadeOut();
+		$("#loading").delay(0).fadeOut("slow");
 		
-		jQuery('.widget .fa.fa-angle-down, #main .fa.fa-angle-down').on('click', function () {
-			jQuery(this).next('.children, .sub-menu').slideToggle();
+		$('.widget .fa.fa-angle-down, #main .fa.fa-angle-down').on('click', function () {
+			$(this).next('.children, .sub-menu').slideToggle();
 		});
 
 		/*---------------------------------------------------------------------
-		Mobile Menu Overlay
+			Mobile Menu Overlay
 		----------------------------------------------------------------------- */
-		jQuery(document).on("click", function(event){
-	    var $trigger = jQuery(".main-header .navbar");
+		$(document).on("click", function(event){
+	    var $trigger = $(".main-header .navbar");
 	    if($trigger !== event.target && !$trigger.has(event.target).length){
-			jQuery(".main-header .navbar-collapse").collapse('hide');
-			jQuery('body').removeClass('nav-open');
+			$(".main-header .navbar-collapse").collapse('hide');
+			$('body').removeClass('nav-open');
 	    }            
 		});
-		jQuery('.c-toggler').on("click", function(){
-			jQuery('body').addClass('nav-open');
+		$('.c-toggler').on("click", function(){
+			$('body').addClass('nav-open');
 		}); 
 
 		/*---------------------------------------------------------------------
-		  Equal Height of Tab Pane
+			Equal Height of Tab Pane
 		-----------------------------------------------------------------------*/		
-		jQuery('.trending-content').each(function () {			
+		$('.trending-content').each(function () {			
 			var highestBox = 0;			
-			jQuery('.tab-pane', this).each(function () {				
-				if (jQuery(this).height() > highestBox) {
-					highestBox = jQuery(this).height();
+			$('.tab-pane', this).each(function () {				
+				if ($(this).height() > highestBox) {
+					highestBox = $(this).height();
 				}
 			});			 
-			jQuery('.tab-pane', this).height(highestBox);
+			$('.tab-pane', this).height(highestBox);
 		}); 
 
 		/*---------------------------------------------------------------------
 	 		Active Class for Pricing Table
   	 	-----------------------------------------------------------------------*/
-		jQuery("#my-table tr th").on("click", function (){
-			jQuery('#my-table tr th').children().removeClass('active');
-			jQuery(this).children().addClass('active');
-			jQuery("#my-table td").each(function () {
-				if (jQuery(this).hasClass('active')) {
-					jQuery(this).removeClass('active')
+		$("#my-table tr th").on("click", function (){
+			$('#my-table tr th').children().removeClass('active');
+			$(this).children().addClass('active');
+			$("#my-table td").each(function () {
+				if ($(this).hasClass('active')) {
+					$(this).removeClass('active')
 				}
 			});
-			var col = jQuery(this).index();
-			jQuery("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
+			var col = $(this).index();
+			$("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
 		});
 		
 		/*---------------------------------------------------------------------
 			Select 2 Dropdown
 		-----------------------------------------------------------------------*/
-		if (jQuery('select').hasClass('season-select')){
-			jQuery('select').select2({
+		if ($('select').hasClass('season-select')){
+			$('select').select2({
 				theme: 'bootstrap4',
 				allowClear: false,
 				width: 'resolve'
 			});
 		}
-		if (jQuery('select').hasClass('pro-dropdown')) {			
-			jQuery('.pro-dropdown').select2({
+		if ($('select').hasClass('pro-dropdown')) {			
+			$('.pro-dropdown').select2({
 				theme: 'bootstrap4',			
 				minimumResultsForSearch: Infinity,			
 				width: 'resolve'
 			});	
-			jQuery('#lang').select2({
+			$('#lang').select2({
 				theme: 'bootstrap4',
 				placeholder: 'Language Preference',
 				allowClear: true,
@@ -466,42 +466,42 @@ Index Of Script
 		/*---------------------------------------------------------------------
 			Video popup
 		-----------------------------------------------------------------------*/
-		jQuery('.video-open').magnificPopup({
-			type: 'iframe',
-			mainClass: 'mfp-fade',
-			removalDelay: 160,
-			preloader: false,
-			fixedContentPos: false,
-			iframe: {
-				markup: '<div class="mfp-iframe-scaler">' +
-					'<div class="mfp-close"></div>' +
-					'<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
-					'</div>',
+		// $('.video-open').magnificPopup({
+		// 	type: 'iframe',
+		// 	mainClass: 'mfp-fade',
+		// 	removalDelay: 160,
+		// 	preloader: false,
+		// 	fixedContentPos: false,
+		// 	iframe: {
+		// 		markup: '<div class="mfp-iframe-scaler">' +
+		// 			'<div class="mfp-close"></div>' +
+		// 			'<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
+		// 			'</div>',
 
-				srcAction: 'iframe_src',
-			}
-		});
+		// 		srcAction: 'iframe_src',
+		// 	}
+		// });
 
 		/*---------------------------------------------------------------------
 			Flatpicker
 		-----------------------------------------------------------------------*/
-		if (jQuery('.date-input').hasClass('basicFlatpickr')) {
-			jQuery('.basicFlatpickr').flatpickr();
+		if ($('.date-input').hasClass('basicFlatpickr')) {
+			$('.basicFlatpickr').flatpickr();
 		}
 		/*---------------------------------------------------------------------
 			Custom File Uploader
 		-----------------------------------------------------------------------*/
-		jQuery(".file-upload").on("change", function () {
+		$(".file-upload").on("change", function () {
 			! function (e) {
 				if (e.files && e.files[0]) {
 					var t = new FileReader;
 					t.onload = function (e) {
-						jQuery(".profile-pic").attr("src", e.target.result)
+						$(".profile-pic").attr("src", e.target.result)
 					}, t.readAsDataURL(e.files[0])
 				}
 			}(this)
-		}), jQuery(".upload-button").on("click", function () {
-			jQuery(".file-upload").click();
+		}), $(".upload-button").on("click", function () {
+			$(".file-upload").click();
 		});
 		// new WOW().init();
 		// var swiper = new Swiper('.swiper-container', {
@@ -532,7 +532,9 @@ Index Of Script
 		// 	},
 		// });
 	
-		// AOS.init();	
+		// AOS.init();
 
+		// var player = window.player = videojs('my-video');
+      	// 	player.httpSourceSelector();
 	});
 })(jQuery);

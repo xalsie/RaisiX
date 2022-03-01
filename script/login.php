@@ -32,13 +32,12 @@ if ((count($_POST) == 2 || count($_POST) == 3) && !empty($_POST["email"]) && !em
 			$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"], "role"=>$_SESSION["role"],];
 			login($user);
 
-			$referer = explode("=", $_SERVER["HTTP_REFERER"])[1];
+			$referer = explode("url_redirect=", $_SERVER["HTTP_REFERER"])[1];
 
 			if (!empty($referer))
 				header("Location: $referer");
 			else
 				header("Location: /index.php");
-			// echo "Location: ../index.php";
 		} else {
 			$error = TRUE;
 			$listOfErrors[]=11;
@@ -51,9 +50,7 @@ if ((count($_POST) == 2 || count($_POST) == 3) && !empty($_POST["email"]) && !em
 		$_SESSION["errorsForm"] = $listOfErrors;
 		$_SESSION["postForm"] = $_POST;
 		header("Location: /login.php");
-		// echo "Location: ../login.php";
 	}
 } else {
 	header("Location: /login.php");
-	// echo "Location: ../login.php";
 }

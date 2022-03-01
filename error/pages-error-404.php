@@ -32,7 +32,7 @@
                             <img src="/assets/images/error/404.png" class="img-fluid iq-error-img" alt="">
                             <h2 class="mb-0 mt-4">Oups! Cette page est introuvable.</h2>
                             <p>La page demandée n'existe pas.</p>
-                            <a class="btn btn-block btn-danger mt-3" href="/index.php"><i class="ri-home-4-line" style="vertical-align: bottom;"></i>Retourner à l'accueil</a>
+                            <a class="btn btn-block btn-danger mt-3" href="./"><i class="ri-home-4-line" style="vertical-align: bottom;"></i>Retourner à l'accueil</a>
                         </div>
                     </div>
                 </div>

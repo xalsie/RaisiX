@@ -13,11 +13,45 @@
 
   app.filter('iframeVideoYtb', ['$sce', function ($sce) {
     return function (val) {
-        return $sce.trustAsResourceUrl("https://www.youtube-nocookie.com/embed/"+val);
+      return $sce.trustAsResourceUrl("https://www.youtube-nocookie.com/embed/"+val);
     };
   }]);
 
-  app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+  app.filter('displayGenres', function() {
+    return function (genres, seperator) {
+      if (genres == undefined) return "";
+      const obj = JSON.parse(genres);
+      const count = Object.keys(obj).length;
+      var _rtn = "";
+      for (var key in obj) {
+        if (key != count-1)
+          _rtn += obj[key].name+seperator;
+        else
+          _rtn += obj[key].name;
+      }
+      return _rtn;
+    }
+  });
+
+  app.filter('fromNow', function() {
+    return function (x) {
+      return moment(x, "YYYY-MM-DD hh:mm:ss").fromNow();
+    }
+  });
+
+  app.filter('formatTime', function() {
+    return function (date) {
+      if (date == undefined) return "";
+      const h = Math.floor(date / 60);
+      const m = Math.round(date % 60)
+      return [
+        h, "h ",
+        m > 9 ? m : (h ? '0' + m : m || '0'), "m"
+      ].filter(Boolean).join("");
+    }
+  });
+
+  app.controller('getAvatar', ['$scope', '$http', function($scope, $http) {
     $scope.getAvatar = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
@@ -31,10 +65,12 @@
         async: true
       }).then(function (response) {
         $scope.avatar = response.data[0].avatar;
-        console.log($scope.avatar);
       });
     }
+    $scope.getAvatar();
+  }]);
 
+  app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
     $scope.getDatas = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
@@ -70,13 +106,15 @@
     $scope.notifMap     = false;
     $scope.sliderMap    = false;
     $scope.slideLoaded  = false;
-    $scope.getAvatar();
     $scope.getDatas();
 
     // $scope.toNotification();
     // $scope.toMovieSlider();
 
     $scope.initSlider = () => {
+      /*---------------------------------------------------------------------
+        Slick Slider
+      ----------------------------------------------------------------------- */
       $('#home-slider').slick({
         autoplay: false,
         speed: 800,
@@ -107,6 +145,42 @@
         }
       });
 
+      /*---------------------------------------------------------------------
+        Video popup
+      -----------------------------------------------------------------------*/
+      $('.video-open').magnificPopup({
+        type: 'iframe',
+        mainClass: 'mfp-fade',
+        removalDelay: 160,
+        preloader: false,
+        fixedContentPos: false,
+        iframe: {
+          markup: '<div class="mfp-iframe-scaler">' +
+            '<div class="mfp-close"></div>' +
+            '<iframe class="mfp-iframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+            '</div>',
+          srcAction: 'iframe_src',
+        }
+      });
+
+      // a voir de plus pres !
+      // $scope.$watch("images", function (newValue, oldValue) {
+      //   $timeout(function() {
+      //     $('.gallery').each(function() {
+      //       $(this).magnificPopup({
+      //         delegate: '.image',
+      //         type:'image',
+      //         gallery: {
+      //          enabled: true
+      //         },
+      //         titleSrc: function(item){
+      //           return item.el.attr('title');
+      //        }
+      //      });
+      //     });
+      //   });
+      // });
+
       $scope.slideLoaded = true;
     }
 
@@ -122,13 +196,13 @@
         m > 9 ? m : (h ? '0' + m : m || '0'), "m"
       ].filter(Boolean).join("");
     }
-    $scope.displayGenres = (genres) => {
+    $scope.displayGenres = (genres, seperator) => {
       const obj = JSON.parse(genres);
       const count = Object.keys(obj).length;
       var _rtn = "";
       for (var key in obj) {
         if (key != count-1)
-          _rtn += obj[key].name+', ';
+          _rtn += obj[key].name+seperator;
         else
           _rtn += obj[key].name;
       }
@@ -137,6 +211,75 @@
 
     // scope tmdb
     $scope.tmdbConf = tmdbConf;
+  }]);
+
+  app.controller('appMovieDetail', ['$scope', '$http', function($scope, $http) {
+    $scope.getMovieById = (id) => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getMovieById",
+          uuid: id
+        },
+        async: true
+      }).then(function (response) {
+        $scope.responseMap = response.data[0];
+
+        var options = {
+          poster: $scope.tmdbConf.images_uri+($scope.responseMap.backdrop_path? $scope.responseMap.backdrop_path:$scope.responseMap.poster_path),
+          responsive: true,
+          html5: {
+            nativeAudioTracks: false,
+            nativeVideoTracks: false,
+            hls: {
+              overrideNative: true,
+              debug: true,
+            }
+          },
+          plugins: {
+            httpSourceSelector:
+            {
+              default: "high"
+            }
+          }
+        };
+
+        var player = window.player = videojs('my-video', options).httpSourceSelector();
+      });
+    }
+
+    $scope.responseMap  = false;
+    $scope.getMovieById(new URLSearchParams(window.location.search).get('id'));
+
+    // scope tmdb
+    $scope.tmdbConf = tmdbConf;
+  }]);
+
+  app.controller('appListMovie', ['$scope', '$http', function($scope, $http) {
+    $scope.getListMovie = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getListMovie",
+          limit: 1,
+          max: 1
+        },
+        async: true
+      }).then(function (response) {
+        $scope.resultsMovie = response.data.data;
+        console.log(response.data);
+      });
+    }
+
+    $scope.resultsMovie = [];
   }]);
 
   app.controller('appSetting', ['$scope', '$http', function($scope, $http) {

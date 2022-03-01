@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             $status     = $_POST["status"];
             $video      = $_POST["video"];
 
-
             $result = [];
 
             $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`, `qualite`, `pathfile`)
@@ -102,6 +101,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             }
 
             echo json_encode($result);
+            break;
+        case "getMovieById":
+            $SQL = "SELECT * FROM `movie_detail` WHERE id = '".db_escape($_POST['uuid'])."';";
+                $result = db_query($SQL);
+
+            echo json_encode($result);
+            break;
+        case "getListMovie":
+            $_limit = $_POST["limit"];
+            $_max = $_POST["max"];
+            $arrayResult = [];
+
+            $SQL = "SELECT COUNT(*) AS count FROM `movie_detail`;";
+                $result = db_query($SQL);
+
+            if(!$result)
+                $arrayResult["_count"] = 0;
+            else
+                $arrayResult["_count"] = $result[0];
+
+            $SQL = "SELECT `id`, `date_create`, `date_modification`, `poster_path`, `genres`, `tmdb_id`, `original_title`, `release_date`, `qualite`, `languages`, `runtime`, `overview`, `status`, `vote_average`, `vote_count`, `pathfile` FROM `movie_detail` LIMIT 0, 1;";
+                $result = db_query($SQL);
+
+            if(!$result)
+                $arrayResult["data"] = [];
+            else
+                $arrayResult["data"] = $result;
+
+            echo json_encode($arrayResult);
+            break;
+        case "delMovie":
+
             break;
 	}
 	exit;
