@@ -4,12 +4,14 @@ Site web de Streaming films et séries gratuit.
 ```
 
 ## **Pre-requis**
-> - [wamp](http://www.wampserver.com/) (ou équivalement)
+> - [Apache 2.4.39](https://httpd.apache.org/download.cgi)
+> - [PHP 7.4.0](https://www.php.net/downloads.php)
+> - [MySQL 5.7.26](https://www.mysql.com/fr/downloads/)
 
 —————————————————
 
 ```DIFF
-+ 🔄｜Mise à jour : mar. 1 mars. 2022 18:28
++ 🔄｜Mise à jour : mar. 8 mars. 2022 02:37
 ```
 —————————————————
 
@@ -19,11 +21,26 @@ Site web de Streaming films et séries gratuit.
 > -「🔄」｜👀｜Affichage des Films en Front\
 > -「🔄」｜🛠｜Optimisation du backOffice\
 > -「🔄」｜🛠｜Création d'un script pour le choix des qualités de film [.m3u8] (php)\
+> -「❌」｜Connection avec 2FA (Google Authentificator)\
 > -「❌」｜Tracking user (Film view, catégorie)\
 > -「❌」｜Gestion Commentaire\
 > -「❌」｜Gestion Catégorie\
 > -「❌」｜Mise en place de [Web Sockets] pour les notification\
 
+—————————————————
+###  **Version** - *0.1.6*
+`｜: : : ADD : : :｜`
+```DIFF
++「🔄」Page Gestion Films [Antoine 😎]
+```
+`｜: : : FIX : : :｜`
+```FIX
+-「✔️」｜Vérification des caracteres du mot de passe (JS)
+-「✔️」｜Marge Slider sur la page d'accueil
+-「✔️」｜Load Js
+-「✔️」｜Redirection après inscription
+-「✔️」｜Responsive page inscription
+```
 —————————————————
 ###  **Version** - *0.1.5*
 `｜: : : ADD : : :｜`
