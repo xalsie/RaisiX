@@ -1,7 +1,7 @@
 .slide { position: relative; -webkit-transition: 1s; transition: 1s; }
 .slider [data-animation-in] { opacity: 0; -webkit-animation-duration: 1.5s; animation-duration: 1.5s; -webkit-transition: opacity 0.5s ease 0.3s; transition: opacity 0.5s ease 0.3s; -webkit-transition: 1s; transition: 1s; }
 .slick-nav { --active: #fff; --border: rgba(255, 255, 255, .12); width: 44px; height: 44px; position: absolute; cursor: pointer; top: calc(50% - 44px); }
-.slick-nav.prev-arrow { left: 2%; -webkit-transform: scaleX(-1); transform: scaleX(-1); z-index: 999; }
+.slick-nav.prev-arrow { left: 2%; -webkit-transform: scaleX(-1); transform: scaleX(-1); z-index: 99; }
 .slick-nav.next-arrow { left: auto; right: 2%; }
 .slick-nav i { display: block; position: absolute; margin: -10px 0 0 -10px; width: 20px; height: 20px; left: 50%; top: 50%; }
 .slick-nav i:before, .slick-nav i:after { content: ''; width: 10px; height: 2px; border-radius: 1px; position: absolute; left: 50%; top: 50%; background: var(--active); margin: -1px 0 0 -5px; display: block; -webkit-transform-origin: 9px 50%; transform-origin: 9px 50%; }

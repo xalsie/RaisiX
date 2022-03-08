@@ -40,6 +40,8 @@ Site web de Streaming films et séries gratuit.
 -「✔️」｜Load Js
 -「✔️」｜Redirection après inscription
 -「✔️」｜Responsive page inscription
+-「✔️」｜cookie domain name
+-「✔️」｜z-index arrow slider
 ```
 —————————————————
 ###  **Version** - *0.1.5*

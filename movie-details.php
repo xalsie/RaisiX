@@ -3,7 +3,7 @@ include_once("includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' rel='stylesheet'/>", "", "appMovieDetail");
+echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' rel='stylesheet'/>", "<script async src='/assets/js/videojs.min.js'></script>", "appMovieDetail");
 ?>
 
       <!-- loader Start -->

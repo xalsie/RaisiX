@@ -31,7 +31,7 @@ echo Header_HTML("Home", "frontend", "", '<!-- Slick JS -->
          <div id="home-slider" class="slider m-0 p-0" ng-show="slideLoaded">
 
          <!-- slider section repeat -->
-            <div class="slide slick-bg" style="margin-top: 5.7rem !important; background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path? movie.backdrop_path:movie.poster_path}});" ng-repeat="movie in sliderMap.datas">
+            <div class="slide slick-bg margin-nav" style="background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path? movie.backdrop_path:movie.poster_path}});" ng-repeat="movie in sliderMap.datas">
                <div class="container-fluid position-relative h-100">
                   <div class="slider-inner h-100">
                      <div class="row align-items-center h-100">

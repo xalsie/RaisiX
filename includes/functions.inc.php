@@ -22,9 +22,9 @@
 			
 			if (isset($_COOKIE["remember"]) && !empty($_COOKIE["remember"])) {
 				$cookieOptions = array (
-					'expires' => strtotime('+10 days'),
+					'expires' => strtotime('+7 days'),
 					'path' => '/',
-					'domain' => 'raisix'
+					'domain' => $_SERVER["HTTP_HOST"]
 				);
 				setcookie("remember", $token, $cookieOptions);
 			}
