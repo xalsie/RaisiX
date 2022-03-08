@@ -2,7 +2,7 @@
 //àéè
 defined('v1Secureraisix') or header('Location: /');
 
-function Header_HTML($Title="", $panel=false, $IncludeHeader="", $controller = "appHeader") {
+function Header_HTML($Title="", $panel=false, $IncludeHeader="", $IncludeFooter="", $controller = "appHeader") {
    $git = getGitVersion();
 
    $ret='<!doctype html>
@@ -43,16 +43,18 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="", $controller = "
          gtag("config", "G-K01N3EFBW2");
       </script>
 
-      '.Header_css($panel).'
-
       <!-- Import CSS -->
       '.$IncludeHeader.'
+
+      <!-- Import JS -->
+      '.Header_css($panel, $IncludeFooter).'
+
    </head>
 <body ng-controller="'.$controller.'">';
   return $ret;
 }
 
-function Header_css($panel) {
+function Header_css($panel, $IncludeFooter = "") {
    $frontend = '<!-- Favicon -->
    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
    <!-- Bootstrap CSS -->
@@ -62,7 +64,25 @@ function Header_css($panel) {
    <!-- Style -->
    <link rel="stylesheet" href="/assets/css/style_frontend.css" />
    <!-- Responsive -->
-   <link rel="stylesheet" href="/assets/css/responsive_frontend.css" />';
+   <link rel="stylesheet" href="/assets/css/responsive_frontend.css" />
+   
+   <!-- jQuery, Popper JS -->
+   <script src="/assets/js/jquery.min.js"></script>
+   <script src="/assets/js/popper.min.js"></script>
+   <!-- Bootstrap JS -->
+   <script src="/assets/js/bootstrap.min.js"></script>
+   
+   <!-- Import JS -->
+   '.$IncludeFooter.'
+
+   <!-- AngularJS Core -->
+   <script src="/assets/js/angular.min.js"></script>
+   <!-- AngularJS Script-->
+   <script src="/assets/js/app-angular.js"></script>
+
+   <!-- Custom JS-->
+   <script src="/assets/js/custom_frontend.js"></script>
+   ';
  
    $dashboard = '<!-- Favicon -->
    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
@@ -73,7 +93,60 @@ function Header_css($panel) {
    <!-- Style -->
    <link rel="stylesheet" href="/assets/css/style_dashboard.css" />
    <!-- Responsive -->
-   <link rel="stylesheet" href="/assets/css/responsive_dashboard.css" />';
+   <link rel="stylesheet" href="/assets/css/responsive_dashboard.css" />
+   <!-- Bootstrap Table -->
+   <link rel="stylesheet" href="/assets/css/bootstrap-table.min.css">
+
+   <!-- jQuery, Popper JS -->
+   <script src="/assets/js/jquery.min.js"></script>
+   <script src="/assets/js/popper.min.js"></script>
+   <!-- Bootstrap JS -->
+   <script src="/assets/js/bootstrap.min.js"></script>
+   <!-- Slick JS -->
+   <script src="/assets/js/slick.min.js"></script>
+   <!-- owl carousel Js -->
+   <script src="/assets/js/owl.carousel.min.js"></script>
+   <!-- select2 Js -->
+   <script src="/assets/js/select2.min.js"></script>
+   <!-- Magnific Popup-->
+   <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+   <!-- Slick Animation-->
+   <script src="/assets/js/slick-animation.min.js"></script>
+   <!-- Flatpickr JavaScript -->
+   <script src="/assets/js/flatpickr.min.js"></script>
+   <!-- Custom JS-->
+   <script src="/assets/js/custom_dashboard.js"></script>
+
+   <!-- Import JS -->
+   '.$IncludeFooter.'
+
+   <!-- AngularJS Core -->
+   <script src="/assets/js/angular.min.js"></script>
+   <!-- AngularJS Script-->
+   <script src="/assets/js/app-angular.js"></script>
+   <!-- Moment With Locales JavaScript -->
+   <script src="/assets/js/moment-with-locales.min.js"></script>
+   <script type="text/javascript">moment.locale("fr");</script>
+
+   <!-- Appear JavaScript -->
+   <script src="/assets/js/jquery.appear.js"></script>
+   <!-- Countdown JavaScript -->
+   <script src="/assets/js/countdown.min.js"></script>
+   <!-- Counterup JavaScript -->
+   <script src="/assets/js/waypoints.min.js"></script>
+   <script src="/assets/js/jquery.counterup.min.js"></script>
+   <!-- Wow JavaScript -->
+   <script src="/assets/js/wow.min.js"></script>
+   <!-- Smooth Scrollbar JavaScript -->
+   <script src="/assets/js/smooth-scrollbar.js"></script>
+   <!-- apex Custom JavaScript -->
+   <script src="/assets/js/apexcharts.js"></script>
+   <!-- Chart Custom JavaScript -->
+   <script src="/assets/js/chart-custom.js"></script>
+   <!-- Bootstrap Table -->
+   <script src="/assets/js/bootstrap-table.min.js"></script>
+   <script src="/assets/js/bootstrap-table-locale-all.min.js"></script>
+   ';
  
    if ($panel == "frontend") {
      return $frontend;
@@ -89,276 +162,276 @@ return $rtn;
 
 function Header_header() {
   $rtn = '<header id="main-header" ng-controller="getAvatar">
-<div class="main-header">
-   <div class="container-fluid">
-      <div class="row">
-         <div class="col-sm-12">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-               <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
-                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                  aria-expanded="false" aria-label="Toggle navigation">
-                  <div class="navbar-toggler-icon" data-toggle="collapse">
-                     <span class="navbar-menu-icon navbar-menu-icon--top"></span>
-                     <span class="navbar-menu-icon navbar-menu-icon--middle"></span>
-                     <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
-                  </div>
-               </a>
-               <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
-                  alt="RaisiX logo" /> </a>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <div class="menu-main-menu-container">
-                     <ul id="top-menu" class="navbar-nav ms-auto">
-                        <li class="menu-item">
-                           <a href="index.php">Accueil</a>
-                        </li>
-                        <li class="menu-item">
-                          <a href="movie-category.php">Films</a>
-                        </li>
-                        <li class="menu-item">
-                           <a href="show-category.php">Séries Tv</a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="mobile-more-menu">
-                  <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
-                     data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
-                  <i class="ri-more-line"></i>
+   <div class="main-header">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12">
+               <nav class="navbar navbar-expand-lg navbar-light p-0">
+                  <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
+                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">
+                     <div class="navbar-toggler-icon" data-toggle="collapse">
+                        <span class="navbar-menu-icon navbar-menu-icon--top"></span>
+                        <span class="navbar-menu-icon navbar-menu-icon--middle"></span>
+                        <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
+                     </div>
                   </a>
-                  <div class="more-menu" aria-labelledby="dropdownMenuButton">
-                     <div class="navbar-right position-relative">
-                        <ul class="d-flex align-items-center justify-content-end list-inline m-0">
-                           <li>
-                              <a href="#" class="search-toggle">
-                              <i class="ri-search-line"></i>
-                              </a>
-                              <div class="search-box iq-search-bar">
-                                 <form action="#" class="searchbox">
-                                    <div class="form-group position-relative">
-                                       <input type="text" class="text search-input font-size-12"
-                                          placeholder="type here to search...">
-                                       <i class="search-link ri-search-line"></i>
-                                    </div>
-                                 </form>
-                              </div>
+                  <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
+                     alt="RaisiX logo" /> </a>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <div class="menu-main-menu-container">
+                        <ul id="top-menu" class="navbar-nav ms-auto">
+                           <li class="menu-item">
+                              <a href="index.php">Accueil</a>
                            </li>
-                           <li class="nav-item nav-icon">
-                              <a href="#" class="search-toggle position-relative">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
-                                    height="22" class="noti-svg">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path
-                                       d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
-                                 </svg>
-                                 <span class="bg-danger dots"></span>
-                              </a>
-                              <div class="iq-sub-dropdown">
-                                 <div class="iq-card shadow-none m-0">
-                                    <div class="iq-card-body">
-                                       <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                             <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
-                                                alt="RaisiX" />
-                                             <div class="media-body">
-                                                <h6 class="mb-0 ">Boop Bitty</h6>
-                                                <small class="font-size-12"> just now</small>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                             <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
-                                                alt="RaisiX" />
-                                             <div class="media-body">
-                                                <h6 class="mb-0 ">The Last Breath</h6>
-                                                <small class="font-size-12">15 minutes ago</small>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <a href="#" class="iq-sub-card">
-                                          <div class="media align-items-center">
-                                             <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
-                                                alt="RaisiX" />
-                                             <div class="media-body">
-                                                <h6 class="mb-0 ">The Hero Camp</h6>
-                                                <small class="font-size-12">1 hour ago</small>
-                                             </div>
-                                          </div>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
+                           <li class="menu-item">
+                           <a href="movie-category.php">Films</a>
                            </li>
-                           <li>
-                              <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                              <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
-                                 alt="user">
-                              </a>
-                              <div class="iq-sub-dropdown iq-user-dropdown">
-                                 <div class="iq-card shadow-none m-0">
-                                    <div class="iq-card-body p-0 pl-3 pr-3">
-                                       <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
-                                          <div class="media align-items-center">
-                                             <div class="right-icon">
-                                                <i class="ri-settings-4-line text-primary"></i>
-                                             </div>
-                                             <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Tableau de bord</h6>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <a href="/setting.php" class="iq-sub-card setting-dropdown">
-                                          <div class="media align-items-center">
-                                             <div class="right-icon">
-                                                <i class="ri-settings-4-line text-primary"></i>
-                                             </div>
-                                             <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Réglage du compte</h6>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <a href="/pricing-plan.php" class="iq-sub-card setting-dropdown">
-                                          <div class="media align-items-center">
-                                             <div class="right-icon">
-                                                <i class="ri-settings-4-line text-primary"></i>
-                                             </div>
-                                             <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Pricing Plan</h6>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <a href="/login.php?logout" class="iq-sub-card setting-dropdown">
-                                          <div class="media align-items-center">
-                                             <div class="right-icon">
-                                                <i class="ri-logout-circle-line text-primary"></i>
-                                             </div>
-                                             <div class="media-body ml-3">
-                                                <h6 class="mb-0">Se déconnecter</h6>
-                                             </div>
-                                          </div>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
+                           <li class="menu-item">
+                              <a href="show-category.php">Séries Tv</a>
                            </li>
                         </ul>
                      </div>
                   </div>
-               </div>
-               <div class="navbar-right menu-right">
-                  <ul class="d-flex align-items-center list-inline m-0">
-                     <li class="nav-item nav-icon">
-                        <a href="#" class="search-toggle device-search">
-                        <i class="ri-search-line"></i>
-                        </a>
-                        <div class="search-box iq-search-bar d-search">
-                           <form action="#" class="searchbox">
-                              <div class="form-group position-relative">
-                                 <input type="text" class="text search-input font-size-12"
-                                    placeholder="type here to search...">
-                                 <i class="search-link ri-search-line"></i>
-                              </div>
-                           </form>
-                        </div>
-                     </li>
-                     <li class="nav-item nav-icon">
-                        <a href="#" class="search-toggle" data-toggle="search-toggle">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
-                           class="color-svg"
-                           ng-class="{\'noti-svg\': notifMap._count}">
-                              <path fill="none" d="M0 0h24v24H0z" />
-                              <path
-                                 d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
-                           </svg>
-                           <span class="bg-danger" ng-class="{\'dots\': notifMap._count}"></span>
-                        </a>
-                        <div class="iq-sub-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body">
-                                 <a href="/movie-details.php?id={{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
-                                    <div class="media align-items-center">
-                                       <div class="noti-img">
-                                          <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
+                  <div class="mobile-more-menu">
+                     <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
+                        data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
+                     <i class="ri-more-line"></i>
+                     </a>
+                     <div class="more-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="navbar-right position-relative">
+                           <ul class="d-flex align-items-center justify-content-end list-inline m-0">
+                              <li>
+                                 <a href="#" class="search-toggle">
+                                 <i class="ri-search-line"></i>
+                                 </a>
+                                 <div class="search-box iq-search-bar">
+                                    <form action="#" class="searchbox">
+                                       <div class="form-group position-relative">
+                                          <input type="text" class="text search-input font-size-12"
+                                             placeholder="type here to search...">
+                                          <i class="search-link ri-search-line"></i>
                                        </div>
-                                       <div class="media-body ml-2">
-                                          <h6 class="mb-0 ">{{row.title}}</h6>
-                                          <small class="font-size-12">{{row.date_create | fromNow}}</small>
+                                    </form>
+                                 </div>
+                              </li>
+                              <li class="nav-item nav-icon">
+                                 <a href="#" class="search-toggle position-relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
+                                       height="22" class="noti-svg">
+                                       <path fill="none" d="M0 0h24v24H0z" />
+                                       <path
+                                          d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
+                                    </svg>
+                                    <span class="bg-danger dots"></span>
+                                 </a>
+                                 <div class="iq-sub-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                       <div class="iq-card-body">
+                                          <a href="#" class="iq-sub-card">
+                                             <div class="media align-items-center">
+                                                <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
+                                                   alt="RaisiX" />
+                                                <div class="media-body">
+                                                   <h6 class="mb-0 ">Boop Bitty</h6>
+                                                   <small class="font-size-12"> just now</small>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="#" class="iq-sub-card">
+                                             <div class="media align-items-center">
+                                                <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
+                                                   alt="RaisiX" />
+                                                <div class="media-body">
+                                                   <h6 class="mb-0 ">The Last Breath</h6>
+                                                   <small class="font-size-12">15 minutes ago</small>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="#" class="iq-sub-card">
+                                             <div class="media align-items-center">
+                                                <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
+                                                   alt="RaisiX" />
+                                                <div class="media-body">
+                                                   <h6 class="mb-0 ">The Hero Camp</h6>
+                                                   <small class="font-size-12">1 hour ago</small>
+                                                </div>
+                                             </div>
+                                          </a>
                                        </div>
                                     </div>
+                                 </div>
+                              </li>
+                              <li>
+                                 <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
+                                 <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
+                                    alt="user">
                                  </a>
+                                 <div class="iq-sub-dropdown iq-user-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                       <div class="iq-card-body p-0 pl-3 pr-3">
+                                          <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-settings-4-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Tableau de bord</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="/setting.php" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-settings-4-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Réglage du compte</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="/pricing-plan.php" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-settings-4-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Pricing Plan</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="/login.php?logout" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-logout-circle-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0">Se déconnecter</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="navbar-right menu-right">
+                     <ul class="d-flex align-items-center list-inline m-0">
+                        <li class="nav-item nav-icon">
+                           <a href="#" class="search-toggle device-search">
+                           <i class="ri-search-line"></i>
+                           </a>
+                           <div class="search-box iq-search-bar d-search">
+                              <form action="#" class="searchbox">
+                                 <div class="form-group position-relative">
+                                    <input type="text" class="text search-input font-size-12"
+                                       placeholder="type here to search...">
+                                    <i class="search-link ri-search-line"></i>
+                                 </div>
+                              </form>
+                           </div>
+                        </li>
+                        <li class="nav-item nav-icon">
+                           <a href="#" class="search-toggle" data-toggle="search-toggle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+                              class="color-svg"
+                              ng-class="{\'noti-svg\': notifMap._count}">
+                                 <path fill="none" d="M0 0h24v24H0z" />
+                                 <path
+                                    d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
+                              </svg>
+                              <span class="bg-danger" ng-class="{\'dots\': notifMap._count}"></span>
+                           </a>
+                           <div class="iq-sub-dropdown">
+                              <div class="iq-card shadow-none m-0">
+                                 <div class="iq-card-body">
+                                    <a href="/movie-details.php?id={{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
+                                       <div class="media align-items-center">
+                                          <div class="noti-img">
+                                             <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
+                                          </div>
+                                          <div class="media-body ml-2">
+                                             <h6 class="mb-0 ">{{row.title}}</h6>
+                                             <small class="font-size-12">{{row.date_create | fromNow}}</small>
+                                          </div>
+                                       </div>
+                                    </a>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                     </li>
-                     <li class="nav-item nav-icon">
-                        <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
-                           data-toggle="search-toggle">
-                        <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
-                        </a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0 pl-3 pr-3">
-                                 <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
-                                    <div class="media align-items-center">
-                                       <div class="right-icon">
-                                          <i class="ri-settings-4-line text-primary"></i>
+                        </li>
+                        <li class="nav-item nav-icon">
+                           <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
+                              data-toggle="search-toggle">
+                           <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
+                           </a>
+                           <div class="iq-sub-dropdown iq-user-dropdown">
+                              <div class="iq-card shadow-none m-0">
+                                 <div class="iq-card-body p-0 pl-3 pr-3">
+                                    <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon">
+                                             <i class="ri-settings-4-line text-primary"></i>
+                                          </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Tableau de bord</h6>
+                                          </div>
                                        </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Tableau de bord</h6>
+                                    </a>
+                                    <a href="setting.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon">
+                                             <i class="ri-settings-4-line text-primary"></i>
+                                          </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Réglage du compte</h6>
+                                          </div>
                                        </div>
-                                    </div>
-                                 </a>
-                                 <a href="setting.php" class="iq-sub-card setting-dropdown">
-                                    <div class="media align-items-center">
-                                       <div class="right-icon">
-                                          <i class="ri-settings-4-line text-primary"></i>
+                                    </a>
+                                    <a href="pricing-plan.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon">
+                                             <i class="ri-settings-4-line text-primary"></i>
+                                          </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Pricing Plan</h6>
+                                          </div>
                                        </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Réglage du compte</h6>
+                                    </a>
+                                    <a href="login.php?logout" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon">
+                                             <i class="ri-logout-circle-line text-primary"></i>
+                                          </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Se déconnecter</h6>
+                                          </div>
                                        </div>
-                                    </div>
-                                 </a>
-                                 <a href="pricing-plan.php" class="iq-sub-card setting-dropdown">
-                                    <div class="media align-items-center">
-                                       <div class="right-icon">
-                                          <i class="ri-settings-4-line text-primary"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Pricing Plan</h6>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="login.php?logout" class="iq-sub-card setting-dropdown">
-                                    <div class="media align-items-center">
-                                       <div class="right-icon">
-                                          <i class="ri-logout-circle-line text-primary"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Se déconnecter</h6>
-                                       </div>
-                                    </div>
-                                 </a>
+                                    </a>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-            </nav>
-            <div class="nav-overlay"></div>
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+               <div class="nav-overlay"></div>
+            </div>
          </div>
       </div>
    </div>
-</div>
-</header>';
+   </header>';
   return $rtn;
 }
 
 function Header_loader() {
   $rtn = '<div id="loading">
-  <div id="loading-center">
-  </div>
-</div>';
+      <div id="loading-center">
+      </div>
+   </div>';
   return $rtn;
 }
 
@@ -429,70 +502,9 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
 }
 
 function footer_css($panel, $IncludeFooter = "") {
-   $frontend = '<!-- jQuery, Popper JS -->
-      <script src="/assets/js/jquery.min.js"></script>
-      <script src="/assets/js/popper.min.js"></script>
-      <!-- Bootstrap JS -->
-      <script src="/assets/js/bootstrap.min.js"></script>
-      
-      <!-- Import JS -->
-      '.$IncludeFooter.'
-
-      <!-- AngularJS Core -->
-      <script src="/assets/js/angular.min.js"></script>
-      <!-- AngularJS Script-->
-      <script src="/assets/js/app-angular.js"></script>
-
-      <!-- Custom JS-->
-      <script src="/assets/js/custom_frontend.js"></script>
-';
+   $frontend = '';
  
-   $dashboard = '<!-- jQuery, Popper JS -->
-      <script src="/assets/js/jquery-3.4.1.min.js"></script>
-      <script src="/assets/js/popper.min.js"></script>
-      <!-- Bootstrap JS -->
-      <script src="/assets/js/bootstrap.min.js"></script>
-      <!-- Slick JS -->
-      <script src="/assets/js/slick.min.js"></script>
-      <!-- owl carousel Js -->
-      <script src="/assets/js/owl.carousel.min.js"></script>
-      <!-- select2 Js -->
-      <script src="/assets/js/select2.min.js"></script>
-      <!-- Magnific Popup-->
-      <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-      <!-- Slick Animation-->
-      <script src="/assets/js/slick-animation.min.js"></script>
-      <!-- Flatpickr JavaScript -->
-      <script src="/assets/js/flatpickr.min.js"></script>
-      <!-- Custom JS-->
-      <script src="/assets/js/custom_dashboard.js"></script>
-   
-      <!-- AngularJS Core -->
-      <script src="/assets/js/angular.min.js"></script>
-      <!-- AngularJS Script-->
-      <script src="/assets/js/app-angular.js"></script>
-      <!-- Moment With Locales JavaScript -->
-      <script src="/assets/js/moment-with-locales.min.js"></script>
-      <script type="text/javascript">moment.locale("fr");</script>
-
-      <script src="/assets/js/jquery.dataTables.min.js"></script>
-      <script src="/assets/js/dataTables.bootstrap4.min.js"></script>
-      <!-- Appear JavaScript -->
-      <script src="/assets/js/jquery.appear.js"></script>
-      <!-- Countdown JavaScript -->
-      <script src="/assets/js/countdown.min.js"></script>
-      <!-- Counterup JavaScript -->
-      <script src="/assets/js/waypoints.min.js"></script>
-      <script src="/assets/js/jquery.counterup.min.js"></script>
-      <!-- Wow JavaScript -->
-      <script src="/assets/js/wow.min.js"></script>
-      <!-- Smooth Scrollbar JavaScript -->
-      <script src="/assets/js/smooth-scrollbar.js"></script>
-      <!-- apex Custom JavaScript -->
-      <script src="/assets/js/apexcharts.js"></script>
-      <!-- Chart Custom JavaScript -->
-      <script src="/assets/js/chart-custom.js"></script>
-';
+   $dashboard = '';
 
    if ($panel == "frontend") {
      return $frontend;

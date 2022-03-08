@@ -73,7 +73,7 @@ include_once("../includes/inc.php");
 				VALUES (now(), now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".$token_email."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now(), '1');";
 			$result = db_execute($sql);
 
-			
+			header("Location: /login.php");
 		}
 	} else {
 		header("Location: /login.php");

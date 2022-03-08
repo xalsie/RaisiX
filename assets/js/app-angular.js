@@ -268,8 +268,8 @@
         dataType: 'json',
         data: {
           autofunc: true,
-          action: "getListMovie",
-          limit: 1,
+          action: "getListMovie1",
+          limit: 5,
           max: 1
         },
         async: true

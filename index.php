@@ -3,7 +3,21 @@ include_once("includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Home", "frontend");
+echo Header_HTML("Home", "frontend", "", '<!-- Slick JS -->
+<script src="/assets/js/slick.min.js"></script>
+<!-- owl carousel Js -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+<!-- select2 Js -->
+<script src="/assets/js/select2.min.js"></script>
+<!-- Magnific Popup-->
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Slick Animation-->
+<script src="/assets/js/slick-animation.min.js"></script>
+<!-- Flatpickr JavaScript -->
+<script src="/assets/js/flatpickr.min.js"></script>
+<!-- Moment With Locales JavaScript -->
+<script src="/assets/js/moment-with-locales.min.js"></script>
+<script type="text/javascript">moment.locale("fr");</script>');
 ?>
 
       <!-- loader Start -->
@@ -17,7 +31,7 @@ echo Header_HTML("Home", "frontend");
          <div id="home-slider" class="slider m-0 p-0" ng-show="slideLoaded">
 
          <!-- slider section repeat -->
-            <div class="slide slick-bg" style="background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path? movie.backdrop_path:movie.poster_path}});" ng-repeat="movie in sliderMap.datas">
+            <div class="slide slick-bg" style="margin-top: 5.7rem !important; background-image: url({{tmdbConf.images_uri}}{{movie.backdrop_path? movie.backdrop_path:movie.poster_path}});" ng-repeat="movie in sliderMap.datas">
                <div class="container-fluid position-relative h-100">
                   <div class="slider-inner h-100">
                      <div class="row align-items-center h-100">
@@ -3710,19 +3724,5 @@ echo Header_HTML("Home", "frontend");
       </div>
 
 <?php
-   echo Footer_html("frontend", '<!-- Slick JS -->
-   <script src="/assets/js/slick.min.js"></script>
-   <!-- owl carousel Js -->
-   <script src="/assets/js/owl.carousel.min.js"></script>
-   <!-- select2 Js -->
-   <script src="/assets/js/select2.min.js"></script>
-   <!-- Magnific Popup-->
-   <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-   <!-- Slick Animation-->
-   <script src="/assets/js/slick-animation.min.js"></script>
-   <!-- Flatpickr JavaScript -->
-   <script src="/assets/js/flatpickr.min.js"></script>
-   <!-- Moment With Locales JavaScript -->
-   <script src="/assets/js/moment-with-locales.min.js"></script>
-   <script type="text/javascript">moment.locale("fr");</script>');
+   echo Footer_html("frontend");
 ?>

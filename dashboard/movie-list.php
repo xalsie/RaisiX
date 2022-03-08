@@ -4,7 +4,7 @@ include_once("../includes/inc.php");
 isConnected(true);
 
 echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">', 'appHeader');
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">', "", 'appHeader');
 ?>
    <!-- loader Start -->
    <div id="loading">
@@ -12,6 +12,12 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       </div>
    </div>
    <!-- loader END -->
+   <style>
+   .table-hover tbody tr:hover {
+      color: var(--iq-primary);
+      background-color: #00000013;
+   }
+   </style>
    <!-- Wrapper Start -->
    <div class="wrapper">
       <!-- Sidebar  -->
@@ -323,87 +329,46 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                      </div>
                      <div class="iq-card-body">
                         <div class="table-view">
-                           <table class="data-tables table movie_table" style="width:100%" ng-controller="appListMovie" ng-init="getListMovie()">
+                           <table class="data-tables table movie_table caption-top table-responsive table-striped"
+                              data-toggle="table"
+                              id="table"
+                              data-toolbar="#toolbar"
+                              data-search="true"
+                              data-show-refresh="true"
+                              data-show-columns="true"
+                              data-show-columns-toggle-all="true"
+                              data-show-export="true"
+                              data-detail-formatter="detailFormatter"
+                              data-minimum-count-columns="2"
+                              data-show-pagination-switch="true"
+                              data-pagination="true"
+                              data-id-field="id"
+
+                              data-group-by="true"
+                              data-group-by-field="name_group"
+
+                              data-page-list="[10, 25, 50, 100, all]"
+                              data-side-pagination="server"
+                              data-url="/assets/js/app-server.php"
+                              data-method="post"
+                              data-query-params="postQueryParams"
+                              data-content-type="application/x-www-form-urlencoded">
                               <thead>
                                  <tr>
-                                    <th>Movie</th>
-                                    <th>Quality</th>
-                                    <th>Category</th>
-                                    <th>Release Year</th>
-                                    <th>Language</th>
-                                    <th style="width: 20%;">Description</th>
-                                    <th>Action</th>
+                                    <th data-field="id" data-width="100" data-sortable="true" data-halign="center" data-visible="false">ID</th>
+                                    
+                                    <th data-field="image" data-sortable="true" data-halign="center" data-formatter="posterFormatter">Poster</th>
+
+                                    <th data-field="original_title" data-sortable="true" data-halign="center" data-formatter="titleFormatter">Movie</th>
+                                    <th data-field="qualite" data-sortable="true" data-halign="center" data-formatter="qualityFormatter">Quality</th>
+                                    <th data-field="genres" data-sortable="true" data-halign="center" data-formatter="genresFormatter">Category</th>
+                                    <th data-field="release_date" data-sortable="true" data-halign="center">Release Year</th>
+                                    <th data-field="languages" data-sortable="true" data-halign="center" data-formatter="languageFormatter">Language</th>
+                                    <th data-field="overview" data-sortable="true" data-formatter="overviewFormatter" style="width: 20%;">Description</th>
+                                    
+                                    <th data-field="action" data-width="150" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
                                  </tr>
                               </thead>
-                              <tbody>
-                                 <tr ng-repeat="rowMovie in resultsMovie">
-                                    <td>
-                                       <div class="media align-items-center">
-                                          <div class="iq-movie">
-                                             <img ng-src="/assets/images/movie-poster{{rowMovie.poster_path}}" class="img-border-radius avatar-40 img-fluid" alt="">
-                                          </div>
-                                          <div class="media-body text-white text-left ml-3">
-                                             <p class="mb-0">{{rowMovie.original_title}}</p>
-                                             <small>{{rowMovie.vote_average}} - {{rowMovie.runtime | formatTime}}</small>
-                                          </div>
-                                       </div>
-                                    </td>
-                                    <td>{{rowMovie.qualite}}</td>
-                                    <td><small>{{rowMovie.genres | displayGenres:', '}}</small></td>
-                                    <td>{{rowMovie.release_date | limitTo: 4}}</td>
-                                    <td>{{rowMovie.languages}}</td>
-                                    <td>
-                                       <p>{{rowMovie.overview}}</p>
-                                    </td>
-                                    <td>
-                                       <div class="flex align-items-center list-user-action">
-                                          <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="View" href="#"><i class="lar la-eye"></i></a>
-                                          <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
-                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="Delete" href="#"><i
-                                                class="ri-delete-bin-line"></i></a>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <!-- <tr>
-                                    <td>
-                                       <div class="media align-items-center">
-                                          <div class="iq-movie">
-                                             <a href="javascript:void(0);"><img
-                                                   src="../assets/images/movie-thumb/06.jpg"
-                                                   class="img-border-radius avatar-40 img-fluid" alt=""></a>
-                                          </div>
-                                          <div class="media-body text-white text-left ml-3">
-                                             <p class="mb-0">Champions</p>
-                                             <small>2h 15m</small>
-                                          </div>
-                                       </div>
-                                    </td>
-                                    <td>Full HD</td>
-                                    <td>Drama</td>
-                                    <td>2019</td>
-                                    <td>English</td>
-                                    <td>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit
-                                          a scelerisque. Etiam feugiat luctus est,
-                                          vel commodo odio rhoncus sit amet
-                                       </p>
-                                    </td>
-                                    <td>
-                                       <div class="flex align-items-center list-user-action">
-                                          <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="View" href="#"><i class="lar la-eye"></i></a>
-                                          <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
-                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                             data-original-title="Delete" href="#"><i
-                                                class="ri-delete-bin-line"></i></a>
-                                       </div>
-                                    </td>
-                                 </tr> -->
-                              </tbody>
                            </table>
                         </div>
                      </div>
@@ -414,6 +379,113 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       </div>
    </div>
    <!-- Wrapper END -->
+
+   <script>
+      // var $ = jQuery;
+
+      function initTable() {
+            var $table = $('#table');
+
+            $table.bootstrapTable('destroy').bootstrapTable({
+               height: 1000,
+               locale: "fr-FR"
+            })
+      }
+
+      function postQueryParams(params) {
+            params.action = "getListMovie";
+            return params;
+      }
+
+      function actionFormatter(value, row, index) {
+         return '<div class="flex align-items-center list-user-action">'+
+               '      <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="#"><i class="lar la-eye"></i></a>'+
+               '      <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>'+
+               '      <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>'+
+               '   </div>';
+      }
+
+      function posterFormatter(value, row, index) {
+         return '<div class="iq-movie">'+
+               '  <img src="/assets/images/movie-poster'+row["poster_path"]+'" class="img-border-radius avatar-40 img-fluid" alt="">'+
+               '</div>';
+      }
+
+      function titleFormatter(value, row, index) {
+         return '<div class="media-body text-left ml-3">'+
+               '   <p class="mb-0">'+row["original_title"]+'</p>'+
+               '   <small>'+row["vote_average"]+' - '+formatTime(row["runtime"])+'</small>'+
+               '</div>';
+      }
+
+      function qualityFormatter(value, row, index) {
+         
+      }
+
+      function languageFormatter(value, row, index) {
+
+      }
+
+      function genresFormatter(value, row, index) {
+         return displayGenres(value, ", ");
+      }
+
+      function overviewFormatter(value, row, index) {
+         return "<small>"+value.substr(0, 75)+"...</small>";
+      }
+
+      function displayGenres(genres, separator) {
+         if (genres == undefined) return "";
+         const obj = JSON.parse(genres);
+         const count = Object.keys(obj).length;
+         var _rtn = "";
+         for (var key in obj) {
+            if (key != count-1)
+               _rtn += obj[key].name+separator;
+            else
+               _rtn += obj[key].name;
+         }
+         return _rtn;
+      }
+
+      function formatTime(date) {
+         if (date == undefined) return "";
+         const h = Math.floor(date / 60);
+         const m = Math.round(date % 60)
+         return [
+         h, "h ",
+         m > 9 ? m : (h ? '0' + m : m || '0'), "m"
+         ].filter(Boolean).join("");
+      }
+
+      function formNow(x) {
+         return moment(x, "YYYY-MM-DD hh:mm:ss").fromNow();
+      }
+
+      window.actionEvents = {
+               'click .btn-remove': function (e, value, row, index) {
+               // console.log("Remove : "+row["login"]);
+               console.log(row);
+            //   ShowDeleteUser(row);
+               },'click .btn-edit': function (e, value, row, index) {
+               console.log("Edit : "+row["id"]);
+            //   ShowEditUser(row);
+            }
+      };
+
+      $("#btn-add").click(function () {
+         console.log();
+      });
+
+      $('#table').on('dbl-click-row.bs.table', function (e, row, element, field) {
+         console.log(row);
+      });
+
+      $(() => {
+          initTable();
+      })
+   </script>
+
    <!-- Footer -->
    <footer class="iq-footer">
       <div class="container-fluid">

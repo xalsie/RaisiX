@@ -3,7 +3,7 @@ include_once("includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' rel='stylesheet'/>", "appMovieDetail");
+echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' rel='stylesheet'/>", "", "appMovieDetail");
 ?>
 
       <!-- loader Start -->
@@ -20,7 +20,7 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' 
             controls
             playsinline>
 
-         <source src="/assets/video/uncharted_2022/bmw_4k_master.m3u8" type='application/x-mpegURL'/>
+         <source src="m3u8Gen.php" type='application/x-mpegURL'/>
       </video>
    </div>
    <!-- Banner End -->
@@ -404,7 +404,6 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' 
    <link href="/assets/css/video-js.css" rel="stylesheet" />
    <link href="https://vod.dev/dist/videojs-http-source-selector.css" rel="stylesheet" />
 
-   <script src="https://vjs.zencdn.net/7.4.1/video.js"></script>
    <script src="https://vod.dev/dist/videojs-http-source-selector.js"></script>
    <script src="https://vod.dev/dist/videojs-contrib-quality-levels.js"></script>');
 ?>

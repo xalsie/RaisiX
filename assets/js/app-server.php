@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Getting posted data and decodeing json
-$_POST = json_decode(file_get_contents('php://input'), true);
+if(empty($_POST))
+    $_POST = json_decode(file_get_contents('php://input'), true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 	switch ($_POST['action']){
@@ -110,26 +111,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             break;
         case "getListMovie":
             $_limit = $_POST["limit"];
-            $_max = $_POST["max"];
-            $arrayResult = [];
+            $_offset = $_POST["offset"];
 
-            $SQL = "SELECT COUNT(*) AS count FROM `movie_detail`;";
+            $SQL = "SELECT `id`, `date_create`, `date_modification`, `poster_path`, `genres`, `tmdb_id`, `original_title`, `release_date`, `qualite`, `languages`, `runtime`, `overview`, `status`, `vote_average`, `vote_count`, `pathfile` FROM `movie_detail` LIMIT ".db_escape($_offset).", ".db_escape($_limit).";";
                 $result = db_query($SQL);
 
             if(!$result)
-                $arrayResult["_count"] = 0;
+                $aRow=array();
             else
-                $arrayResult["_count"] = $result[0];
+                foreach ($result as $row) {
+                    $aRow[]=array("id"=>$row["id"], "date_create"=>$row["date_create"], "date_modification"=>$row["date_modification"],
+                    "poster_path"=>$row["poster_path"], "genres"=>$row["genres"], "tmdb_id"=>$row["tmdb_id"],"original_title"=>$row["original_title"],
+                    "release_date"=>$row["release_date"], "qualite"=>$row["qualite"], "languages"=>$row["languages"],"runtime"=>$row["runtime"],
+                    "overview"=>$row["overview"], "status"=>$row["status"], "vote_average"=>$row["vote_average"], "vote_count"=>$row["vote_count"],
+                    "pathfile"=>$row["pathfile"]);
+                }
 
-            $SQL = "SELECT `id`, `date_create`, `date_modification`, `poster_path`, `genres`, `tmdb_id`, `original_title`, `release_date`, `qualite`, `languages`, `runtime`, `overview`, `status`, `vote_average`, `vote_count`, `pathfile` FROM `movie_detail` LIMIT 0, 1;";
-                $result = db_query($SQL);
-
-            if(!$result)
-                $arrayResult["data"] = [];
-            else
-                $arrayResult["data"] = $result;
-
-            echo json_encode($arrayResult);
+            echo json_encode($aRow);
             break;
         case "delMovie":
 
