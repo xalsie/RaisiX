@@ -72,22 +72,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             echo json_encode($result);
             break;
         case "saveMovie":
-            $data       = $_POST["data"];
-            $backdrop   = $_POST["backdrop"];
-            $language   = $_POST["language"];
-            $pathfile   = $_POST["pathfile"];
-            $poster     = $_POST["poster"];
-            $qualite    = $_POST["qualite"];
-            $status     = $_POST["status"];
-            $video      = $_POST["video"];
+            $data     = $_POST["data"];
+            $backdrop = $_POST["backdrop"];
+            $language = $_POST["language"];
+            $pathfile = $_POST["pathfile"];
+            $poster   = $_POST["poster"];
+            $qualite  = $_POST["qualite"];
+            $status   = $_POST["status"];
+            $video    = $_POST["video"];
 
             $result = [];
+            $savePicture = [];
 
             $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`, `qualite`, `pathfile`)
                     VALUES (now(), now(), '".$data['adult']."', '".$backdrop."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$poster."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', '".json_encode($language)."', '".$status."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$video."', '".$data['vote_average']."', '".$data['vote_count']."', '".json_encode($qualite)."', '".db_escape(json_encode($pathfile, JSON_FORCE_OBJECT))."');";
 			$result = db_execute($SQL);
 
-            print_r($result);
+            if (!empty($poster)) {
+                $savePicture["poster"] = saveFile('https://image.tmdb.org/t/p/original'.$poster, $poster, 'assets/images/movie-poster');
+            }
+
+            if (!empty($backdrop)) {
+                $savePicture["backdrop"] = saveFile('https://image.tmdb.org/t/p/original'.$backdrop, $backdrop, 'assets/images/movie-backdrop');
+            }
+
+            print_r([$result, $savePicture]);
             break;
         case "getPathMovie":
             $result = array();
@@ -154,8 +163,6 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
         $error          = true;
     }
 
-    print_r($_FILES);
-
     if ($error) {
         echo "Erreur lors du téléchargement. [".$errorName."] sur le fichier '".$_FILES["file"]["name"]."'.";
         return 0;
@@ -169,4 +176,24 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
 
     $SQL = "UPDATE `users_detail` SET `date_modification` = now(), `avatar` = '".$newfilename."' WHERE `id_users` = '".$_SESSION["id"]."';";
     $result = db_execute($SQL);
+}
+
+function saveFile($urlFile, $saveName, $saveLocation) {
+    $_rtnError = false;
+
+    $img_file = $urlFile;
+
+    $img_file=file_get_contents($img_file);
+
+    $file_loc = $_SERVER["DOCUMENT_ROOT"]."/".$saveLocation.$saveName;
+
+    $file_handler=fopen($file_loc,'w');
+
+    if(fwrite($file_handler,$img_file)==false){
+        $_rtnError = 'Error : Files ['.$saveName.'] not saved.';
+    }
+
+    fclose($file_handler);
+
+    return $_rtnError;
 }

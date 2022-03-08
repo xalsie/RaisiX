@@ -22,9 +22,9 @@ if ((count($_POST) == 2 || count($_POST) == 3) && !empty($_POST["email"]) && !em
 
 			if (isset($_POST["customCheck"]) && $_POST["customCheck"] == "on") {
 				$cookieOptions = array (
-					'expires' => 'Session',
+					'expires' => strtotime('+7 days'),
 					'path' => '/',
-					'domain' => 'raisix'
+					'domain' => $_SERVER["HTTP_HOST"]
 				);
 				setcookie("remember", $_SESSION["token"], $cookieOptions);
 			}
