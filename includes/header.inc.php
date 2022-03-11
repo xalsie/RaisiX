@@ -15,14 +15,13 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="", $IncludeFooter=
 
       <title>Raisix - '.$Title.'</title>
 
-      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      RaisiX   -  Responsive Bootstrap 4
-                                             Updated: '.$git[1].'
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      #  RaisiX - Responsive Bootstrap 4
 
-      Author                  : LeGrizzly#0341 - StarBeard#1310 - Ma4yGaHiH#1268
-      Design and Developed by : LeGrizzly#0341 - StarBeard#1310 - Ma4yGaHiH#1268
+      #  Developed by    : LeGrizzly#0341
+      #  Design by       : StarBeard#1310 - Ma4yGaHiH#1268 - Anghamar#5748
 
-      Support: https://discord.gg/YTxEJN3jxk
+      #  Support         : https://discord.gg/YTxEJN3jxk
        _                _____          _               _         
       | |              / ____|        (_)             | |        
       | |        ___  | |  __   _ __   _   ____  ____ | |  _   _ 
@@ -30,8 +29,8 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="", $IncludeFooter=
       | |____  |  __/ | |__| | | |    | |  / /   / /  | | | |_| |
       |______|  \___|  \_____| |_|    |_| /___| /___| |_|  \__, |
                                                             __/ |
-                                                            |___/
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                                           |___/
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~_Update: '.$git[0]." - ".$git[1].'_~~-->
 
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-K01N3EFBW2"></script>
@@ -524,7 +523,7 @@ function footer_css($panel, $IncludeFooter = "") {
 function getGitVersion() {
    $version = trim(exec('git log --pretty="%h" -n1 HEAD'));
    $commitDate = new \DateTime(trim(exec('git log -n1 --pretty=%ci HEAD')));
-     $date = $commitDate->setTimezone(new \DateTimeZone('UTC'))->add(new DateInterval("PT2H"))->format('d-m H:i');
-   
+      $date = $commitDate->setTimezone(new \DateTimeZone('UTC'))->add(new DateInterval("PT2H"))->format('d-m H:i');
+
    return array($version, $date);
- }
+}
