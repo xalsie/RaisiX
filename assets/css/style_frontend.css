@@ -81,7 +81,7 @@ header .navbar ul li:last-child { margin-right: 0; }
 #home-slider .slick-dots li.slick-active button { background: var(--iq-primary); }
 #home-slider li { position: relative; }
 .slider-description { position: absolute; top: 15%; left: 80px; }
-#home-slider h1.slider-text { font-size: 80px; margin: 15px 0; }
+/* #home-slider h1.slider-text { font-size: 80px; margin: 15px 0; } */
 #home-slider p { margin: 20px 0; width: 75%; }
 #home-slider .slick-bg { padding: 100px 0 50px;width:100%; background-size: cover;background-position: center center; background-repeat: no-repeat; height: 90vh; position: relative; z-index: 1;}
 #home-slider .slick-bg.s-bg-1 { background-image: url(/assets/images/slider/slider1.jpg); }

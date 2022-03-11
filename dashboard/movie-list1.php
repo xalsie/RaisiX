@@ -2,9 +2,9 @@
 include_once("../includes/inc.php");
 
 isConnected(true);
-   
-echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">');
+
+echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">', "", 'appHeader');
 ?>
    <!-- loader Start -->
    <div id="loading">
@@ -17,8 +17,11 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
       <!-- Sidebar  -->
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="./dashboard.php" class="header-logo">
-               <img src="/assets/images/logo.png" class="rounded-normal" alt="logo image raisix">
+            <a href="index-2.html" class="header-logo">
+               <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+               <div class="logo-title">
+                  <span class="text-primary text-uppercase">RaisiX</span>
+               </div>
             </a>
             <div class="iq-menu-bt-sidebar">
                <div class="iq-menu-bt align-self-center">
@@ -31,7 +34,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
          <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                <ul id="iq-sidebar-toggle" class="iq-menu">
-                  <li><a href="./dashboard.php" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
+                  <li class="active active-menu"><a href="index-2.html" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
                   <li><a href="user.html" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisatrice</span></a></li>
@@ -42,10 +45,10 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                         <li><a href="category-list.html"><i class="las la-eye"></i>Liste des catégories</a></li>
                      </ul>
                   </li>
-                  <li class="active active-menu">
-                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="true"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                     <ul id="movie" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                        <li class="active"><a href="movie-add.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
+                  <li>
+                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="movie" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li><a href="movie-add.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
                         <li><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
                      </ul>
                   </li>
@@ -66,6 +69,19 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
       <div class="iq-top-navbar">
          <div class="iq-navbar-custom">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
+               <div class="iq-menu-bt d-flex align-items-center">
+                  <div class="wrapper-menu">
+                     <div class="main-circle"><i class="las la-bars"></i></div>
+                  </div>
+                  <div class="iq-navbar-logo d-flex justify-content-between">
+                     <a href="index-2.html" class="header-logo">
+                        <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                        <div class="logo-title">
+                           <span class="text-primary text-uppercase">Streamit</span>
+                        </div>
+                     </a>
+                  </div>
+               </div>
                <div class="iq-search-bar ml-auto">
                   <form action="#" class="searchbox">
                      <input type="text" class="text search-input" placeholder="Search Here...">
@@ -290,141 +306,105 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
             </nav>
          </div>
       </div>
+      <!-- TOP Nav Bar END -->
       <!-- Page Content  -->
-      <div id="content-page" class="content-page" ng-controller="appAddMovie">
+      <div id="content-page" class="content-page">
          <div class="container-fluid">
             <div class="row">
                <div class="col-sm-12">
                   <div class="iq-card">
                      <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                           <h4 class="card-title">Ajouter un film</h4>
+                           <h4 class="card-title">Liste des films</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                           <a href="./movie-list.php" class="btn btn-primary">Liste des films</a>
+                           <a href="./movie-add.php" class="btn btn-primary">Ajouter un film</a>
                         </div>
                      </div>
                      <div class="iq-card-body">
-                        <div class="row mb-4">
-                           <div class="col-lg-7">
-                              <div class="row">
-                                 <div class="col-12 form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Saisir le titre du film" ng-model="tmdbData" aria-label="Saisir le titre du film" aria-describedby="title-movie">
-
-                                    <div class="input-group-append">
-                                       <button class="btn btn-outline-secondary" ng-click="tmdb_search()" type="button">Recherche</button>
-                                    </div>
-                                 </div>
-
-                                 <div class="col-12 form-group input-group mb-3" ng-show="tmdbDetailsResult">
-                                    <select class="form-control" id="exampleFormControlSelect1" ng-model="tmdbDataSelect">
-                                       <option ng-cloak ng-repeat="details in tmdbDetailsResult" value="{{details.id}}">{{details.original_title}}</option>
-                                    </select>
-                                 </div>
-
-                                 <div class="col-12 form-group" ng-show="tmdbDetailsResult">
-                                    <button type="button" class="btn btn-info btn-block" ng-click="getInfoMovie()">Valide</button>
-                                 </div>
-
-                              </div>
-                              <div class="row" ng-show="tmdbDetailsShow">
-                                 <div class="col-md-6 form-group">
-                                    <select class="form-control" id="formSelectGenres" multiple>
-                                       <option disabled>Genres</option>
-                                       <option ng-repeat="genres in tmdbDetails.info.genres" value="{{genres.id}}" disabled selected>{{genres.name}}</option>
-                                    </select>
-                                 </div>
-                                 
-                                 <div class="col-sm-6 form-group">
-                                    <input type="text" class="form-control" placeholder="Année de sortie" value="{{todatefr(tmdbDetails.info.release_date)}}">
-                                 </div>
-
-                                 <div class="col-12 form-group">
-                                    <textarea id="text" name="text" rows="5" class="form-control"
-                                       placeholder="Description">{{tmdbDetails.info.overview}}</textarea>
-                                 </div>
-
-                                 <div class="col-12 form-group">
-                                    <div class="col-sm form-group">
-                                       <select class="form-control" id="formSelectVideo" ng-model="videoSelect">
-                                          <option disabled selected>Bande-annonce</option>
-                                          <option ng-repeat="video in tmdbDetails.videos.results" value="{{video.key}}">{{video.name}} - {{video.site}}</option>
-                                       </select>
-                                    </div>
-
-                                    <div class="col-12">
-                                       <iframe width="560" height="315" ng-src="{{videoSelect | iframeVideoYtb}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    </div>
-
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-lg-5" ng-show="tmdbDetailsShow">
-                              <div class="col-sm form-group">
-                                 <select class="form-control" id="formSelectPoster" ng-model="posterSelected">
-                                    <option disabled selected>Affiches</option>
-                                    <option ng-repeat="poster in tmdbDetails.images.posters" value="{{poster.file_path}}">[{{poster.iso_639_1}}] - {{poster.file_path}}</option>
-                                 </select>
-                              </div>
-                              <div class="d-block position-relative mb-3">
-                                 <div class="form_video-upload" style="position: relative; text-align: center;">
-                                    <img ng-src="{{tmdbConf.images_uri}}{{posterSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
-                                 </div>
-                              </div>
-
-                              <div class="col-sm form-group">
-                                 <select class="form-control" id="formSelectBackdrop" ng-model="backdropSelected">
-                                    <option disabled selected>Toiles de fond</option>
-                                    <option ng-repeat="backdrop in tmdbDetails.images.backdrops" value="{{backdrop.file_path}}">[{{backdrop.iso_639_1}}] - {{backdrop.file_path}}</option>
-                                 </select>
-                              </div>
-                              <div class="d-block position-relative">
-                                 <div class="form_video-upload" style="position: relative; text-align: center;">
-                                    <img ng-src="{{tmdbConf.images_uri}}{{backdropSelected}}" class="img-fluid" alt="tmdb info picture" style="width: 80%;">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row" ng-show="tmdbDetailsShow">
-                           <div class="col-sm form-group">
-                              <select class="form-control" id="formSelectQualite" multiple ng-model="qualiteSelected">
-                                 <option disabled>Qualités</option>
-                                 <option value="1">SD - 480p</option>
-                                 <option value="2">HD - 720p</option>
-                                 <option value="3">BluRay - 1080p</option>
-                                 <option value="4">2K - 1440p</option>
-                                 <option value="4">4K - 2160p</option>
-                              </select>
-                           </div>
-                           <div class="col-sm form-group">
-                              <select class="form-control" id="formSelectStatus" ng-model="statusSelected">
-                                 <option disabled selected>Statut</option>
-                                 <option value="1">A venir</option>
-                                 <option value="2">Publié</option>
-                              </select>
-                           </div>
-                           <div class="col-sm form-group">
-                              <select class="form-control" id="formSelectLanguage" multiple ng-model="languageSelected">
-                                 <option disabled>Langue</option>
-                                 <option value="1">English</option>
-                                 <option value="2">Francais</option>
-                              </select>
-                           </div>
-
-
-                           <div class="col-sm-12 form-group">
-                              <select class="form-control" id="formSelectPathFile" multiple ng-model="pathFileSelected">
-                                 <option disabled selected>Dossier du film</option>
-                                 <option ng-repeat="pathmovie in tmdbDetails.path" value="{{pathmovie}}">{{pathmovie}}</option>
-                              </select>
-                           </div>
-
-                        </div>
-                        <div class="row">
-                           <div class="col-12 form-group ">
-                              <button type="button" ng-click="submitMovie()" class="btn btn-primary" ng-show="tmdbDetailsShow">Submit</button>
-                              <button type="reset" ng-click="resetMovie()" class="btn btn-danger">cancel</button>
-                           </div>
+                        <div class="table-view">
+                           <table class="data-tables table movie_table" style="width:100%" ng-controller="appListMovie" ng-init="getListMovie()">
+                              <thead>
+                                 <tr>
+                                    <th>Movie</th>
+                                    <th>Quality</th>
+                                    <th>Category</th>
+                                    <th>Release Year</th>
+                                    <th>Language</th>
+                                    <th style="width: 20%;">Description</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="rowMovie in resultsMovie">
+                                    <td>
+                                       <div class="media align-items-center">
+                                          <div class="iq-movie">
+                                             <img ng-src="/assets/images/movie-poster{{rowMovie.poster_path}}" class="img-border-radius avatar-40 img-fluid" alt="">
+                                          </div>
+                                          <div class="media-body text-white text-left ml-3">
+                                             <p class="mb-0">{{rowMovie.original_title}}</p>
+                                             <small>{{rowMovie.vote_average}} - {{rowMovie.runtime | formatTime}}</small>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td>{{rowMovie.qualite}}</td>
+                                    <td><small>{{rowMovie.genres | displayGenres:', '}}</small></td>
+                                    <td>{{rowMovie.release_date | limitTo: 4}}</td>
+                                    <td>{{rowMovie.languages}}</td>
+                                    <td>
+                                       <p>{{rowMovie.overview}}</p>
+                                    </td>
+                                    <td>
+                                       <div class="flex align-items-center list-user-action">
+                                          <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="View" href="#"><i class="lar la-eye"></i></a>
+                                          <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
+                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="Delete" href="#"><i
+                                                class="ri-delete-bin-line"></i></a>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <!-- <tr>
+                                    <td>
+                                       <div class="media align-items-center">
+                                          <div class="iq-movie">
+                                             <a href="javascript:void(0);"><img
+                                                   src="../assets/images/movie-thumb/06.jpg"
+                                                   class="img-border-radius avatar-40 img-fluid" alt=""></a>
+                                          </div>
+                                          <div class="media-body text-white text-left ml-3">
+                                             <p class="mb-0">Champions</p>
+                                             <small>2h 15m</small>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td>Full HD</td>
+                                    <td>Drama</td>
+                                    <td>2019</td>
+                                    <td>English</td>
+                                    <td>
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit
+                                          a scelerisque. Etiam feugiat luctus est,
+                                          vel commodo odio rhoncus sit amet
+                                       </p>
+                                    </td>
+                                    <td>
+                                       <div class="flex align-items-center list-user-action">
+                                          <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="View" href="#"><i class="lar la-eye"></i></a>
+                                          <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
+                                          <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                             data-original-title="Delete" href="#"><i
+                                                class="ri-delete-bin-line"></i></a>
+                                       </div>
+                                    </td>
+                                 </tr> -->
+                              </tbody>
+                           </table>
                         </div>
                      </div>
                   </div>
@@ -434,18 +414,18 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
       </div>
    </div>
    <!-- Wrapper END -->
-
    <!-- Footer -->
    <footer class="iq-footer">
       <div class="container-fluid">
          <div class="row">
             <div class="col-lg-6">
                <ul class="list-inline mb-0">
-                  <li class="list-inline-item"><a href="privacy-policy.html" target="blank">Privacy Policy</a></li>
-                  <li class="list-inline-item"><a href="terms-of-service.html" target="blank">Terms of Use</a></li>
+                  <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                  <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
                </ul>
             </div>
-            <div class="col-lg-6 text-right">Copyright 2022 <a href="/" target="blank">RaisiX</a> All Rights Reserved.
+            <div class="col-lg-6 text-right">
+               Copyright 2022 <a href="./">RaisiX</a> All Rights Reserved.
             </div>
          </div>
       </div>
@@ -453,5 +433,5 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
    <!-- Footer END -->
 
 <?php
-   echo Footer_css("dashboard");
+   echo footer_css("dashboard");
 ?>

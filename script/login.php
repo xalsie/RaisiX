@@ -1,10 +1,19 @@
 <?php
 include_once("../includes/inc.php");
 
-if ((count($_POST) == 2 || count($_POST) == 3) && !empty($_POST["email"]) && !empty($_POST["pwd"])) {
+if ((count($_POST) == 3 || count($_POST) == 4) && !empty($_POST["email"]) && !empty($_POST["pwd"]) && !empty($_POST["captcha"])) {
 	$error = FALSE;
 	$listOfErrors = [];
 	$_POST["email"] = strtolower( trim($_POST["email"]) );
+
+	if ($_POST["captcha"] !== $_SESSION["captcha"]) {
+		$error = TRUE;
+		$listOfErrors[]=12;
+		$_SESSION["errorsForm"] = $listOfErrors;
+		$_SESSION["postForm"] = $_POST;
+		header("Location: /login.php");
+		exit;
+	}
 
 	$sql = "SELECT `id`, `firstname`, `lastname`, `email`, `password`, `role` FROM `users` WHERE `email` = '".db_escape($_POST["email"])."'";
 	$result = db_query($sql);

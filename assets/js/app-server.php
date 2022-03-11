@@ -119,10 +119,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             echo json_encode($result);
             break;
         case "getListMovie":
-            $_limit = $_POST["limit"];
-            $_offset = $_POST["offset"];
+            // $_limit = $_POST["limit"];
+            // $_offset = $_POST["offset"];
+            $_search = (empty($_POST["search"])? false:$_POST["search"]);
+            $_reqSearch = "";
 
-            $SQL = "SELECT `id`, `date_create`, `date_modification`, `poster_path`, `genres`, `tmdb_id`, `original_title`, `release_date`, `qualite`, `languages`, `runtime`, `overview`, `status`, `vote_average`, `vote_count`, `pathfile` FROM `movie_detail` LIMIT ".db_escape($_offset).", ".db_escape($_limit).";";
+            if ($_search) {
+                $_reqSearch = "WHERE (`adult` LIKE '%$_search%' OR `backdrop_path` LIKE '%$_search%' OR `belongs_to_collection` LIKE '%$_search%' OR `genres` LIKE '%$_search%' OR `homepage` LIKE '%$_search%' OR `tmdb_id` LIKE '%$_search%' OR `imdb_id` LIKE '%$_search%' OR `original_language` LIKE '%$_search%' OR `original_title` LIKE '%$_search%' OR `overview` LIKE '%$_search%' OR `poster_path` LIKE '%$_search%' OR `production_companies` LIKE '%$_search%' OR `production_countries` LIKE '%$_search%' OR `release_date` LIKE '%$_search%' OR `languages` LIKE '%$_search%' OR `status` LIKE '%$_search%' OR `tagline` LIKE '%$_search%' OR `title` LIKE '%$_search%' OR `video` LIKE '%$_search%' OR `qualite` LIKE '%$_search%' OR `pathfile` LIKE '%$_search%')";
+            }
+
+            $SQL = "SELECT `id`, `date_create`, `date_modification`, `poster_path`, `genres`, `tmdb_id`, `original_title`, `release_date`, `qualite`, `languages`, `runtime`, `overview`, `status`, `vote_average`, `vote_count`, `pathfile` FROM `movie_detail` $_reqSearch ;";
                 $result = db_query($SQL);
 
             if(!$result)

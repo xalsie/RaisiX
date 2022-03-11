@@ -23,11 +23,8 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       <!-- Sidebar  -->
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="index-2.html" class="header-logo">
-               <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-               <div class="logo-title">
-                  <span class="text-primary text-uppercase">RaisiX</span>
-               </div>
+            <a href="./dashboard.php" class="header-logo">
+               <img src="/assets/images/logo.png" class="rounded-normal" alt="logo image raisix">
             </a>
             <div class="iq-menu-bt-sidebar">
                <div class="iq-menu-bt align-self-center">
@@ -40,7 +37,7 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
          <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                <ul id="iq-sidebar-toggle" class="iq-menu">
-                  <li class="active active-menu"><a href="index-2.html" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
+                  <li><a href="./dashboard.php" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
                   <li><a href="user.html" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisatrice</span></a></li>
@@ -51,11 +48,11 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                         <li><a href="category-list.html"><i class="las la-eye"></i>Liste des catégories</a></li>
                      </ul>
                   </li>
-                  <li>
-                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                     <ul id="movie" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                  <li class="active active-menu">
+                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="true"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="movie" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
                         <li><a href="movie-add.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
-                        <li><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
+                        <li class="active active-menu"><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
                      </ul>
                   </li>
                   <li>
@@ -75,19 +72,6 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       <div class="iq-top-navbar">
          <div class="iq-navbar-custom">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
-               <div class="iq-menu-bt d-flex align-items-center">
-                  <div class="wrapper-menu">
-                     <div class="main-circle"><i class="las la-bars"></i></div>
-                  </div>
-                  <div class="iq-navbar-logo d-flex justify-content-between">
-                     <a href="index-2.html" class="header-logo">
-                        <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-                        <div class="logo-title">
-                           <span class="text-primary text-uppercase">Streamit</span>
-                        </div>
-                     </a>
-                  </div>
-               </div>
                <div class="iq-search-bar ml-auto">
                   <form action="#" class="searchbox">
                      <input type="text" class="text search-input" placeholder="Search Here...">
@@ -312,7 +296,6 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
             </nav>
          </div>
       </div>
-      <!-- TOP Nav Bar END -->
       <!-- Page Content  -->
       <div id="content-page" class="content-page">
          <div class="container-fluid">
@@ -329,7 +312,7 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                      </div>
                      <div class="iq-card-body">
                         <div class="table-view">
-                           <table class="data-tables table movie_table caption-top table-responsive table-striped"
+                           <table class="data-tables table-striped table-borderless table-sm table-responsive-sm"
                               data-toggle="table"
                               id="table"
                               data-toolbar="#toolbar"
@@ -340,15 +323,14 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                               data-show-export="true"
                               data-detail-formatter="detailFormatter"
                               data-minimum-count-columns="2"
-                              data-show-pagination-switch="true"
-                              data-pagination="true"
                               data-id-field="id"
 
-                              data-group-by="true"
-                              data-group-by-field="name_group"
+                              data-silent-sort="true"
 
-                              data-page-list="[10, 25, 50, 100, all]"
-                              data-side-pagination="server"
+                              data-pagination="true"
+                              data-page-list="[5, 10, 25, 50, 100, all]"
+                              data-page-size="5"
+
                               data-url="/assets/js/app-server.php"
                               data-method="post"
                               data-query-params="postQueryParams"
@@ -387,7 +369,6 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
             var $table = $('#table');
 
             $table.bootstrapTable('destroy').bootstrapTable({
-               height: 1000,
                locale: "fr-FR"
             })
       }
@@ -399,7 +380,6 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
 
       function actionFormatter(value, row, index) {
          return '<div class="flex align-items-center list-user-action">'+
-               '      <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="#"><i class="lar la-eye"></i></a>'+
                '      <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>'+
                '      <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>'+
                '   </div>';

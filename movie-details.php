@@ -3,7 +3,23 @@ include_once("includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' rel='stylesheet'/>", "<script async src='/assets/js/videojs.min.js'></script>", "appMovieDetail");
+echo Header_HTML("Movie", "frontend", "<link href='/assets/css/video-js.css' rel='stylesheet'/> <link href='/assets/css/videojs-http-source-selector.css' rel='stylesheet' />", "<!-- Videojs -->
+   <script src='/assets/js/videojs.min.js'></script>
+   <script src='/assets/js/videojs-contrib-quality-levels.js'></script>
+   <script src='/assets/js/videojs-http-source-selector.js'></script>
+   
+   <!-- Slick JS -->
+   <script src='/assets/js/slick.min.js'></script>
+   <!-- owl carousel Js -->
+   <script src='/assets/js/owl.carousel.min.js'></script>
+   <!-- select2 Js -->
+   <script src='/assets/js/select2.min.js'></script>
+   <!-- Magnific Popup-->
+   <script src='/assets/js/jquery.magnific-popup.min.js'></script>
+   <!-- Slick Animation-->
+   <script src='/assets/js/slick-animation.min.js'></script>
+   <!-- Flatpickr JavaScript -->
+   <script src='/assets/js/flatpickr.min.js'></script>", "appMovieDetail");
 ?>
 
       <!-- loader Start -->
@@ -20,7 +36,7 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' 
             controls
             playsinline>
 
-         <source src="m3u8Gen.php" type='application/x-mpegURL'/>
+         <source src="/assets/video/uncharted_2022/bmw_4k_master.m3u8" type='application/x-mpegURL'/>
       </video>
    </div>
    <!-- Banner End -->
@@ -384,26 +400,7 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/videojs.min.css' 
    </div>
 
 <?php
-   echo Footer_html("frontend",'<!-- Slick JS -->
-   <script src="/assets/js/slick.min.js"></script>
-   <!-- owl carousel Js -->
-   <script src="/assets/js/owl.carousel.min.js"></script>
-   <!-- select2 Js -->
-   <script src="/assets/js/select2.min.js"></script>
-   <!-- Magnific Popup-->
-   <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-   <!-- Slick Animation-->
-   <script src="/assets/js/slick-animation.min.js"></script>
-   <!-- Flatpickr JavaScript -->
-   <script src="/assets/js/flatpickr.min.js"></script>
-   <!-- Moment With Locales JavaScript -->
+   echo Footer_html("frontend",'<!-- Moment With Locales JavaScript -->
    <script src="/assets/js/moment-with-locales.min.js"></script>
-   <script type="text/javascript">moment.locale("fr");</script>
-
-   <!-- Videojs -->
-   <link href="/assets/css/video-js.css" rel="stylesheet" />
-   <link href="https://vod.dev/dist/videojs-http-source-selector.css" rel="stylesheet" />
-
-   <script src="https://vod.dev/dist/videojs-http-source-selector.js"></script>
-   <script src="https://vod.dev/dist/videojs-contrib-quality-levels.js"></script>');
+   <script type="text/javascript">moment.locale("fr");</script>');
 ?>

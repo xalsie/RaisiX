@@ -156,8 +156,8 @@ function Header_css($panel, $IncludeFooter = "") {
 }
 
 function nav_bar_user() {
-$rtn = '';
-return $rtn;
+   $rtn = '';
+   return $rtn;
 }
 
 function Header_header() {
@@ -320,9 +320,10 @@ function Header_header() {
                   </div>
                   <div class="navbar-right menu-right">
                      <ul class="d-flex align-items-center list-inline m-0">
+                        <!--
                         <li class="nav-item nav-icon">
                            <a href="#" class="search-toggle device-search">
-                           <i class="ri-search-line"></i>
+                              <i class="ri-search-line"></i>
                            </a>
                            <div class="search-box iq-search-bar d-search">
                               <form action="#" class="searchbox">
@@ -334,6 +335,7 @@ function Header_header() {
                               </form>
                            </div>
                         </li>
+                        -->
                         <li class="nav-item nav-icon">
                            <a href="#" class="search-toggle" data-toggle="search-toggle">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
@@ -347,7 +349,10 @@ function Header_header() {
                            </a>
                            <div class="iq-sub-dropdown">
                               <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body">
+                                 <div class="iq-card-body p-0">
+                                    <div class="bg-primary p-3">
+                                       <h5 class="mb-0 text-white">Toutes les notifications<small class="badge badge-light float-right pt-1">{{notifMap._count}}</small></h5>
+                                    </div>
                                     <a href="/movie-details.php?id={{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
                                        <div class="media align-items-center">
                                           <div class="noti-img">
@@ -359,6 +364,9 @@ function Header_header() {
                                           </div>
                                        </div>
                                     </a>
+                                    <div class="bg-primary p-1">
+                                       <h6 class="mb-0 text-white"><a href="./">Voir tous</a></h6>
+                                    </div>
                                  </div>
                               </div>
                            </div>

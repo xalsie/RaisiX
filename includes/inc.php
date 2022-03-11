@@ -36,7 +36,8 @@
 		8=>"Le mot de passe de confirmation ne correspond pas",
 		9=>"L'email existe déjà",
 		10=>"Le mot de passe doit avoir des minuscules, des majuscules et des chiffres",
-		11=>"Identifiants incorrects."
+		11=>"Identifiants incorrects.",
+		12=>"Le captcha est incorrect !"
 	];
 
 	//Verification du niveau et modif si besoin

@@ -46,13 +46,29 @@ echo Header_HTML("S'identifier", "frontend");
                                  <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" required>
                               </div>
 
-                                 <div class="sign-info">
-                                    <button type="submit" class="btn btn-hover">S'identifier</button>
-                                    <div class="custom-control custom-checkbox d-inline-block">
-                                       <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
-                                       <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
+                              <div class="form-group">
+                                 <div class="form-row">
+
+                                    <div class="col-md-6">
+                                       <div class="form-label-group">
+                                          <img src="/script/captcha_new.php" onclick="this.src='/script/captcha_new.php?rand='+Math.random();" style="width: -webkit-fill-available;">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-label-group">
+                                          <input type="text" class="form-control mb-0" id="captcha" name="captcha" placeholder="Entrez le captcha" autocomplete="off" required>
+                                       </div>
                                     </div>
                                  </div>
+                              </div>
+
+                              <div class="sign-info">
+                                 <button type="submit" class="btn btn-hover">S'identifier</button>
+                                 <div class="custom-control custom-checkbox d-inline-block">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
+                                    <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
+                                 </div>
+                              </div>
 
                            </form>
                         </div>

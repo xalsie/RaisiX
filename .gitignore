@@ -11,6 +11,10 @@ Dev/*
 _outils/*
 *.dev
 pages/*
+*.html
 
 # Apache WEB cache
 apache/*
+
+# Not Upload Video
+assets/video/*

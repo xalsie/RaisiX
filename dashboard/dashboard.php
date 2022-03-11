@@ -17,11 +17,8 @@ echo Header_HTML("Tableau de bord - Accueil", "dashboard", '<link rel="styleshee
       <!-- Sidebar-->
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="index-2.html" class="header-logo">
-               <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-               <div class="logo-title">
-                  <span class="text-primary text-uppercase">RaisiX</span>
-               </div>
+            <a href="./dashboard.php" class="header-logo">
+               <img src="/assets/images/logo.png" class="rounded-normal" alt="logo image raisix">
             </a>
             <div class="iq-menu-bt-sidebar">
                <div class="iq-menu-bt align-self-center">
@@ -34,7 +31,7 @@ echo Header_HTML("Tableau de bord - Accueil", "dashboard", '<link rel="styleshee
          <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                <ul id="iq-sidebar-toggle" class="iq-menu">
-                  <li class="active active-menu"><a href="index-2.html" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
+                  <li class="active active-menu"><a href="./dashboard.php" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
                   <li><a href="user.html" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisatrice</span></a></li>
@@ -69,19 +66,6 @@ echo Header_HTML("Tableau de bord - Accueil", "dashboard", '<link rel="styleshee
       <div class="iq-top-navbar">
          <div class="iq-navbar-custom">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
-               <div class="iq-menu-bt d-flex align-items-center">
-                  <div class="wrapper-menu">
-                     <div class="main-circle"><i class="las la-bars"></i></div>
-                  </div>
-                  <div class="iq-navbar-logo d-flex justify-content-between">
-                     <a href="index-2.html" class="header-logo">
-                        <img src="/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-                        <div class="logo-title">
-                           <span class="text-primary text-uppercase">RaisiX</span>
-                        </div>
-                     </a>
-                  </div>
-               </div>
                <div class="iq-search-bar ml-auto">
                   <form action="#" class="searchbox">
                      <input type="text" class="text search-input" placeholder="Search Here...">
