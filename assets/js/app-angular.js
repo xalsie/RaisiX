@@ -51,7 +51,7 @@
     }
   });
 
-  app.controller('getAvatar', ['$scope', '$http', function($scope, $http) {
+  app.controller('getInfoNav', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
     $scope.getAvatar = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
@@ -67,11 +67,11 @@
         $scope.avatar = response.data[0].avatar;
       });
     }
-    $scope.getAvatar();
-  }]);
 
-  app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
-    $scope.getDatas = () => {
+    /* -------------------------------------
+      Get Notification
+    ------------------------------------- */
+    $scope.getDatasNotifs = () => {
       $http({
         headers: {'Content-Type': 'application/json'},
         method: "POST",
@@ -79,50 +79,111 @@
         dataType: 'json',
         data: {
           autofunc: true,
-          action: "getDatas",
+          action: "getDatasNotifs",
         },
         async: true
       }).then(function (response) {
-        $scope.responseMap = response.data;
-
-        $scope.toNotification();
-        $scope.toMovieSlider();
+        $scope.notifMap = response.data.notification;
       });
     }
 
-    $scope.toNotification = () => {
-      $scope.notifMap = $scope.responseMap.notification;
+    $scope.getAvatar();
+
+    $interval(()=>{$scope.getDatasNotifs()}, 3000); // TypeError: g is not a function
+  }]);
+
+  app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+    /* -------------------------------------
+      Get Slider Picture
+    ------------------------------------- */
+    $scope.getDatasSlider = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getDatasSlider",
+        },
+        async: true
+      }).then(function (response) {
+        $scope.sliderMap = response.data.slider;
+
+        $timeout(function(){
+          $scope.initSlider();
+        }, 100);
+      });
     }
 
-    $scope.toMovieSlider = () => {
-      $scope.sliderMap = $scope.responseMap.slider;
+    $scope.getUpcomingMovies = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getUpcomingMovies",
+        },
+        async: true
+      }).then(function (response) {
+        $scope.upComingMovies = response.data.upComingMovies;
 
-      $timeout(function(){
-        $scope.initSlider();
-      }, 500);
+        $timeout(function(){
+          $scope.initSliderByClass('.upcoming-slider');
+        }, 100);
+      });
     }
 
-    $scope.responseMap  = false;
-    $scope.notifMap     = false;
-    $scope.sliderMap    = false;
-    $scope.slideLoaded  = false;
-    $scope.getDatas();
+    $scope.getMovies = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getMovies",
+        },
+        async: true
+      }).then(function (response) {
+        $scope.moviesList = response.data.moviesList;
 
-    // $scope.toNotification();
-    // $scope.toMovieSlider();
+        $timeout(function(){
+          $scope.initSliderByClass('.movie-list-slider');
+        }, 100);
+
+        // $scope.toMovieSlider();
+      });
+    }
+
+    $scope.responseMap    = false;
+    $scope.notifMap       = [];
+    $scope.sliderMap      = [];
+    $scope.slideLoaded    = false;
+    $scope.upComingMovies = [];
+    $scope.moviesList     = [];
 
     $scope.initSlider = () => {
       /*---------------------------------------------------------------------
         Slick Slider
       ----------------------------------------------------------------------- */
       $('#home-slider').slick({
-        autoplay: false,
+        lazyLoad: 'ondemand',
+        autoplay: true,
+        autoplaySpeed: 5000,
         speed: 800,
-        lazyLoad: 'progressive',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: false,
+        infinite: true,
         dots: false,
         arrows: true,
         prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
         nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        swipe: true,
+        swipeToSlide: true,
         responsive: [
           {
             breakpoint: 992,
@@ -133,17 +194,6 @@
           }
         ]
       }).slickAnimation();
-
-      $('.slick-nav').on('click touch', function (e) {
-        e.preventDefault();
-        var arrow = $(this);
-        if (!arrow.hasClass('animate')) {
-          arrow.addClass('animate');
-          setTimeout(() => {
-            arrow.removeClass('animate');
-          }, 1600);
-        }
-      });
 
       /*---------------------------------------------------------------------
         Video popup
@@ -163,25 +213,63 @@
         }
       });
 
-      // a voir de plus pres !
-      // $scope.$watch("images", function (newValue, oldValue) {
-      //   $timeout(function() {
-      //     $('.gallery').each(function() {
-      //       $(this).magnificPopup({
-      //         delegate: '.image',
-      //         type:'image',
-      //         gallery: {
-      //          enabled: true
-      //         },
-      //         titleSrc: function(item){
-      //           return item.el.attr('title');
-      //        }
-      //      });
-      //     });
-      //   });
-      // });
-
       $scope.slideLoaded = true;
+    }
+
+    $scope.initSliderByClass = (className) => {
+      $('.favorites-slider').slick({
+        lazyLoad: 'ondemand',
+        dots: false,
+        arrows: true,
+        prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        infinite: true,
+        speed: 1500,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        }
+        ]
+      });
+
+      $('.slick-nav').on('click touch', function (e) {
+        e.preventDefault();
+        var arrow = $(this);
+        if (!arrow.hasClass('animate')) {
+          arrow.addClass('animate');
+          setTimeout(() => {
+            arrow.removeClass('animate');
+          }, 1600);
+        }
+      });
     }
 
     $scope.fromNow = (x) => {
@@ -213,7 +301,7 @@
     $scope.tmdbConf = tmdbConf;
   }]);
 
-  app.controller('appMovieDetail', ['$scope', '$http', function($scope, $http) {
+  app.controller('appMovieDetail', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
     $scope.getMovieById = (id) => {
       $http({
         headers: {'Content-Type': 'application/json'},
@@ -229,34 +317,145 @@
       }).then(function (response) {
         $scope.responseMap = response.data[0];
 
+        $scope.credits = JSON.parse($scope.responseMap.content);
+
         var options = {
           poster: $scope.tmdbConf.images_uri+($scope.responseMap.backdrop_path? $scope.responseMap.backdrop_path:$scope.responseMap.poster_path),
           responsive: true,
           html5: {
-            nativeAudioTracks: false,
-            nativeVideoTracks: false,
+            nativeVideoTracks: true,
             hls: {
-              overrideNative: true,
-              debug: true,
+              withCredentials: true
             }
           },
           plugins: {
-            httpSourceSelector:
-            {
-              default: "high"
-            }
+            httpSourceSelector: {
+              default: "auto"
+            },
+
+            eventTracking: true
           }
         };
 
-        var player = window.player = videojs('my-video', options).httpSourceSelector();
+        var player = videojs('my-video', options).httpSourceSelector();
+
+        videojs('my-video').ready(function() {
+          var Interval = setInterval(() => {
+
+            // console.log(videojs('my-video'));
+            // console.log($("#my-video_html5_api")[0].duration);
+            if ($("#my-video_html5_api")[0].currentTime > ($("#my-video_html5_api")[0].duration / 4)) {
+              clearInterval(Interval);
+              console.log("####### Video Vu");
+
+              $scope.toMovieView(id);
+            }
+  
+          }, (1  * 1000)) // 1 seconds
+        });
       });
     }
 
+    $scope.getUpcomingMovies = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "getUpcomingMovies",
+        },
+        async: true
+      }).then(function (response) {
+        $scope.upComingMovies = response.data.upComingMovies;
+
+        $timeout(function(){
+          $scope.initSliderByClass('.upcoming-slider');
+        }, 100);
+      });
+    }
+
+
+    $scope.toMovieView = (id) => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          autofunc: true,
+          action: "toMovieView",
+          uuid: id
+        },
+        async: true
+      }).then(function (response) {
+        console.log(response);
+      })
+    }
+
     $scope.responseMap  = false;
+    $scope.upComingMovies = [];
     $scope.getMovieById(new URLSearchParams(window.location.search).get('id'));
 
     // scope tmdb
     $scope.tmdbConf = tmdbConf;
+
+    $scope.initSliderByClass = (className) => {
+      $('.favorites-slider').slick({
+        lazyLoad: 'ondemand',
+        dots: false,
+        arrows: true,
+        prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+        infinite: true,
+        speed: 1500,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+          }
+        }
+        ]
+      });
+
+      $('.slick-nav').on('click touch', function (e) {
+        e.preventDefault();
+        var arrow = $(this);
+        if (!arrow.hasClass('animate')) {
+          arrow.addClass('animate');
+          setTimeout(() => {
+            arrow.removeClass('animate');
+          }, 1600);
+        }
+      });
+    }
   }]);
 
   app.controller('appListMovie', ['$scope', '$http', function($scope, $http) {
@@ -392,6 +591,22 @@
         $scope.tmdbDetails["info"] = response.data;
       });
 
+      var _url  = $scope.tmdbConf.base_uri+
+                  "movie/"+$scope.tmdbDataSelect+
+                  "/credits"+
+                  "?api_key="+$scope.tmdbConf.api_key+
+                  "&language="+$scope.tmdbConf.language;
+
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "GET",
+        url: _url,
+        dataType: 'json',
+        async: true
+      }).then(function (response) {
+        $scope.tmdbDetails["credits"] = response.data;
+      });
+
       _url  = $scope.tmdbConf.base_uri+
               "movie/"+$scope.tmdbDataSelect+
               "/images"+
@@ -451,6 +666,7 @@
           autofunc: false,
           action: "saveMovie",
           data: $scope.tmdbDetails["info"],
+          credits: $scope.tmdbDetails["credits"],
           poster: $scope.posterSelected,
           backdrop: $scope.backdropSelected,
           video: $scope.videoSelect,

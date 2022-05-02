@@ -49,29 +49,29 @@ input.input-danger:focus {
 
                      <form class="mt-4" method="POST" action="script/saveUser.php">
                         <div class="form-group d-flex flex-md-row flex-column">
-                           <input type="text" class="form-control mb-0" id="firstname" name="firstname" placeholder="Entrez votre Prenom" <?php echo (isset($_SESSION["firstname"]))? 'value="'.$_SESSION["firstname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
-                           <input type="text" class="form-control mb-0" id="lastname" name="lastname" placeholder="Entrez votre Nom" <?php echo (isset($_SESSION["lastname"]))? 'value="'.$_SESSION["lastname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                           <input type="text" class="form-control mb-0" id="firstname" name="firstname" placeholder="Entrez votre Prenom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["firstname"]))? 'value="'.$_SESSION["postForm"]["firstname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                           <input type="text" class="form-control mb-0" id="lastname" name="lastname" placeholder="Entrez votre Nom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["lastname"]))? 'value="'.$_SESSION["postForm"]["lastname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
                         </div>
                         <div class="form-group">
-                           <input type="email" class="form-control mb-0" id="email" name="email" placeholder="Entrez votre Email" <?php echo (isset($_SESSION["email"]))? 'value="'.$_SESSION["email"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                           <input type="email" class="form-control mb-0" id="email" name="email" placeholder="Entrez votre Email" <?php echo (isset($_SESSION["postForm"]["email"]))? 'value="'.$_SESSION["postForm"]["email"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
                         </div>
                         <div class="row">
-                           <div class="form-group col-md-6">
+                           <div class="form-group col-sm-12 col-md-6">
                               <div class="input-group mb-1">
-                                 <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" onkeyup="getPassword()" required>
+                                 <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" minlength="8" onkeyup="getPassword()" required>
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" data-id="pwd" onclick="togglePassword(this)">👀</button>
                                  </div>
                               </div>
 
                               <div class="input-group">
-                                 <input type="password" class="form-control mb-0" id="pwdConfirm" name="pwdConfirm" placeholder="Confirmez votre Mot de Passe" onkeyup="checkConfirmPwd()" required>
+                                 <input type="password" class="form-control mb-0" id="pwdConfirm" name="pwdConfirm" placeholder="Confirmez votre Mot de Passe" minlength="8" maxlength="25" onkeyup="checkConfirmPwd()" required>
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" data-id="pwdConfirm" onclick="togglePassword(this)">👀</button>
                                  </div>
                               </div>
                            </div>
-                           <div class="form-group col-md-auto">
+                           <div class="form-group col-sm-12 col-md-6">
                               <ul class="list-group" id="requirements">
                                  <li id="length" class="list-group-item">Au moins 8 caractères</li>
                                  <li id="lowercase" class="list-group-item">Au moins 1 lettre minuscule</li>
@@ -105,6 +105,7 @@ input.input-danger:focus {
       function getPassword() {
          var elem = document.getElementById('pwd');
          var text = elem.value;
+         // if (text == "") return;
          var pwdChecked = false;
 
          var length     = document.getElementById('length');

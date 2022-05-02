@@ -1,10 +1,23 @@
 <?php
 include_once("includes/inc.php");
 
-if (!isConnected())
-   header("Location: login.php");
+isConnected(true);
 
-echo Header_HTML("Réglage du compte", "frontend", );
+echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
+<script src="/assets/js/slick.min.js"></script>
+<!-- owl carousel Js -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+<!-- select2 Js -->
+<script src="/assets/js/select2.min.js"></script>
+<!-- Magnific Popup-->
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Slick Animation-->
+<script src="/assets/js/slick-animation.min.js"></script>
+<!-- Flatpickr JavaScript -->
+<script src="/assets/js/flatpickr.min.js"></script>
+<!-- Moment With Locales JavaScript -->
+<script src="/assets/js/moment-with-locales.min.js"></script>
+<script type="text/javascript">moment.locale("fr");</script>');
 ?>
 
 <?php echo Header_loader(); ?>
@@ -21,7 +34,7 @@ echo Header_HTML("Réglage du compte", "frontend", );
                         <label class="edit-icon text-primary slick-arrow" for="customFile">Modifier</label>
                             <input type="file" class="custom-file-input" accept="image/*" onchange="angular.element(this).scope().SelectFile(event)" style="display:none;" id="customFile">
                         <img ng-src="{{PreviewImage}}" class="rounded-circle img-fluid d-block avatar-150 cover mx-auto mb-3" alt="Avatar user">
-                        <a ng-show="PreviewImageSave" class="save-icon text-success slick-arrow" ng-click="sendPicture();">Enregistrer</a>
+                        <a ng-show="PreviewImageSave" class="save-icon text-success slick-arrow" data-ng-click="sendPicture();">Enregistrer</a>
                         <h4 class="mt-4 mb-3">{{settingMap.firstname}} {{settingMap.lastname}}</h4>
                         <p>{{settingMap.description}}</p>
                     </div>
@@ -37,8 +50,8 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                 <input ng-show="editLine1" type="text" ng-model="settingMap.firstname" class="form-control form-control-sm mb-0" placeholder="Prenom">
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine1" class="text-primary slick-arrow" ng-click="editLine1 = !editLine1;">Modifier</a>
-                                <a ng-show="editLine1" class="text-success slick-arrow" ng-click="editLine1 = !editLine1;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine1" class="text-primary slick-arrow" data-ng-click="editLine1 = !editLine1;">Modifier</a>
+                                <a ng-show="editLine1" class="text-success slick-arrow" data-ng-click="editLine1 = !editLine1;saveLine()">Enregistrer</a>
                             </div>
                         </div>
 
@@ -49,8 +62,8 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                 <input ng-show="editLine2" type="text" ng-model="settingMap.lastname" class="form-control form-control-sm mb-0" placeholder="Nom">
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine2" class="text-primary slick-arrow" ng-click="editLine2 = !editLine2;">Modifier</a>
-                                <a ng-show="editLine2" class="text-success slick-arrow" ng-click="editLine2 = !editLine2;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine2" class="text-primary slick-arrow" data-ng-click="editLine2 = !editLine2;">Modifier</a>
+                                <a ng-show="editLine2" class="text-success slick-arrow" data-ng-click="editLine2 = !editLine2;saveLine()">Enregistrer</a>
                             </div>
                         </div>
 
@@ -61,8 +74,8 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                 <input ng-show="editLine3" type="text" ng-model="settingMap.email" class="form-control form-control-sm mb-0" placeholder="Email">
                             </div>   
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine3" class="text-primary slick-arrow" ng-click="editLine3 = !editLine3;">Modifier</a>
-                                <a ng-show="editLine3" class="text-success slick-arrow" ng-click="editLine3 = !editLine3;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine3" class="text-primary slick-arrow" data-ng-click="editLine3 = !editLine3;">Modifier</a>
+                                <a ng-show="editLine3" class="text-success slick-arrow" data-ng-click="editLine3 = !editLine3;saveLine()">Enregistrer</a>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
@@ -79,8 +92,8 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                 </div>
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine4" class="text-primary slick-arrow" ng-click="editLine4 = !editLine4;">Modifier</a>
-                                <a ng-show="editLine4" class="text-success slick-arrow" ng-click="editLine4 = !editLine4;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine4" class="text-primary slick-arrow" data-ng-click="editLine4 = !editLine4;">Modifier</a>
+                                <a ng-show="editLine4" class="text-success slick-arrow" data-ng-click="editLine4 = !editLine4;saveLine()">Enregistrer</a>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-between mb-3">
@@ -90,8 +103,8 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                 <input ng-show="editLine5" type="text" class="form-control form-control-sm mb-0 date-input basicFlatpickr flatpickr-input" id="inputWeek" placeholder="Date de naissance" value="" readonly="readonly">
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine5" class="text-primary slick-arrow" ng-click="editLine5 = !editLine5;">Modifier</a>
-                                <a ng-show="editLine5" class="text-success slick-arrow" ng-click="editLine5 = !editLine5;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine5" class="text-primary slick-arrow" data-ng-click="editLine5 = !editLine5;">Modifier</a>
+                                <a ng-show="editLine5" class="text-success slick-arrow" data-ng-click="editLine5 = !editLine5;saveLine()">Enregistrer</a>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-between">
@@ -105,14 +118,14 @@ echo Header_HTML("Réglage du compte", "frontend", );
                                  </select>
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a ng-show="!editLine6" class="text-primary slick-arrow" ng-click="editLine6 = !editLine6;">Modifier</a>
-                                <a ng-show="editLine6" class="text-success slick-arrow" ng-click="editLine6 = !editLine6;saveLine()">Enregistrer</a>
+                                <a ng-show="!editLine6" class="text-primary slick-arrow" data-ng-click="editLine6 = !editLine6;">Modifier</a>
+                                <a ng-show="editLine6" class="text-success slick-arrow" data-ng-click="editLine6 = !editLine6;saveLine()">Enregistrer</a>
                             </div>
                         </div>
 
                         <div class="row align-items-center justify-content-end mb-3">
                             <div class="col-md-auto text-md-right text-left">
-                                <button ng-show="btnSave" type="button" class="btn btn-outline-success" ng-click="saveSetting()">Enregistrer</button>
+                                <button ng-show="btnSave" type="button" class="btn btn-outline-success" data-ng-click="saveSetting()">Enregistrer</button>
                             </div>
                         </div>
 

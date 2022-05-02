@@ -14,6 +14,9 @@ Description             : This file contains the styling for responsive Template
 :: Pages Content
 :: Back to Top
 :: Sign In
+:: Footer
+:: list Actor
+:: Countdown
 
 ======================================
 [ End table content ]
@@ -206,7 +209,7 @@ li.slide-item .block-description .parallax-ratting span { font-size: 14px; }
 
 /* parallax */
 .parallax-img img { box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6); }
-.parallax-window { height: 100%; padding: 100px 0; position: relative; background: url(/assets/images/parallax/p1.jpg)center center; background-size: cover; background-attachment: fixed; }
+.parallax-window { height: 100%; padding: 100px 0; position: relative; background: url(/assets/images/parallax/p1.jpg) center center; background-size: cover; background-attachment: fixed; }
 .parallax-window::after { position: absolute; content: ""; top: 0; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); }
 .parallaxt-details { z-index: 9; position: relative; }
 
@@ -364,10 +367,7 @@ video { display: block; width: 100%; height: 100%; }
 #back-to-top .top { z-index: 999; position: fixed; margin: 0px; color: var(--iq-white); background: var(--iq-primary); bottom: 30px; right: 25px; font-size: 26px; width: 50px; height: 50px; text-align: center; line-height: 50px; border-radius: 90px; -webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
 #back-to-top .top:hover { color: var(--iq-white) !important; background: var(--iq-primary); }
 #back-to-top{opacity: 0;transition: opacity 0.6s ease;}
-#back-to-top.show {
-  opacity: 1;
-  transition: opacity 0.6s ease;
-}
+#back-to-top.show { opacity: 1; transition: opacity 0.6s ease; }
 /*---------------------------------------------------------------------
                       Sign In
 -----------------------------------------------------------------------*/
@@ -443,3 +443,32 @@ video { display: block; width: 100%; height: 100%; }
 	70% { transform: translateX(-2px); }
 	100% { transform: translateX(0); }
 }
+
+/*---------------------------------------------------------------------
+                      Footer
+-----------------------------------------------------------------------*/
+.wrapper-buttons { display: block; margin-left: auto; margin-right: auto; width: 250px;}
+.wrapper-buttons > * { margin-bottom: 10px;}
+.wrapper-buttons > *:last-child { margin-bottom: 0px;}
+.white-button,.blue-button { display: inline-block; font-weight: 400; font-size: 11pt; border-radius: 5px; cursor: pointer;  width: -webkit-fill-available; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);text-align: center;padding: 10px 0;}
+.blue-button, .blue-button:hover { background-color: #7289da; border: 2px solid #7289da; color: #fff !important; }
+.white-button, .white-button:hover { background-color: #fff; border: 2px solid #fff; color: #000 !important; }
+.blue-button:hover,.white-button:hover { transform: translateY(1px); }
+.blue-button:active,.white-button:active { transform: translateY(2px); }
+.blue-button,.white-button { outline: transparent !important; }
+
+/*---------------------------------------------------------------------
+    list Actor
+-----------------------------------------------------------------------*/
+#listActors .row { display: flex; overflow-x: scroll; overflow-y: hidden; flex-direction: row; flex-wrap: nowrap; align-content: center; justify-content: space-between; align-items: flex-start; }
+
+/*---------------------------------------------------------------------
+    Countdown
+-----------------------------------------------------------------------*/
+.iq-comingsoon { margin-top: 80px; }
+.countdown { margin: 60px 0 0; padding: 0; }
+.countdown li span { font-size: 60px; display: inline-block; width: 100%; color: var(--iq-primary); }
+.countdown li:last-child { margin-right: 0; }
+.iq-comingsoon-form { position: relative; }
+.iq-comingsoon-form button { position: absolute; right: 0; top: 0; padding: 11px 30px; }
+.form-control.comming { background-color: var(--iq-light-card); }

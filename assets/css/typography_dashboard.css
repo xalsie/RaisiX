@@ -9,7 +9,6 @@ NOTE: This file contains the styling for responsive Template.
 [  Table of contents  ]
 ================================================
 
-
 :: Import Css
 :: Font
 :: General
@@ -33,6 +32,7 @@ NOTE: This file contains the styling for responsive Template.
 :: Border
 :: Grid Boxes
 :: Select
+:: List Actor
 
 ======================================
 [ End table content ]
@@ -45,7 +45,7 @@ import Css
 @import url("owl.carousel.min.css");
 @import url("dripicons.css");
 @import url("remixicon.css");
-@import url("all.min.css");
+@import url("../fonts/fontawesome/css/all.min.css");
 @import url("line-awesome.min.css");
 @import url("ionicons.min.css");
 @import url("slick.min.css");
@@ -92,7 +92,6 @@ label { color: var(--iq-white); }
 /* Definition Lists */
 dl dd { margin-bottom: 15px; }
 dl dd:last-child { margin-bottom: 0px; }
-th { }
 .table-striped tbody tr:nth-of-type(odd) { background: var(--iq-body-bg); }
 .table td, .table th { vertical-align: middle; }
 .table thead th {
@@ -254,6 +253,7 @@ Font Weight
 /*----------------------------------------------
 Avatar Size
 ------------------------------------------------*/
+.avatar { object-fit: cover; }
 .avatar-35 { height: 35px; width: 35px; min-width: 35px; line-height: 35px; }
 .avatar-30 { height: 30px; width: 30px; min-width: 30px; line-height: 30px; }
 .avatar-40 { height: 40px; width: 40px; min-width: 40px; line-height: 40px; }
@@ -315,7 +315,7 @@ Card
 .bg-over-black-90:before { background: rgba(5, 8, 9, 0.9); content: ""; height: 100%; left: 0; position: absolute; top: 0; width: 100%; z-index: 0; }
 
 /*----------------------------------------------
-Buttons
+        Buttons
 ------------------------------------------------*/
 .btn.focus, .btn:focus { box-shadow: none !important; }
 .btn i { margin-right: 5px; }
@@ -325,7 +325,6 @@ Buttons
 .btn i { margin-right: 5px; }
 .iq-sign-btn { display: inline-block; text-align: center; border: 1px solid transparent; padding: .375rem 1rem; border-radius: 5px; line-height: normal; }
 .iq-sign-btn:hover { color: var(--iq-white) !important; background: var(--iq-danger) !important; }
-
 
 /*--------------*/
 .btn-primary { background: var(--iq-primary); border-color: var(--iq-primary); }
@@ -420,7 +419,7 @@ Buttons
 .btn-outline-dark.disabled, .btn-outline-dark:disabled { color: var(--iq-dark); background-color: transparent; }
 
 /*----------------------------------------------
-Alert
+        Alert
 ------------------------------------------------*/
 .alert-primary { color: var(--iq-primary); border-color: var(--iq-primary); background-color: var(--iq-light-color); }
 .alert-secondary { color: var(--iq-secondary); border-color: var(--iq-secondary-dark); background-color: var(--iq-light-secondary); }
@@ -440,7 +439,7 @@ Alert
 .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover { outline: none; }
 
 /*----------------------------------------------
-list Group
+        list Group
 ------------------------------------------------*/
 .list-group-item {background-color:var(--iq-light-card);}
 .list-group-item-action {color: var(--iq-dark1);}
@@ -454,9 +453,8 @@ list Group
 .list-group-item-dark { color: var(--iq-dark); background-color: var(--iq-light-dark); }
 .list-group-item.active { background-color: var(--iq-primary); border-color: var(--iq-primary); }
 
-
 /*----------------------------------------------
-Border
+        Border
 ------------------------------------------------*/
 .border-primary { border-color: var(--iq-primary) !important; }
 .border-secondary { border-color: var(--iq-secondary) !important; }
@@ -469,7 +467,7 @@ Border
 .border-white { border-color: var(--iq-white) !important; }
 
 /*----------------------------------------------
-Grid Boxes
+        Grid Boxes
 ------------------------------------------------*/
 .iq-card-block.iq-card-stretch { -webkit-box-align: stretch; -ms-flex-align: stretch; align-items: stretch; }
 .iq-card-block.iq-card-height-third { height: calc(33.33% - 30px); }
@@ -478,10 +476,14 @@ Grid Boxes
 .iq-card-block { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
 /*----------------------------------------------
-Select
+        Select
 ------------------------------------------------*/
 option:checked {color: #72787d; background-color: #4950570f;}
 option:checked::before {content: "";display: inline-block; font-size: inherit; float: right; margin-top: 5px; margin-right: 16px; display: inline-block; transform: rotate(45deg); height: 10px; width: 5px; border-bottom: 3px solid #ffffff; border-right: 3px solid #ffffff; border-radius: 2px;}
 select option:hover, select option:focus, select option:active {background: linear-gradient(#1a1a1a, #1a1a1a); background-color: #1a1a1a !important; color: #ffffff !important;}
 select option:checked {background: linear-gradient(#1a1a1a, #1a1a1a); background-color: #1a1a1a !important; color: #ffffff !important;}
 
+/*----------------------------------------------
+        list Actor
+------------------------------------------------*/
+#listActors .row { display: flex; overflow-x: scroll; overflow-y: hidden; flex-direction: row; flex-wrap: nowrap; align-content: center; justify-content: space-between; align-items: flex-start; }

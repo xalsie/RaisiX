@@ -34,7 +34,8 @@ echo Header_HTML("Tableau de bord - Accueil", "dashboard", '<link rel="styleshee
                   <li class="active active-menu"><a href="./dashboard.php" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
-                  <li><a href="user.html" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisatrice</span></a></li>
+                  <li><a href="./tab-users.php" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisateur</span></a></li>
+                  <li><a href="movie-request.php" class="iq-waves-effect"><i class="las la-plus"></i><span>Demande de film</span></a></li>
                   <li>
                      <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Catégorie</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">

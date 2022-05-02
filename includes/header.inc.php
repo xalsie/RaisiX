@@ -57,14 +57,21 @@ function Header_css($panel, $IncludeFooter = "") {
    $frontend = '<!-- Favicon -->
    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/bootstrap.min.css"/>
    <!-- Typography CSS -->
-   <link rel="stylesheet" href="/assets/css/typography_frontend.css">
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/typography_frontend.css">
    <!-- Style -->
-   <link rel="stylesheet" href="/assets/css/style_frontend.css" />
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/style_frontend.css" />
    <!-- Responsive -->
-   <link rel="stylesheet" href="/assets/css/responsive_frontend.css" />
-   
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/responsive_frontend.css" />
+
+   <noscript>
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="/assets/css/typography_frontend.css">
+      <link rel="stylesheet" href="/assets/css/style_frontend.css" />
+      <link rel="stylesheet" href="/assets/css/responsive_frontend.css" />
+   </noscript>
+
    <!-- jQuery, Popper JS -->
    <script src="/assets/js/jquery.min.js"></script>
    <script src="/assets/js/popper.min.js"></script>
@@ -78,6 +85,9 @@ function Header_css($panel, $IncludeFooter = "") {
    <script src="/assets/js/angular.min.js"></script>
    <!-- AngularJS Script-->
    <script src="/assets/js/app-angular.js"></script>
+
+   <!-- Lazad JS -->
+   <!-- script type="text/javascript" src="/assets/js/lozad.min.js"></script -->
 
    <!-- Custom JS-->
    <script src="/assets/js/custom_frontend.js"></script>
@@ -160,13 +170,13 @@ function nav_bar_user() {
 }
 
 function Header_header() {
-  $rtn = '<header id="main-header" ng-controller="getAvatar">
-   <div class="main-header">
+  $rtn = '<header id="main-header" ng-controller="getInfoNav">
+   <div class="main-header" data-ng-init="getAvatar()">
       <div class="container-fluid">
          <div class="row">
             <div class="col-sm-12">
                <nav class="navbar navbar-expand-lg navbar-light p-0">
-                  <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
+                  <a href="javascript:void(0);" class="navbar-toggler c-toggler" data-toggle="collapse"
                      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                      aria-expanded="false" aria-label="Toggle navigation">
                      <div class="navbar-toggler-icon" data-toggle="collapse">
@@ -175,19 +185,19 @@ function Header_header() {
                         <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                      </div>
                   </a>
-                  <a class="navbar-brand" href="index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
+                  <a class="navbar-brand" href="/index.php"> <img class="img-fluid logo" src="/assets/images/logo.png"
                      alt="RaisiX logo" /> </a>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <div class="menu-main-menu-container">
                         <ul id="top-menu" class="navbar-nav ms-auto">
                            <li class="menu-item">
-                              <a href="index.php">Accueil</a>
+                              <a href="/index.php">Accueil</a>
                            </li>
                            <li class="menu-item">
-                           <a href="movie-category.php">Films</a>
+                              <a href="/pages-comingsoon.php">Films</a>
                            </li>
                            <li class="menu-item">
-                              <a href="show-category.php">Séries Tv</a>
+                              <a href="/pages-comingsoon.php">Séries Tv</a>
                            </li>
                         </ul>
                      </div>
@@ -201,11 +211,11 @@ function Header_header() {
                         <div class="navbar-right position-relative">
                            <ul class="d-flex align-items-center justify-content-end list-inline m-0">
                               <li>
-                                 <a href="#" class="search-toggle">
-                                 <i class="ri-search-line"></i>
+                                 <a href="javascript:void(0);" class="search-toggle">
+                                    <i class="ri-search-line"></i>
                                  </a>
                                  <div class="search-box iq-search-bar">
-                                    <form action="#" class="searchbox">
+                                    <form action="javascript:void(0);" class="searchbox">
                                        <div class="form-group position-relative">
                                           <input type="text" class="text search-input font-size-12"
                                              placeholder="type here to search...">
@@ -215,7 +225,7 @@ function Header_header() {
                                  </div>
                               </li>
                               <li class="nav-item nav-icon">
-                                 <a href="#" class="search-toggle position-relative">
+                                 <a href="javascript:void(0);" class="search-toggle position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
                                        height="22" class="noti-svg">
                                        <path fill="none" d="M0 0h24v24H0z" />
@@ -227,7 +237,7 @@ function Header_header() {
                                  <div class="iq-sub-dropdown">
                                     <div class="iq-card shadow-none m-0">
                                        <div class="iq-card-body">
-                                          <a href="#" class="iq-sub-card">
+                                          <a href="javascript:void(0);" class="iq-sub-card">
                                              <div class="media align-items-center">
                                                 <img src="/assets/images/notify/thumb-1.jpg" class="img-fluid me-3"
                                                    alt="RaisiX" />
@@ -237,7 +247,7 @@ function Header_header() {
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="#" class="iq-sub-card">
+                                          <a href="javascript:void(0);" class="iq-sub-card">
                                              <div class="media align-items-center">
                                                 <img src="/assets/images/notify/thumb-2.jpg" class="img-fluid me-3"
                                                    alt="RaisiX" />
@@ -247,7 +257,7 @@ function Header_header() {
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="#" class="iq-sub-card">
+                                          <a href="javascript:void(0);" class="iq-sub-card">
                                              <div class="media align-items-center">
                                                 <img src="/assets/images/notify/thumb-3.jpg" class="img-fluid me-3"
                                                    alt="RaisiX" />
@@ -262,7 +272,7 @@ function Header_header() {
                                  </div>
                               </li>
                               <li>
-                                 <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
+                                 <a href="javascript:void(0);" class="iq-user-dropdown search-toggle d-flex align-items-center">
                                  <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle"
                                     alt="user">
                                  </a>
@@ -321,11 +331,11 @@ function Header_header() {
                      <ul class="d-flex align-items-center list-inline m-0">
                         <!--
                         <li class="nav-item nav-icon">
-                           <a href="#" class="search-toggle device-search">
+                           <a href="javascript:void(0);" class="search-toggle device-search">
                               <i class="ri-search-line"></i>
                            </a>
                            <div class="search-box iq-search-bar d-search">
-                              <form action="#" class="searchbox">
+                              <form action="javascript:void(0);" class="searchbox">
                                  <div class="form-group position-relative">
                                     <input type="text" class="text search-input font-size-12"
                                        placeholder="type here to search...">
@@ -336,7 +346,7 @@ function Header_header() {
                         </li>
                         -->
                         <li class="nav-item nav-icon">
-                           <a href="#" class="search-toggle" data-toggle="search-toggle">
+                           <a href="javascript:void(0);" class="search-toggle" data-ng-click="getDatasNotifs()" data-ng-init="getDatasNotifs()" data-toggle="search-toggle">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
                               class="color-svg"
                               ng-class="{\'noti-svg\': notifMap._count}">
@@ -364,14 +374,14 @@ function Header_header() {
                                        </div>
                                     </a>
                                     <div class="bg-primary p-1">
-                                       <h6 class="mb-0 text-white"><a href="./">Voir tous</a></h6>
+                                       <h6 class="mb-0 text-white"><a href="javascript:void(0);">Voir tous</a></h6>
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </li>
                         <li class="nav-item nav-icon">
-                           <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
+                           <a href="javascript:void(0);" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
                               data-toggle="search-toggle">
                            <img ng-src="/assets/images/user/{{avatar}}" class="img-fluid avatar-40 cover rounded-circle" alt="user">
                            </a>
@@ -449,40 +459,32 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
             <div class="row">
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="javascript:void(0);">About Us</a></li>
                     <li><a href="movie-category.php">Movies</a></li>
                     <li><a href="show-category.php">Tv Shows</a></li>
-                    <li><a href="#">Coporate Information</a></li>
+                    <li><a href="javascript:void(0);">Coporate Information</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="javascript:void(0);">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0);">Terms & Conditions</a></li>
+                    <li><a href="javascript:void(0);">Help</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Cotact Us</a></li>
-                    <li><a href="#">Legal Notice</a></li>
+                    <li><a href="javascript:void(0);">FAQ</a></li>
+                    <li><a href="javascript:void(0);">Cotact Us</a></li>
+                    <li><a href="javascript:void(0);">Legal Notice</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-12 r-mt-15">
                   <div class="d-flex">
-                    <a href="#" class="s-icon">
-                    <i class="ri-facebook-fill"></i>
-                    </a>
-                    <a href="#" class="s-icon">
-                    <i class="ri-skypr-fill"></i>
-                    </a>
-                    <a href="#" class="s-icon">
-                    <i class="ri-linkedin-fill"></i>
-                    </a>
-                    <a href="#" class="s-icon">
-                    <i class="ri-whatsapp-fill"></i>
-                    </a>
+                     <div class="wrapper-buttons">
+                        <a class="white-button" href="https://github.com/xalsie/RaisiX_app/releases" target="_blank"><i class="fa-solid fa-boxes-stacked"></i> Download for Windows</a>
+                        <a class="blue-button" href="https://discord.gg/YTxEJN3jxk" target="_blank"><i class="fa-brands fa-discord"></i> Open Discord</a>
+                     </div>
                   </div>
               </div>
             </div>
@@ -490,7 +492,7 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
       </div>
       <div class="copyright py-2">
         <div class="container-fluid">
-            <p class="mb-0 text-center font-size-14 text-body">RaisiX - 2020 All Rights Reserved</p>
+            <p class="mb-0 text-center font-size-14 text-body">RaisiX - 2022 All Rights Reserved</p>
         </div>
       </div>
   </footer>

@@ -34,7 +34,8 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                   <li><a href="./dashboard.php" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Tableau de bord</span></a></li>
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
-                  <li><a href="user.html" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisatrice</span></a></li>
+                  <li><a href="./tab-users.php" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisateur</span></a></li>
+                  <li><a href="movie-request.php" class="iq-waves-effect"><i class="las la-plus"></i><span>Demande de film</span></a></li>
                   <li>
                      <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Catégorie</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -312,7 +313,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                                     <input type="text" class="form-control" placeholder="Saisir le titre du film" ng-model="tmdbData" aria-label="Saisir le titre du film" aria-describedby="title-movie">
 
                                     <div class="input-group-append">
-                                       <button class="btn btn-outline-secondary" ng-click="tmdb_search()" type="button">Recherche</button>
+                                       <button class="btn btn-outline-secondary" data-ng-click="tmdb_search()" type="button">Recherche</button>
                                     </div>
                                  </div>
 
@@ -323,7 +324,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                                  </div>
 
                                  <div class="col-12 form-group" ng-show="tmdbDetailsResult">
-                                    <button type="button" class="btn btn-info btn-block" ng-click="getInfoMovie()">Valide</button>
+                                    <button type="button" class="btn btn-info btn-block" data-ng-click="getInfoMovie()">Valide</button>
                                  </div>
 
                               </div>
@@ -363,7 +364,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                               <div class="col-sm form-group">
                                  <select class="form-control" id="formSelectPoster" ng-model="posterSelected">
                                     <option disabled selected>Affiches</option>
-                                    <option ng-repeat="poster in tmdbDetails.images.posters" value="{{poster.file_path}}">[{{poster.iso_639_1}}] - {{poster.file_path}}</option>
+                                    <option ng-repeat="poster in tmdbDetails.images.posters" value="{{poster.file_path}}">[{{poster.iso_639_1}}] - {{poster.width}}x{{poster.height}} - {{poster.file_path}}</option>
                                  </select>
                               </div>
                               <div class="d-block position-relative mb-3">
@@ -375,7 +376,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                               <div class="col-sm form-group">
                                  <select class="form-control" id="formSelectBackdrop" ng-model="backdropSelected">
                                     <option disabled selected>Toiles de fond</option>
-                                    <option ng-repeat="backdrop in tmdbDetails.images.backdrops" value="{{backdrop.file_path}}">[{{backdrop.iso_639_1}}] - {{backdrop.file_path}}</option>
+                                    <option ng-repeat="backdrop in tmdbDetails.images.backdrops" value="{{backdrop.file_path}}">[{{backdrop.iso_639_1}}] - {{poster.width}}x{{poster.height}} - {{backdrop.file_path}}</option>
                                  </select>
                               </div>
                               <div class="d-block position-relative">
@@ -385,7 +386,26 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                               </div>
                            </div>
                         </div>
-                        <div class="row" ng-show="tmdbDetailsShow">
+
+                        <div class="row" data-ng-show="tmdbDetailsShow">
+                           <div class="col-12 mb-4" id="listActors">
+                              <div class="row">
+
+
+                                 <div class="col-lg-2 col-md-6 col-12 mt-4" data-ng-repeat="actor in tmdbDetails.credits.cast | limitTo: 15">
+                                    <div class="team text-center rounded p-1">
+                                       <img ng-src="https://image.tmdb.org/t/p/w185{{actor.profile_path}}" class="img-fluid avatar avatar-120 shadow rounded-pill" alt="">
+                                       <div class="content mt-2">
+                                             <h4 class="title mb-0">{{actor.character}}</h4>
+                                             <p class="text-muted">{{actor.name}}</p>
+                                       </div>
+                                    </div>
+                                 </div><!--end col-->
+
+                              </div><!--end row-->
+                           </div>
+
+
                            <div class="col-sm form-group">
                               <select class="form-control" id="formSelectQualite" multiple ng-model="qualiteSelected">
                                  <option disabled>Qualités</option>
@@ -422,8 +442,8 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                         </div>
                         <div class="row">
                            <div class="col-12 form-group ">
-                              <button type="button" ng-click="submitMovie()" class="btn btn-primary" ng-show="tmdbDetailsShow">Submit</button>
-                              <button type="reset" ng-click="resetMovie()" class="btn btn-danger">cancel</button>
+                              <button type="button" data-ng-click="submitMovie()" class="btn btn-primary" ng-show="tmdbDetailsShow">Submit</button>
+                              <button type="reset" data-ng-click="resetMovie()" class="btn btn-danger">cancel</button>
                            </div>
                         </div>
                      </div>

@@ -3,7 +3,7 @@ include_once("../includes/inc.php");
 
 isConnected(true);
 
-echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
+echo Header_HTML("Tableau de bord - Liste des demandes films", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">', "", 'appHeader');
 ?>
    <!-- loader Start -->
@@ -41,7 +41,7 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                   <li><a href="rating.html" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Notation</span></a></li>
                   <li><a href="comment.html" class="iq-waves-effect"><i class="las la-comments"></i><span>Commenter</span></a></li>
                   <li><a href="./tab-users.php" class="iq-waves-effect"><i class="las la-user-friends"></i><span>Utilisateur</span></a></li>
-                  <li><a href="movie-request.php" class="iq-waves-effect"><i class="las la-plus"></i><span>Demande de film</span></a></li>
+                  <li class="active active-menu"><a href="movie-request.php" class="iq-waves-effect"><i class="las la-plus"></i><span>Demande de film</span></a></li>
                   <li>
                      <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Catégorie</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -49,11 +49,11 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                         <li><a href="category-list.html"><i class="las la-eye"></i>Liste des catégories</a></li>
                      </ul>
                   </li>
-                  <li class="active active-menu">
-                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="true"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                     <ul id="movie" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
+                  <li>
+                     <a href="#movie" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-film"></i><span>Films</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="movie" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li><a href="movie-add.php"><i class="las la-user-plus"></i>Ajouter un film</a></li>
-                        <li class="active active-menu"><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
+                        <li><a href="movie-list.php"><i class="las la-eye"></i>Liste des films</a></li>
                      </ul>
                   </li>
                   <li>
@@ -305,11 +305,13 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                   <div class="iq-card">
                      <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                           <h4 class="card-title">Liste des films</h4>
+                           <h4 class="card-title">Liste des demandes de films</h4>
                         </div>
-                        <div class="iq-card-header-toolbar d-flex align-items-center">
-                           <a href="./movie-add.php" class="btn btn-primary">Ajouter un film</a>
-                        </div>
+                     </div>
+                     <div id="toolbar">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                           + Proposer un film
+                        </button>
                      </div>
                      <div class="iq-card-body">
                         <div class="table-view">
@@ -340,14 +342,12 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
                                  <tr>
                                     <th data-field="id" data-width="100" data-sortable="true" data-halign="center" data-visible="false">ID</th>
                                     
-                                    <th data-field="image" data-sortable="true" data-halign="center" data-formatter="posterFormatter">Poster</th>
+                                    <th data-field="name" data-sortable="true" data-halign="center">Nom du film</th>
+                                    <th data-field="date-release" data-sortable="true" data-halign="center">Date</th>
+                                    <th data-field="langage" data-sortable="true" data-halign="center" data-formatter="languageFormatter">langage</th>
 
-                                    <th data-field="original_title" data-sortable="true" data-halign="center" data-formatter="titleFormatter">Movie</th>
-                                    <th data-field="qualite" data-sortable="true" data-halign="center" data-formatter="qualityFormatter">Quality</th>
-                                    <th data-field="genres" data-sortable="true" data-halign="center" data-formatter="genresFormatter">Category</th>
-                                    <th data-field="release_date" data-sortable="true" data-halign="center">Release Year</th>
-                                    <th data-field="languages" data-sortable="true" data-halign="center" data-formatter="languageFormatter">Language</th>
-                                    <th data-field="overview" data-sortable="true" data-formatter="overviewFormatter" style="width: 20%;">Description</th>
+                                    <th data-field="pseudo" data-sortable="true" data-halign="center">Demandeur</th>
+                                    <th data-field="pseudo" data-sortable="true" data-halign="center">Nombre de vote</th>
                                     
                                     <th data-field="action" data-width="150" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
                                  </tr>
@@ -361,21 +361,57 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
          </div>
       </div>
    </div>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="/assets/js/app-server.php">
+                  <div class="form-group">
+                     <label for="exampleFormControlInput1">Nom du film</label>
+                     <input type="text" class="form-control" name="exampleFormControlInput1" id="exampleFormControlInput1" placeholder="Venom">
+                  </div>
+                  <div class="form-group">
+                     <label for="exampleFormControlInput1">Date de sortie</label>
+                     <input type="text" class="form-control" name="exampleFormControlInput2" id="exampleFormControlInput2" placeholder="2018">
+                  </div>
+                  <div class="form-group">
+                     <label for="exampleFormControlSelect2">Language Souhaité</label>
+                     <select class="form-control" multiple name="exampleFormControlSelect1" id="exampleFormControlSelect1">
+                        <option>Francais</option>
+                        <option>Anglais</option>
+                        <option>VO</option>
+                        <option>VOSTFR</option>
+                     </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-block btn-primary">Save changes</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
    <!-- Wrapper END -->
 
    <script>
       // var $ = jQuery;
 
       function initTable() {
-            var $table = $('#table');
+         var $table = $('#table');
 
-            $table.bootstrapTable('destroy').bootstrapTable({
-               locale: "fr-FR"
-            })
+         $table.bootstrapTable('destroy').bootstrapTable({
+            locale: "fr-FR"
+         })
       }
 
       function postQueryParams(params) {
-            params.action = "getListMovie";
+            params.action = "getListRequestMovie";
             return params;
       }
 
@@ -444,14 +480,14 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       }
 
       window.actionEvents = {
-               'click .btn-remove': function (e, value, row, index) {
-               // console.log("Remove : "+row["login"]);
-               console.log(row);
+         'click .btn-remove': function (e, value, row, index) {
+            // console.log("Remove : "+row["login"]);
+            console.log(row);
             //   ShowDeleteUser(row);
-               },'click .btn-edit': function (e, value, row, index) {
-               console.log("Edit : "+row["id"]);
+         },'click .btn-edit': function (e, value, row, index) {
+            console.log("Edit : "+row["id"]);
             //   ShowEditUser(row);
-            }
+         }
       };
 
       $("#btn-add").click(function () {
@@ -463,7 +499,33 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
       });
 
       $(() => {
-          initTable();
+         initTable();
+
+         $("form").submit(function(event) {
+            var send=$.ajax({
+               method: 'POST',
+               url:'/assets/js/app-server.php',
+               data: {
+                  autofunc: false,
+                  action: 'saveMovieRequest',
+                  nameMovie: $("#exampleFormControlInput1").val(),
+                  dateRelease: $("#exampleFormControlInput2").val(),
+                  langage: $("#exampleFormControlSelect1").val()
+               }
+            }).done(function(html){
+               if(html != 'OK') {
+                  $('#exampleModal').modal('hide')
+                  console.log('Une erreur s\'est produite lors de l\'enregistrement de la demande de film !');
+               } else {
+                  $('#exampleModal').modal('hide')
+                  $('#table').bootstrapTable('refresh');
+               }
+            }).fail(function(){
+               console.log('Une erreur s\'est produite lors de l\'enregistrement de la demande de film !');
+            });
+
+            event.preventDefault();
+         });
       })
    </script>
 

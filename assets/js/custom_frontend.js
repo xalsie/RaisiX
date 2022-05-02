@@ -118,275 +118,229 @@ Index Of Script
 		/*---------------------------------------------------------------------
 			Slick Slider
 		----------------------------------------------------------------------- */
-		// $('#home-slider').slick({
-		// 	autoplay: false,
-		// 	speed: 800,
-		// 	lazyLoad: 'progressive',
-		// 	arrows: true,
-		// 	dots: false,
-		// 	prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
-		// 	nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
-		// 	responsive: [
-		// 		{
-		// 			breakpoint: 992,
-		// 			settings: {
-		// 				dots: true,
-		// 				arrows: false,
-		// 			}
-		// 		}
-		// 	]
-		// }).slickAnimation();
-
-		// $('.slick-nav').on('click touch', function (e) {
-		// 	e.preventDefault();
-		// 	var arrow = $(this);
-		// 	if (!arrow.hasClass('animate')) {
-		// 		arrow.addClass('animate');
-		// 		setTimeout(() => {
-		// 			arrow.removeClass('animate');
-		// 		}, 1600);
-		// 	}
-		// });
-
-		$('.favorites-slider').slick({
-			dots: false,
-			arrows: false,
-			infinite: true,
-			speed: 300,
-			autoplay: false,
-			slidesToShow: 4,
-			slidesToScroll: 1,
-			responsive: [
-			{
-				breakpoint: 1200,
-				settings: {
+		if($('#top-ten-slider').length) {
+			$('#top-ten-slider').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+				fade: true,
+				asNavFor: '#top-ten-slider-nav',
+				responsive: [
+				{
+					breakpoint: 992,
+					settings: {
+					asNavFor: false,
+					arrows: true,
+					nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
+					prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
+					}
+				}
+				]
+			});
+		}
+		
+		if($('#top-ten-slider-nav').length) {
+			$('#top-ten-slider-nav').slick({
 				slidesToShow: 3,
 				slidesToScroll: 1,
-				infinite: true,
-				dots: true
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1
-				}
-			}
-			]
-		});
-
-		$('#top-ten-slider').slick({
-			slidesToShow: 1,
-			slidesToScroll: 1,
-			arrows: false,
-			fade: true,
-			asNavFor: '#top-ten-slider-nav',
-			responsive: [
-			{
-				breakpoint: 992,
-				settings: {
-				asNavFor: false,
+				asNavFor: '#top-ten-slider',
+				dots: false,
 				arrows: true,
-				nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
-				prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
-				}
-			}
-			]
-		});
-		$('#top-ten-slider-nav').slick({
-			slidesToShow: 3,
-			slidesToScroll: 1,
-			asNavFor: '#top-ten-slider',
-			dots: false,
-			arrows: true,
-			infinite: true,
-			vertical:true,
-			verticalSwiping: true,
-			centerMode: false,
-			nextArrow:'<button class="NextArrow"><i class="ri-arrow-down-s-line"></i></button>',
-			prevArrow:'<button class="PreArrow"><i class="ri-arrow-up-s-line"></i></button>',
-			focusOnSelect: true,
-			responsive: [		    
+				infinite: true,
+				vertical:true,
+				verticalSwiping: true,
+				centerMode: false,
+				nextArrow:'<button class="NextArrow"><i class="ri-arrow-down-s-line"></i></button>',
+				prevArrow:'<button class="PreArrow"><i class="ri-arrow-up-s-line"></i></button>',
+				focusOnSelect: true,
+				responsive: [		    
+					{
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: 2,
+					}
+					},
+					{
+						breakpoint: 600,
+						settings: {
+							asNavFor: false,
+						}
+					},
+				]
+			});
+		}
+			
+		if($('#episodes-slider2').length) {
+			$('#episodes-slider2').slick({
+				dots: false,
+				arrows: true,
+				infinite: true,
+				speed: 300,
+				autoplay: false,
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				responsive: [
 				{
-				breakpoint: 1200,
-				settings: {
-					slidesToShow: 2,
-				}
+					breakpoint: 1024,
+					settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					infinite: true,
+					dots: true,
+					}
 				},
 				{
 					breakpoint: 600,
 					settings: {
-						asNavFor: false,
-					}
-				},
-			]
-		});
-
-		$('#episodes-slider2').slick({
-			dots: false,
-			arrows: true,
-			infinite: true,
-			speed: 300,
-			autoplay: false,
-			slidesToShow: 4,
-			slidesToScroll: 1,
-			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				infinite: true,
-				dots: true,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				}
-			}
-			]
-		});
-
-		$('#episodes-slider3').slick({
-			dots: false,
-			arrows: true,
-			infinite: true,
-			speed: 300,
-			autoplay: false,
-			slidesToShow: 4,
-			slidesToScroll: 1,
-			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				infinite: true,
-				dots: true,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				}
-			}
-			]
-		});
-
-		$('#trending-slider').slick({
-			slidesToShow: 1,
-			slidesToScroll: 1,		 
-			arrows: false,
-			fade: true,
-			asNavFor: '#trending-slider-nav',	
-		});
-		$('#trending-slider-nav').slick({
-			slidesToShow: 5,
-			slidesToScroll: 1,
-			asNavFor: '#trending-slider',
-			dots: false,
-			arrows: false,
-			infinite: true,
-			centerMode: true,
-			centerPadding:0,
-			focusOnSelect: true,
-			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1
-				}
-			}
-			]
-		});
-		
-		$('#tvshows-slider').slick({
-			centerMode: true,
-			centerPadding: '200px',
-			slidesToShow: 1,
-			nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
-			prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
-			arrows:true,
-			dots:false,
-			responsive: [
-				{
-					breakpoint: 991,
-					settings: {
-						arrows: false,
-						centerMode: true,
-						centerPadding: '20px',
-						slidesToShow: 1
+					slidesToShow: 2,
+					slidesToScroll: 1,
 					}
 				},
 				{
 					breakpoint: 480,
 					settings: {
-						arrows: false,
-						centerMode: true,
-						centerPadding: '20px',
-						slidesToShow: 1
+					slidesToShow: 1,
+					slidesToScroll: 1,
 					}
 				}
-			]
-		});
+				]
+			});
+		}
+		
+		if($('#episodes-slider3').length) {
+			$('#episodes-slider3').slick({
+				dots: false,
+				arrows: true,
+				infinite: true,
+				speed: 300,
+				autoplay: false,
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				responsive: [
+				{
+					breakpoint: 1024,
+					settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					infinite: true,
+					dots: true,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					}
+				}
+				]
+			});
+		}
+			
+		if($('#trending-slider').length) {
+			$('#trending-slider').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,		 
+				arrows: false,
+				fade: true,
+				asNavFor: '#trending-slider-nav',	
+			});
+		}
+			
+		if($('#trending-slider-nav').length) {
+			$('#trending-slider-nav').slick({
+				slidesToShow: 5,
+				slidesToScroll: 1,
+				asNavFor: '#trending-slider',
+				dots: false,
+				arrows: false,
+				infinite: true,
+				centerMode: true,
+				centerPadding:0,
+				focusOnSelect: true,
+				responsive: [
+				{
+					breakpoint: 1024,
+					settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+					}
+				}
+				]
+			});
+		}
+		
+		if($('#tvshows-slider').length) {
+			$('#tvshows-slider').slick({
+				centerMode: true,
+				centerPadding: '200px',
+				slidesToShow: 1,
+				nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
+				prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
+				arrows:true,
+				dots:false,
+				responsive: [
+					{
+						breakpoint: 991,
+						settings: {
+							arrows: false,
+							centerMode: true,
+							centerPadding: '20px',
+							slidesToShow: 1
+						}
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							arrows: false,
+							centerMode: true,
+							centerPadding: '20px',
+							slidesToShow: 1
+						}
+					}
+				]
+			});
+		}
+		
 
 		/*---------------------------------------------------------------------
 			Owl Carousel
 		----------------------------------------------------------------------- */
-		$('.episodes-slider1').owlCarousel({
-			loop:true,
-			margin:20,
-			nav:true,
-			navText: ["<i class='ri-arrow-left-s-line'></i>", "<i class='ri-arrow-right-s-line'></i>"],
-			dots:false,
-			responsive:{
-				0:{
-					items:1
-				},
-				600:{
-					items:1
-				},
-				1000:{
-					items:4
+		if($('.episodes-slider1').length) {
+			$('.episodes-slider1').owlCarousel({
+				loop:true,
+				margin:20,
+				nav:true,
+				navText: ["<i class='ri-arrow-left-s-line'></i>", "<i class='ri-arrow-right-s-line'></i>"],
+				dots:false,
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:1
+					},
+					1000:{
+						items:4
+					}
 				}
-			}
-		});
-		
+			});
+		}
+
 		/*---------------------------------------------------------------------
 			Page Loader
 		----------------------------------------------------------------------- */
@@ -464,25 +418,6 @@ Index Of Script
 		}
 
 		/*---------------------------------------------------------------------
-			Video popup
-		-----------------------------------------------------------------------*/
-		// $('.video-open').magnificPopup({
-		// 	type: 'iframe',
-		// 	mainClass: 'mfp-fade',
-		// 	removalDelay: 160,
-		// 	preloader: false,
-		// 	fixedContentPos: false,
-		// 	iframe: {
-		// 		markup: '<div class="mfp-iframe-scaler">' +
-		// 			'<div class="mfp-close"></div>' +
-		// 			'<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
-		// 			'</div>',
-
-		// 		srcAction: 'iframe_src',
-		// 	}
-		// });
-
-		/*---------------------------------------------------------------------
 			Flatpicker
 		-----------------------------------------------------------------------*/
 		if ($('.date-input').hasClass('basicFlatpickr')) {
@@ -503,38 +438,5 @@ Index Of Script
 		}), $(".upload-button").on("click", function () {
 			$(".file-upload").click();
 		});
-		// new WOW().init();
-		// var swiper = new Swiper('.swiper-container', {
-		// 	effect: 'fade',
-		// 	grabCursor: true,
-		// 	centeredSlides: false,
-		// 	slidesPerView: 'auto',
-		// 	freeMode: true,
-		// 	loop: true,
-		// 	parallax: true,
-		// 	on: {
-		// 		slideChangeTransitionEnd: function () {
-		// 			$('.aos-slide').show(0);
-		// 			AOS.init();
-		// 		},
-		// 		slideChangeTransitionStart: function () {
-		// 			$('.aos-slide').hide(0);
-		// 			$('.aos-slide').removeClass('aos-init').removeClass('aos-animate');
-					
-		// 		},
-		// 	},
-		// 	pagination: {
-		// 		el: '.swiper-pagination',
-		// 	},
-		// 	navigation: {
-		// 		nextEl: '.swiper-button-next',
-		// 		prevEl: '.swiper-button-prev',
-		// 	},
-		// });
-	
-		// AOS.init();
-
-		// var player = window.player = videojs('my-video');
-      	// 	player.httpSourceSelector();
 	});
 })(jQuery);

@@ -1,19 +1,21 @@
 <?php
 include_once("includes/inc.php");
 
+$domain = 'raisix';
+
 if(isset($_GET['logout'])) {
    // destroy session
    session_destroy();
    $cookieOptions = array (
       'expires' => 'Session',
       'path' => '/',
-      'domain' => 'raisix'
+      'domain' => $domain
    );
    setcookie("remember", "", $cookieOptions);
 } else if (isConnected())
    header("Location: /index.php");
 
-echo Header_HTML("S'identifier", "frontend");
+echo Header_HTML("S'identifier", "frontend", "", "");
 ?>
       <!-- MainContent -->
       <section class="sign-in-page">
@@ -40,10 +42,10 @@ echo Header_HTML("S'identifier", "frontend");
 
                            <form class="mt-4" method="POST" action="/script/login.php">
                               <div class="form-group">
-                                 <input type="email" class="form-control mb-0" id="email" name="email" placeholder="Entrez votre Email" autocomplete="off" required>
+                                 <input type="email" class="form-control mb-0" id="email" name="email" <?php echo (isset($_SESSION["postForm"]["email"]))? 'value="'.$_SESSION["postForm"]["email"].'"': " "; ?> placeholder="Entrez votre Email" autocomplete="off" required>
                               </div>
                               <div class="form-group">
-                                 <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" required>
+                                 <input type="password" class="form-control mb-0" id="pwd" name="pwd" <?php echo (isset($_SESSION["postForm"]["pwd"]))? 'value="'.$_SESSION["postForm"]["pwd"].'"': " "; ?> placeholder="Entrez votre Mot de Passe" required>
                               </div>
 
                               <div class="form-group">

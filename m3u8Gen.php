@@ -15,6 +15,12 @@
     /assets/video/uncharted_2022/file1_2160.m3u8
 */
 
+// $sal = "seletc flux where id 24";
+
+// $sql = "select grade user where id 4";
+
+// grade = 5;
+
 echo '#EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:BANDWIDTH=1900800,RESOLUTION=3440x480,CODECS="avc1.42c028,mp4a.40.2"

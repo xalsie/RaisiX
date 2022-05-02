@@ -2,7 +2,7 @@
 include_once("../../includes/inc.php");
 
 if (!isConnected())
-   die("Vous etes deconnecté.");
+    die("Vous etes deconnecté.");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     http_response_code(401);
@@ -47,19 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
 			echo json_encode($result);
             break;
-        case "getDatas":
-            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path  FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 15;";
-                $result["notification"] = [];
-                $result["notification"]["datas"] = db_query($SQL);
-
-            if (!$result["notification"]["datas"]) {
-                $result["notification"]["datas"] = [];
-                $result["notification"]["_count"] = 0;
-            } else
-                $result["notification"]["_count"] = count($result["notification"]["datas"]);
-
-
-            $SQL = "SELECT * FROM `movie_detail` WHERE date_create > date_sub(now(), interval 1 week) ORDER BY date_create DESC LIMIT 6;";
+        case "getDatasSlider":
+            $SQL = "SELECT * FROM `movie_detail` ORDER BY date_create DESC LIMIT 6;";
                 $result["slider"] = [];
                 $result["slider"]["datas"] = db_query($SQL);
 
@@ -71,8 +60,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
         
             echo json_encode($result);
             break;
+        case "getDatasNotifs":
+            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path FROM `movie_detail` ORDER BY date_create DESC LIMIT 5;";
+                $result["notification"] = [];
+                $result["notification"]["datas"] = db_query($SQL);
+
+            if (!$result["notification"]["datas"]) {
+                $result["notification"]["datas"] = [];
+                $result["notification"]["_count"] = 0;
+            } else
+                $result["notification"]["_count"] = count($result["notification"]["datas"]);
+
+            echo json_encode($result);
+            break;
+        case "getUpcomingMovies":
+            $SQL = "SELECT id, date_create, title, vote_average, runtime, backdrop_path, poster_path FROM `movie_detail` WHERE `status` = '1' ORDER BY date_create DESC LIMIT 8;";
+                $result["upComingMovies"] = [];
+                $result["upComingMovies"]["datas"] = db_query($SQL);
+
+            if (!$result["upComingMovies"]["datas"]) {
+                $result["upComingMovies"]["datas"] = [];
+                $result["upComingMovies"]["_count"] = 0;
+            } else
+                $result["upComingMovies"]["_count"] = count($result["upComingMovies"]["datas"]);
+
+            echo json_encode($result);
+            break;
+        case "getMovies":
+            $SQL = "SELECT id, date_create, title, vote_average, runtime, backdrop_path, poster_path FROM `movie_detail` WHERE `status` = '2' ORDER BY date_create DESC LIMIT 16;";
+                $result["moviesList"] = [];
+                $result["moviesList"]["datas"] = db_query($SQL);
+
+            if (!$result["moviesList"]["datas"]) {
+                $result["moviesList"]["datas"] = [];
+                $result["moviesList"]["_count"] = 0;
+            } else
+                $result["moviesList"]["_count"] = count($result["moviesList"]["datas"]);
+
+            echo json_encode($result);
+            break;
         case "saveMovie":
             $data     = $_POST["data"];
+            $credits  = $_POST["credits"];
             $backdrop = $_POST["backdrop"];
             $language = $_POST["language"];
             $pathfile = $_POST["pathfile"];
@@ -86,7 +115,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
             $SQL = "INSERT INTO `movie_detail` (`date_create`, `date_modification`, `adult`, `backdrop_path`, `belongs_to_collection`, `budget`, `genres`, `homepage`, `tmdb_id`, `imdb_id`, `original_language`, `original_title`, `overview`, `popularity`, `poster_path`, `production_companies`, `production_countries`, `release_date`, `revenue`, `runtime`, `languages`, `status`, `tagline`, `title`, `video`, `vote_average`, `vote_count`, `qualite`, `pathfile`)
                     VALUES (now(), now(), '".$data['adult']."', '".$backdrop."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$poster."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', '".json_encode($language)."', '".$status."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$video."', '".$data['vote_average']."', '".$data['vote_count']."', '".json_encode($qualite)."', '".db_escape(json_encode($pathfile, JSON_FORCE_OBJECT))."');";
-			$result = db_execute($SQL);
+			$result1 = db_execute($SQL);
+
+            $SQL = "INSERT INTO `movie_credits` (`date_create`, `date_modification`, `id_movie_details`, `content`) VALUES (now(), now(), (SELECT LAST_INSERT_ID() AS lastID), '".db_escape(json_encode($credits))."')";
+            $result2 = db_execute($SQL);
 
             if (!empty($poster)) {
                 $savePicture["poster"] = saveFile('https://image.tmdb.org/t/p/original'.$poster, $poster, 'assets/images/movie-poster');
@@ -96,7 +128,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
                 $savePicture["backdrop"] = saveFile('https://image.tmdb.org/t/p/original'.$backdrop, $backdrop, 'assets/images/movie-backdrop');
             }
 
-            print_r([$result, $savePicture]);
+            if ($result1[0] && $result2[0]) {
+                discordApiPost($data, $credits);
+            }
+
+            print_r([$result1, $result2, $savePicture]);
             break;
         case "getPathMovie":
             $result = array();
@@ -113,10 +149,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             echo json_encode($result);
             break;
         case "getMovieById":
-            $SQL = "SELECT * FROM `movie_detail` WHERE id = '".db_escape($_POST['uuid'])."';";
+            $SQL = "SELECT md.id, md.adult, md.backdrop_path, md.genres, md.original_title, md.overview, md.poster_path, md.release_date, md.runtime, md.languages, md.title, md.vote_average, md.vote_count, md.qualite, mc.content FROM `movie_detail` AS md
+                     INNER JOIN `movie_credits` AS mc
+                     on md.id = mc.id_movie_details
+                     WHERE md.id = '".db_escape($_POST['uuid'])."';";
                 $result = db_query($SQL);
 
             echo json_encode($result);
+            break;
+        case "toMovieView":
+            $idMovie = db_escape($_POST["uuid"]);
+            $idUser = $_SESSION["id"];
+
+            $SQL = "INSERT INTO `movie_view` (`date_create`, `date_modification`, `id_movie`, `id_user`) VALUES (NOW(), NOW(), $idMovie, $idUser)";
+                $result = db_execute($SQL);
+
+                echo json_encode($result);
             break;
         case "getListMovie":
             // $_limit = $_POST["limit"];
@@ -146,6 +194,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             break;
         case "delMovie":
 
+            break;
+        case "getListRequestMovie":
+            $_search = (empty($_POST["search"])? false:$_POST["search"]);
+
+            $SQL = "SELECT mr.id, mr.date_create, mr.date_modification, ud.pseudo, mr.name, mr.`date-release`, mr.langage FROM `movie_request` AS mr LEFT JOIN `users_detail` AS ud on mr.id_users = ud.id_users;";
+                $result = db_query($SQL);
+
+            if(!$result)
+                $aRow=array();
+            else
+                foreach ($result as $row) {
+                    $aRow[]=array("id"=>$row["id"], "date_create"=>$row["date_create"], "date_modification"=>$row["date_modification"],
+                    "pseudo"=>$row["pseudo"], "name"=>$row["name"], "date-release"=>$row["date-release"],"langage"=>$row["langage"]);
+                }
+
+            echo json_encode($aRow);
+            break;
+        case "saveMovieRequest":
+            $nameMovie = db_escape($_POST["nameMovie"]);
+            $dateRelease = db_escape($_POST["dateRelease"]);
+            $langage = db_escape(json_encode($_POST["langage"], JSON_FORCE_OBJECT));
+
+            $SQL = "INSERT INTO `movie_request` (`date_create`, `date_modification`, `id_users`, `name`, `date-release`, `langage`)
+                    VALUES (now(), now(), '".$_SESSION['id']."', '$nameMovie', '$dateRelease', '$langage');";
+            $result = db_execute($SQL);
+
+            if ($result[0]) {
+                echo 'OK';
+            }
             break;
 	}
 	exit;
@@ -202,4 +279,80 @@ function saveFile($urlFile, $saveName, $saveLocation) {
     fclose($file_handler);
 
     return $_rtnError;
+}
+
+function listActors($data, $count) {
+    $rtn = "";
+    for($i = 0; $i < $count; $i++) {
+        $rtn .= $data[$i]["name"];
+    }
+    return $rtn;
+}
+
+function discordApiPost($data, $credits) {
+    //=======================================================================================================
+    // Create new webhook in your Discord channel settings and copy&paste URL
+    //=======================================================================================================
+    $webhookurl = "https://discord.com/api/webhooks/965899077218865162/vkrLkjSgaBVF2ZryFcY0lp_fOuyTiFnBOCJlWGlP9MAMecRv6zzcUd9REjFtLl3pUlFS";
+
+    //=======================================================================================================
+    // Compose message. You can use Markdown
+    // Message Formatting -- https://discordapp.com/developers/docs/reference#message-formatting
+    //========================================================================================================
+    $timestamp = date("c", strtotime("now"));
+
+    $json_data = json_encode([
+        "username" => "🍿｜RaisiX",
+        "avatar_url" => "",
+        "tts" => false,
+        "content" => "",
+        "embeds" => [
+            [
+            "type" => "rich",
+            "title" => "**".$data["title"]."** - *".substr($data["release_date"], 0, 4)."*",
+            "color" => hexdec( "b95504" ),
+            "description" => "Film ajouté par 🐻｜LeGrizzly#0341",
+            "timestamp" => $timestamp,
+            "author" => [],
+            "image" => [
+                "url" => "https://raisix.fr/assets/images/movie-backdrop".$data["backdrop_path"]
+            ],
+            "thumbnail" => [
+                "url" => "https://raisix.fr/assets/images/movie-poster".$data["poster_path"]
+            ],
+            "footer" => [
+                "text" => "🍿｜RaisiX - V1.1",
+                "icon_url" => ""
+            ],
+            "fields" => [
+                [
+                    "name" => "🎬｜Synopsis",
+                    "value" => "🟧 ".substr($data["overview"], 0, 255)."...\n--------------------",
+                    "inline" => false
+                ],
+                [
+                    "name" => "🤸｜Acteurs",
+                    "value" => "🟧 ".listActors($credits["cast"], 4)."\n--------------------",
+                    "inline" => false
+                ],
+                [
+                    "name" => "🎬｜Voir le Film",
+                    "value" => "🟧 __https://raisix.fr/movie-details.php?id=34__\n--------------------",
+                    "inline" => false
+                ]
+            ]
+            ]
+        ]
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+    $headers = [ 'Content-Type: application/json; charset=utf-8' ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $webhookurl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    $response   = curl_exec($ch);
 }

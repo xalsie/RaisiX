@@ -1,7 +1,7 @@
 <?php
 	//àéè
 	// A inclure dans les fichiers php :
-	// 	defined('v1SecureForeCaster') or header('Location: /');
+	// 	defined('v1Secureraisix') or header('Location: /');
 	//  include_once("/var/www/html/SiteChrono/includes/inc.php");
 	define('v1Secureraisix',"WEB");
 	
@@ -22,7 +22,7 @@
 	
 	include_once($path."/includes/db.inc.php");
 	include_once($path."/includes/functions.inc.php");
-	
+
 	include_once($path."/includes/header.inc.php");
 
 	$listOfErrors=[

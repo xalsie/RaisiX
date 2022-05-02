@@ -1,22 +1,28 @@
 <?php
 include_once("../includes/inc.php");
-include('../assets/animegif/GIFEncoder.class.php');
-header ('Content-type: image/gif');
+defined('v1Secureraisix') or header('Location: /');
+
+include_once('../assets/animegif/GIFEncoder.class.php');
+header('Content-type: image/gif');
+
+ini_set('log_errors','Off');
+ini_set('display_errors','Off');
+ini_set('error_reporting', E_ALL );
 
 $captcha = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 2, 7);
 $_SESSION["captcha"] = strtolower($captcha);
 
 $x			    = 230;
-$y			    = 115;
+$y			    = 90;
 $z			    = 0;
 $space		    = 15;
 $interval	    = 30;
 $letext		    = 5;
 $j			    = 10;
 $space		    = 15;
-$a              = rand(-30,30);
-$b              = rand($y / 3,90);
-$listOfFonts    = glob("../assets/fonts/Ed Wood Movies.ttf");
+$a              = rand(-30, 30);
+$b              = rand($y/2,90);
+$listOfFonts    = glob("../assets/fonts/MonoLisa-Medium.ttf");
 
 function generateRandomFont() {
 	if ($directory = opendir('../assets/fonts')) {
@@ -55,7 +61,7 @@ for($i = 0; $i <= (strlen($captcha) - 1); $i++) {
 
         $fontName[0] = __DIR__."/".$listOfFonts[array_rand($listOfFonts)];
 
-        imagettftext($image, 25, $a, $space, $b, $black, $fontName[0], substr($captcha, $j, 1));
+        imagettftext($image, 30, $a, $space, $b, $black, $fontName[0], substr($captcha, $j, 1));
 
         $space += $interval;
     }

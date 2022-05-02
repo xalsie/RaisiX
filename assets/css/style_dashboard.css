@@ -44,13 +44,14 @@ NOTE: This file contains the styling for responsive Template.
 :: modal-content
 :: FlatPicker
 :: Pricing
+:: list Actor
 
 ======================================
 [ End table content ]
 ======================================*/
 
 /*--------------------------------------------------------------------
-General
+    General
 ---------------------------------------------------------------------*/
 *::-moz-selection { background: var(--iq-primary); color: var(--iq-white); text-shadow: none; }
 ::-moz-selection { background: var(--iq-primary); color: var(--iq-white); text-shadow: none; }
@@ -61,7 +62,6 @@ dl dd { margin-bottom: 15px; }
 dl dd:last-child { margin-bottom: 0px; }
 
 /* Table */
-th { }
 a:hover { text-decoration: none; }
 .dropdown-item { font-size: 14px; }
 .dropdown-menu { border-radius: 5px; }
@@ -90,14 +90,14 @@ a:hover { text-decoration: none; }
 #sidebar-scrollbar { height: 100%; }
 
 /*---------------------------------------------------------------------
-Badge
+    Badge
 -----------------------------------------------------------------------*/
 .badge { padding: .3em .6em; line-height: 1.3; text-transform: capitalize; }
 .breadcrumb.bg-primary .breadcrumb-item+.breadcrumb-item::before { color: var(--iq-white); }
 .badge-img-tag { position: absolute; top: 15px; left: 15px; }
 
 /*---------------------------------------------------------------------
-Media Support
+    Media Support
 -----------------------------------------------------------------------*/
 .media-support { display: inline-block; width: 100%; }
 .media-support-user-img img { height: 60px; }
@@ -113,7 +113,7 @@ Media Support
 .media-pl { text-align: center; }
 
 /*---------------------------------------------------------------------
-Profile-Avatar
+    Profile-Avatar
 -----------------------------------------------------------------------*/
 .iq-profile-avatar { position: relative; }
 .iq-profile-avatar:before { content: ''; position: absolute; border-radius: 100%; z-index: 1; border: 2px solid var(--iq-white); background-color: var(--iq-body-text); height: 16px; width: 16px; right: 0; bottom: -3px; }
@@ -130,7 +130,7 @@ Profile-Avatar
 .profile-icon { height: 40px; width: 40px; line-height: 40px; text-align: center; font-size: 20px; font-weight: 700; border-radius: 50%; }
 
 /*---------------------------------------------------------------------
-Countdown
+    Countdown
 -----------------------------------------------------------------------*/
 .iq-comingsoon { margin-top: 80px; }
 .countdown { margin: 60px 0 0; padding: 0; }
@@ -141,13 +141,13 @@ Countdown
 .form-control.comming { background-color: var(--iq-light-card); }
 
 /*---------------------------------------------------------------------
-Progressbar
+    Progressbar
 -----------------------------------------------------------------------*/
 .iq-progress-bar { background: var(--iq-light); box-shadow: 0 0 0; height: 6px; margin: 0; position: relative; width: 100%; border-radius: 5px; }
 .iq-progress-bar > span { background: var(--iq-primary) none repeat scroll 0 0; display: block; height: 100%; width: 0; border-radius: 5px; }
 
 /*---------------------------------------------------------------------
-Dropdown Menu
+    Dropdown Menu
 -----------------------------------------------------------------------*/
 .iq-card-header .dropdown-bg { background: var(--iq-light-primary); padding: 8px 15px; color: var(--iq-primary); border-radius: 5px; }
 .iq-card-header .dropdown-menu { margin: 0; padding: 0; font-size: 13px; top: 20px !important; border-radius: 5px; border-color: rgba(210, 201, 255, 0.4); -webkit-box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1); -moz-box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1); box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1); background-color: var(--iq-body-bg); }
@@ -156,24 +156,24 @@ Dropdown Menu
 .dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover { background: transparent; color: var(--iq-primary); }
 
 /*---------------------------------------------------------------------
-Icon Box
+    Icon Box
 -----------------------------------------------------------------------*/
 .iq-icon-box { height: 64px; width: 64px; line-height: 64px; text-align: center; margin-right: 10px; font-size: 26px; text-decoration: none; }
 .iq-icon-box:hover { text-decoration: none; }
 
 /*---------------------------------------------------------------------
-Tasks Card
+    Tasks Card
 -----------------------------------------------------------------------*/
 .tasks-card { padding: 0 0 15px 0; border-bottom: 1px solid var(--iq-border-light); margin: 0 0 15px 0; }
 .tasks-card .close { font-size: 16px; }
 .tasks-card:last-child { border: none; margin: 0; padding: 0; }
 
 /*---------------------------------------------------------------------
-Sign In
+    Sign In
 -----------------------------------------------------------------------*/
 #sign-in-page-box { background: #fff; border-radius: 10px; position: relative; width: 100%; min-height: 480px; height: 93vh; margin: 15px auto; box-shadow: 0px 4px 20px 0px rgba(44, 101, 144, 0.1); -webkit-box-shadow: 0px 4px 20px 0px rgba(44, 101, 144, 0.1); }
 .sign-in-detail { color: var(--iq-white); }
-.sign-in-page { height: 100vh; position: relative; background: url(/assets/images/login/login_wp.jpg)  no-repeat scroll 0 0; background-size: cover; }
+.sign-in-page { height: 100vh; position: relative; background: url(/assets/images/login/login_wp.jpg) no-repeat scroll 0 0; background-size: cover; }
 .sign-in-page .height-self-center { height: 100vh; border-radius: 15px; }
 .sign-in-page-data { border-radius: 15px; }
 .sign-in-detail { padding: 50px 80px; }
@@ -201,16 +201,14 @@ color: #d9d5d5 !important; }
 color: #d9d5d5 !important; }
 .f-link:hover { color: var(--iq-primary); }
 
-
-
 /*---------------------------------------------------------------------
-Dash Hover
+    Dash Hover
 -----------------------------------------------------------------------*/
 .dash-hover-blank { background-color: var(--iq-border-light); border: dashed 2px var(--iq-dark); height: 90%; justify-content: center; }
 .dash-hover-blank:hover { cursor: pointer; background-color: var(--iq-border-light); }
 
 /*---------------------------------------------------------------------
-Waves Effect
+    Waves Effect
 -----------------------------------------------------------------------*/
 .iq-waves-effect { position: relative; }
 
@@ -222,14 +220,14 @@ Waves Effect
 }
 
 /*---------------------------------------------------------------------
- Sidebar
- -----------------------------------------------------------------------*/
+    Sidebar
+-----------------------------------------------------------------------*/
 .iq-sidebar { position: fixed; z-index: 1000; top: 0; width: 300px; height: 100%; background: var(--iq-light-card); transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .iq-sidebar .iq-sidebar-logo { float: none; width: 100%; }
 
 /*---------------------------------------------------------------------
-                             Sidebar Menu
- -----------------------------------------------------------------------*/
+    Sidebar Menu
+-----------------------------------------------------------------------*/
 
 /* Form */
 #sidebar-scrollbar { height: 100vh; }
@@ -256,7 +254,6 @@ Waves Effect
 .iq-sidebar-menu .iq-menu li.active .iq-submenu li:last-child>a { border-radius: 0 0 5px 5px; }
 .iq-sidebar-menu .iq-menu li .iq-submenu li>a::before { display: none; }
 body.sidebar-main .iq-sidebar .iq-menu li a[aria-expanded="false"].collapsed { border-radius: 5px; }
-.iq-sidebar-menu .iq-menu li a i.iq-arrow-left, .iq-sidebar-menu .iq-menu li > a > i.iq-arrow-left { /*background: transparent; color: var(--iq-body-text); text-align: center; border-radius: 5px; font-size: 16px;*/ }
 .iq-sidebar-menu .iq-menu li a[aria-expanded="true"] i.iq-arrow-left, .iq-sidebar-menu .iq-menu li.active > a > i.iq-arrow-left { color: var(--iq-primary);/* color: var(--iq-white);*/ }
 .iq-sidebar-menu .iq-menu li>a::before { content: ""; width: 3px; height: 0px; display: inline-block; background: var(--iq-primary); position: absolute; top: 7px; right: 0px; opacity: 0; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s; }
 .iq-sidebar-menu .iq-menu li.active>a::before { opacity: 1; height: 75%; }
@@ -274,7 +271,7 @@ body.sidebar-main .iq-sidebar .iq-menu li a[aria-expanded="false"].collapsed { b
 .iq-sidebar-menu .iq-menu li ul.iq-submenu-data li { margin: 0; }
 
 /*---------------------------------------------------------------------
-Top Menu
+    Top Menu
 -----------------------------------------------------------------------*/
 .iq-top-navbar { padding: 0 15px 0 30px; min-height: 73px; position: fixed; top: 0; left: auto; right: 0; width: calc(100% - 300px); display: inline-block; z-index: 99; background: var(--iq-light-card); margin: 0; transition: all 0.45s ease 0s; }
 body.sidebar-main .iq-top-navbar { width: calc(100% - 80px); }
@@ -344,7 +341,7 @@ div#lottie-beil svg path, div#lottie-mail svg path, div#lottie-fullscreen svg pa
 .iq-top-navbar .iq-navbar-custom .iq-menu-bt { display: none; }
 
 /*---------------------------------------------------------------------
-content Page
+    content Page
 -----------------------------------------------------------------------*/
 .content-page { overflow: hidden; margin-left: 300px; padding: 117px 15px 0; min-height: 100vh; -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; }
 .iq-user-dropdown { width: 350px; }
@@ -366,7 +363,7 @@ body.sidebar-main .content-page { margin-left: 80px; }
 .slick-aerrow-block button.slick-arrow { position: static; background: var(--iq-primary) 0% 0% no-repeat padding-box; margin: 0 0 0 20px; line-height: 5px; box-shadow: 0px 9px 19px #01041B0D; font-size: 0; transform: none; color: var(--iq-white); -webkit-transition: all 0.4s ease-in-out 0s; -moz-transition: all 0.4s ease-in-out 0s; transition: all 0.4s ease-in-out 0s; }
 .slick-aerrow-block button.slick-arrow:hover { background: var(--iq-white); color: var(--iq-primary) !important; -webkit-transition: all 0.4s ease-in-out 0s; -moz-transition: all 0.4s ease-in-out 0s; transition: all 0.4s ease-in-out 0s; }
 .slick-aerrow-block { display: flex; align-items: center; justify-content: center; }
-.slick-aerrow-block  .slick-prev:before { color: var(--iq-white); content: "\f30a"; font-family: 'Line Awesome Free'; font-weight: 900; }
+.slick-aerrow-block .slick-prev:before { color: var(--iq-white); content: "\f30a"; font-family: 'Line Awesome Free'; font-weight: 900; }
 .slick-aerrow-block .slick-next:before { color: var(--iq-white); content: "\f30b"; font-family: 'Line Awesome Free'; font-weight: 900; }
 .slick-aerrow-block .slick-prev:hover::before { color: var(--iq-primary); }
 .slick-aerrow-block .slick-next:hover::before { color: var(--iq-primary); }
@@ -396,7 +393,6 @@ body.sidebar-main .content-page { margin-left: 80px; }
 .iq-sidebar-logo a:hover, .iq-sidebar-logo a:focus { text-decoration: none; }
 .iq-sidebar-logo img { height: 45px; }
 .iq-top-navbar .iq-navbar-custom .iq-menu-bt-sidebar .iq-menu-bt { display: block; margin: 0 0 0 20px; }
-.iq-menu-bt { }
 .wrapper-menu { font-size: 30px; text-align: center; line-height: 15px; color: var(--iq-primary); position: relative; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; transition: transform 330ms ease-out; background: transparent; padding: 12px 0px; margin-right: 15px; -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
 .line-menu { background-color: var(--iq-primary); border-radius: 90px; width: 100%; height: 2px; }
 .line-menu.half { width: 50%; }
@@ -441,8 +437,8 @@ body.sidebar-main .content-page { margin-left: 80px; }
 .search-box .search-link { position: absolute; top: 12px; left: 15px; }
 
 /*---------------------------------------------------------------------
- Error Page
- -----------------------------------------------------------------------*/
+    Error Page
+-----------------------------------------------------------------------*/
 .iq-error { position: relative; width: 100%; overflow: hidden; display: inline-block; }
 .iq-error h1.text-in-box { font-size: 5em; font-weight: 700; }
 .iq-error-img { position: static; display: inline-block; }
@@ -451,7 +447,7 @@ body.sidebar-main .content-page { margin-left: 80px; }
 .iq-maintenance > img { width: 35%; }
 
 /*---------------------------------------------------------------------
-OWL Carousel
+    OWL Carousel
 -----------------------------------------------------------------------*/
 .owl-carousel .owl-nav { display: block; position: absolute; text-indent: inherit; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); left: 0; width: 100%; cursor: pointer; z-index: 999; }
 .owl-carousel .owl-nav .owl-prev { display: block; position: absolute; text-align: center; text-indent: inherit; left: -8%; width: auto; cursor: pointer; -webkit-transition: opacity 0.3s ease 0s, left 0.3s ease 0s; -moz-transition: opacity 0.3s ease 0s, left 0.3s ease 0s; -ms-transition: opacity 0.3s ease 0s, left 0.3s ease 0s; -o-transition: opacity 0.3s ease 0s, left 0.3s ease 0s; transition: opacity 0.3s ease 0s, left 0.3s ease 0s; }
@@ -471,11 +467,11 @@ OWL Carousel
 .iq-icons-list { line-height: 50px; margin-bottom: 15px; display: inline-block; }
 .iq-icons-list i { text-align: center; vertical-align: middle; font-size: 22px; float: left; width: 40px; height: 50px; line-height: 50px; margin-right: 10px; display: inline-block; }
 .iq-icons-list .icon { text-align: center; vertical-align: middle; font-size: 22px; width: 40px; height: 40px; line-height: 50px; margin-right: 10px; display: inline-block; }
-.iq-icons-list  span { display: inline-block; vertical-align: middle; }
+.iq-icons-list span { display: inline-block; vertical-align: middle; }
 .iq-card-icon { height: 66px; width: 66px; display: inline-block; line-height: 66px; text-align: center; font-size: 22px; }
 
 /* ----------------------------------------------
-Select 2
+    Select 2
 ------------------------------------------------ */
 .iq-custom-select { position: relative; }
 .iq-custom-select .select2-container--bootstrap4 .select2-selection, .select2-dropdown { background-color: var(--iq-body-bg); border: none; border-radius: 0; color: #fff; }
@@ -498,14 +494,14 @@ Select 2
 /* .iq-custom-select .select2-selection{position:relative;} */
 
 /*---------------------------------------------------------------------
-Timeline
+    Timeline
 -----------------------------------------------------------------------*/
 .iq-timeline { margin: 0 0 0 20px; padding: 0; width: 100%; border-left: 3px solid var(--iq-dark-primary); }
 .iq-timeline li { margin-left: 35px; position: relative; padding: 15px 15px 0 5px; list-style-type: none; }
 .iq-timeline li .timeline-dots { position: absolute; top: 20px; left: -54px; border: 3px solid var(--iq-primary); border-radius: 90px; padding: 5px; background: var(--iq-dark-light-card); height: 40px; width: 40px; line-height: 25px; text-align: center; }
 
 /*---------------------------------------------------------------------
-Team
+    Team
 -----------------------------------------------------------------------*/
 .iq-team { background: var(--iq-white); padding: 15px; position: relative; }
 .team-authors-bg { position: relative; margin-bottom: 50px; }
@@ -516,7 +512,7 @@ Team
 .iq-team-1 .iq-team-1-info { position: absolute; padding: 30px 15px; bottom: 0; left: 0; width: 100%; }
 
 /*---------------------------------------------------------------------
-User Add Block
+    User Add Block
 -----------------------------------------------------------------------*/
 .user-add-block { background: var(--iq-white); }
 .user-add-plus { position: absolute; right: 30px; font-size: 24px; bottom: -25px; height: 60px; width: 60px; line-height: 60px; text-align: center; background: var(--iq-body-text); color: var(--iq-white); border-radius: 900px; -webkit-box-shadow: 0px 10px 30px 0px rgba(57, 60, 82, 0.1); -moz-box-shadow: 0px 10px 30px 0px rgba(57, 60, 82, 0.1); box-shadow: 0px 10px 30px 0px rgba(57, 60, 82, 0.1); }
@@ -527,7 +523,7 @@ User Add Block
 .user-add-list { padding: 30px; }
 
 /*-----------------------------------------------------------------
-Material Card Style1
+    Material Card Style1
 ----------------------------------------------------------------- */
 .card-style1 { display: flex; }
 .card-style1 img { object-fit: cover; border-radius: 100px; height: 75px; margin-right: 10px; }
@@ -536,13 +532,13 @@ Material Card Style1
 .card-style1 .percentage span { font-weight: normal; }
 
 /*-----------------------------------------------------------------
-Material Card Style2
+    Material Card Style2
 ----------------------------------------------------------------- */
 .card-style1.card-style2 .iq-details { width: 100%; }
 .card-style1.card-style2 .percentage { font-weight: bolder; font-size: 1.2rem; margin-top: -5px; margin-left: -50px; }
 
 /*-----------------------------------------------------------------
-Circle Progressbar
+    Circle Progressbar
 ------------------------------------------------------------------- */
 .iq-circle-progressbar .percent { font-size: 1.3rem !important; }
 .iq-circle-progressbar svg { width: 100px !important; height: 100px !important; }
@@ -563,7 +559,7 @@ Circle Progressbar
 .progress-round.alarams-progress { height: 110px; width: 110px; }
 
 /*---------------------------------------------------------------------
-FAQ
+    FAQ
 -----------------------------------------------------------------------*/
 .iq-accordion.career-style.faq-style .iq-accordion-block .accordion-title span { padding-left: 0px; }
 .iq-accordion.career-style .iq-accordion-block { margin-bottom: 30px; }
@@ -577,7 +573,7 @@ FAQ
 .active-faq a.accordion-title { display: block; padding-right: 45px; }
 
 /*---------------------------------------------------------------------
-Table
+    Table
 -----------------------------------------------------------------------*/
 table tr th img { width: 35px; height: 35px; border-radius: 90px; }
 .progress-animate { animation: progress-bar-stripes 1s linear infinite; }
@@ -600,7 +596,7 @@ table.dataTable { border-collapse: collapse !important; }
 .iq-movie-text { text-align: left; }
 
 /*---------------------------------------------------------------------
-Footer
+    Footer
 -----------------------------------------------------------------------*/
 .iq-footer { background: var(--iq-light-card); padding: 15px; margin-left: 300px; -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; }
 body.sidebar-main .iq-footer { margin-left: 80px; }
@@ -615,6 +611,7 @@ body.sidebar-main .iq-footer { margin-left: 80px; }
 .nav.nav-pills.style-three { margin-top: 10px; }
 .nav.nav-pills.style-three a:last-child { margin-right: 0px; }
 .nav.nav-pills.style-three a { background: transparent; position: relative; margin-right: 30px; padding: 10px 0px; }
+
 
 /* checkbox with icon */
 .custom-checkbox.checkbox-icon label i { position: absolute; top: 6px; left: -21px; font-size: 10px; transform: scale(0); -webkit-transform: scale(0); -webkit-transition: all .15s ease-in; transition: all .15s ease-in; }
@@ -646,12 +643,12 @@ body.sidebar-main .iq-footer { margin-left: 80px; }
 
 /* colors changes in radio button, checkbox, switch */
 .custom-control-input:focus~.custom-control-label::before { box-shadow: none; }
-.custom-checkbox.custom-checkbox-color input.bg-primary~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-primary~label::before, .custom-radio.custom-radio-color input.bg-primary~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-primary~label::before, .custom-switch.custom-switch-color input:checked.bg-primary~label::before { background-color: var(--iq-primary) !important; border-color: var(--iq-primary) !important; }
-.custom-checkbox.custom-checkbox-color input.bg-success~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-success~label::before, .custom-radio.custom-radio-color input.bg-success~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-success~label::before, .custom-switch.custom-switch-color input:checked.bg-success~label::before { background-color: var(--iq-success) !important; border-color: var(--iq-success) !important; }
-.custom-checkbox.custom-checkbox-color input.bg-danger~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-danger~label::before, .custom-radio.custom-radio-color input.bg-danger~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-danger~label::before, .custom-switch.custom-switch-color input:checked.bg-danger~label::before { background-color: var(--iq-danger) !important; border-color: var(--iq-danger) !important; }
-.custom-checkbox.custom-checkbox-color input.bg-warning~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-warning~label::before, .custom-radio.custom-radio-color input.bg-warning~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-warning~label::before, .custom-switch.custom-switch-color input:checked.bg-warning~label::before { background-color: var(--iq-warning) !important; border-color: var(--iq-warning) !important; }
-.custom-checkbox.custom-checkbox-color input.bg-dark~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-dark~label::before, .custom-radio.custom-radio-color input.bg-dark~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-dark~label::before, .custom-switch.custom-switch-color input:checked.bg-dark~label::before { background-color: var(--iq-body-text) !important; border-color: var(--iq-body-text) !important; }
-.custom-checkbox.custom-checkbox-color input.bg-info~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-info~label::before, .custom-radio.custom-radio-color input.bg-info~label::before, .custom-radio.custom-radio-color-checked  input:checked.bg-info~label::before, .custom-switch.custom-switch-color input:checked.bg-info~label::before { background-color: var(--iq-info) !important; border-color: var(--iq-info) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-primary~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-primary~label::before, .custom-radio.custom-radio-color input.bg-primary~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-primary~label::before, .custom-switch.custom-switch-color input:checked.bg-primary~label::before { background-color: var(--iq-primary) !important; border-color: var(--iq-primary) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-success~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-success~label::before, .custom-radio.custom-radio-color input.bg-success~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-success~label::before, .custom-switch.custom-switch-color input:checked.bg-success~label::before { background-color: var(--iq-success) !important; border-color: var(--iq-success) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-danger~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-danger~label::before, .custom-radio.custom-radio-color input.bg-danger~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-danger~label::before, .custom-switch.custom-switch-color input:checked.bg-danger~label::before { background-color: var(--iq-danger) !important; border-color: var(--iq-danger) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-warning~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-warning~label::before, .custom-radio.custom-radio-color input.bg-warning~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-warning~label::before, .custom-switch.custom-switch-color input:checked.bg-warning~label::before { background-color: var(--iq-warning) !important; border-color: var(--iq-warning) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-dark~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-dark~label::before, .custom-radio.custom-radio-color input.bg-dark~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-dark~label::before, .custom-switch.custom-switch-color input:checked.bg-dark~label::before { background-color: var(--iq-body-text) !important; border-color: var(--iq-body-text) !important; }
+.custom-checkbox.custom-checkbox-color input.bg-info~label::before, .custom-checkbox.custom-checkbox-color-check input:checked.bg-info~label::before, .custom-radio.custom-radio-color input.bg-info~label::before, .custom-radio.custom-radio-color-checked input:checked.bg-info~label::before, .custom-switch.custom-switch-color input:checked.bg-info~label::before { background-color: var(--iq-info) !important; border-color: var(--iq-info) !important; }
 
 /* checkbox with icon */
 .custom-checkbox.checkbox-icon label i { position: absolute; top: 6px; left: -21px; font-size: 10px; transform: scale(0); -webkit-transform: scale(0); -webkit-transition: all .15s ease-in; transition: all .15s ease-in; }
@@ -682,15 +679,15 @@ body.sidebar-main .iq-footer { margin-left: 80px; }
 .vector-map.h-500 { width: 100%; height: 500px; }
 
 /*---------------------------------------------------------------------
-slick Arrow
+    slick Arrow
 -----------------------------------------------------------------------*/
 .slick-arrow.left { left: 0; top: 0; }
 .slick-arrow.right { right: 0; top: 0; }
 .slick-arrow:hover { text-decoration: none; }
 
 /*---------------------------------------------------------------------
- Wizard
- -----------------------------------------------------------------------*/
+    Wizard
+-----------------------------------------------------------------------*/
 #form-wizard1, #form-wizard2, #form-wizard3 { position: relative; }
 #form-wizard1 input[type="file"] { line-height: 27px; }
 #form-wizard1 fieldset:not(:first-of-type) { display: none }
@@ -752,13 +749,13 @@ slick Arrow
 #top-tabbar-vertical li.active i { background: var(--iq-white) !important; }
 
 /*---------------------------------------------------------------------
-Profile Page
+    Profile Page
 -----------------------------------------------------------------------*/
 .profile-img img { border-radius: 50%; -webkit-border-radius: 50%; border: 1px solid rgba(0, 0, 0, .1); }
 .cover-container { position: relative; }
 ul.header-nav { position: absolute; left: auto; right: 0; top: auto; bottom: 20px; }
 ul.header-nav li { list-style: none; }
-ul.header-nav li  a { display: block; list-style: none; height: 40px; width: 40px; background: var(--iq-white); border-radius: 50%; line-height: 40px; text-align: center; color: var(--iq-primary); font-size: 18px; margin: 0 15px 0 0; }
+ul.header-nav li a { display: block; list-style: none; height: 40px; width: 40px; background: var(--iq-white); border-radius: 50%; line-height: 40px; text-align: center; color: var(--iq-primary); font-size: 18px; margin: 0 15px 0 0; }
 .profile-img { margin-top: -80px; }
 .profile-feed-items li { list-style: none; }
 .profile-feed-items li:last-child a { margin: 0; }
@@ -788,7 +785,7 @@ form.comment-text input { padding-right: 130px; }
 .twit-date a { color: var(--iq-body-text); }
 
 /*---------------------------------------------------------------------
-Profile Edit 
+    Profile Edit 
 -----------------------------------------------------------------------*/
 .profile-pic { max-width: 100%; display: block; border-radius: 50%; -webkit-border-radius: 50%; }
 .profile-img-edit { position: relative; display: inline-block; height: 150px; width: 150px; }
@@ -801,14 +798,13 @@ ul.iq-edit-profile li:first-child a { border-radius: 5px 0 0 5px; border-left: n
 ul.iq-edit-profile li:last-child a { border-radius: 0 5px 5px 0; }
 
 /*---------------------------------------------------------------------
-Privacy Policy Page
+    Privacy Policy Page
 -----------------------------------------------------------------------*/
-.privacy-status { }
 .input-group .input-group-text { background: var(--iq-light); border: 0px solid var(--iq-border-light); }
 .data-privacy { margin: 30px 0; }
 
 /*---------------------------------------------------------------------
-User List Page
+    User List Page
 -----------------------------------------------------------------------*/
 .list-user-action a { font-size: 16px; height: 25px; width: 25px; text-align: center; line-height: 25px; margin: 0 3px; display: inline-block; border-radius: 5px; }
 #user-list-table.table td { vertical-align: middle; }
@@ -816,19 +812,19 @@ User List Page
 .table-responsive #exampleInputSearch { width: auto; }
 
 /*---------------------------------------------------------------------
-Add User Page
+    Add User Page
 -----------------------------------------------------------------------*/
 .add-img-user .p-image { position: static; text-align: left; display: block; height: auto; width: auto; background: transparent; margin-top: 20px; }
 .img-extension a, .img-extension span { color: var(--iq-body-text); padding: 0 3px; font-size: 13px; }
 .pricing.table thead th { border-top: 0px; }
 
 /*---------------------------------------------------------------------
-modal-content
+    modal-content
 -----------------------------------------------------------------------*/
 .modal-content { background-color: var(--iq-light-card); }
 
 /*----------------------------------------------
-Flatpicker
+    Flatpicker
 ------------------------------------------------*/
 .flatpickr-input[readonly] { background-color: var(--iq-body-bg) !important; }
 .form_video-upload.upload-banner p { line-height: 120px; }
@@ -844,7 +840,7 @@ Flatpicker
 div.dataTables_wrapper div.dataTables_paginate ul.pagination { margin: 15px 0 15px; }
 
 /*----------------------------------------------
-Pricing Page
+    Pricing Page
 ------------------------------------------------*/
 .pricing .table th { border-top: none; }
 .pricing .table th { border-bottom: 1px solid var(--iq-body-bg); }
@@ -867,3 +863,8 @@ Pricing Page
 .upload_profile { position: relative; }
 .child-cell.active { color: var(--iq-primary); }
 .iq-social ul li a { display: block; text-align: center; font-size: 16px; line-height: 43px; }
+
+/*----------------------------------------------
+    list Actor
+------------------------------------------------*/
+#listActors .row { display: flex; overflow-x: scroll; overflow-y: hidden; flex-direction: row; flex-wrap: nowrap; align-content: center; justify-content: space-between; align-items: flex-start; }
