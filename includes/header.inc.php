@@ -83,6 +83,8 @@ function Header_css($panel, $IncludeFooter = "") {
 
    <!-- AngularJS Core -->
    <script src="/assets/js/angular.min.js"></script>
+   <!-- AngularJS Animate -->
+   <!-- script src="/assets/js/angular-animate.js"></script -->
    <!-- AngularJS Script-->
    <script src="/assets/js/app-angular.js"></script>
 
@@ -305,7 +307,7 @@ function Header_header() {
                                                    <i class="ri-settings-4-line text-primary"></i>
                                                 </div>
                                                 <div class="media-body ml-3">
-                                                   <h6 class="mb-0 ">Pricing Plan</h6>
+                                                   <h6 class="mb-0 ">Forfaits et tarifs</h6>
                                                 </div>
                                              </div>
                                           </a>
@@ -362,19 +364,26 @@ function Header_header() {
                                     <div class="bg-primary p-3">
                                        <h5 class="mb-0 text-white">Toutes les notifications<small class="badge badge-light float-right pt-1">{{notifMap._count}}</small></h5>
                                     </div>
-                                    <a href="/movie-details.php?id={{row.id}}" id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas">
+                                    <div id="{{row.id}}" class="iq-sub-card" ng-repeat="row in notifMap.datas | limitTo: 5">
+                                       
                                        <div class="media align-items-center">
-                                          <div class="noti-img">
-                                             <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
-                                          </div>
-                                          <div class="media-body ml-2">
-                                             <h6 class="mb-0 ">{{row.title}}</h6>
-                                             <small class="font-size-12">{{row.date_create | fromNow}}</small>
+                                          <a class="media align-items-center" href="/movie-details.php?id={{row.id}}" data-ng-click="viewNotif(row, row.id)">
+                                             <div class="noti-img">
+                                                <img ng-src="{{tmdbConf.images_uri}}{{row.poster_path}}" class="img-fluid me-3" alt="RaisiX" />
+                                             </div>
+                                             <div class="media-body ml-2">
+                                                <h6 class="mb-0 ">{{row.title}}</h6>
+                                                <small class="font-size-12">{{row.date_create | fromNow}}</small>
+                                             </div>
+                                          </a>
+
+                                          <div>
+                                             <span title="Marquer comme lu" data-ng-click="viewNotif(row, row.id, true)"><i class="fa-regular fa-check"></i></span>
                                           </div>
                                        </div>
-                                    </a>
+                                    </div>
                                     <div class="bg-primary p-1">
-                                       <h6 class="mb-0 text-white"><a href="javascript:void(0);">Voir tous</a></h6>
+                                       <h6 class="mb-0 text-white"><a href="/user/notification.php">Voir la list</a><span class="text-black-50"> - </span><span data-toggle="tooltip" data-placement="top" title="Tout marquer comme lue" data-ng-click="viewAllNotif(true)"><i class="fa-duotone fa-check-double"></i></span></h6>
                                     </div>
                                  </div>
                               </div>
@@ -414,7 +423,7 @@ function Header_header() {
                                              <i class="ri-settings-4-line text-primary"></i>
                                           </div>
                                           <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Pricing Plan</h6>
+                                             <h6 class="mb-0 ">Forfaits et tarifs</h6>
                                           </div>
                                        </div>
                                     </a>
@@ -440,6 +449,11 @@ function Header_header() {
          </div>
       </div>
    </div>
+   <script>
+   $(function () {
+      $(\'[data-toggle="tooltip"]\').tooltip();
+   })
+   </script>
    </header>';
   return $rtn;
 }

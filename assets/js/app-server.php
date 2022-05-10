@@ -17,10 +17,17 @@ if(empty($_POST))
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 	switch ($_POST['action']){
 		case "getSession":
-            $SQL = "SELECT u.id, u.firstname, u.lastname, u.email, ud.avatar, ud.langue, ud.date_naissance, ud.description FROM users AS u LEFT JOIN users_detail AS ud ON u.id = ud.id_users WHERE u.id = ".$_SESSION["id"]." AND u.token = '".$_SESSION["token"]."';";
+            $SQL = "SELECT u.id, u.firstname, u.lastname, u.email, u.auth_fa, ud.pseudo, ud.avatar, ud.langue, ud.date_naissance, ud.description
+                        FROM users AS u
+                        JOIN users_detail AS ud
+                        JOIN users_sign AS us
+                        ON u.id = ud.id_users AND u.id = us.id_users
+                        WHERE u.id = ".$_SESSION["id"]." AND us.id_device = '".$_COOKIE['id_device']."' AND us.token = '".$_SESSION[$_COOKIE["id_device"]]["token"]."';";
+
             $result = db_query($SQL);
 
-			echo json_encode($result);
+            header('Content-Type: text/json; charset=utf-8');
+			echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
 			break;
         case "saveSession":
             /*
@@ -61,7 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             echo json_encode($result);
             break;
         case "getDatasNotifs":
-            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path FROM `movie_detail` ORDER BY date_create DESC LIMIT 5;";
+            $listView = $_POST["listView"];
+
+            $SQL = "SELECT id, date_create, title, backdrop_path, poster_path FROM `movie_detail` WHERE id NOT IN (".db_escape($listView).") ORDER BY date_create DESC;";
                 $result["notification"] = [];
                 $result["notification"]["datas"] = db_query($SQL);
 
@@ -117,6 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
                     VALUES (now(), now(), '".$data['adult']."', '".$backdrop."', '".json_encode($data['belongs_to_collection'])."', '".$data['budget']."', '".json_encode($data['genres'])."', '".db_escape($data['homepage'])."', '".$data['id']."', '".$data['imdb_id']."', '".db_escape($data['original_language'])."', '".db_escape($data['original_title'])."', '".db_escape($data['overview'])."', '".$data['popularity']."', '".$poster."', '".json_encode($data['production_companies'])."', '".json_encode($data['production_countries'])."', '".$data['release_date']."', '".$data['revenue']."', '".$data['runtime']."', '".json_encode($language)."', '".$status."', '".db_escape($data['tagline'])."', '".db_escape($data['title'])."', '".$video."', '".$data['vote_average']."', '".$data['vote_count']."', '".json_encode($qualite)."', '".db_escape(json_encode($pathfile, JSON_FORCE_OBJECT))."');";
 			$result1 = db_execute($SQL);
 
+            $insert_id[0] = db_query("SELECT LAST_INSERT_ID();");
+
             $SQL = "INSERT INTO `movie_credits` (`date_create`, `date_modification`, `id_movie_details`, `content`) VALUES (now(), now(), (SELECT LAST_INSERT_ID() AS lastID), '".db_escape(json_encode($credits))."')";
             $result2 = db_execute($SQL);
 
@@ -129,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             }
 
             if ($result1[0] && $result2[0]) {
-                discordApiPost($data, $credits);
+                discordApiPost($data, $credits, $insert_id);
             }
 
             print_r([$result1, $result2, $savePicture]);
@@ -224,6 +235,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
                 echo 'OK';
             }
             break;
+        case "toSignOutAll":
+            $error = FALSE;
+	        $codeErrors = [];
+            $_rtn = false;
+            if ((count($_POST) == 3) && !empty($_POST["pwd"])) {
+                $SQL = "SELECT u.`id`, u.`password` FROM `users` AS u
+                         JOIN users_sign AS us
+                         ON u.id = us.id_users
+                         WHERE u.`email` = '".db_escape($_SESSION["email"])."' AND u.`id` = ".$_SESSION["id"]." AND us.id_device = '".$_COOKIE["id_device"]."' AND us.token = '".$_SESSION[$_COOKIE["id_device"]]["token"]."';";
+
+                    $result = db_query($SQL);
+
+                if (password_verify($_POST["pwd"], $result[0]["password"])) {
+                    $SQL = "UPDATE users_sign SET date_modification = NOW(), token = 0 WHERE id_users = ".$_SESSION["id"]." AND id_device != '".$_COOKIE["id_device"]."';";
+                        $result = db_execute($SQL);
+                    $_rtn = json_encode(true);
+                } else {
+                    $error = TRUE;
+                    $codeErrors = 11;
+                }
+            } else {
+                $error = TRUE;
+                $codeErrors = 11;
+            }
+
+            if (!$error)
+                echo $_rtn;
+            else
+                echo json_encode([false, $listOfErrors[$codeErrors]]);
+            break;
 	}
 	exit;
 }
@@ -289,16 +330,9 @@ function listActors($data, $count) {
     return $rtn;
 }
 
-function discordApiPost($data, $credits) {
-    //=======================================================================================================
-    // Create new webhook in your Discord channel settings and copy&paste URL
-    //=======================================================================================================
+function discordApiPost($data, $credits, $insert_id) {
     $webhookurl = "https://discord.com/api/webhooks/965899077218865162/vkrLkjSgaBVF2ZryFcY0lp_fOuyTiFnBOCJlWGlP9MAMecRv6zzcUd9REjFtLl3pUlFS";
 
-    //=======================================================================================================
-    // Compose message. You can use Markdown
-    // Message Formatting -- https://discordapp.com/developers/docs/reference#message-formatting
-    //========================================================================================================
     $timestamp = date("c", strtotime("now"));
 
     $json_data = json_encode([
@@ -337,7 +371,7 @@ function discordApiPost($data, $credits) {
                 ],
                 [
                     "name" => "🎬｜Voir le Film",
-                    "value" => "🟧 __https://raisix.fr/movie-details.php?id=34__\n--------------------",
+                    "value" => "🟧 __https://raisix.fr/movie-details.php?id=".$insert_id."__\n--------------------",
                     "inline" => false
                 ]
             ]

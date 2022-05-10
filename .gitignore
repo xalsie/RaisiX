@@ -18,3 +18,7 @@ apache/*
 
 # Not Upload Video
 assets/video/*
+
+# Not Upload Image
+assets/images/movie-*
+assets/images/user

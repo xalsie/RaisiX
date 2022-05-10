@@ -27,6 +27,7 @@ Description             : This file contains the styling for responsive Template
 :: Overflow
 :: Custom Column
 :: Select 2
+:: Modal
 
 ======================================
 [ End table content ]
@@ -253,3 +254,11 @@ Select 2
 .select2-container--bootstrap4 .select2-selection--single, .select2-container--bootstrap4 .select2-selection--multiple { height: 45px !important; }
 .select2-container--bootstrap4 .select2-dropdown.select2-dropdown--above { border-radius: 0; border: none; }
 .sea-epi .select2-container { width: 150px !important; }
+
+/*---------------------------------------------------------------------
+    Modal
+-----------------------------------------------------------------------*/
+.modal-content { background-color: var(--iq-light-card); }
+.modal-header { border-bottom: 1px solid var(--iq-body-bg); }
+.modal-footer { border-top: 1px solid var(--iq-body-bg); }
+.modal-content .form-group.qr-auth { text-align: center; }

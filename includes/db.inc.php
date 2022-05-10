@@ -11,7 +11,7 @@ function db_connect() {
 		return mysqli_connect_error($db_link);
 	}
 	
-	mysqli_set_charset($db_link,'utf8');
+	mysqli_set_charset($db_link,'utf8mb4');
 	
 	if (!mysqli_select_db($db_link, $aConfig['db_name'])) {
 		return false;

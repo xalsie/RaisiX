@@ -3,22 +3,22 @@
 	defined('v1Secureraisix') or header('Location: /');
 
 	function login($user) {
-		$token					= createToken();
-		$id_device				= (!empty($_COOKIE["id_device"]))? $_COOKIE["id_device"]:createToken();
-		$_SESSION["token"]		= $token;
-		$_SESSION["id"]			= $user["id"];
-		$_SESSION["firstname"]	= $user["firstname"];
-		$_SESSION["lastname"]	= $user["lastname"];
-		$_SESSION["email"]		= $user["email"];
-		$_SESSION["role"]		= $user["role"];
-		$resultDevice			= ["0" => ["_count" => 0]];
+		$token							= createToken();
+		$id_device						= (!empty($_COOKIE["id_device"]))? $_COOKIE["id_device"]:createToken();
+		$_SESSION[$id_device]["token"]	= $token;
+		$_SESSION["id"]					= $user["id"];
+		$_SESSION["firstname"]			= $user["firstname"];
+		$_SESSION["lastname"]			= $user["lastname"];
+		$_SESSION["email"]				= $user["email"];
+		$_SESSION["role"]				= $user["role"];
+		$resultDevice					= ["0" => ["_count" => 0]];
 
 		if (!empty($_COOKIE["id_device"])) {
 			$SQL = "SELECT COUNT(*) AS _count FROM `users_sign` WHERE id_device = '".$id_device."' AND id_users = '".$_SESSION["id"]."';";
 				$resultDevice = db_query($SQL);
 		}
 		if ($resultDevice[0]["_count"]) {
-			$SQL = "UPDATE `users_sign` AS us1 SET us1.`date_modification` = now(), us1.`token` = '".$token."' WHERE us1.`id_device` = '".$id_device."';";
+			$SQL = "UPDATE `users_sign` SET `date_modification` = now(), `token` = '".$token."' WHERE `id_users` = ".$_SESSION["id"]." AND `id_device` = '".$id_device."';";
 				$result = db_execute($SQL);
 		} else {
 			$SQL = "SELECT count(*) AS _count FROM `users_sign` WHERE id_users = '".$_SESSION["id"]."';";
@@ -57,14 +57,16 @@
 	}
 
 	function isConnected($redirect = false) {
-		if(!empty($_SESSION["token"])
+		$id_device = (!empty($_COOKIE["id_device"]))? $_COOKIE["id_device"]:"";
+
+		if(!empty($_SESSION[$id_device]["token"])
 			&& !empty($_SESSION["email"])
 			&& !empty($_SESSION["id"])
 			&& !empty($_COOKIE["id_device"])) {
 
 			$SQL = "SELECT u.`id`, u.`firstname`, u.`lastname`, u.`email`, u.`role`, us.`token` FROM users AS u
 				INNER JOIN `users_sign` AS us on us.id_users = u.id
-				WHERE us.id_device = '".$_COOKIE['id_device']."' AND us.token = '".$_SESSION["token"]."';";
+				WHERE us.id_device = '".$_COOKIE['id_device']."' AND us.token = '".$_SESSION[$id_device]["token"]."';";
 				$result = db_query($SQL);
 
 			if(!empty($result[0])) {

@@ -2,22 +2,29 @@
 include_once("../includes/inc.php");
 defined('v1Secureraisix') or header('Location: /');
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    http_response_code(401);
+    echo "Not unauthorized for GET request.";
+    return;
+}
+
+// Getting posted data and decodeing json
+if(empty($_POST))
+	$_POST = json_decode(file_get_contents('php://input'), true);
 
 if ((count($_POST) == 3 || count($_POST) == 4) && !empty($_POST["email"]) && !empty($_POST["pwd"]) && !empty($_POST["captcha"])) {
 	$error = FALSE;
-	$listOfErrors = [];
+	$keyError = FALSE;
 	$_POST["email"] = strtolower(trim($_POST["email"]));
 
 	if (strtolower(trim($_POST["captcha"])) !== strtolower(trim($_SESSION["captcha"]))) {
 		$error = TRUE;
-		$listOfErrors[]=12;
-		$_SESSION["errorsForm"] = $listOfErrors;
-		$_SESSION["postForm"] = $_POST;
-		header("Location: /login.php");
+		$keyError = 12;
+		echo json_encode([false, $listOfErrors[$keyError], $_POST]);
 		exit;
 	}
 
-	$SQL = "SELECT `id`, `firstname`, `lastname`, `email`, `password`, `role` FROM `users` WHERE `email` = '".db_escape($_POST["email"])."';";
+	$SQL = "SELECT `id`, `firstname`, `lastname`, `email`, `password`, `role`, `auth_fa`, `auth_fa_token` FROM `users` WHERE `email` = '".db_escape($_POST["email"])."' LIMIT 1;";
 		$result = db_query($SQL);
 
 	if (!empty($result[0])) {
@@ -31,7 +38,7 @@ if ((count($_POST) == 3 || count($_POST) == 4) && !empty($_POST["email"]) && !em
 			$_SESSION["token"]		= createToken();
 			$_SESSION["role"]		= $result[0]["role"];
 
-			if (isset($_POST["customCheck"]) && $_POST["customCheck"] == "on") {
+			if (isset($_POST["remember_me"]) && $_POST["remember_me"] == "on") {
 				setcookie("remember", $_SESSION["token"], [
 					'expires' => strtotime('+7 days'),
 					'path' => '/',
@@ -40,27 +47,30 @@ if ((count($_POST) == 3 || count($_POST) == 4) && !empty($_POST["email"]) && !em
 			}
 
 			$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"], "role"=>$_SESSION["role"]];
-			login($user);
 
-			$referer = explode("url_redirect=", $_SERVER["HTTP_REFERER"])[1];
+			// $referer = explode("url_redirect=", $_SERVER["HTTP_REFERER"])[1];
 
-			if (!empty($referer))
-				header("Location: $referer");
-			else
-				header("Location: /index.php");
+			if ($result[0]["auth_fa"] == "1") {
+				$_SESSION["user"] = $user;
+				$_SESSION["2FA_token"] = $result[0]["auth_fa_token"];
+				echo json_encode(["2FA", ""]);
+			} else {
+				login($user);
+				echo json_encode([true, ""]);
+			}
 		} else {
 			$error = TRUE;
-			$listOfErrors[]=11;
+			$keyError = 11;
 		}
 	} else {
 		$error = TRUE;
-		$listOfErrors[]=11;
-	}
-	if ($error) {
-		$_SESSION["errorsForm"] = $listOfErrors;
-		$_SESSION["postForm"] = $_POST;
-		header("Location: /login.php");
+		$keyError = 11;
 	}
 } else {
-	header("Location: /login.php");
+	$error = TRUE;
+	$keyError = 11;
+}
+
+if ($error) {
+	echo json_encode([false, $listOfErrors[$keyError], $_POST]);
 }

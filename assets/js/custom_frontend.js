@@ -109,9 +109,14 @@ Index Of Script
 				mainElement.toggleClass('active');
 
 				e.preventDefault();
-			} else if ($(myTargetElement).is('.search-input')) {} else {
-				$('.navbar-right li').removeClass('iq-show');
-				$('.navbar-right li .search-toggle').removeClass('active');
+			}
+			else if ($(myTargetElement).is('.search-input')) {}
+			else {
+
+				if (e.target.className !== "fa-regular fa-check") {
+					$('.navbar-right li').removeClass('iq-show');
+					$('.navbar-right li .search-toggle').removeClass('active');
+				}
 			}
 		});
 

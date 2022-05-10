@@ -23,7 +23,7 @@ echo Header_HTML("Tableau de bord - Liste des demandes films", "dashboard", '<li
       <!-- Sidebar  -->
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="./dashboard.php" class="header-logo">
+            <a href="/" class="header-logo">
                <img src="/assets/images/logo.png" class="rounded-normal" alt="logo image raisix">
             </a>
             <div class="iq-menu-bt-sidebar">

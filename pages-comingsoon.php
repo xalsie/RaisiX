@@ -30,7 +30,7 @@ echo Header_HTML("Coming Soon!", "frontend", '<link rel="stylesheet" href="/asse
                   </a>
                   <h2 class="mt-4 mb-1">Restez connectés, nous lançons très bientôt</h2>
                   <p>Nous travaillons très dur pour vous offrir la meilleure expérience possible !</p>
-                  <ul class="countdown d-flex align-items-center list-inline" data-date="May 06 2022 23:59:59">
+                  <ul class="countdown d-flex align-items-center list-inline" data-date="June 08 2022 23:59:59">
                     <li class="col-md-6 col-lg-3">
                       <div class="iq-card">
                         <div class="iq-card-body">

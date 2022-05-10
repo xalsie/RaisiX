@@ -69,9 +69,46 @@
     }
 
     /* -------------------------------------
-      Get Notification
+      Local Storage
     ------------------------------------- */
+    var nameStorage = "toViewNotif";
+
+    // Vérif localstorage
+    $scope.localStorageVerif = (elem = false) => {
+      if (localStorage.getItem(nameStorage) == null)
+        localStorage.setItem(nameStorage, '{"0": 0}');
+
+      if (elem) return Object.values(JSON.parse(localStorage.getItem(nameStorage))).includes(elem);
+    }
+
+    $scope.localStorageAdd = (id) => {
+      if ($scope.localStorageVerif(id)) return;
+
+      // Récupération de l'objet
+      let monObjet = JSON.parse(localStorage.getItem(nameStorage));
+
+      // Json add elem
+      let result = monObjet[Object.keys(monObjet).length] = id
+
+      // Stockage d'un objet plus compliqué
+      localStorage.setItem(nameStorage, JSON.stringify(monObjet));
+    }
+
+    /* -------------------------------------
+      Notification
+    ------------------------------------- */
+
     $scope.getDatasNotifs = () => {
+      $scope.localStorageVerif();
+
+      var listOfView = "";
+
+      let monObjet = JSON.parse(localStorage.getItem(nameStorage));
+
+      listOfView = $.map(monObjet, function(elem){
+        return elem;
+      }).join(',');
+
       $http({
         headers: {'Content-Type': 'application/json'},
         method: "POST",
@@ -80,6 +117,7 @@
         data: {
           autofunc: true,
           action: "getDatasNotifs",
+          listView: listOfView
         },
         async: true
       }).then(function (response) {
@@ -87,9 +125,25 @@
       });
     }
 
-    $scope.getAvatar();
+    $scope.viewNotif = (row, id, refresh = false) => {
+      $scope.localStorageAdd(id);
 
-    $interval(()=>{$scope.getDatasNotifs()}, 3000); // TypeError: g is not a function
+      if (refresh) $scope.getDatasNotifs();
+    }
+
+    $scope.viewAllNotif = (refresh = false) => {
+      $scope.notifMap.datas.forEach((elem, key) => {
+        $scope.localStorageAdd(elem.id);
+      });
+
+      if (refresh) $scope.getDatasNotifs();
+    }
+
+    // Init Func
+    $scope.getAvatar();
+    $scope.localStorageVerif();
+
+    // $interval(()=>{$scope.getDatasNotifs()}, (3 * 1000)); // TypeError: g is not a function
   }]);
 
   app.controller('appHeader', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
@@ -535,14 +589,204 @@
       reader.readAsDataURL(e.target.files[0]);
     };
 
+    $scope.GetAuthPairing2fa = () => {
+      if ($scope.qrLoad) return;
+      
+      $scope.authValidateError = false;
+      $scope.errorText    = "";
+
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/script/auth2FA.php",
+        dataType: 'text',
+        data: {
+          autofunc: 'false',
+          action: 'toPairing'
+        },
+        async: true
+      }).then(function (response) {
+        angular.element(document.getElementById('qrPairing')).append(response.data);
+        $scope.qrLoad = true;
+      });
+    }
+
+    $scope.GetAuthValidation2fa = () => {
+      $scope.authValidateError = false;
+      $scope.errorText    = "";
+
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/script/auth2FA.php",
+        dataType: 'text',
+        data: {
+          autofunc: 'false',
+          action: 'toValidate',
+          param: "toAddBdd",
+          code: $scope.validate.replaceAll(" ", "")
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data.toLowerCase() == "true") {
+          $('#modalEnable2FA').modal('hide');
+          $scope.settingMap.auth_fa = 1;
+        } else {
+          $scope.authValidateError = true;
+          $scope.errorText = "Le jeton d'authentification à deux facteurs fourni n'était pas valide.";
+        }
+      });
+    }
+
+    $scope.Disable2FA = () => {
+      $scope.authValidateError = false;
+      $scope.errorText    = false;
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/script/auth2FA.php",
+        dataType: 'text',
+        data: {
+          autofunc: 'false',
+          action: 'toDisable',
+          pwd: $scope.userPwd
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data == "true") {
+          $('#modalDisable2FA').modal('hide');
+          $scope.validate = "";
+          $scope.settingMap.auth_fa = 0;
+        } else {
+          $scope.authValidateError = true;
+          $scope.errorText = response.data[1];
+        }
+      });
+    }
+
+    $scope.SignOutAll = () => {
+      $scope.authValidateError = false;
+      $scope.errorText    = false;
+      $scope.POST({autofunc: false, action: "toSignOutAll", pwd: $scope.userPwd}, 'json', 'application/json', function (response) {
+        console.log(response);
+
+        if (response.data == "true") {
+          $('#modalSignOutAll').modal('hide');
+          $scope.userPwd = "";
+        } else {
+          $scope.authValidateError = true;
+          $scope.errorText = response.data[1];
+        }
+      })
+    }
+
     // ############
     // Init
     $scope.settingMap   = false;
     $scope.edit         = false;
     $scope.editLine     = false;
     $scope.btnSave      = false;
+    $scope.qrLoad       = false;
+    $scope.validate     = "";
+    $scope.userPwd      = "";
+    $scope.authValidateError = false;
+    $scope.errorText    = "";
 
     $scope.getSession();
+  }]);
+
+  app.controller('appSignIn', ['$scope', '$http', function($scope, $http) {
+
+    $scope.alertLogOut = () => {
+      try {
+        if (window.location.href.split("?")[1] == "logout") {
+          window.history.replaceState("", "", window.location.href.split("?")[0]);
+          $scope.alertLogOutShow = true;
+        }
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    }
+    
+    $scope.toSignIn = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/script/login.php",
+        dataType: 'json',
+        data: {
+          email: $scope.login_email,
+          pwd: $scope.login_pwd,
+          captcha: $scope.login_captcha,
+          remember_me: $scope.login_remember_me
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data[0] == true) {
+          $scope.alertLogOutShow = false;
+          $scope.error = false;
+          $scope.errorText = "";
+          location.assign('/index.php');
+        } else if (response.data[0] == "2FA") {
+          $scope.alertLogOutShow = false;
+          $scope.error = false;
+          $scope.errorText = "";
+
+          $scope.cardAuthValidation2fa = true;
+        } else {
+          $scope.alertLogOutShow = false;
+          $scope.error = true;
+          $scope.errorText = response.data[1];
+
+          $scope.srcCaptcha = "/script/captcha_new.php?rand="+Math.random();
+        }
+      });
+    }
+
+    $scope.returnToLogin = () => {
+      $scope.alertLogOutShow = false;
+      $scope.error = false;
+      $scope.errorText = "";
+      $scope.login_pwd = "";
+
+      $scope.cardAuthValidation2fa = false;
+    }
+
+    $scope.GetAuthValidation2fa = () => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/script/auth2FA.php",
+        dataType: 'text',
+        data: {
+          autofunc: 'false',
+          action: 'toValidate',
+          param : "toLogin",
+          code: $scope.login_auth2fa.replaceAll(" ", "")
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data.toLowerCase() == "true") {
+          location.assign('/index.php');
+        } else {
+          $scope.error = true;
+          $scope.errorText = "Le jeton d'authentification à deux facteurs fourni n'était pas valide.";
+        }
+      });
+    }
+
+    // ############
+    // Init
+    $scope.login_email            = "";
+    $scope.login_pwd              = "";
+    $scope.login_captcha          = "";
+    $scope.login_remember_me      = "";
+    $scope.error                  = false;
+    $scope.errorText              = "";
+    $scope.alertLogOutShow        = false;
+    $scope.cardAuthValidation2fa  = false;
+    $scope.login_auth2fa          = "";
+    $scope.srcCaptcha = "/script/captcha_new.php?rand="+Math.random();
   }]);
 
   app.controller('appAddMovie', ['$scope', '$http', function($scope, $http, $sce) {
@@ -716,4 +960,18 @@
       ].filter(Boolean).join(':');
     }
   }]);
+
+
+
+  app.controller('appPricing', ['$scope', '$http', function($scope, $http, $sce) {
+    
+
+
+    // ############
+    // Init
+    $scope.princingPlan = true;
+
+  }]);
+
+
 })(window.angular);

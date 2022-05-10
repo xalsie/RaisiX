@@ -22,7 +22,10 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/video-js.css' rel
    <!-- Slick Animation-->
    <script src='/assets/js/slick-animation.min.js'></script>
    <!-- Flatpickr JavaScript -->
-   <script src='/assets/js/flatpickr.min.js'></script>", "appMovieDetail");
+   <script src='/assets/js/flatpickr.min.js'></script>
+   <!-- Moment With Locales JavaScript -->
+   <script src='/assets/js/moment-with-locales.min.js'></script>
+   <script type='text/javascript'>moment.locale('fr');</script>", "appMovieDetail");
 ?>
 
       <!-- loader Start -->

@@ -69,9 +69,13 @@ if (count($_POST) == 6
 		// send mail to verif
 		// raisix/verif_mail?uuid=$token_email&email=$_POST["email"]
 		
-		$sql = "INSERT INTO `users` (`date_create`, `date_modification`, `firstname`, `lastname`, `email`, `token_check_email`, `password`, `date_modification_pw`, `tac`)
+		$SQL = "INSERT INTO `users` (`date_create`, `date_modification`, `firstname`, `lastname`, `email`, `token_check_email`, `password`, `date_modification_pw`, `tac`)
 			VALUES (now(), now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".$token_email."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now(), '1');";
-		$result = db_execute($sql);
+		$result = db_execute($SQL);
+
+
+		$SQL = "INSERT INTO `users_detail` (`id_users`, `date_create`, `date_modification`) VALUES (LAST_INSERT_ID(), now(), now())";
+			$result = db_execute($SQL);
 
 		header("Location: /login.php");
 	}
