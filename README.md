@@ -11,36 +11,64 @@ Site web de Streaming films et séries gratuit.
 —————————————————
 
 ```DIFF
-+ 🔄｜Mise à jour : lun. 02 mai. 2022 16:00
++ 🔄｜Mise à jour : dim. 8 mai. 2022 15:08
 ```
 —————————————————
 
 🔨｜ ***En cours***\
+`Lors de la création d’un compte :`
+> -「✔️」｜Ajouté le compte dans la table user\
+> -「✔️」｜Créé la ligne de l’user dans la table user_detail\
+> -「🔄」｜Mettre en place l’envoie de mail\
+> -「🔄」｜Mettre en place l’email de recovery
+
 `Slider page d'accueil`
 > -「✔️」｜📽️｜Films a l'affiche\
 > -「❌」｜❤️｜Films favoris\
 > -「🔄」｜🎟️｜Films à venir\
-> -「🔄」｜🎟️｜6 Derniers Films ajouté
+> -「🔄」｜🎟️｜6 Derniers Films ajouté\
+> -「❌」｜📺｜Séries TV
 
 —————————————————
 
 🍿| ***A venir***
-> -「🔄」｜  ｜Page Gestion Films                     [en cours]\
-> -「🔄」｜  ｜Page Gestion des demande de Films      [en cours]\
-> -「🔄」｜  ｜Finir l’afffichage des slider\
-> -「🔄」｜🖥｜Créer la page avec tous les films avec des filtres (catégoris, date de sortie, qualité)\
-> -「🔄」｜📣｜Post discord film publier\
-> -「🔄」｜🎟️｜Slider de films 16 derniers films sortie\
-> -「🔄」｜🤸｜Affichage des acteurs\
-> -「🔄」｜👀｜Affichage des Films en Front\
-> -「🔄」｜🛠️｜Optimisation du backOffice\
-> -「🔄」｜📊｜Tracking user (Film view, catégorie)\
-> -「❌」｜🛠️｜Création d'un script pour le choix des qualités de film [.m3u8] (php)\
-> -「❌」｜📲｜Connection avec 2FA (Google Authentificator)\
-> -「❌」｜  ｜Gestion Commentaire\
-> -「❌」｜  ｜Gestion Catégorie\
-> -「❌」｜  ｜Mise en place de [Web Sockets] pour les notification
+> -「🔄」｜      ｜Page Gestion Films [en cours]\
+> -「🔄」｜      ｜Page Gestion des demande de Films [en cours]\
+> -「🔄」｜📣｜Post discord film  publier [Error] : affichage des images\
+> -「🔄」｜🖥️｜Créer la page avec tous les films avec des filtres\
+> (catégorie, date de sortie, qualité)\
+> -「🔄」｜      ｜Finir l’affichage des slider\
+> -「🔄」｜🛠️｜Optimisation du backoffice\
+> -「🔄」｜📊｜Tracking user\
+> (catégorie)\
+> -「❌」｜🛠️｜Création d'un script pour le choix des qualités de film [.m3u8] (PHP)\
+> -「❌」｜      ｜Gestion Commentaire\
+> -「❌」｜      ｜Gestion Catégorie
 
+—————————————————
+###  Version** - *0.2.1*
+`｜：：：ＡＤＤ：：：｜`
+```DIFF
+Page - Réglage du compte
++「✔️」｜⚙️|FIX page *Réglage du compte*                         [Error] : Token remember BDD vide
++「✔️」｜📲｜Déconnectez-vous de tous les appareils dans *Réglage du compte*
++「✔️」｜🔐|Connexion avec 2FA : (Google Authentificator)｜https://authenticatorapi.com
++        ✔️｜Paramétrage dans *Réglage du compte*
++        ✔️｜Vérification du code lors de la connexion
+BACKUP - MYSQL DUMP
++「✔️」｜📦|Sauvegarde automatique de la base de donnée - tous les soirs
+```
+`｜：：：ＦＩＸ：：：｜`
+```FIX
+-「✔️」｜🔔｜Notification view (localStorage)
+         ✔️｜Marquer la notification comme lue
+         ✔️｜Marquer toutes les notifications comme lue
+-「✔️」｜👀｜Affichage des Films en Front
+-「✔️」｜🎫｜Slider de films 16 derniers films sortie
+-「✔️」｜🤸｜Affichage des acteurs
+-「🔄」｜📊｜Tracking user [Film View]
+-「✔️」｜🐻｜Retrun POST emoji
+```
 —————————————————
 ###  **Version** - *0.2.0*
 `｜: : : ADD : : :｜`
@@ -49,8 +77,6 @@ Site web de Streaming films et séries gratuit.
 +「✔️」｜Ajout bouton download RaisiX app
 +「✔️」｜Création git raisix app
 +「✔️」｜Page coming soon
-+「✔️」｜Bouton Discord
-+「✔️」｜Bouton download RaisiX app
 +「✔️」｜Liste acteur dans la page detail
 +「✔️」｜Webhook Discord : Ajout d'un film dans la bibliothèque
 ```
