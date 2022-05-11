@@ -966,10 +966,69 @@
   app.controller('appPricing', ['$scope', '$http', function($scope, $http, $sce) {
     
 
+    $scope.displayCartLocal = () => {
+      
+    }
+
+    $scope.test = () => {
+      // remember_cart_name
+      // remember_cart_num_cart
+      // remember_cart_date
+      console.log("Checking cart ...");
+      console.log("Message Success..");
+
+      if (remember_cart) $scope.localStorageAdd([$scope.remember_cart_name, $scope.remember_cart_num_cart, $scope.remember_cart_date]);
+    }
+
+    /* -------------------------------------
+      Local Storage
+    ------------------------------------- */
+    var nameStorage = "toLocalCart";
+
+    // Vérif localstorage
+    $scope.localStorageVerif = (elem = false) => {
+      var found = false;
+
+      if (localStorage.getItem(nameStorage) == null) {
+        localStorage.setItem(nameStorage, JSON.stringify([elem]));
+        return found;
+      }
+
+      var monObjet = JSON.parse(localStorage.getItem(nameStorage));
+      for(var i = 0; i < monObjet.length; i++) {
+        console.log(monObjet[i].includes($scope.remember_cart_num_cart));
+        if (monObjet[i].includes($scope.remember_cart_num_cart)) {
+          found = true;
+          break;
+        }
+      }
+
+      return found;
+    }
+
+    $scope.localStorageAdd = (arrayCart) => {
+      if ($scope.localStorageVerif(arrayCart)) return;
+
+      // Récupération de l'objet
+      let monObjet = JSON.parse(localStorage.getItem(nameStorage));
+
+      // Json add elem
+      let result = monObjet[Object.keys(monObjet).length] = arrayCart
+
+      // Stockage d'un objet plus compliqué
+      localStorage.setItem(nameStorage, JSON.stringify(monObjet));
+    }
 
     // ############
     // Init
-    $scope.princingPlan = true;
+    $scope.princingPlan   = true;
+    $scope.princingChoise = 0;
+
+    $scope.pricingOption  = {
+      "1": ["19 € / par mois", "Basic"],
+      "2": ["39 € / par mois", "Standard"],
+      "3": ["119 € / par mois", "Premium"]
+    };
 
   }]);
 

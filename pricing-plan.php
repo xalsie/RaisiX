@@ -1,332 +1,58 @@
 <?php
 include_once("includes/inc.php");
 
-echo Header_HTML("Home", "frontend");
+isConnected(true);
+
+echo Header_HTML("Home", "frontend", "", '<!-- Slick JS -->
+<script src="/assets/js/slick.min.js"></script>
+<!-- owl carousel Js -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+<!-- select2 Js -->
+<script src="/assets/js/select2.min.js"></script>
+<!-- Magnific Popup-->
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Slick Animation-->
+<script src="/assets/js/slick-animation.min.js"></script>
+<!-- Flatpickr JavaScript -->
+<script src="/assets/js/flatpickr.min.js"></script>
+<!-- Moment With Locales JavaScript -->
+<script src="/assets/js/moment-with-locales.min.js"></script>
+<script type="text/javascript">moment.locale("fr");</script>');
 ?>
-    <div id="loading">
-        <div id="loading-center">
-        </div>
-    </div>
-    <!-- Header -->
-    <header id="main-header">
-        <div class="main-header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <nav class="navbar navbar-expand-lg navbar-light p-0">
-                            <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <div class="navbar-toggler-icon" data-toggle="collapse">
-                                    <span class="navbar-menu-icon navbar-menu-icon--top"></span>
-                                    <span class="navbar-menu-icon navbar-menu-icon--middle"></span>
-                                    <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
-                                </div>
-                            </a>
-                            <a class="navbar-brand" href="index-2.html"> <img class="img-fluid logo" src="images/logo.png"
-                                    alt="RaisiX" /> </a>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <div class="menu-main-menu-container">
-                                    <ul id="top-menu" class="navbar-nav ml-auto">
-                                        <li class="menu-item">
-                                            <a href="index-2.html">Home</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="show-category.html">Tv Shows</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="movie-category.html">Movies</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="mobile-more-menu">
-                                <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
-                                    data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ri-more-line"></i>
-                                </a>
-                                <div class="more-menu" aria-labelledby="dropdownMenuButton">
-                                    <div class="navbar-right position-relative">
-                                        <ul class="d-flex align-items-center justify-content-end list-inline m-0">
-                                            <li>
-                                                <a href="#" class="search-toggle">
-                                                    <i class="ri-search-line"></i>
-                                                </a>
-                                                <div class="search-box iq-search-bar">
-                                                    <form action="#" class="searchbox">
-                                                        <div class="form-group position-relative">
-                                                            <input type="text" class="text search-input font-size-12"
-                                                                placeholder="type here to search...">
-                                                            <i class="search-link ri-search-line"></i>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item nav-icon">
-                                                <a href="#" class="search-toggle position-relative">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
-                                                        height="22" class="noti-svg">
-                                                        <path fill="none" d="M0 0h24v24H0z" />
-                                                        <path
-                                                            d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
-                                                    </svg>
-                                                    <span class="bg-danger dots"></span>
-                                                </a>
-                                                <div class="iq-sub-dropdown">
-                                                    <div class="iq-card shadow-none m-0">
-                                                        <div class="iq-card-body">
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="images/notify/thumb-1.jpg"
-                                                                        class="img-fluid mr-3" alt="RaisiX" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">Boop Bitty</h6>
-                                                                        <small class="font-size-12"> just now</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="images/notify/thumb-2.jpg"
-                                                                        class="img-fluid mr-3" alt="RaisiX" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">The Last Breath</h6>
-                                                                        <small class="font-size-12">15 minutes ago</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="images/notify/thumb-3.jpg"
-                                                                        class="img-fluid mr-3" alt="RaisiX" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">The Hero Camp</h6>
-                                                                        <small class="font-size-12">1 hour ago</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="iq-user-dropdown search-toggle d-flex align-items-center">
-                                                    <img src="images/user/user.jpg"
-                                                        class="img-fluid avatar-40 rounded-circle" alt="user">
-                                                </a>
-                                                <div class="iq-sub-dropdown iq-user-dropdown">
-                                                    <div class="iq-card shadow-none m-0">
-                                                        <div class="iq-card-body p-0 pl-3 pr-3">
-                                                            <a href="manage-profile.html"
-                                                                class="iq-sub-card setting-dropdown">
-                                                                <div class="media align-items-center">
-                                                                    <div class="right-icon">
-                                                                        <i class="ri-file-user-line text-primary"></i>
-                                                                    </div>
-                                                                    <div class="media-body ml-3">
-                                                                        <h6 class="mb-0 ">Manage Profile</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="setting.html" class="iq-sub-card setting-dropdown">
-                                                                <div class="media align-items-center">
-                                                                    <div class="right-icon">
-                                                                        <i class="ri-settings-4-line text-primary"></i>
-                                                                    </div>
-                                                                    <div class="media-body ml-3">
-                                                                        <h6 class="mb-0 ">Settings</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="pricing-plan.html"
-                                                                class="iq-sub-card setting-dropdown">
-                                                                <div class="media align-items-center">
-                                                                    <div class="right-icon">
-                                                                        <i class="ri-settings-4-line text-primary"></i>
-                                                                    </div>
-                                                                    <div class="media-body ml-3">
-                                                                        <h6 class="mb-0 ">Pricing Plan</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="login.html" class="iq-sub-card setting-dropdown">
-                                                                <div class="media align-items-center">
-                                                                    <div class="right-icon">
-                                                                        <i class="ri-logout-circle-line text-primary"></i>
-                                                                    </div>
-                                                                    <div class="media-body ml-3">
-                                                                        <h6 class="mb-0">Logout</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="navbar-right menu-right">
-                                <ul class="d-flex align-items-center list-inline m-0">
-                                    <li class="nav-item nav-icon">
-                                        <a href="#" class="search-toggle device-search">
-                                            <i class="ri-search-line"></i>
-                                        </a>
-                                        <div class="search-box iq-search-bar d-search">
-                                            <form action="#" class="searchbox">
-                                                <div class="form-group position-relative">
-                                                    <input type="text" class="text search-input font-size-12"
-                                                        placeholder="type here to search...">
-                                                    <i class="search-link ri-search-line"></i>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item nav-icon">
-                                        <a href="#" class="search-toggle" data-toggle="search-toggle">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
-                                                height="22" class="noti-svg">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path
-                                                    d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
-                                            </svg>
-                                            <span class="bg-danger dots"></span>
-                                        </a>
-                                        <div class="iq-sub-dropdown">
-                                            <div class="iq-card shadow-none m-0">
-                                                <div class="iq-card-body">
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center">
-                                                            <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
-                                                                alt="RaisiX" />
-                                                            <div class="media-body">
-                                                                <h6 class="mb-0 ">Boot Bitty</h6>
-                                                                <small class="font-size-12"> just now</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center">
-                                                            <img src="images/notify/thumb-2.jpg" class="img-fluid mr-3"
-                                                                alt="RaisiX" />
-                                                            <div class="media-body">
-                                                                <h6 class="mb-0 ">The Last Breath</h6>
-                                                                <small class="font-size-12">15 minutes ago</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center">
-                                                            <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
-                                                                alt="RaisiX" />
-                                                            <div class="media-body">
-                                                                <h6 class="mb-0 ">The Hero Camp</h6>
-                                                                <small class="font-size-12">1 hour ago</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item nav-icon">
-                                        <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
-                                            data-toggle="search-toggle">
-                                            <img src="images/user/user.jpg" class="img-fluid avatar-40 rounded-circle"
-                                                alt="user">
-                                        </a>
-                                        <div class="iq-sub-dropdown iq-user-dropdown">
-                                            <div class="iq-card shadow-none m-0">
-                                                <div class="iq-card-body p-0 pl-3 pr-3">
-                                                    <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
-                                                        <div class="media align-items-center">
-                                                            <div class="right-icon">
-                                                                <i class="ri-file-user-line text-primary"></i>
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <h6 class="mb-0 ">Manage Profile</h6>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="setting.html" class="iq-sub-card setting-dropdown">
-                                                        <div class="media align-items-center">
-                                                            <div class="right-icon">
-                                                                <i class="ri-settings-4-line text-primary"></i>
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <h6 class="mb-0 ">Settings</h6>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
-                                                        <div class="media align-items-center">
-                                                            <div class="right-icon">
-                                                                <i class="ri-settings-4-line text-primary"></i>
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <h6 class="mb-0 ">Pricing Plan</h6>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="login.html" class="iq-sub-card setting-dropdown">
-                                                        <div class="media align-items-center">
-                                                            <div class="right-icon">
-                                                                <i class="ri-logout-circle-line text-primary"></i>
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <h6 class="mb-0 ">Logout</h6>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <div class="nav-overlay"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
+
+      <!-- loader Start -->
+<?php // echo Header_loader(); ?>
+      <!-- loader END -->
+      <!-- Header -->
+<?php echo Header_header(); ?>
+      <!-- Header End -->
     <!-- MainContent -->
-    <section class="m-profile">
-        <div class="container">
-            <h4 class="main-title mb-4">Pricing Plan</h4>
+    <section class="m-profile" data-ng-controller="appPricing">
+        <div class="container" data-ng-show="!princingChoise">
+            <h4 class="main-title mb-4">Forfaits et tarifs</h4>
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="sign-user_card">
                         <div class="table-responsive pricing pt-2">
-                            <table id="my-table" class="table">
+                            <table id="my-table" class="table text-light">
                                 <thead>
                                     <tr>
                                         <th class="text-center prc-wrap"></th>
                                         <th class="text-center prc-wrap">
                                             <div class="prc-box">
-                                                <div class="h3 pt-4 text-white">$19<small> / Per month</small></div>
+                                                <div class="h3 pt-4 text-white">19 €<small> / Par mois</small></div>
                                                 <span class="type">Basic</span>
                                             </div>
                                         </th>
                                         <th class="text-center prc-wrap">
                                             <div class="prc-box active">
-                                                <div class="h3 pt-4 text-white">$39<small> / Per month</small></div>
+                                                <div class="h3 pt-4 text-white">39 €<small> / Par mois</small></div>
                                                 <span class="type">Standard</span>
                                             </div>
                                         </th>
                                         <th class="text-center prc-wrap">
                                             <div class="prc-box">
-                                                <div class="h3 pt-4 text-white">$119<small> / Per month</small></div>
-                                                <span class="type">Platinum</span>
-                                            </div>
-                                        </th>
-                                        <th class="text-center prc-wrap">
-                                            <div class="prc-box">
-                                                <div class="h3 pt-4 text-white">$219<small> / Per month</small></div>
+                                                <div class="h3 pt-4 text-white">119 €<small> / Par mois</small></div>
                                                 <span class="type">Premium</span>
                                             </div>
                                         </th>
@@ -334,65 +60,45 @@ echo Header_HTML("Home", "frontend");
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th class="text-center" scope="row">New Movies</th>
+                                        <th class="text-center" scope="row">Accès au Films</th>
                                         <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                        </td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
+                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i></td>
                                         <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" scope="row">RaisiX Special</th>
+                                        <th class="text-center" scope="row">Accès au Séries</th>
                                         <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                        </td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
+                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i></td>
                                         <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" scope="row">American Tv Shows</th>
-                                        <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                        </td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
+                                        <th class="text-center" scope="row">Nombre d'écrans disponibles en simultané</th>
+                                        <td class="text-center child-cell">1</i></td>
+                                        <td class="text-center child-cell active">2</td>
+                                        <td class="text-center child-cell">4</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" scope="row">Hollywood Movies</th>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                        <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                        </td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center" scope="row">Video Quality</th>
+                                        <th class="text-center" scope="row">Qualité disponible</th>
                                         <td class="text-center child-cell">SD (480p)</td>
                                         <td class="text-center child-cell active">HD (720p)</td>
-                                        <td class="text-center child-cell">FHD (1080p)</td>
-                                        <td class="text-center child-cell">FHD (1080p)</td>
+                                        <td class="text-center child-cell">4K (2160p)</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" scope="row">Ad Free Entertainment</th>
+                                        <th class="text-center" scope="row">Pas de plucité</th>
                                         <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                        <td class="text-center child-cell active"><i class="ri-close-line i_close"></i>
-                                        </td>
-                                        <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
+                                        <td class="text-center child-cell active"><i class="ri-close-line i_close"></i></td>
                                         <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center"><i class="ri-close-line i_close"></i></td>
+                                        <td class="text-center"></td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-hover mt-3">Purchase</a>
+                                            <button type="button" class="btn btn-hover mt-3" data-ng-click="princingChoise=1">Acheté</button>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-hover mt-3">Purchase</a>
+                                            <button type="button" class="btn btn-hover mt-3" data-ng-click="princingChoise=2">Acheté</button>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-hover mt-3">Purchase</a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-hover mt-3">Purchase</a>
+                                            <button type="button" class="btn btn-hover mt-3" data-ng-click="princingChoise=3">Acheté</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -402,6 +108,103 @@ echo Header_HTML("Home", "frontend");
                 </div>
             </div>
         </div>
+
+        <div class="container p-0" data-ng-show="princingChoise">
+            <div class="wrapper">
+                    <div class="card sign-user_card px-4">
+                    <p class="h8 py-3">Configurez votre carte de paiement</p>
+                    <div class="row gx-3">
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Nom / Prénom</p>
+                                <input class="form-control mb-3" type="text" data-ng-model="remember_cart_name" placeholder="Nom / Prénom" value="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Numéro de carte</p>
+                                <input class="form-control mb-3" data-ng-model="remember_cart_num_cart" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Date d'expiration (MM/YY)</p>
+                                <input class="form-control mb-3" type="text" data-ng-model="remember_cart_date" placeholder="MM/YY">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Cryptogramme (CVV)</p>
+                                <input class="form-control mb-3 pt-2" type="password" placeholder="***" size="3">
+                            </div>
+                        </div>
+                        <div class="col-12 text-right pb-2">
+                            <div class="custom-control custom-checkbox d-inline-block">
+                                <input type="checkbox" class="custom-control-input" id="remember_cart" name="remember_cart" data-ng-model="remember_cart">
+                                <label class="custom-control-label" for="remember_cart">Se souvenir de la carte</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="alert text-light" role="alert">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col"><p class="font-weight-bold">{{pricingOption[princingChoise][0]}}</p></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><p class="font-weight-light">Forfait {{pricingOption[princingChoise][1]}}</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 align-self-sm-center"><button type="button" class="btn text-right text-light" data-ng-click="princingChoise=0">Changer</button></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 pb-3 pt-2">
+                            <p class="text-muted">
+                                En cliquant sur le bouton "Activer mon abonnement payant" ci-dessous, vous acceptez nos Conditions d'utilisation, reconnaissez avoir plus de 18 ans et prenez acte de la Déclaration de confidentialité. Vous acceptez que votre abonnement commence immédiatement et renoncez à votre droit de rétractation. Netflix renouvelle automatiquement votre abonnement et prélève les frais correspondants (actuellement {{pricingOption[princingChoise][0]}}) via le mode de paiement choisi, sauf résiliation de votre part. Vous pouvez annuler votre abonnement à tout moment pour éviter tout prélèvement ultérieur.
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary mb-3" data-ng-click="test()">
+                                <span class="ps-3">Activer mon abonnement payant</span>
+                                <span class="fas fa-arrow-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                for (const el of document.querySelectorAll("[placeholder][data-slots]")) {
+                    const pattern = el.getAttribute("placeholder"),
+                        slots = new Set(el.dataset.slots || "_"),
+                        prev = (j => Array.from(pattern, (c,i) => slots.has(c)? j=i+1: j))(0),
+                        first = [...pattern].findIndex(c => slots.has(c)),
+                        accept = new RegExp(el.dataset.accept || "\\d", "g"),
+                        clean = input => {
+                            input = input.match(accept) || [];
+                            return Array.from(pattern, c =>
+                                input[0] === c || slots.has(c) ? input.shift() || c : c
+                            );
+                        },
+                        format = () => {
+                            const [i, j] = [el.selectionStart, el.selectionEnd].map(i => {
+                                i = clean(el.value.slice(0, i)).findIndex(c => slots.has(c));
+                                return i<0? prev[prev.length-1]: back? prev[i-1] || first: i;
+                            });
+                            el.value = clean(el.value).join``;
+                            el.setSelectionRange(i, j);
+                            back = false;
+                        };
+                    let back = false;
+                    el.addEventListener("keydown", (e) => back = e.key === "Backspace");
+                    el.addEventListener("input", format);
+                    el.addEventListener("focus", format);
+                    el.addEventListener("blur", () => el.value === pattern && (el.value=""));
+                }
+            });
+        </script>
     </section>
 
 <?php
