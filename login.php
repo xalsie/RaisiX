@@ -1,4 +1,25 @@
 <?php
+ob_start("minifier");
+function minifier($code) {
+    $search = array(
+          
+        // Remove whitespaces after tags
+        '/\>[^\S ]+/s',
+          
+        // Remove whitespaces before tags
+        '/[^\S ]+\</s',
+          
+        // Remove multiple whitespace sequences
+        '/(\s)+/s',
+          
+        // Removes comments
+        '/<!--(.|\s)*?-->/'
+    );
+    $replace = array('>', '<', '\\1');
+    $code = preg_replace($search, $replace, $code);
+    return $code;
+}
+
 include_once("includes/inc.php");
 
 $domain = 'raisix';
@@ -18,7 +39,12 @@ if(isset($_GET['logout'])) {
 echo Header_HTML("S'identifier", "frontend", "", "");
 ?>
       <!-- MainContent -->
-      <section class="sign-in-page" data-ng-controller="appSignIn">
+      <style>
+         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+         }
+      </style>
+      <section class="sign-in-page" data-ng-cloak data-ng-controller="appSignIn">
          <div class="container">
             <div class="row justify-content-center align-items-center height-self-center">
                <div class="col-lg-5 col-md-12 align-self-center">
@@ -61,7 +87,7 @@ echo Header_HTML("S'identifier", "frontend", "", "");
 
                               <div class="sign-info">
                                  <button type="button" class="btn btn-hover" data-ng-click="toSignIn()">S'identifier</button>
-                                 <div class="custom-control custom-checkbox d-inline-block">
+                                 <div class="form-check d-inline-block">
                                     <input type="checkbox" class="custom-control-input" id="remember_me" name="remember_me" data-ng-model="login_remember_me">
                                     <label class="custom-control-label" for="remember_me">Se souvenir de moi</label>
                                  </div>
@@ -119,3 +145,6 @@ echo Header_HTML("S'identifier", "frontend", "", "");
       ?>
    </body>
 </html>
+
+<?php
+   ob_end_flush();

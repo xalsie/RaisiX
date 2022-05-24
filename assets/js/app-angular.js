@@ -51,6 +51,12 @@
     }
   });
 
+  app.filter('addMonth', function() {
+    return function (date) {
+      return moment(date, "YYYY-MM-DD hh:mm:ss").add(1, 'M').format('dddd Do MMMM YYYY');
+    }
+  });
+
   app.controller('getInfoNav', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
     $scope.getAvatar = () => {
       $http({
@@ -961,68 +967,119 @@
     }
   }]);
 
-
-
   app.controller('appPricing', ['$scope', '$http', function($scope, $http, $sce) {
     
-
     $scope.displayCartLocal = () => {
-      
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          action: "getCartuser"
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data.length) {
+          $scope.objectCart = response.data;
+        } else {
+          console.log("Error to get cart.");
+        }
+      });
     }
 
-    $scope.test = () => {
-      // remember_cart_name
-      // remember_cart_num_cart
-      // remember_cart_date
-      console.log("Checking cart ...");
-      console.log("Message Success..");
+    $scope.toPay = (cartSave = false) => {
+      $scope.error      = false;
+      $scope.errorText  = "";
+      var optionParam = {};
 
-      if (remember_cart) $scope.localStorageAdd([$scope.remember_cart_name, $scope.remember_cart_num_cart, $scope.remember_cart_date]);
-    }
-
-    /* -------------------------------------
-      Local Storage
-    ------------------------------------- */
-    var nameStorage = "toLocalCart";
-
-    // Vérif localstorage
-    $scope.localStorageVerif = (elem = false) => {
-      var found = false;
-
-      if (localStorage.getItem(nameStorage) == null) {
-        localStorage.setItem(nameStorage, JSON.stringify([elem]));
-        return found;
-      }
-
-      var monObjet = JSON.parse(localStorage.getItem(nameStorage));
-      for(var i = 0; i < monObjet.length; i++) {
-        console.log(monObjet[i].includes($scope.remember_cart_num_cart));
-        if (monObjet[i].includes($scope.remember_cart_num_cart)) {
-          found = true;
-          break;
+      if (cartSave) {
+        optionParam = {
+          action: "toPay",
+          saved: true,
+          cvv: $scope.pricing_modal_cvv,
+          option: $scope.princingChoise,
+          id: $scope.utilCartId,
+          remember_cart: $scope.pricing_remember_cart
+        }
+      } else {
+        optionParam = {
+          action: "toPay",
+          saved: false,
+          name: $scope.pricing_cart_name.toLowerCase(),
+          number: $scope.pricing_cart_num_cart.trim().replace(/\s/g, ""),
+          date: $scope.pricing_cart_date,
+          option: $scope.princingChoise,
+          remember_cart: $scope.pricing_remember_cart
         }
       }
 
-      return found;
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: optionParam,
+        async: true
+      }).then(function (response) {
+        if (response.data[0] == true) {
+          console.log("Checking cart ...");
+          console.log("Message Success..");
+
+          $('.modal').modal('hide');
+          $scope.success = true;
+          $scope.successPayment = true;
+
+          $scope.princingChoise = false;
+          $scope.princingCart = false;
+        } else {
+          $scope.error          = true;
+          $scope.errorText      = response.data[1];
+        }
+      });
     }
 
-    $scope.localStorageAdd = (arrayCart) => {
-      if ($scope.localStorageVerif(arrayCart)) return;
+    $scope.toSuppCart = (id, key) => {
+      $http({
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        url: "/assets/js/app-server.php",
+        dataType: 'json',
+        data: {
+          action: "toSuppCart",
+          id: id
+        },
+        async: true
+      }).then(function (response) {
+        if (response.data[0] == true) {
+          console.log(key);
+          // console.log($scope.objectCart.splice(key, 1));
+        }
+      });
+    }
 
-      // Récupération de l'objet
-      let monObjet = JSON.parse(localStorage.getItem(nameStorage));
-
-      // Json add elem
-      let result = monObjet[Object.keys(monObjet).length] = arrayCart
-
-      // Stockage d'un objet plus compliqué
-      localStorage.setItem(nameStorage, JSON.stringify(monObjet));
+    $scope.utilCart = (id, key) => {
+      $scope.utilCartId     = $scope.objectCart[key].id;
+      $scope.utilCartName   = $scope.objectCart[key].name;
+      $scope.utilCartNumber = $scope.objectCart[key].number;
+      $scope.utilCartDate   = $scope.objectCart[key].date;
     }
 
     // ############
     // Init
-    $scope.princingPlan   = true;
-    $scope.princingChoise = 0;
+    $scope.error              = false;
+    $scope.errorText          = "";
+    $scope.princingPlan       = true;
+    $scope.princingChoise     = 0;
+    $scope.objectCart         = false;
+    $scope.pricing_remember_cart = false;
+    $scope.utilCartId         = false;
+    $scope.utilCartName       = false;
+    $scope.utilCartNumber     = false;
+    $scope.utilCartDate       = false;
+    $scope.successPayment     = false;
+    $scope.pricing_modal_cvv  = "";
+    $scope.success            = false;
 
     $scope.pricingOption  = {
       "1": ["19 € / par mois", "Basic"],
@@ -1031,6 +1088,17 @@
     };
 
   }]);
+
+
+
+
+
+  app.controller('appDashboard', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+    
+    
+  }]);
+
+
 
 
 })(window.angular);

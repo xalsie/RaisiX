@@ -17,7 +17,7 @@ if(empty($_POST))
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 	switch ($_POST['action']){
 		case "getSession":
-            $SQL = "SELECT u.id, u.firstname, u.lastname, u.email, u.auth_fa, ud.pseudo, ud.avatar, ud.langue, ud.date_naissance, ud.description
+            $SQL = "SELECT u.id, u.firstname, u.lastname, u.email, u.auth_fa, ud.pseudo, ud.avatar, ud.langue, ud.date_naissance, ud.description, ud.payment_date, ud.payment_choise
                         FROM users AS u
                         JOIN users_detail AS ud
                         JOIN users_sign AS us
@@ -264,6 +264,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
                 echo $_rtn;
             else
                 echo json_encode([false, $listOfErrors[$codeErrors]]);
+            break;
+        case "toSuppCart":
+            $id = db_escape($_POST["id"]);
+
+            $SQL = "DELETE FROM `users_cart` WHERE (`id` = '$id');";
+                $result = db_execute($SQL);
+
+                echo json_encode($result);
+            break;
+        case "getCartuser":
+            $SQL = "SELECT * FROM `users_cart` WHERE (id_users = ".$_SESSION["id"].");";
+                $result = db_query($SQL);
+
+            if(!$result)
+                $aRow=array();
+            else
+                foreach ($result as $row) {
+                    $data = "************".substr($row["number"],-4);
+                    $aRow[]=array("id"=>$row["id"], "date_create"=>$row["date_create"], "date_modification"=>$row["date_modification"],
+                    "id_users"=>$row["id_users"], "name"=>$row["name"], "number"=>$data, "date"=>$row["date"]);
+                }
+
+            echo json_encode($aRow);
+            break;
+        case "toPay":
+            $savedCart = db_escape($_POST["saved"]);
+            $remember_cart = $_POST["remember_cart"];
+            $optionPlan = db_escape($_POST["option"]);
+
+            if ($savedCart == true) {
+                // $idCart = $_POST["id"];
+                // verif Cart
+                $cvv = $_POST["cvv"];
+
+                if ($cvv !== "001") {
+                    $errorText = "Le CVV de la carte est faux.";
+                    echo json_encode([false, $errorText]);
+                    break;
+                }
+                // payment process
+                // return
+                //      -> false - return error
+                //      -> true - insert detail table
+            } else if ($remember_cart) {
+                $nameCart = (empty($_POST["name"])? false:$_POST["name"]);
+                $numCart = (empty($_POST["number"])? false:$_POST["number"]);
+                $dateCart = (empty($_POST["date"])? false:$_POST["date"]);
+
+                $SQL = "INSERT INTO `users_cart` (`date_create`, `date_modification`, `id_users`, `name`, `number`, `date`) VALUES (NOW(), NOW(), ".$_SESSION["id"].", '$nameCart', '$numCart', '$dateCart');";
+                    $result = db_execute($SQL);
+    
+                // payment process
+            }
+
+            $SQL = "UPDATE `users_detail` SET `payment_date` = NOW(), `payment_choise` = '$optionPlan' WHERE (id_users = ".$_SESSION["id"].");";
+                $result = db_execute($SQL);
+
+            echo json_encode($result);
             break;
 	}
 	exit;

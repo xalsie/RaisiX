@@ -350,7 +350,7 @@ Index Of Script
 			Page Loader
 		----------------------------------------------------------------------- */
 		$("#load").fadeOut();
-		$("#loading").delay(0).fadeOut("slow");
+		$("#loading").delay(500).fadeOut("slow");
 		
 		$('.widget .fa.fa-angle-down, #main .fa.fa-angle-down').on('click', function () {
 			$(this).next('.children, .sub-menu').slideToggle();
@@ -368,7 +368,7 @@ Index Of Script
 		});
 		$('.c-toggler').on("click", function(){
 			$('body').addClass('nav-open');
-		}); 
+		});
 
 		/*---------------------------------------------------------------------
 			Equal Height of Tab Pane
@@ -381,23 +381,8 @@ Index Of Script
 				}
 			});			 
 			$('.tab-pane', this).height(highestBox);
-		}); 
-
-		/*---------------------------------------------------------------------
-	 		Active Class for Pricing Table
-  	 	-----------------------------------------------------------------------*/
-		$("#my-table tr th").on("click", function (){
-			$('#my-table tr th').children().removeClass('active');
-			$(this).children().addClass('active');
-			$("#my-table td").each(function () {
-				if ($(this).hasClass('active')) {
-					$(this).removeClass('active')
-				}
-			});
-			var col = $(this).index();
-			$("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
 		});
-		
+
 		/*---------------------------------------------------------------------
 			Select 2 Dropdown
 		-----------------------------------------------------------------------*/
@@ -428,6 +413,7 @@ Index Of Script
 		if ($('.date-input').hasClass('basicFlatpickr')) {
 			$('.basicFlatpickr').flatpickr();
 		}
+
 		/*---------------------------------------------------------------------
 			Custom File Uploader
 		-----------------------------------------------------------------------*/

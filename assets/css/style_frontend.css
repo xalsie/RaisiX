@@ -487,5 +487,5 @@ p {margin:0}
 .form-control {color:#fff;border:2px solid transparent;height:60px;padding-left:20px;vertical-align:middle}
 .form-control:focus {color:#fff;background-color:#f76e14;border:2px solid #f76e14;box-shadow:none}
 .text{font-size:14px;font-weight:600}
-.card.sign-user_card .alert { background-image: linear-gradient(to right,#aa1938 0,#f76e14 100%); border: none; transition: .5s; background-size: 100% auto; }
+.card.sign-user_card .alert, .modal-body .alert-color { background-image: linear-gradient(to right,#aa1938 0,#f76e14 100%); border: none; transition: .5s; background-size: 100% auto; }
 ::placeholder{font-size:14px;font-weight:600}

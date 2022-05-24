@@ -36,7 +36,7 @@ if (count($_POST) == 6
 	}
 
 		//pwd : min 8, max : 25
-	if( strlen($_POST["pwd"]) < 8 || strlen($_POST["pwd"]) > 25 ) {
+	if( strlen($_POST["pwd"]) < 12 || strlen($_POST["pwd"]) > 25 ) {
 		$error = TRUE;
 		$listOfErrors[]=7;
 	}

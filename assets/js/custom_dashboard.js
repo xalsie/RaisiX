@@ -588,21 +588,6 @@ Index Of Script
             });
         }, false);
 
-      /*---------------------------------------------------------------------
-       Active Class for Pricing Table
-       -----------------------------------------------------------------------*/
-      $("#my-table tr th").click(function () {
-        $('#my-table tr th').children().removeClass('active');
-        $(this).children().addClass('active');
-        $("#my-table td").each(function () {
-          if ($(this).hasClass('active')) {
-            $(this).removeClass('active')
-          }
-        });
-        var col = $(this).index();
-        $("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
-      });
-
         /*------------------------------------------------------------------
         Flatpicker
         * -----------------------------------------------------------------*/

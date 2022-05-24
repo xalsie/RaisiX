@@ -302,7 +302,5 @@ echo Header_HTML("Movie", "frontend", "<link href='/assets/css/video-js.css' rel
    </div>
 
 <?php
-   echo Footer_html("frontend",'<!-- Moment With Locales JavaScript -->
-   <script src="/assets/js/moment-with-locales.min.js"></script>
-   <script type="text/javascript">moment.locale("fr");</script>');
+   echo Footer_html("frontend");
 ?>

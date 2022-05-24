@@ -56,8 +56,10 @@ function Header_HTML($Title="", $panel=false, $IncludeHeader="", $IncludeFooter=
 function Header_css($panel, $IncludeFooter = "") {
    $frontend = '<!-- Favicon -->
    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+
    <!-- Bootstrap CSS -->
    <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/bootstrap.min.css"/>
+
    <!-- Typography CSS -->
    <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/typography_frontend.css">
    <!-- Style -->
@@ -98,15 +100,23 @@ function Header_css($panel, $IncludeFooter = "") {
    $dashboard = '<!-- Favicon -->
    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/bootstrap.min.css" />
    <!-- Typography CSS -->
-   <link rel="stylesheet" href="/assets/css/typography_dashboard.css">
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/typography_dashboard.css">
    <!-- Style -->
-   <link rel="stylesheet" href="/assets/css/style_dashboard.css" />
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/style_dashboard.css" />
    <!-- Responsive -->
-   <link rel="stylesheet" href="/assets/css/responsive_dashboard.css" />
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/responsive_dashboard.css" />
    <!-- Bootstrap Table -->
-   <link rel="stylesheet" href="/assets/css/bootstrap-table.min.css">
+   <link rel="preload" as="style" onload="this.rel = \'stylesheet\'" href="/assets/css/bootstrap-table.min.css">
+
+   <noscript>
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="/assets/css/typography_dashboard.css">
+      <link rel="stylesheet" href="/assets/css/style_dashboard.css" />
+      <link rel="stylesheet" href="/assets/css/responsive_dashboard.css" />
+      <link rel="stylesheet" href="/assets/css/bootstrap-table.min.css">
+   </noscript>
 
    <!-- jQuery, Popper JS -->
    <script src="/assets/js/jquery.min.js"></script>
@@ -125,8 +135,6 @@ function Header_css($panel, $IncludeFooter = "") {
    <script src="/assets/js/slick-animation.min.js"></script>
    <!-- Flatpickr JavaScript -->
    <script src="/assets/js/flatpickr.min.js"></script>
-   <!-- Custom JS-->
-   <script src="/assets/js/custom_dashboard.js"></script>
 
    <!-- Import JS -->
    '.$IncludeFooter.'
@@ -154,6 +162,8 @@ function Header_css($panel, $IncludeFooter = "") {
    <script src="/assets/js/apexcharts.js"></script>
    <!-- Chart Custom JavaScript -->
    <script src="/assets/js/chart-custom.js"></script>
+   <!-- Custom JS-->
+   <script src="/assets/js/custom_dashboard.js"></script>
    <!-- Bootstrap Table -->
    <script src="/assets/js/bootstrap-table.min.js"></script>
    <script src="/assets/js/bootstrap-table-locale-all.min.js"></script>

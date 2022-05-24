@@ -24,29 +24,30 @@ if ((count($_POST) == 3 || count($_POST) == 4) && !empty($_POST["email"]) && !em
 		exit;
 	}
 
-	$SQL = "SELECT `id`, `firstname`, `lastname`, `email`, `password`, `role`, `auth_fa`, `auth_fa_token` FROM `users` WHERE `email` = '".db_escape($_POST["email"])."' LIMIT 1;";
+	$SQL = "SELECT u.`id`, u.`firstname`, u.`lastname`, u.`email`, u.`password`, u.`role`, u.`auth_fa`, u.`auth_fa_token`, ud.`payment_choise` FROM users AS u JOIN `users_detail` AS ud on ud.id_users = u.id WHERE `email` = '".db_escape($_POST["email"])."' LIMIT 1;";
 		$result = db_query($SQL);
 
 	if (!empty($result[0])) {
 		if (password_verify($_POST["pwd"], $result[0]["password"])) {
-			$_SESSION["auth"]		= true;
-			$_SESSION["id"]			= $result[0]["id"];
-			$_SESSION["email"]		= $_POST["email"];
-			$_SESSION["firstname"]	= $result[0]["firstname"];
-			$_SESSION["lastname"]	= $result[0]["lastname"];
-			$_SESSION["idmd5"]		= md5(trim($result[0]["id"].$result[0]["firstname"].$result[0]["lastname"].$_POST["email"]));
-			$_SESSION["token"]		= createToken();
-			$_SESSION["role"]		= $result[0]["role"];
+			$_SESSION["auth"]				= true;
+			$_SESSION["id"]					= $result[0]["id"];
+			$_SESSION["email"]				= $_POST["email"];
+			$_SESSION["firstname"]			= $result[0]["firstname"];
+			$_SESSION["lastname"]			= $result[0]["lastname"];
+			$_SESSION["idmd5"]				= md5(trim($result[0]["id"].$result[0]["firstname"].$result[0]["lastname"].$_POST["email"]));
+			$_SESSION["token"]				= createToken();
+			$_SESSION["role"]				= $result[0]["role"];
+			$_SESSION["payment_choise"]		= $result[0]["payment_choise"];
 
 			if (isset($_POST["remember_me"]) && $_POST["remember_me"] == "on") {
 				setcookie("remember", $_SESSION["token"], [
 					'expires' => strtotime('+7 days'),
 					'path' => '/',
-					'domain' => 'raisix'
+					'domain' => $_SERVER["SERVER_NAME"]
 				]);
 			}
 
-			$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"], "role"=>$_SESSION["role"]];
+			$user = ["id"=>$_SESSION["id"], "email"=>$_SESSION["email"], "firstname"=>$_SESSION["firstname"], "lastname"=>$_SESSION["lastname"], "role"=>$_SESSION["role"], "payment_choise"=>$_SESSION["payment_choise"]];
 
 			// $referer = explode("url_redirect=", $_SERVER["HTTP_REFERER"])[1];
 

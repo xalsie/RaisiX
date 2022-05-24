@@ -161,20 +161,23 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                         <h5 class="mb-3 mt-4 pb-3 a-border">Détails de la facturation</h5>
                         <div class="row justify-content-between mb-3">
                             <div class="col-md-8 r-mb-15">
-                                <p>Votre prochaine date de facturation est le 19 septembre 2022.</p>
+                                <p>Votre prochaine date de facturation est le {{settingMap.payment_date | addMonth}}.</p>
                                 <a href="#" class="btn btn-hover mt-1">Annuler l'adhésion</a>
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a href="#" class="text-primary slick-arrow">Mettre à jour les informations de paiement</a>
+                                <a href="/pricing-plan.php" class="text-primary slick-arrow">Mettre à jour les informations de paiement</a>
                             </div>
                         </div>
                         <h5 class="mb-3 mt-4 pb-3 a-border">Détails du forfait</h5>
                         <div class="row justify-content-between mb-3">
                             <div class="col-md-8">
-                                <p>Prime</p>
+                                <p data-ng-show="settingMap.payment_choise==0">Free</p>
+                                <p data-ng-show="settingMap.payment_choise==1">Basic</p>
+                                <p data-ng-show="settingMap.payment_choise==2">Standard</p>
+                                <p data-ng-show="settingMap.payment_choise==3">Premium</p>
                             </div>
                             <div class="col-md-4 text-md-right text-left">
-                                <a href="pricing-plan.php" class="text-primary slick-arrow">Modifier le Plan</a>
+                                <a href="/pricing-plan.php" class="text-primary slick-arrow">Modifier le Plan</a>
                             </div>
                         </div>
                         <h5 class="mb-3 pb-3 mt-4 a-border">Réglage</h5>
@@ -196,7 +199,7 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Authentification a 2 facteurs (2FA)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
@@ -230,7 +233,7 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Authentification a 2 facteurs (2FA)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
@@ -253,7 +256,7 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Déconnectez-vous de tous les appareils</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
@@ -286,9 +289,6 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
    <script src="/assets/js/slick-animation.min.js"></script>
    <!-- Flatpickr JavaScript -->
    <script src="/assets/js/flatpickr.min.js"></script>
-   <!-- Moment With Locales JavaScript -->
-   <script src="/assets/js/moment-with-locales.min.js"></script>
-   <script type="text/javascript">moment.locale("fr");</script>
 
    <!-- Videojs -->
    <link href="/assets/css/video-js.css" rel="stylesheet" />

@@ -59,21 +59,21 @@ input.input-danger:focus {
                            <div class="form-group col-sm-12 col-md-6">
                               <div class="input-group mb-1">
                                  <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" minlength="8" onkeyup="getPassword()" required>
-                                 <div class="input-group-append">
+                                 <div class="input-group-text">
                                     <button class="btn btn-outline-secondary" type="button" data-id="pwd" onclick="togglePassword(this)">👀</button>
                                  </div>
                               </div>
 
                               <div class="input-group">
                                  <input type="password" class="form-control mb-0" id="pwdConfirm" name="pwdConfirm" placeholder="Confirmez votre Mot de Passe" minlength="8" maxlength="25" onkeyup="checkConfirmPwd()" required>
-                                 <div class="input-group-append">
+                                 <div class="input-group-text">
                                     <button class="btn btn-outline-secondary" type="button" data-id="pwdConfirm" onclick="togglePassword(this)">👀</button>
                                  </div>
                               </div>
                            </div>
                            <div class="form-group col-sm-12 col-md-6">
                               <ul class="list-group" id="requirements">
-                                 <li id="length" class="list-group-item">Au moins 8 caractères</li>
+                                 <li id="length" class="list-group-item">Au moins 12 caractères</li>
                                  <li id="lowercase" class="list-group-item">Au moins 1 lettre minuscule</li>
                                  <li id="uppercase" class="list-group-item">Au moins 1 lettre majuscule</li>
                                  <li id="number" class="list-group-item">Au moins 1 chiffre</li>
@@ -82,7 +82,7 @@ input.input-danger:focus {
                            </div>
                         </div>
 
-                        <div class="custom-control custom-checkbox mb-3">
+                        <div class="form-check mb-3">
                            <input type="checkbox" class="custom-control-input" id="cgu" onclick="checkSubmit()" name="cgu">
                            <label class="custom-control-label" for="cgu">J'accepte les <a href="#" class="text-primary"> Termes et Conditions</a></label>
                         </div>
@@ -131,7 +131,7 @@ input.input-danger:focus {
       }
 
       function checkIfEightChar(text){
-         return text.length >= 8;
+         return text.length >= 12;
       }
 
       function checkIfOneLowercase(text) {
