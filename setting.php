@@ -1,4 +1,25 @@
 <?php
+ob_start("minifier");
+function minifier($code) {
+    $search = array(
+
+        // Remove whitespaces after tags
+        '/\>[^\S ]+/s',
+          
+        // Remove whitespaces before tags
+        '/[^\S ]+\</s',
+          
+        // Remove multiple whitespace sequences
+        '/(\s)+/s',
+          
+        // Removes comments
+        '/<!--(.|\s)*?-->/'
+    );
+    $replace = array('>', '<', '\\1');
+    $code = preg_replace($search, $replace, $code);
+    return $code;
+}
+
 include_once("includes/inc.php");
 
 isConnected(true);
@@ -39,7 +60,19 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                         <h4 class="mt-4 mb-3" data-ng-hide="settingMap.pseudo">{{settingMap.firstname}} {{settingMap.lastname}}</h4>
                         <h4 class="mt-4 mb-3" data-ng-show="settingMap.pseudo">{{settingMap.pseudo}}</h4>
 
-                        <p>{{settingMap.description}}</p>
+                        <!-- <p>{{settingMap.description}}</p> -->
+
+                        <div class="row align-items-center justify-content-between mb-3">
+                            <div class="col-12">
+                                <span class="text-light font-size-13">Description</span>
+                                <textarea ng-show="!editLine8" class="form-control form-control-sm mb-0" ng-model="settingMap.description" placeholder="Description" rows="6" readonly style="background-color: var(--iq-body-bg);height: 160px;">{{settingMap.description}}</textarea>
+                                <textarea ng-show="editLine8" class="form-control" ng-model="settingMap.description" name="formControlEditDescription" placeholder="Description" rows="6"></textarea>
+                            </div>
+                            <div class="col-12 text-md-right text-left">
+                                <button type="button" ng-show="!editLine8" class="text-body btn-outline-primary btn-sm mt-1 mb-1 text-primary slick-arrow" data-ng-click="editLine8 = !editLine8;">Modifier</button>
+                                <button type="button" ng-show="editLine8" class="text-body btn-outline-primary btn-sm mt-1 mb-1 text-primary slick-arrow" data-ng-click="editLine8 = !editLine8;saveLine()">Enregistrer</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -115,7 +148,7 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                             <div class="col-md-8">
                                 <span class="text-light font-size-13">Date de naissance</span>
                                 <p ng-show="!editLine5" class="mb-0">{{settingMap.date_naissance}}</p>
-                                <input ng-show="editLine5" type="text" class="form-control form-control-sm mb-0 date-input basicFlatpickr flatpickr-input" id="inputWeek" placeholder="Date de naissance" value="" readonly="readonly">
+                                <input ng-show="editLine5" type="text" class="form-control form-control-sm mb-0 date-input basicFlatpickr flatpickr-input" id="inputWeek" ng-model="settingMap.date_naissance" placeholder="Date de naissance" value="" readonly="readonly">
                             </div>
                             <div class="col-md-4 text-md-right text-left">
                                 <a ng-show="!editLine5" class="text-primary slick-arrow" data-ng-click="editLine5 = !editLine5;">Modifier</a>
@@ -126,7 +159,7 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                             <div class="col-md-8">
                                 <span class="text-light font-size-13">Langue</span>
                                 <p ng-show="!editLine6" class="mb-0">{{settingMap.langue}}</p>
-                                <select ng-show="editLine6" class="form-control form-control-sm mb-0" id="exampleFormControlSelect1">
+                                <select ng-show="editLine6" class="form-control form-control-sm mb-0" ng-model="settingMap.langue" id="exampleFormControlSelect1">
                                     <option selected disabled>Choisisez votre langue</option>
                                     <option value="francais">Français</option>
                                     <option value="anglais">Anglais</option>
@@ -140,7 +173,8 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
 
                         <div class="row align-items-center justify-content-end mb-3 mt-3">
                             <div class="col-md-auto text-md-right text-left">
-                                <button ng-show="btnSave" type="button" class="btn btn-outline-success" data-ng-click="saveSetting()">Enregistrer</button>
+                                <button type="button" ng-show="btnSave" class="btn-outline-success btn-sm btn-success d-block mb-1 mt-1 slick-arrow text-body" data-ng-click="saveSetting()">Enregistrer</button>
+                                
                             </div>
                         </div>
 
@@ -158,8 +192,8 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
                             </div>
                         </div>
 
-                        <h5 class="mb-3 mt-4 pb-3 a-border">Détails de la facturation</h5>
-                        <div class="row justify-content-between mb-3">
+                        <h5 data-ng-hide="settingMap.payment_choise==0" class="mb-3 mt-4 pb-3 a-border">Détails de la facturation</h5>
+                        <div data-ng-hide="settingMap.payment_choise==0" class="row justify-content-between mb-3">
                             <div class="col-md-8 r-mb-15">
                                 <p>Votre prochaine date de facturation est le {{settingMap.payment_date | addMonth}}.</p>
                                 <a href="#" class="btn btn-hover mt-1">Annuler l'adhésion</a>
@@ -297,4 +331,4 @@ echo Header_HTML("Réglage du compte", "frontend", "", '<!-- Slick JS -->
    <script src="https://vjs.zencdn.net/7.4.1/video.js"></script>
    <script src="https://vod.dev/dist/videojs-http-source-selector.js"></script>
    <script src="https://vod.dev/dist/videojs-contrib-quality-levels.js"></script>');
-?>
+   ob_end_flush();

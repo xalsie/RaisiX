@@ -4,14 +4,14 @@ Site web de Streaming films et séries gratuit.
 ```
 
 ## **Pre-requis**
-> - [Apache 2.4.39](https://httpd.apache.org/download.cgi)
-> - [PHP 7.3.0](https://www.php.net/downloads.php)
-> - [MySQL 5.7.26](https://www.mysql.com/fr/downloads/)
+> - [Apache 2.4.38](https://httpd.apache.org/download.cgi)
+> - [PHP 7.3.31-1(fpm-fcgi)](https://www.php.net/downloads.php)
+> - [MariaDB 10.3.34](https://www.mysql.com/fr/downloads/)
 
 —————————————————
 
 ```DIFF
-+ 🔄｜Mise à jour : lun. 30 mai. 2022 23:30
++ 🔄｜Mise à jour : mer. 01 juin. 2022 01:30
 ```
 —————————————————
 

@@ -560,24 +560,23 @@ function Footer_HTML($panel=false, $IncludeFooter="") {
             <div class="row">
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
-                    <li><a href="javascript:void(0);">About Us</a></li>
-                    <li><a href="movie-category.php">Movies</a></li>
-                    <li><a href="show-category.php">Tv Shows</a></li>
-                    <li><a href="javascript:void(0);">Coporate Information</a></li>
+                    <li><a href="javascript:void(0);">À propos de nous</a></li>
+                    <li><a href="movie-category.php">Films</a></li>
+                    <li><a href="show-category.php">Séries Tv</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
-                    <li><a href="javascript:void(0);">Privacy Policy</a></li>
-                    <li><a href="javascript:void(0);">Terms & Conditions</a></li>
-                    <li><a href="javascript:void(0);">Help</a></li>
+                    <li><a href="javascript:void(0);">Politique de confidentialité</a></li>
+                    <li><a href="javascript:void(0);">termes et conditions</a></li>
+                    <li><a href="javascript:void(0);">Support</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-4">
                   <ul class="f-link list-unstyled mb-0">
                     <li><a href="javascript:void(0);">FAQ</a></li>
-                    <li><a href="javascript:void(0);">Cotact Us</a></li>
-                    <li><a href="javascript:void(0);">Legal Notice</a></li>
+                    <li><a href="https://discord.gg/YTxEJN3jxk">Contactez-nous sur Discord</a></li>
+                    <li><a href="javascript:void(0);">Mention légale</a></li>
                   </ul>
               </div>
               <div class="col-lg-3 col-md-12 r-mt-15">

@@ -329,4 +329,3 @@ echo Header_HTML("Tableau de bord - Liste des demandes films", "dashboard", '<li
 
 <?php
    echo footer_css("dashboard");
-?>

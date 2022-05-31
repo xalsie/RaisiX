@@ -474,4 +474,3 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
 
 <?php
    echo Footer_css("dashboard");
-?>

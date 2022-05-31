@@ -41,12 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             */
             $data = $_POST["data"][0];
 
-            print_r($data["id"]);
+            $SQL = "UPDATE `users` SET `date_modification` = now(), `firstname` = '".db_escape($data["firstname"])."', `lastname` = '".db_escape($data["lastname"])."', `email` = '".db_escape($data["email"])."' WHERE `id` = '".$data["id"]."'";
+			    $result = db_execute($SQL);
+            
+            $SQL = "UPDATE `users_detail` SET `date_modification` = now(), `langue` = '".db_escape($data["langue"])."', `date_naissance` = '".db_escape($data["date_naissance"])."', `description` = '".db_escape($data["description"])."' WHERE `id_users` = '".$data["id"]."'";
+			    $result = db_execute($SQL);
 
-            $SQL = "INSERT INTO `users` (`date_modification`, `firstname`, `lastname`, `email`, `password`, `date_modification_pw`)
-				VALUES (now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now());";
-			$result = db_execute($SQL);
-
+            echo json_encode($result);
             break;
         case "getAvatar":
             $SQL = "SELECT ud.avatar FROM users_detail AS ud WHERE ud.id_users = ".$_SESSION["id"].";";
@@ -380,7 +381,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
                 $result1 = db_execute($SQL);
 
             $SQL = "UPDATE `users_detail` SET `date_modification` = NOW(), `pseudo` = '$pseudo', `description` = '$description', `avatar` = '$avatar' WHERE `id_users` = '".$id."';";
-                echo $SQL;
                 $result2 = db_execute($SQL);
 
             if ($result1[0] && $result2[0]) {
@@ -399,14 +399,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
             $token_email = uniqid('', true);
 
-            $SQL = "INSERT INTO `users` (`date_modification`, `token_check_email`, `check_email`) VALUES (now(), '".$token_email."', '0');";
-		        // $result = db_execute($SQL);
+            $SQL = "UPDATE `users` SET `date_modification` = now(), `token_check_email` = '".$token_email."', `check_email` = '0' WHERE `id` = '".$id."' AND `email` = '".$email."';";
+		        $result = db_execute($SQL);
 
-            $rtn = sendMail($_POST["email"], $token_email);
+            $rtn = sendMail($_POST["email"], $token_email, $aConfig);
 
             echo json_encode([$rtn, $rtn_txt]);
             break;
+        case "editUser":
+            $rtn = false;
+            $rtn_txt = "";
 
+            $id = db_escape($_POST["id"]);
+            $value = db_escape($_POST["value"]);
+
+            $role = (($value == '15')? 15:0);
+
+            $SQL = "UPDATE `users` SET `date_modification` = NOW(), `role` = '".$role."' WHERE `id` = '".$id."';";
+                $result = db_execute($SQL);
+
+            if ($result[0]) {
+                $rtn = true;
+            } else {
+                $rtn_txt = "Une erreur s'est produite lors de l'execution de la tache. Contacter le support.";
+            }
+
+            echo json_encode([$rtn, $rtn_txt]);
+            break;
     }
 	exit;
 }

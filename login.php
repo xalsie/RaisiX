@@ -2,16 +2,16 @@
 ob_start("minifier");
 function minifier($code) {
     $search = array(
-          
+
         // Remove whitespaces after tags
         '/\>[^\S ]+/s',
-          
+
         // Remove whitespaces before tags
         '/[^\S ]+\</s',
-          
+
         // Remove multiple whitespace sequences
         '/(\s)+/s',
-          
+
         // Removes comments
         '/<!--(.|\s)*?-->/'
     );
@@ -22,15 +22,13 @@ function minifier($code) {
 
 include_once("includes/inc.php");
 
-$domain = 'raisix';
-
 if(isset($_GET['logout'])) {
    // destroy session
    session_destroy();
    $cookieOptions = array (
-      'expires' => 'Session',
+      'expires' => '1',
       'path' => '/',
-      'domain' => $domain
+      'domain' => $_SERVER["SERVER_NAME"]
    );
    setcookie("remember", "", $cookieOptions);
 } else if (isConnected())

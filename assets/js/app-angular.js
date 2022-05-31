@@ -1095,7 +1095,6 @@
 
   app.controller('appDashboard', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
     
-    
   }]);
 
 

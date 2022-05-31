@@ -434,4 +434,3 @@ echo Header_HTML("Tableau de bord - Liste des films", "dashboard", '<link rel="s
 
 <?php
    echo footer_css("dashboard");
-?>

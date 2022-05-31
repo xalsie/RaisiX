@@ -951,4 +951,3 @@ echo Header_HTML("Home", "frontend", "", '<!-- Slick JS -->
 <?php
    echo Footer_html("frontend");
    ob_end_flush();
-?>

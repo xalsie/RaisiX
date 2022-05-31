@@ -147,7 +147,7 @@
 		}
 	}
 
-	function sendMail($email, $token_email) {
+	function sendMail($email, $token_email, $aConfig) {
 		//Create an instance; passing `true` enables exceptions
 		$mail = new PHPMailer(true);
 

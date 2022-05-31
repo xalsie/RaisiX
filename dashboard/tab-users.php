@@ -170,23 +170,30 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                         <div class="form-group text-center">
                            <label>Edité</label>
 
-                           <button type="submit" class="btn btn-primary form-control btn-edit" data-toggle="modal" data-target="#modalEditUsers">Edité <i class="ri-pencil-line"></i></button>
+                           <button type="button" id="btn-edit" class="btn btn-primary form-control" data-toggle="modal" data-target="#modalEditUsers">Edité <i class="ri-pencil-line"></i></button>
                         </div>
                      </div>
                      <div class="col">
                         <div class="form-group text-center">
                            <label>Supprimé</label>
 
-                           <button type="submit" class="btn btn-primary form-control btn-remove" data-toggle="modal" data-target="#modalDeleteUsers">Supprimé ! <i class="ri-delete-bin-line"></i></button>
+                           <button type="button" id="btn-remove" class="btn btn-primary form-control" data-toggle="modal" data-target="#modalDeleteUsers">Supprimé ! <i class="ri-delete-bin-line"></i></button>
                         </div>
                      </div>
                   </div>
                   <div class="row align-items-center">
-                     <div class="col">
+                     <div class="col-9">
                         <div class="form-group text-center">
                            <label>Renvoyé le mail de confirmation</label>
 
-                           <button type="submit" id="btn-send-mail" class="btn btn-primary form-control">Renvoyé ! <i class="ri-delete-bin-line"></i></button>
+                           <button type="button" id="btn-send-mail" class="btn btn-primary form-control">Renvoyé ! <i class="ri-delete-bin-line"></i></button>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="form-group text-center">
+                           <label>Rôle</label>
+
+                           <button type="button" id="btn-role" class="btn btn-primary form-control">Modifier <i class="ri-delete-bin-line"></i></button>
                         </div>
                      </div>
                   </div>
@@ -196,7 +203,7 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
       </div>
    </div>
 
-   <div class="modal fade" id="modalDeleteUsers" tabindex="-1" aria-labelledby="modalDeleteUsers" aria-hidden="true">
+   <div class="modal fade" id="modalDeleteUsers" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalDeleteUsers" aria-hidden="true">
       <div class="modal-dialog">
          <div class="modal-content">
             <div class="modal-header">
@@ -224,14 +231,18 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                      <input type="text" class="form-control" name="formControlEmail" id="formControlEmail" disabled>
                   </div>
 
-                  <button type="submit" class="btn btn-block btn-primary">Supprimé !</button>
+                  <div class="modal-footer">
+                     <div>
+                        <button type="submit" class="btn btn-block btn-primary">Supprimé !</button>
+                     </div>
+                  </div>
                </form>
             </div>
          </div>
       </div>
    </div>
 
-   <div class="modal fade" id="modalEditUsers" tabindex="-1" aria-labelledby="modalEditUsers" aria-hidden="true">
+   <div class="modal fade" id="modalEditUsers" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsers" aria-hidden="true">
       <div class="modal-dialog">
          <div class="modal-content">
             <div class="modal-header">
@@ -278,11 +289,51 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                      <textarea class="form-control" id="formControlEditDescription" name="formControlEditDescription" placeholder=""></textarea>
                   </div>
 
-                  <div class="align-items-center form-row">
-                     <div class="col-md-6 text-center">
+                  <div class="modal-footer">
+                     <div>
                         <button type="button" class="btn btn-block btn-outline-secondary" data-dismiss="modal" aria-label="Close">Annulé</button>
                      </div>
-                     <div class="col-md-6 text-center">
+                     <div>
+                        <button type="submit" class="btn btn-block btn-primary">Enregistré</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="modalEditRole" data-backdrop="static" data-keyboard="false" tabindex="1" aria-labelledby="modalEditRole" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="modalEditRoleLabel">Modifier le Rôle</h5>
+               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                  <i class="fa-solid fa-xmark-large"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="/assets/js/app-server.php">
+                  <div class="action" style="display: none;">
+                     <input type="text" name="formControlAction" class="formControlAction" disabled>
+                     <input type="text" name="formControlId" class="formControlId" disabled>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
+                     <label class="form-check-label" for="inlineRadio1">Membre</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
+                     <label class="form-check-label" for="inlineRadio2">Administrateur</label>
+                  </div>
+
+                  <div class="modal-footer">
+                     <div>
+                        <button type="button" class="btn btn-block btn-outline-secondary" data-dismiss="modal" aria-label="Close">Annulé</button>
+                     </div>
+                     <div>
                         <button type="submit" class="btn btn-block btn-primary">Enregistré</button>
                      </div>
                   </div>
@@ -305,8 +356,8 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
       }
 
       function postQueryParams(params) {
-            params.action = "getListUsers";
-            return params;
+         params.action = "getListUsers";
+         return params;
       }
 
       function actionFormatter(value, row, index) {
@@ -361,7 +412,7 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
          }
       };
 
-      $('.btn-remove').click(() => {
+      $('#btn-remove').click(() => {
          var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
 
          var modal = $('#modalDeleteUsers')
@@ -373,7 +424,7 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
             modal.find('#formControlEmail').val(row["email"])
       })
 
-      $(".btn-edit").click(() => {
+      $("#btn-edit").click(() => {
          var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
 
          var modal = $('#modalEditUsers')
@@ -391,7 +442,7 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                else modal.find('#formControlEditImg').attr('src', "//dummyimage.com/200x200/363636/fff").attr("data-avatar", "user.jpg")
       })
 
-      $(".btn-delete-avatar").click(() => {
+      $("#btn-delete-avatar").click(() => {
          var modal = $('#modalEditUsers')
             modal.find('#formControlEditImg').attr('src', "/assets/images/user/user.jpg").attr("data-avatar", "user.jpg")
       })
@@ -411,6 +462,22 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
             })
       })
 
+      $("#btn-role").click(() => {
+         var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
+
+         var modal = $('#modalEditRole')
+            modal.modal('show')
+            modal.find('.formControlAction').val("editRole")
+            modal.find('.formControlId').val(row["id"])
+         if (row['role'] == '15') {
+            modal.find("#inlineRadio1").attr("checked", false)
+            modal.find("#inlineRadio2").attr("checked", true)
+         } else {
+            modal.find("#inlineRadio2").attr("checked", false)
+            modal.find("#inlineRadio1").attr("checked", true)
+         }
+      })
+
       $(() => {
          initTable();
 
@@ -418,17 +485,20 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
             event.preventDefault();
             var param = {};
             
-            if ($(this).find(".formControlAction").val() == 'deleteUser') {
+            var action = $(this).find(".formControlAction").val();
+            var actionId = $(this).find('.formControlId').val().trim();
+
+            if (action == 'deleteUser') {
                param = {
                   autofunc: false,
                   action: 'deleteUser',
-                  id: $(this).find('.formControlId').val().trim()
+                  id: actionId
                }
-            } else if ($(this).find(".formControlAction").val() == 'editUser') {
+            } else if (action == 'editUser') {
                param = {
                   autofunc: false,
                   action: 'editUser',
-                  id: $(this).find('.formControlId').val().trim(),
+                  id: actionId,
 
                   firstname: $(this).find('#formControlEditFirstname').val().trim(),
                   lastname: $(this).find('#formControlEditLastname').val().trim(),
@@ -436,6 +506,13 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                   pseudo: $(this).find('#formControlEditPseudo').val().trim(),
                   description: $(this).find('#formControlEditDescription').val().trim(),
                   avatar: $(this).find('#formControlEditImg').attr("data-avatar").trim()
+               }
+            } else if (action == 'editRole') {
+               param = {
+                  autofunc: false,
+                  action: 'editRole',
+                  id: actionId,
+                  value: $(this).find(":checked").val()
                }
             }
 
@@ -484,4 +561,3 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
 
 <?php
    echo footer_css("dashboard");
-?>

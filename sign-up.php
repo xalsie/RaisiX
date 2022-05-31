@@ -1,32 +1,35 @@
 <?php
+ob_start("minifier");
+function minifier($code) {
+    $search = array(
+
+        // Remove whitespaces after tags
+        '/\>[^\S ]+/s',
+          
+        // Remove whitespaces before tags
+        '/[^\S ]+\</s',
+          
+        // Remove multiple whitespace sequences
+        '/(\s)+/s',
+          
+        // Removes comments
+        '/<!--(.|\s)*?-->/'
+    );
+    $replace = array('>', '<', '\\1');
+    $code = preg_replace($search, $replace, $code);
+    return $code;
+}
+
 include_once("includes/inc.php");
+
+if (isConnected())
+   header("Location: /index.php");
 
 echo Header_HTML("S'inscrire", "frontend");
 ?>
 
 <style>
-.list-group-item {
-   position: relative;
-   display: block;
-   padding: 5px;
-   background-color: #0000;
-   border: 0px;
-}
-form.mt-4 .btn {
-   padding: 0.375rem 0.75rem;
-}
-input.input-success,
-input.input-success:focus {
-   color: #28a745 !important;
-   border-color: #28a745 !important;
-   border: 3px solid #28a745 !important;
-}
-input.input-danger,
-input.input-danger:focus {
-   color: #dc3545 !important;
-   border-color: #dc3545 !important;
-   border: 3px solid #dc3545 !important;
-}
+.list-group-item{position:relative;display:block;padding:5px;background-color:#0000;border:0}form.mt-4 .btn{padding:.375rem .75rem}input.input-success,input.input-success:focus{color:#28a745!important;border-color:#28a745!important;border:3px solid #28a745!important}input.input-danger,input.input-danger:focus{color:#dc3545!important;border-color:#dc3545!important;border:3px solid #dc3545!important}
 </style>
 <!-- MainContent -->
 <section class="sign-in-page">
@@ -48,38 +51,49 @@ input.input-danger:focus {
                      ?>
 
                      <form class="mt-4" method="POST" action="script/saveUser.php">
-                        <div class="form-group d-flex flex-md-row flex-column">
-                           <input type="text" class="form-control mb-0" id="firstname" name="firstname" placeholder="Entrez votre Prenom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["firstname"]))? 'value="'.$_SESSION["postForm"]["firstname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
-                           <input type="text" class="form-control mb-0" id="lastname" name="lastname" placeholder="Entrez votre Nom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["lastname"]))? 'value="'.$_SESSION["postForm"]["lastname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                        <div class="row">
+                           <div class="form-group col-sm-12 col-md-6">
+                              <input type="text" class="form-control mb-0" id="firstname" name="firstname" placeholder="Entrez votre Prenom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["firstname"]))? 'value="'.$_SESSION["postForm"]["firstname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                              <small id="passwordHelpInline" class="text-muted">
+                                 La longueur doit être de 3 à 45 caractères.
+                              </small>
+                           </div>
+                           <div class="form-group col-sm-12 col-md-6">
+                              <input type="text" class="form-control mb-0" id="lastname" name="lastname" placeholder="Entrez votre Nom" minlength="3" maxlength="45" <?php echo (isset($_SESSION["postForm"]["lastname"]))? 'value="'.$_SESSION["postForm"]["lastname"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
+                              <small id="passwordHelpInline" class="text-muted">
+                                 La longueur doit être de 3 à 45 caractères.
+                              </small>
+                           </div>
                         </div>
+
                         <div class="form-group">
                            <input type="email" class="form-control mb-0" id="email" name="email" placeholder="Entrez votre Email" <?php echo (isset($_SESSION["postForm"]["email"]))? 'value="'.$_SESSION["postForm"]["email"].'"': ""; ?> autocomplete="off" onkeyup="checkSubmit()" required>
                         </div>
-                        <div class="row">
-                           <div class="form-group col-sm-12 col-md-6">
-                              <div class="input-group mb-1">
-                                 <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" minlength="8" onkeyup="getPassword()" required>
-                                 <div class="input-group-text">
-                                    <button class="btn btn-outline-secondary" type="button" data-id="pwd" onclick="togglePassword(this)">👀</button>
-                                 </div>
-                              </div>
 
-                              <div class="input-group">
-                                 <input type="password" class="form-control mb-0" id="pwdConfirm" name="pwdConfirm" placeholder="Confirmez votre Mot de Passe" minlength="8" maxlength="25" onkeyup="checkConfirmPwd()" required>
-                                 <div class="input-group-text">
-                                    <button class="btn btn-outline-secondary" type="button" data-id="pwdConfirm" onclick="togglePassword(this)">👀</button>
-                                 </div>
+                        <div class="form-group">
+                           <div class="input-group mb-1">
+                              <input type="password" class="form-control mb-0" id="pwd" name="pwd" placeholder="Entrez votre Mot de Passe" minlength="8" onkeyup="getPassword()" required>
+                              <div class="input-group-text">
+                                 <button class="btn btn-outline-secondary" type="button" data-id="pwd" onclick="togglePassword(this)">👀</button>
                               </div>
                            </div>
-                           <div class="form-group col-sm-12 col-md-6">
-                              <ul class="list-group" id="requirements">
-                                 <li id="length" class="list-group-item">Au moins 12 caractères</li>
-                                 <li id="lowercase" class="list-group-item">Au moins 1 lettre minuscule</li>
-                                 <li id="uppercase" class="list-group-item">Au moins 1 lettre majuscule</li>
-                                 <li id="number" class="list-group-item">Au moins 1 chiffre</li>
-                                 <li id="special" class="list-group-item">Au moins 1 caractère spécial</li>
-                              </ul>
+
+                           <div class="input-group">
+                              <input type="password" class="form-control mb-0" id="pwdConfirm" name="pwdConfirm" placeholder="Confirmez votre Mot de Passe" minlength="8" maxlength="25" onkeyup="checkConfirmPwd()" required>
+                              <div class="input-group-text">
+                                 <button class="btn btn-outline-secondary" type="button" data-id="pwdConfirm" onclick="togglePassword(this)">👀</button>
+                              </div>
                            </div>
+                        </div>
+
+                        <div class="form-group">
+                           <ul class="list-group" id="requirements">
+                              <li id="length" class="list-group-item">Au moins 12 caractères</li>
+                              <li id="lowercase" class="list-group-item">Au moins 1 lettre minuscule</li>
+                              <li id="uppercase" class="list-group-item">Au moins 1 lettre majuscule</li>
+                              <li id="number" class="list-group-item">Au moins 1 chiffre</li>
+                              <li id="special" class="list-group-item">Au moins 1 caractère spécial</li>
+                           </ul>
                         </div>
 
                         <div class="form-check mb-3">
@@ -208,4 +222,4 @@ input.input-danger:focus {
 
 <?php
    echo Footer_css("frontend");
-?>
+   ob_end_flush();
