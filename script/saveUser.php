@@ -19,13 +19,13 @@ if (count($_POST) == 6
 	$_POST["email"] = strtolower( trim($_POST["email"]) );
 	//vérifier les champs un par un
 
-		//firstname : min 2, max : 25
-	if( strlen($_POST["firstname"]) < 2 || strlen($_POST["firstname"])> 25 ) {
+		//firstname : min 3, max : 25
+	if( strlen($_POST["firstname"]) < 3 || strlen($_POST["firstname"])> 25 ) {
 		$error = TRUE;
 		$listOfErrors[]=1;
 	}
-		//lastname: min 2, max : 125
-	if( strlen($_POST["lastname"]) <2 || strlen($_POST["lastname"]) > 125 ) {
+		//lastname: min 3, max : 125
+	if( strlen($_POST["lastname"]) < 3 || strlen($_POST["lastname"]) > 125 ) {
 		$error = TRUE;
 		$listOfErrors[]=2;
 	}
@@ -35,7 +35,7 @@ if (count($_POST) == 6
 		$listOfErrors[]=3;
 	}
 
-		//pwd : min 8, max : 25
+		//pwd : min 12, max : 25
 	if( strlen($_POST["pwd"]) < 12 || strlen($_POST["pwd"]) > 25 ) {
 		$error = TRUE;
 		$listOfErrors[]=7;
@@ -63,12 +63,11 @@ if (count($_POST) == 6
 		$_SESSION["postForm"] = $_POST;
 		header("Location: /sign-up.php");
 	} else {
-
 		$token_email = uniqid('', true);
 
 		// send mail to verif
 		// raisix/verif_mail?uuid=$token_email&email=$_POST["email"]
-		
+
 		$SQL = "INSERT INTO `users` (`date_create`, `date_modification`, `firstname`, `lastname`, `email`, `token_check_email`, `password`, `date_modification_pw`, `tac`)
 			VALUES (now(), now(), '".db_escape($_POST["firstname"])."', '".db_escape($_POST["lastname"])."', '".db_escape($_POST["email"])."', '".$token_email."', '".password_hash($_POST["pwd"], PASSWORD_BCRYPT)."', now(), '1');";
 		$result = db_execute($SQL);
@@ -76,6 +75,8 @@ if (count($_POST) == 6
 
 		$SQL = "INSERT INTO `users_detail` (`id_users`, `date_create`, `date_modification`) VALUES (LAST_INSERT_ID(), now(), now())";
 			$result = db_execute($SQL);
+
+		sendMail($_POST["email"]);
 
 		header("Location: /login.php");
 	}

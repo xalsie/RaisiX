@@ -18,6 +18,11 @@
 	$aConfig['db_password']=$dbpassword;
 	$aConfig['db_name']=$database;
 
+	$aConfig['mail_host']=$mailHost;
+	$aConfig['mail_port']=$mailPort;
+	$aConfig['mail_user']=$mailUsername;
+	$aConfig['mail_pwd']=$mailPassword;
+
 	session_start();
 	
 	include_once($path."/includes/db.inc.php");

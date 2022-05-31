@@ -2,6 +2,7 @@
 include_once("../includes/inc.php");
 
 isConnected(true);
+verifniv(15,false,false);
 
 echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link rel="stylesheet" href="/assets/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">', "", 'appHeader');
@@ -69,234 +70,13 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
             </nav>
          </div>
       </div>
-      <!-- TOP Nav Bar -->
-      <div class="iq-top-navbar">
-         <div class="iq-navbar-custom">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-               <div class="iq-search-bar ml-auto">
-                  <form action="#" class="searchbox">
-                     <input type="text" class="text search-input" placeholder="Search Here...">
-                     <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                  </form>
-               </div>
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-                  <i class="ri-menu-3-line"></i>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ml-auto navbar-list">
-                     <li class="nav-item nav-icon search-content">
-                        <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                           <i class="ri-search-line"></i>
-                        </a>
-                        <form action="#" class="search-box p-0">
-                           <input type="text" class="text search-input" placeholder="Type here to search...">
-                           <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                        </form>
-                     </li>
-                     <li class="nav-item nav-icon">
-                        <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                           <i class="ri-notification-2-line"></i>
-                           <span class="bg-primary dots"></span>
-                        </a>
-                        <div class="iq-sub-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0">
-                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white">All Notifications<small
-                                          class="badge  badge-light float-right pt-1">4</small></h5>
-                                 </div>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/01.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                          <small class="float-right font-size-12">Just Now</small>
-                                          <p class="mb-0">95 MB</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/02.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">New customer is join</h6>
-                                          <small class="float-right font-size-12">5 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/03.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Two customer is left</h6>
-                                          <small class="float-right font-size-12">2 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/04.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                          <small class="float-right font-size-12">3 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="nav-item nav-icon dropdown">
-                        <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                           <i class="ri-mail-line"></i>
-                           <span class="bg-primary dots"></span>
-                        </a>
-                        <div class="iq-sub-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0 ">
-                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white">All Messages<small
-                                          class="badge  badge-light float-right pt-1">5</small></h5>
-                                 </div>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/01.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Barry Emma Watson</h6>
-                                          <small class="float-left font-size-12">13 Jun</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/02.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                          <small class="float-left font-size-12">20 Apr</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/03.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Why do we use it?</h6>
-                                          <small class="float-left font-size-12">30 Jun</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/04.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Variations Passages</h6>
-                                          <small class="float-left font-size-12">12 Sep</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="../assets/images/user/05.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                          <small class="float-left font-size-12">5 Dec</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="line-height pt-3">
-                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                           <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
-                        </a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0 ">
-                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                    <span class="text-white font-size-12">Available</span>
-                                 </div>
-                                 <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-file-user-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">My Profile</h6>
-                                          <p class="mb-0 font-size-12">View personal profile details.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-profile-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Edit Profile</h6>
-                                          <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="account-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-account-box-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Account settings</h6>
-                                          <p class="mb-0 font-size-12">Manage your account parameters.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-lock-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Privacy Settings</h6>
-                                          <p class="mb-0 font-size-12">Control your privacy parameters.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="bg-primary iq-sign-btn" href="sign-in.html" role="button">Sign out<i
-                                          class="ri-login-box-line ml-2"></i></a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-            </nav>
-         </div>
-      </div>
+
+      <!-- TOP Nav Bar START -->
+      <?php
+         echo Header_header('dashboard');
+      ?>
+      <!-- TOP Nav Bar END -->
+
       <!-- Page Content  -->
       <div id="content-page" class="content-page">
          <div class="container-fluid">
@@ -308,11 +88,6 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                            <h4 class="card-title">Liste des utilisateurs</h4>
                         </div>
                      </div>
-                     <!-- <div id="toolbar">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                           + Proposer un film
-                        </button>
-                     </div> -->
                      <div class="iq-card-body">
                         <div class="table-view">
                            <table class="data-tables table-striped table-borderless table-sm table-responsive-sm"
@@ -323,7 +98,9 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                               data-show-refresh="true"
                               data-show-columns="true"
                               data-show-columns-toggle-all="true"
+
                               data-show-export="true"
+
                               data-detail-formatter="detailFormatter"
                               data-minimum-count-columns="2"
                               data-id-field="id"
@@ -332,7 +109,7 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
 
                               data-pagination="true"
                               data-page-list="[5, 10, 25, 50, 100, all]"
-                              data-page-size="5"
+                              data-page-size="10"
 
                               data-url="/assets/js/app-server.php"
                               data-method="post"
@@ -340,16 +117,27 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
                               data-content-type="application/x-www-form-urlencoded">
                               <thead>
                                  <tr>
-                                    <th data-field="id" data-width="100" data-sortable="true" data-halign="center" data-visible="false">ID</th>
-                                    
-                                    <th data-field="name" data-sortable="true" data-halign="center">Nom du film</th>
-                                    <th data-field="date-release" data-sortable="true" data-halign="center">Date</th>
-                                    <th data-field="langage" data-sortable="true" data-halign="center" data-formatter="languageFormatter">langage</th>
+                                    <th data-field="action" data-width="70" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
 
-                                    <th data-field="pseudo" data-sortable="true" data-halign="center">Demandeur</th>
-                                    <th data-field="pseudo" data-sortable="true" data-halign="center">Nombre de vote</th>
-                                    
-                                    <th data-field="action" data-width="150" data-halign="center" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Actions</th>
+                                    <th data-field="id" data-width="100" data-sortable="true" data-halign="center" data-visible="false">ID</th>
+                                    <th data-field="date_create" data-sortable="true" data-halign="center" data-visible="false">date de création</th>
+                                    <th data-field="date_modification" data-sortable="true" data-halign="center" data-visible="false">date de modification</th>
+                                    <th data-field="firstname" data-sortable="true" data-halign="center" data-align="center">Prenom</th>
+                                    <th data-field="lastname" data-sortable="true" data-halign="center" data-align="center">Nom</th>
+                                    <th data-field="email" data-width="100" data-sortable="true" data-halign="center">Mail</th>
+                                    <th data-field="check_email" data-sortable="true" data-halign="center" data-align="center" data-formatter="toCheckbox">Mail confirmé</th>
+                                    <th data-field="date_modification_pw" data-sortable="true" data-halign="center" data-visible="false">date de modification du MDP</th>
+                                    <th data-field="role" data-sortable="true" data-halign="center">Role</th>
+                                    <th data-field="auth_fa" data-sortable="true" data-halign="center" data-align="center" data-formatter="toCheckbox">2FA</th>
+
+                                    <th data-field="date_modification" data-sortable="true" data-halign="center" data-visible="false">date de modification du profil</th>
+                                    <th data-field="pseudo" data-sortable="true" data-halign="center">Pseudo</th>
+                                    <th data-field="avatar" data-sortable="true" data-halign="center" data-align="center" data-formatter="imgView">Avatar</th>
+                                    <th data-field="langue" data-sortable="true" data-halign="center" data-visible="false">Langue</th>
+                                    <th data-field="date_naissance" data-sortable="true" data-halign="center" data-visible="false">date de naissance</th>
+                                    <th data-field="description" data-sortable="true" data-halign="center" data-visible="false">Description de l'utilisateur</th>
+                                    <th data-field="payment_date" data-sortable="true" data-halign="center">Dernier prélèvement</th>
+                                    <th data-field="payment_choise" data-sortable="true" data-halign="center" data-align="center" data-formatter="toPayment">Statut du compte</th>
                                  </tr>
                               </thead>
                            </table>
@@ -361,8 +149,150 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
          </div>
       </div>
    </div>
-   <!-- Wrapper END -->
 
+   <div class="modal fade" id="modalActionUsers" tabindex="-1" aria-labelledby="modalActionUsers" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="modalActionUsersLabel">Action sur un compte utilisateur</h5>
+               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                  <i class="fa-solid fa-xmark-large"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div>
+                  <div class="action" style="display: none;">
+                     <input type="text" name="formControlIndex" id="formControlIndex" disabled>
+                  </div>
+
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <div class="form-group text-center">
+                           <label>Edité</label>
+
+                           <button type="submit" class="btn btn-primary form-control btn-edit" data-toggle="modal" data-target="#modalEditUsers">Edité <i class="ri-pencil-line"></i></button>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="form-group text-center">
+                           <label>Supprimé</label>
+
+                           <button type="submit" class="btn btn-primary form-control btn-remove" data-toggle="modal" data-target="#modalDeleteUsers">Supprimé ! <i class="ri-delete-bin-line"></i></button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <div class="form-group text-center">
+                           <label>Renvoyé le mail de confirmation</label>
+
+                           <button type="submit" id="btn-send-mail" class="btn btn-primary form-control">Renvoyé ! <i class="ri-delete-bin-line"></i></button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="modalDeleteUsers" tabindex="-1" aria-labelledby="modalDeleteUsers" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="modalDeleteUsersLabel">Suppression du compte</h5>
+               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                  <i class="fa-solid fa-xmark-large"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="/assets/js/app-server.php">
+                  <div class="action" style="display: none;">
+                     <input type="text" name="formControlAction" class="formControlAction" disabled>
+                     <input type="text" name="formControlId" class="formControlId" disabled>
+                  </div>
+                  <div class="form-group">
+                     <label for="formControlFirstname">Prenom</label>
+                     <input type="text" class="form-control" name="formControlFirstname" id="formControlFirstname" disabled>
+                  </div>
+                  <div class="form-group">
+                     <label for="formControlLastname">Nom</label>
+                     <input type="text" class="form-control" name="formControlLastname" id="formControlLastname" disabled>
+                  </div>
+                  <div class="form-group">
+                     <label for="formControlEmail">Mail</label>
+                     <input type="text" class="form-control" name="formControlEmail" id="formControlEmail" disabled>
+                  </div>
+
+                  <button type="submit" class="btn btn-block btn-primary">Supprimé !</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="modalEditUsers" tabindex="-1" aria-labelledby="modalEditUsers" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="modalEditUsersLabel">Edition du compte</h5>
+               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                  <i class="fa-solid fa-xmark-large"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="/assets/js/app-server.php">
+                  <div class="action" style="display: none;">
+                     <input type="text" name="formControlAction" class="formControlAction" disabled>
+                     <input type="text" name="formControlId" class="formControlId" disabled>
+                  </div>
+                  <div class="form-row ml-0 mr-0">
+                     <div class="col-md-6 order-md-1">
+                        <div class="form-row">
+                           <label for="formControlEditLastname">Nom</label>
+                           <input type="text" class="form-control" id="formControlEditLastname" name="formControlEditLastname">
+                        </div>
+                        <div class="form-row">
+                           <label for="formControlEditFirstname">Prenom</label>
+                           <input type="text" class="form-control" id="formControlEditFirstname" name="formControlEditFirstname">
+                        </div>
+                     </div>
+                     <div class="col-md-6 order-md-2">
+                        <div class="form-group mb-0 text-center">
+                           <button type="button" class="btn btn-sm btn-warning btn-delete-avatar mb-2">Supprimé <i class="fa-solid fa-xmark-large"></i></button>
+                           <img id="formControlEditImg" name="formControlEditImg" width="200" class="rounded mx-auto d-block" alt="dev">
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="formControlEditPseudo">Pseudo</label>
+                     <input type="text" class="form-control" id="formControlEditPseudo" name="formControlEditPseudo" placeholder="">
+                  </div>
+                  <div class="form-group">
+                     <label for="formControlEditMail">Email</label>
+                     <input type="email" class="form-control" id="formControlEditMail" name="formControlEditMail" placeholder="">
+                  </div>
+                  <div class="form-group">
+                     <label for="formControlEditDescription">Description</label>
+                     <textarea class="form-control" id="formControlEditDescription" name="formControlEditDescription" placeholder=""></textarea>
+                  </div>
+
+                  <div class="align-items-center form-row">
+                     <div class="col-md-6 text-center">
+                        <button type="button" class="btn btn-block btn-outline-secondary" data-dismiss="modal" aria-label="Close">Annulé</button>
+                     </div>
+                     <div class="col-md-6 text-center">
+                        <button type="submit" class="btn btn-block btn-primary">Enregistré</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Wrapper END -->
    <script>
       // var $ = jQuery;
 
@@ -375,120 +305,157 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
       }
 
       function postQueryParams(params) {
-            params.action = "getListRequestMovie";
+            params.action = "getListUsers";
             return params;
       }
 
       function actionFormatter(value, row, index) {
          return '<div class="flex align-items-center list-user-action">'+
-               '      <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>'+
-               '      <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>'+
+               '      <a class="iq-bg-success btn-action" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="fa-regular fa-user-gear"></i></a>'+
                '   </div>';
       }
 
-      function posterFormatter(value, row, index) {
-         return '<div class="iq-movie">'+
-               '  <img src="/assets/images/movie-poster'+row["poster_path"]+'" class="img-border-radius avatar-40 img-fluid" alt="">'+
-               '</div>';
+      function toCheckbox(value, row, index) {
+         if (value == "1")
+            return '<i class="far fa-check me-1" style="color:green"></i>';
+         else
+            return '<i class="far fa-ban me-1" style="color:Tomato"></i>';
       }
 
-      function titleFormatter(value, row, index) {
-         return '<div class="media-body text-left ml-3">'+
-               '   <p class="mb-0">'+row["original_title"]+'</p>'+
-               '   <small>'+row["vote_average"]+' - '+formatTime(row["runtime"])+'</small>'+
-               '</div>';
-      }
-
-      function qualityFormatter(value, row, index) {
-         
-      }
-
-      function languageFormatter(value, row, index) {
-
-      }
-
-      function genresFormatter(value, row, index) {
-         return displayGenres(value, ", ");
-      }
-
-      function overviewFormatter(value, row, index) {
-         return "<small>"+value.substr(0, 75)+"...</small>";
-      }
-
-      function displayGenres(genres, separator) {
-         if (genres == undefined) return "";
-         const obj = JSON.parse(genres);
-         const count = Object.keys(obj).length;
-         var _rtn = "";
-         for (var key in obj) {
-            if (key != count-1)
-               _rtn += obj[key].name+separator;
-            else
-               _rtn += obj[key].name;
+      function toPayment(value, row, index) {
+         $rtn = "";
+         switch (value) {
+            case '0':
+               $rtn = "Free";
+               break;
+            case '1':
+               $rtn = "Basic";
+               break;
+            case '2':
+               $rtn = "Standard";
+               break;
+            case '3':
+               $rtn = "Premium";
+               break;
+            default:
+               $rtn = "Free";
+               break;
          }
-         return _rtn;
+
+         return $rtn;
       }
 
-      function formatTime(date) {
-         if (date == undefined) return "";
-         const h = Math.floor(date / 60);
-         const m = Math.round(date % 60)
-         return [
-         h, "h ",
-         m > 9 ? m : (h ? '0' + m : m || '0'), "m"
-         ].filter(Boolean).join("");
-      }
-
-      function formNow(x) {
-         return moment(x, "YYYY-MM-DD hh:mm:ss").fromNow();
+      function imgView(value, row, index) {
+         if (value)
+            return '<img src="/assets/images/user/'+value+'" class="rounded" width="64" alt="Image user '+row["id"]+'">';
+         else
+            return '<i class="far fa-ban me-1" style="color:Tomato"></i>';
       }
 
       window.actionEvents = {
-         'click .btn-remove': function (e, value, row, index) {
-            // console.log("Remove : "+row["login"]);
-            console.log(row);
-            //   ShowDeleteUser(row);
-         },'click .btn-edit': function (e, value, row, index) {
-            console.log("Edit : "+row["id"]);
+         'click .btn-action': function (e, value, row, index) {
             //   ShowEditUser(row);
+            var modal = $('#modalActionUsers')
+               modal.modal('show')
+               modal.find('#formControlIndex').val(index)
          }
       };
 
-      $("#btn-add").click(function () {
-         console.log();
-      });
+      $('.btn-remove').click(() => {
+         var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
 
-      $('#table').on('dbl-click-row.bs.table', function (e, row, element, field) {
-         console.log(row);
-      });
+         var modal = $('#modalDeleteUsers')
+            modal.modal('show')
+            modal.find('.formControlAction').val("deleteUser")
+            modal.find('.formControlId').val(row["id"])
+            modal.find('#formControlFirstname').val(row["firstname"])
+            modal.find('#formControlLastname').val(row["lastname"])
+            modal.find('#formControlEmail').val(row["email"])
+      })
+
+      $(".btn-edit").click(() => {
+         var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
+
+         var modal = $('#modalEditUsers')
+            modal.modal('show')
+            modal.find('.formControlAction').val("editUser")
+            modal.find('.formControlId').val(row["id"])
+
+            modal.find('#formControlEditFirstname').val(row["firstname"])
+            modal.find('#formControlEditLastname').val(row["lastname"])
+            modal.find('#formControlEditMail').val(row["email"])
+            modal.find('#formControlEditPseudo').val(row["pseudo"])
+            modal.find('#formControlEditDescription').val(row["description"])
+
+            if (row["avatar"]) modal.find('#formControlEditImg').attr('src', "/assets/images/user/"+row["avatar"]).attr("data-avatar", row["avatar"])
+               else modal.find('#formControlEditImg').attr('src', "//dummyimage.com/200x200/363636/fff").attr("data-avatar", "user.jpg")
+      })
+
+      $(".btn-delete-avatar").click(() => {
+         var modal = $('#modalEditUsers')
+            modal.find('#formControlEditImg').attr('src', "/assets/images/user/user.jpg").attr("data-avatar", "user.jpg")
+      })
+
+      $("#btn-send-mail").click(() => {
+         var row = $("#table").bootstrapTable("getData")[$("#formControlIndex").val()];
+
+         var send=$.ajax({
+               method: 'POST',
+               url:'/assets/js/app-server.php',
+               data: {
+                  autofunc: false,
+                  action: 'sendMail',
+                  id: row["id"],
+                  email: row["email"]
+               }
+            })
+      })
 
       $(() => {
          initTable();
 
          $("form").submit(function(event) {
+            event.preventDefault();
+            var param = {};
+            
+            if ($(this).find(".formControlAction").val() == 'deleteUser') {
+               param = {
+                  autofunc: false,
+                  action: 'deleteUser',
+                  id: $(this).find('.formControlId').val().trim()
+               }
+            } else if ($(this).find(".formControlAction").val() == 'editUser') {
+               param = {
+                  autofunc: false,
+                  action: 'editUser',
+                  id: $(this).find('.formControlId').val().trim(),
+
+                  firstname: $(this).find('#formControlEditFirstname').val().trim(),
+                  lastname: $(this).find('#formControlEditLastname').val().trim(),
+                  email: $(this).find('#formControlEditMail').val().trim(),
+                  pseudo: $(this).find('#formControlEditPseudo').val().trim(),
+                  description: $(this).find('#formControlEditDescription').val().trim(),
+                  avatar: $(this).find('#formControlEditImg').attr("data-avatar").trim()
+               }
+            }
+
             var send=$.ajax({
                method: 'POST',
                url:'/assets/js/app-server.php',
-               data: {
-                  autofunc: false,
-                  action: 'saveMovieRequest',
-                  nameMovie: $("#exampleFormControlInput1").val(),
-                  dateRelease: $("#exampleFormControlInput2").val(),
-                  langage: $("#exampleFormControlSelect1").val()
-               }
+               data: param
             }).done(function(html){
-               if(html != 'OK') {
-                  $('#exampleModal').modal('hide')
-                  console.log('Une erreur s\'est produite lors de l\'enregistrement de la demande de film !');
-               } else {
-                  $('#exampleModal').modal('hide')
+               if(html[0]) {
                   $('#table').bootstrapTable('refresh');
+
+                  $('#modalDeleteUsers').modal('hide');
+                  $('#modalEditUsers').modal('hide');
+                  $('#modalActionUsers').modal('hide');
+               } else {
+                  console.log(html[1]);
                }
             }).fail(function(){
-               console.log('Une erreur s\'est produite lors de l\'enregistrement de la demande de film !');
+               console.log("Une erreur s'est produite lors de l'execution de la tache. Contacter le support.");
             });
-
-            event.preventDefault();
          });
       })
    </script>
@@ -510,6 +477,10 @@ echo Header_HTML("Tableau de bord - Liste des utilisateurs", "dashboard", '<link
       </div>
    </footer>
    <!-- Footer END -->
+
+
+   <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+   <script src='https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js'></script>
 
 <?php
    echo footer_css("dashboard");

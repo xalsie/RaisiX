@@ -27,6 +27,7 @@ Description             : This file contains the styling for responsive Template
                     Header
 -----------------------------------------------------------------------*/
 header#main-header { position: fixed; left: 0px; right: 0px; text-align: center; z-index: 99; background: rgba(20, 20, 20, 0.5) !important; }
+header#main-header ul { margin-top: 0; margin-bottom: 0; }
 header .navbar-light .navbar-brand img.logo { width: 160px; }
 .iq-search-bar .search-input { width: 100%; height: 40px; padding: 5px 15px 5px 40px; border: none; border-radius: 0; color: var(--iq-white); background: var(--iq-bg1); }
 .iq-search-bar .searchbox .search-link { position: absolute; left: 15px; top: 6px; font-size: 16px; }

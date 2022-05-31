@@ -181,8 +181,8 @@ function nav_bar_user() {
    return $rtn;
 }
 
-function Header_header() {
-  $rtn = '<header id="main-header" ng-controller="getInfoNav">
+function Header_header($panel = 'frontend') {
+  $frontend = '<header id="main-header" class="iq-top-navbar" data-ng-controller="getInfoNav">
    <div class="main-header" data-ng-init="getAvatar()">
       <div class="container-fluid">
          <div class="row">
@@ -340,23 +340,7 @@ function Header_header() {
                      </div>
                   </div>
                   <div class="navbar-right menu-right">
-                     <ul class="d-flex align-items-center list-inline m-0">
-                        <!--
-                        <li class="nav-item nav-icon">
-                           <a href="javascript:void(0);" class="search-toggle device-search">
-                              <i class="ri-search-line"></i>
-                           </a>
-                           <div class="search-box iq-search-bar d-search">
-                              <form action="javascript:void(0);" class="searchbox">
-                                 <div class="form-group position-relative">
-                                    <input type="text" class="text search-input font-size-12"
-                                       placeholder="type here to search...">
-                                    <i class="search-link ri-search-line"></i>
-                                 </div>
-                              </form>
-                           </div>
-                        </li>
-                        -->
+                     <ul class="d-flex align-items-center list-inline">
                         <li class="nav-item nav-icon">
                            <a href="javascript:void(0);" class="search-toggle" data-ng-click="getDatasNotifs()" data-ng-init="getDatasNotifs()" data-toggle="search-toggle">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
@@ -369,7 +353,7 @@ function Header_header() {
                               <span class="bg-danger" ng-class="{\'dots\': notifMap._count}"></span>
                            </a>
                            <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
+                              <div class="iq-card shadow-none">
                                  <div class="iq-card-body p-0">
                                     <div class="bg-primary p-3">
                                        <h5 class="mb-0 text-white">Toutes les notifications<small class="badge badge-light float-right pt-1">{{notifMap._count}}</small></h5>
@@ -460,12 +444,105 @@ function Header_header() {
       </div>
    </div>
    <script>
-   $(function () {
-      $(\'[data-toggle="tooltip"]\').tooltip();
-   })
+      $(function () {
+         $(\'[data-toggle="tooltip"]\').tooltip();
+      })
    </script>
-   </header>';
-  return $rtn;
+</header>';
+
+
+   $dashboard = '<header id="main-header" class="iq-top-navbar" data-ng-controller="getInfoNav" class="ng-scope">
+   <div class="main-header" data-ng-init="getAvatar()">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12">
+               <nav class="navbar navbar-expand-lg navbar-light">
+                  <div class="navbar-right menu-right">
+                     <ul class="d-flex align-items-center list-inline">
+                        <li class="nav-item nav-icon">
+                           <a href="javascript:void(0);" class="search-toggle" data-ng-click="getDatasNotifs()" data-ng-init="getDatasNotifs()" data-toggle="search-toggle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" class="color-svg" data-ng-class="{\'noti-svg\': notifMap._count}">
+                                 <path fill="none" d="M0 0h24v24H0z"></path>
+                                 <path d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z"></path>
+                              </svg>
+                              <span class="bg-danger" data-ng-class="{\'dots\': notifMap._count}"></span>
+                           </a>
+                           <div class="iq-sub-dropdown">
+                              <div class="iq-card shadow-none m-0">
+                                 <div class="iq-card-body p-0">
+                                    <div class="bg-primary p-3">
+                                       <h5 class="mb-0 text-white">Toutes les notifications<small class="badge badge-light float-right pt-1 ng-binding">0</small></h5>
+                                    </div>
+                                    <div class="bg-primary p-1">
+                                       <h6 class="mb-0 text-white">
+                                          <a href="/user/notification.php">Voir la list</a>
+                                          <span class="text-black-50"> - </span>
+                                          <span data-toggle="tooltip" data-placement="top" title="" data-ng-click="viewAllNotif(true)" data-original-title="Tout marquer comme lue"><i class="fa-duotone fa-check-double"></i></span>
+                                       </h6>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item nav-icon">
+                           <a href="javascript:void(0);" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center" data-toggle="search-toggle"> <img class="img-fluid avatar-40 cover rounded-circle" alt="user" ng-src="/assets/images/user/61f18c407fced2.92898852.jpeg" src="/assets/images/user/61f18c407fced2.92898852.jpeg"> </a>
+                           <div class="iq-sub-dropdown">
+                              <div class="iq-card shadow-none m-0">
+                                 <div class="iq-card-body p-0 pl-3 pr-3">
+                                    <a href="/dashboard/dashboard.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon"> <i class="ri-settings-4-line text-primary"></i> </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Tableau de bord</h6> </div>
+                                       </div>
+                                    </a>
+                                    <a href="setting.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon"> <i class="ri-settings-4-line text-primary"></i> </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Réglage du compte</h6> </div>
+                                       </div>
+                                    </a>
+                                    <a href="pricing-plan.php" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon"> <i class="ri-settings-4-line text-primary"></i> </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Forfaits et tarifs</h6> </div>
+                                       </div>
+                                    </a>
+                                    <a href="login.php?logout" class="iq-sub-card setting-dropdown">
+                                       <div class="media align-items-center">
+                                          <div class="right-icon"> <i class="ri-logout-circle-line text-primary"></i> </div>
+                                          <div class="media-body ml-3">
+                                             <h6 class="mb-0 ">Se déconnecter</h6> </div>
+                                       </div>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+               <div class="nav-overlay"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      $(function() {
+         $(\'[data-toggle="tooltip"]\').tooltip();
+      })
+   </script>
+</header>';
+
+
+
+   if ($panel == "frontend") {
+      return $frontend;
+    } else if ($panel == "dashboard") {
+      return $dashboard;
+    }
 }
 
 function Header_loader() {

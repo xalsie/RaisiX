@@ -312,7 +312,7 @@ echo Header_HTML("Tableau de bord - Ajouter film", "dashboard", '<link rel="styl
                                  <div class="col-12 form-group input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Saisir le titre du film" ng-model="tmdbData" aria-label="Saisir le titre du film" aria-describedby="title-movie">
 
-                                    <div class="input-group-append">
+                                    <div class="input-group-text">
                                        <button class="btn btn-outline-secondary" data-ng-click="tmdb_search()" type="button">Recherche</button>
                                     </div>
                                  </div>

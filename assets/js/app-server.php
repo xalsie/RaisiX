@@ -95,6 +95,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
             echo json_encode($result);
             break;
+        case "getListUsers":
+            $_search = (empty($_POST["search"])? false:$_POST["search"]);
+
+            $SQL = "SELECT u.id, u.date_create, u.date_modification, u.firstname, u.lastname, u.email, u.check_email, u.date_modification_pw, u.role, u.auth_fa, ud.date_modification, ud.pseudo, ud.avatar, ud.langue, ud.date_naissance, ud.description, ud.payment_date, ud.payment_choise FROM `users` AS u
+                    LEFT JOIN `users_detail` AS ud on u.`id` = ud.`id_users`
+                    ORDER BY u.`date_create` ASC;";
+                $result = db_query($SQL);
+
+            if(!$result[0])
+                $aRow=array();
+            else
+                foreach ($result as $row) {
+                    $aRow[]=array("id"=>$row["id"],"date_create"=>$row["date_create"],"date_modification"=>$row["date_modification"],
+                                "firstname"=>$row["firstname"],"lastname"=>$row["lastname"],"email"=>$row["email"],"check_email"=>$row["check_email"],
+                                "date_modification_pw"=>$row["date_modification_pw"],"role"=>$row["role"],"auth_fa"=>$row["auth_fa"],
+                                "date_modification"=>$row["date_modification"],"pseudo"=>$row["pseudo"],"avatar"=>$row["avatar"],"langue"=>$row["langue"],
+                                "date_naissance"=>$row["date_naissance"],"description"=>$row["description"],"payment_date"=>$row["payment_date"],
+                                "payment_choise"=>$row["payment_choise"]);
+                }
+
+            echo json_encode($aRow);
+            break;
         case "getMovies":
             $SQL = "SELECT id, date_create, title, vote_average, runtime, backdrop_path, poster_path FROM `movie_detail` WHERE `status` = '2' ORDER BY date_create DESC LIMIT 16;";
                 $result["moviesList"] = [];
@@ -323,7 +345,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
             echo json_encode($result);
             break;
-	}
+	
+    
+        case "deleteUser":
+            $rtn = false;
+            $rtn_txt = "";
+
+            $id = db_escape($_POST["id"]);
+
+            $SQL = "DELETE FROM `users` WHERE `id` = '".$id."';";
+                $result = db_execute($SQL);
+            
+            if ($result) {
+                $rtn = true;
+            } else {
+                $rtn_txt = "Une erreur s'est produite lors de l'execution de la tache. Contacter le support.";
+            }
+
+            echo json_encode([$rtn, $rtn_txt]);
+            break;
+        case "editUser":
+            $rtn = false;
+            $rtn_txt = "";
+
+            $id = db_escape($_POST["id"]);
+            $firstname = db_escape($_POST["firstname"]);
+            $lastname = db_escape($_POST["lastname"]);
+            $email = db_escape($_POST["email"]);
+            $pseudo = db_escape($_POST["pseudo"]);
+            $description = db_escape($_POST["description"]);
+            $avatar = db_escape($_POST["avatar"]);
+
+            $SQL = "UPDATE `users` SET `date_modification` = NOW(), `firstname` = '$firstname', `lastname` = '$lastname', `email` = '$email' WHERE `id` = '".$id."';";
+                $result1 = db_execute($SQL);
+
+            $SQL = "UPDATE `users_detail` SET `date_modification` = NOW(), `pseudo` = '$pseudo', `description` = '$description', `avatar` = '$avatar' WHERE `id_users` = '".$id."';";
+                echo $SQL;
+                $result2 = db_execute($SQL);
+
+            if ($result1[0] && $result2[0]) {
+                $rtn = true;
+            } else {
+                $rtn_txt = "Une erreur s'est produite lors de l'execution de la tache. Contacter le support.";
+            }
+
+            echo json_encode([$rtn, $rtn_txt]);
+            break;
+        case "sendMail":
+            $rtn_txt = "";
+
+            $id = db_escape($_POST["id"]);
+            $email = db_escape($_POST["email"]);
+
+            $token_email = uniqid('', true);
+
+            $SQL = "INSERT INTO `users` (`date_modification`, `token_check_email`, `check_email`) VALUES (now(), '".$token_email."', '0');";
+		        // $result = db_execute($SQL);
+
+            $rtn = sendMail($_POST["email"], $token_email);
+
+            echo json_encode([$rtn, $rtn_txt]);
+            break;
+
+    }
 	exit;
 }
 
@@ -448,3 +532,4 @@ function discordApiPost($data, $credits, $insert_id) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
     $response   = curl_exec($ch);
 }
+

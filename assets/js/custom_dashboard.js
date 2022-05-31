@@ -10,13 +10,13 @@ Index Of Script
 ------------------------------------------------
 
 :: Tooltip
+:: Header Menu Dropdown
 :: Magnific Popup
 :: Ripple Effect
 :: Sidebar Widget
 :: Page FAQ
 :: Page Loader
 :: Owl Carousel
-:: Search input
 :: Scrollbar
 :: Counter
 :: slick
@@ -46,6 +46,47 @@ Index Of Script
         -----------------------------------------------------------------------*/
         $('[data-toggle="popover"]').popover();
         $('[data-toggle="tooltip"]').tooltip();
+
+        /*---------------------------------------------------------------------
+          Header Menu Dropdown
+        ---------------------------------------------------------------------*/
+        $('[data-toggle=more-toggle]').on('click', function() {
+          $(this).next().toggleClass('show');
+        });
+
+        $(document).on('click', function(e) {
+          let myTargetElement = e.target;
+          let selector, mainElement;
+          if ($(myTargetElement).hasClass('search-toggle') || $(myTargetElement).parent().hasClass('search-toggle') || $(myTargetElement).parent().parent().hasClass('search-toggle')) {
+            if ($(myTargetElement).hasClass('search-toggle')) {
+              selector = $(myTargetElement).parent();
+              mainElement = $(myTargetElement);
+            } else if ($(myTargetElement).parent().hasClass('search-toggle')) {
+              selector = $(myTargetElement).parent().parent();
+              mainElement = $(myTargetElement).parent();
+            } else if ($(myTargetElement).parent().parent().hasClass('search-toggle')) {
+              selector = $(myTargetElement).parent().parent().parent();
+              mainElement = $(myTargetElement).parent().parent();
+            }
+            if (!mainElement.hasClass('active') && $(".navbar-list li").find('.active')) {
+              $('.navbar-right li').removeClass('iq-show');
+              $('.navbar-right li .search-toggle').removeClass('active');
+            }
+
+            selector.toggleClass('iq-show');
+            mainElement.toggleClass('active');
+
+            e.preventDefault();
+          }
+          else if ($(myTargetElement).is('.search-input')) {}
+          else {
+
+            if (e.target.className !== "fa-regular fa-check") {
+              $('.navbar-right li').removeClass('iq-show');
+              $('.navbar-right li .search-toggle').removeClass('active');
+            }
+          }
+        });
 
         /*---------------------------------------------------------------------
         Magnific Popup
@@ -139,9 +180,7 @@ Index Of Script
         Page Loader
         -----------------------------------------------------------------------*/
         $("#load").fadeOut();
-        $("#loading").delay().fadeOut("");
-
-        
+        $("#loading").delay(500).fadeOut("");
 
        /*---------------------------------------------------------------------
        Owl Carousel
@@ -184,38 +223,6 @@ Index Of Script
                     }
                 }
             });
-        });
-
-        /*---------------------------------------------------------------------
-        Search input
-        -----------------------------------------------------------------------*/
-        $(document).on('click', function(e) {
-            let myTargetElement = e.target;
-            let selector, mainElement;
-            if ($(myTargetElement).hasClass('search-toggle') || $(myTargetElement).parent().hasClass('search-toggle') || $(myTargetElement).parent().parent().hasClass('search-toggle')) {
-                if ($(myTargetElement).hasClass('search-toggle')) {
-                    selector = $(myTargetElement).parent();
-                    mainElement = $(myTargetElement);
-                } else if ($(myTargetElement).parent().hasClass('search-toggle')) {
-                    selector = $(myTargetElement).parent().parent();
-                    mainElement = $(myTargetElement).parent();
-                } else if ($(myTargetElement).parent().parent().hasClass('search-toggle')) {
-                    selector = $(myTargetElement).parent().parent().parent();
-                    mainElement = $(myTargetElement).parent().parent();
-                }
-                if (!mainElement.hasClass('active') && $(".navbar-list li").find('.active')) {
-                    $('.navbar-list li').removeClass('iq-show');
-                    $('.navbar-list li .search-toggle').removeClass('active');
-                }
-
-                selector.toggleClass('iq-show');
-                mainElement.toggleClass('active');
-
-                e.preventDefault();
-            } else if ($(myTargetElement).is('.search-input')) {} else {
-                $('.navbar-list li').removeClass('iq-show');
-                $('.navbar-list li .search-toggle').removeClass('active');
-            }
         });
 
         /*---------------------------------------------------------------------
